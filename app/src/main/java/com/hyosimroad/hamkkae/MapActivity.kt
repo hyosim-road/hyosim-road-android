@@ -1,17 +1,15 @@
 package com.hyosimroad.hamkkae
 
+import android.app.Activity
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
-import com.hyosimroad.hamkkae.databinding.ActivityMainBinding
+import com.hyosimroad.hamkkae.databinding.ActivityMapBinding
 import com.kakao.vectormap.KakaoMap
 import com.kakao.vectormap.KakaoMapReadyCallback
 import com.kakao.vectormap.MapLifeCycleCallback
-import com.kakao.vectormap.MapView
 import timber.log.Timber
 
-class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+class MapActivity: Activity() {
+    private lateinit var binding: ActivityMapBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,7 +18,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initBinds() {
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMapBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
 
