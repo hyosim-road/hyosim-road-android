@@ -1,15 +1,7 @@
----
-name: "\U0001F528 refactor"
-about: Create a report to help us improve
-title: "\U0001F528 refactor"
-labels: ''
-assignees: ''
-
----
-
-name: "🔨 refactor"
+name: "🐛 fix"
 description: "새로운 기능 추가"
-labels: ["refactor"]
+title: "[🐛 fix]"
+labels: ["fix"]
 body:
   - type: textarea
     attributes:
