@@ -1,6 +1,6 @@
 name: "🔨 refactor"
 description: "새로운 기능 추가"
-title: "🔨 refactor]"
+title: "🔨 refactor: "
 labels: ["refactor"]
 body:
   - type: textarea

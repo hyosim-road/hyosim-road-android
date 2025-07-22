@@ -1,6 +1,6 @@
 name: "🐛 fix"
 description: "새로운 기능 추가"
-title: "[🐛 fix]"
+title: "🐛 fix: "
 labels: ["fix"]
 body:
   - type: textarea
