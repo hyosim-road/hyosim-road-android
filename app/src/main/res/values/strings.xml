@@ -1,3 +1,46 @@
 <resources>
     <string name="app_name">hamkkae</string>
+
+    <!--state-->
+    <string name="state_complete">완료</string>
+    <string name="state_in_progress">진행중</string>
+    <string name="state_before_starting">시작전</string>
+
+    <!--home-->
+    <string name="main_title">함께가효</string>
+    <string name="main_subtitle">부모님과 함께하는 특별한 여행</string>
+
+    <string name="main_plan_title">부모님과 특별한 여행을 계획해보세요</string>
+    <string name="main_plan_subtitle">취향에 맞는 관광지 추천부터 추억만들기까지 \n모든 것을 도와드려요 😊</string>
+    <string name="main_plan_first_btn">+\t\t첫 여행 계획하기</string>
+    <string name="main_plan_btn">+\t\t\t여행 계획하기</string>
+
+    <string name="main_recent_title">최근 활동</string>
+    <string name="main_recent_all">전체보기</string>
+    <string name="main_recent_no_content">아직 활동 내역이 없어요!</string>
+    <string name="main_recent_just">방금 전</string>
+    <string name="main_recent_minute">%d분 전</string>
+    <string name="main_recent_hour">%d시간 전</string>
+    
+    <string name="main_album_title">추억 사진첩</string>
+    <string name="main_album_subtitle">여행 추억 모아보기</string>
+    <string name="main_tip_title">여행 가이드</string>
+    <string name="main_tip_subtitle">앱 사용법과 여행 팁</string>
+    
+    <string name="main_trip_record_title">여행 기록</string>
+    <string name="main_trip_record_no_content">아직 여행 기록이 없어요!</string>
+    <string name="main_trip_record_date">%s ~ %s</string>
+
+
+
+    <!--mock-->
+    <!--home-->
+    <string name="main_recent_mock1">경주 여행을 성공적으로 완료했어요!</string>
+    <string name="main_recent_mock2">동궁과 월지에서 가족사진 업로드</string>
+    <string name="main_recent_mock3">마지막 질문에 답변 완료</string>
+    
+    <string name="main_trip_record_mock1">제주 자연 힐링 여행</string>
+    <string name="main_trip_record_mock2">부산 바다 여행</string>
+    <string name="date_mock1">2023.12.20</string>
+    <string name="date_mock2">2023.12.23</string>
 </resources>
