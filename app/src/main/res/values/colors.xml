@@ -2,4 +2,22 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="primary_orange">#FB923C</color>
+    <color name="primary_red">#F87171</color>
+    <color name="hover_orange">#F97316</color>
+    <color name="hover_red">#EF4444</color>
+    <color name="secondary_blue">#60A5FA</color>
+
+    <color name="card_click">#FEF5EF</color>
+    <color name="card_background">#FEF3C7</color>
+    <color name="accent_yellow">#FBBF24</color>
+    <color name="background_yellow">#FEFCE8</color>
+    <color name="text_secondary_gray">#5F5F5F</color>
+
+    <!--state-->
+    <color name="state_complete_gray">#E5E5E5</color>
+
+    <!--home-->
+    <color name="header_line_orange">#33FB923C</color>
 </resources>
