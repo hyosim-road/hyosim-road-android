@@ -1,4 +1,4 @@
-package com.hyosimroad.hamkkae.presentation.main.adapter
+package com.hyosimroad.hamkkae.presentation.main.adapter.recent
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

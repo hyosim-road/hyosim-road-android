@@ -1,4 +1,4 @@
-package com.hyosimroad.hamkkae.presentation.main.adapter
+package com.hyosimroad.hamkkae.presentation.main.adapter.trip_record
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

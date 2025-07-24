@@ -6,9 +6,31 @@
     <string name="state_in_progress">진행중</string>
     <string name="state_before_starting">시작전</string>
 
+    <!--keyword-->
+    <string name="keyword_sachal">사찰</string>
+    <string name="keyword_history">역사</string>
+
     <!--home-->
     <string name="main_title">함께가효</string>
     <string name="main_subtitle">부모님과 함께하는 특별한 여행</string>
+
+    <string name="main_question_title">가족 대화 질문이 도착했어요!</string>
+    <string name="main_question_answer">답변하기</string>
+    <string name="main_question_later">나중에</string>
+
+    <string name="main_trip_current_location">현재위치: </string>
+    <string name="main_trip_current_day">• Day %d</string>
+    <string name="main_trip_photo">사진</string>
+    <string name="main_trip_answers">대화</string>
+    <string name="main_trip_complete">완료</string>
+    <string name="main_trip_complete_count">%d/%d</string>
+    <string name="main_trip_progress">여행 진행률</string>
+    <string name="main_trip_detail">여행 계속하기</string>
+    <string name="main_trip_upload">사진 업로드</string>
+
+    <string name="main_today_schedule">오늘의 일정</string>
+    <string name="main_time">%s ~ %s</string>
+    <string name="main_current">현재</string>
 
     <string name="main_plan_title">부모님과 특별한 여행을 계획해보세요</string>
     <string name="main_plan_subtitle">취향에 맞는 관광지 추천부터 추억만들기까지 \n모든 것을 도와드려요 😊</string>
@@ -35,6 +57,11 @@
 
     <!--mock-->
     <!--home-->
+    <string name="main_question_mock">부모님과 함께 이곳에서 가장 인상 깊었던 순간은 무엇인가요?</string>
+
+    <string name="main_trip_title_mock">경주 역사문화 코스</string>
+    <string name="main_trip_location_mock">불국사</string>
+
     <string name="main_recent_mock1">경주 여행을 성공적으로 완료했어요!</string>
     <string name="main_recent_mock2">동궁과 월지에서 가족사진 업로드</string>
     <string name="main_recent_mock3">마지막 질문에 답변 완료</string>

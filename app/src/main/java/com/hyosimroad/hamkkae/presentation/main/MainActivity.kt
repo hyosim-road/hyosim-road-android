@@ -2,12 +2,19 @@ package com.hyosimroad.hamkkae.presentation.main
 
 import android.os.Bundle
 import android.view.View
+import android.view.animation.AlphaAnimation
+import android.view.animation.Animation
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintSet
+import androidx.lifecycle.lifecycleScope
 import com.hyosimroad.hamkkae.R
 import com.hyosimroad.hamkkae.databinding.ActivityMainBinding
-import com.hyosimroad.hamkkae.presentation.main.adapter.RecentAdapter
-import com.hyosimroad.hamkkae.presentation.main.adapter.TripRecordAdapter
+import com.hyosimroad.hamkkae.presentation.main.adapter.recent.RecentAdapter
+import com.hyosimroad.hamkkae.presentation.main.adapter.today_schedule.TodayScheduleAdapter
+import com.hyosimroad.hamkkae.presentation.main.adapter.trip_record.TripRecordAdapter
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
@@ -27,8 +34,76 @@ class MainActivity : AppCompatActivity() {
 
     private fun setting() {
         binding.btnPlan.text = getString(R.string.main_plan_first_btn)
+
+        getTodaySchedule()
         getRecents()
         getTripRecords()
+
+        setVisibilityPlan(false)
+        showQuestion(false)
+        clickSetting()
+    }
+
+    private fun setVisibilityPlan(plan: Boolean) {
+        Timber.d("setVisibilityPlan 호출: plan = $plan")
+        val constraintSet = ConstraintSet()
+        constraintSet.clone(binding.clMain)
+        val marginTop = resources.getDimensionPixelSize(R.dimen.margin_20dp)
+
+        if (plan) {
+            //binding.cvQuestion.visibility = View.VISIBLE
+            binding.cvTrip.visibility = View.VISIBLE
+            binding.cvSchedule.visibility = View.VISIBLE
+            binding.cvPlan.visibility = View.GONE
+
+            // cvRecent의 top을 cvSchedule의 bottom에 연결
+            binding.cvSchedule.post {
+                val constraintSet = ConstraintSet()
+                constraintSet.clone(binding.clMain)
+                constraintSet.clear(R.id.cv_recent, ConstraintSet.TOP)
+                constraintSet.connect(
+                    R.id.cv_recent,
+                    ConstraintSet.TOP,
+                    R.id.cv_schedule,
+                    ConstraintSet.BOTTOM,
+                    marginTop
+                )
+                constraintSet.applyTo(binding.clMain)
+            }
+
+            lifecycleScope.launch {
+                delay(3000) // 3초 대기
+                showQuestion(true)
+            }
+
+        } else {
+            //binding.cvQuestion.visibility = View.GONE
+            binding.cvTrip.visibility = View.GONE
+            binding.cvSchedule.visibility = View.GONE
+            binding.cvPlan.visibility = View.VISIBLE
+
+            // cvRecent의 top을 cvPlan의 bottom에 연결
+            binding.cvPlan.post {
+                val set = ConstraintSet()
+                set.clone(binding.clMain)
+                set.clear(R.id.cv_recent, ConstraintSet.TOP)
+                set.connect(
+                    R.id.cv_recent,
+                    ConstraintSet.TOP,
+                    R.id.cv_plan,
+                    ConstraintSet.BOTTOM,
+                    marginTop
+                )
+                set.applyTo(binding.clMain)
+            }
+        }
+    }
+
+
+    private fun getTodaySchedule(){
+        val todayScheduleAdapter = TodayScheduleAdapter()
+        binding.rvMainSchedule.adapter=todayScheduleAdapter
+        todayScheduleAdapter.submitList(mainViewModel.todayScheduleList)
     }
 
     private fun getRecents(){
@@ -54,4 +129,60 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun showQuestion(isShow: Boolean ){
+        val constraintSet = ConstraintSet()
+        constraintSet.clone(binding.clMain)
+        val marginTop20 = resources.getDimensionPixelSize(R.dimen.margin_20dp)
+        val marginTop30 = resources.getDimensionPixelSize(R.dimen.margin_30dp)
+
+        if(isShow){
+            binding.cvQuestion.visibility= View.VISIBLE
+            binding.cvSchedule.post {
+                val constraintSet = ConstraintSet()
+                constraintSet.clone(binding.clMain)
+                constraintSet.clear(R.id.cv_trip, ConstraintSet.TOP)
+                constraintSet.connect(
+                    R.id.cv_trip,
+                    ConstraintSet.TOP,
+                    R.id.cv_question,
+                    ConstraintSet.BOTTOM,
+                    marginTop20
+                )
+                constraintSet.applyTo(binding.clMain)
+            }
+
+            startBlinkingAnimation(binding.tvQuestionTitle)
+        }else{
+            binding.cvQuestion.visibility= View.GONE
+            binding.cvSchedule.post {
+                val constraintSet = ConstraintSet()
+                constraintSet.clone(binding.clMain)
+                constraintSet.clear(R.id.cv_trip, ConstraintSet.TOP)
+                constraintSet.connect(
+                    R.id.cv_trip,
+                    ConstraintSet.TOP,
+                    R.id.cl_header,
+                    ConstraintSet.BOTTOM,
+                    marginTop30
+                )
+                constraintSet.applyTo(binding.clMain)
+            }
+        }
+    }
+
+    private fun clickSetting(){
+        binding.btnSetting.setOnClickListener {
+            Timber.d("setting click!")
+            setVisibilityPlan(true)
+        }
+    }
+
+    private fun startBlinkingAnimation(view: View) {
+        val blinkAnimation = AlphaAnimation(1.0f, 0.3f).apply {
+            duration = 1000
+            repeatMode = Animation.REVERSE
+            repeatCount = Animation.INFINITE
+        }
+        view.startAnimation(blinkAnimation)
+    }
 }
