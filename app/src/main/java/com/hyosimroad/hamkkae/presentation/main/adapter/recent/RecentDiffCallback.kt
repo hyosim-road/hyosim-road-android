@@ -1,4 +1,4 @@
-package com.hyosimroad.hamkkae.presentation.main.adapter
+package com.hyosimroad.hamkkae.presentation.main.adapter.recent
 
 import androidx.recyclerview.widget.DiffUtil
 import com.hyosimroad.hamkkae.domain.model.Recent
