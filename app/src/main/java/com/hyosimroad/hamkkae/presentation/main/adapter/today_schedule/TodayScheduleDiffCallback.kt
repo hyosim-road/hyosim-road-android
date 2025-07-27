@@ -1,7 +1,6 @@
 package com.hyosimroad.hamkkae.presentation.main.adapter.today_schedule
 
 import androidx.recyclerview.widget.DiffUtil
-import com.hyosimroad.hamkkae.domain.model.Recent
 import com.hyosimroad.hamkkae.domain.model.TodaySchedule
 
 object TodayScheduleDiffCallback : DiffUtil.ItemCallback<TodaySchedule>() {

@@ -18,6 +18,14 @@
     <!--state-->
     <color name="state_complete_gray">#E5E5E5</color>
 
+    <!--course_keyword-->
+    <color name="course_keyword_bg_orange">#FFEDD5</color>
+    <color name="course_keyword_stroke_orange">#FED7AA</color>
+
     <!--home-->
     <color name="header_line_orange">#33FB923C</color>
+
+    <!--plan-->
+    <!--course-->
+    <color name="course_keyword_text_orange">#C0795A</color>
 </resources>

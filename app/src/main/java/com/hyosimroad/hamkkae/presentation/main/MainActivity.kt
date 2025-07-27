@@ -1,5 +1,6 @@
 package com.hyosimroad.hamkkae.presentation.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AlphaAnimation
@@ -13,9 +14,11 @@ import com.hyosimroad.hamkkae.databinding.ActivityMainBinding
 import com.hyosimroad.hamkkae.presentation.main.adapter.recent.RecentAdapter
 import com.hyosimroad.hamkkae.presentation.main.adapter.today_schedule.TodayScheduleAdapter
 import com.hyosimroad.hamkkae.presentation.main.adapter.trip_record.TripRecordAdapter
+import com.hyosimroad.hamkkae.presentation.main.plan.PlanActivity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import kotlin.jvm.java
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -34,6 +37,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setting() {
         binding.btnPlan.text = getString(R.string.main_plan_first_btn)
+        binding.btnPlan.isSelected=true
 
         getTodaySchedule()
         getRecents()
@@ -41,6 +45,7 @@ class MainActivity : AppCompatActivity() {
 
         setVisibilityPlan(false)
         showQuestion(false)
+        clickPlan()
         clickSetting()
     }
 
@@ -167,6 +172,13 @@ class MainActivity : AppCompatActivity() {
                 )
                 constraintSet.applyTo(binding.clMain)
             }
+        }
+    }
+
+    private fun clickPlan(){
+        binding.btnPlan.setOnClickListener {
+            val intent = Intent(this, PlanActivity::class.java)
+            startActivity(intent)
         }
     }
 
