@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_course"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="2dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_course"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_course">
+
+            <ImageView
+                android:id="@+id/iv_image"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@drawable/image_trip"
+                app:layout_constraintDimensionRatio="1:0.5"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="15dp"
+                android:text="@string/main_trip_title_mock"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/iv_image"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <ImageView
+                android:id="@+id/iv_clock"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="3dp"
+                android:background="@drawable/ic_time_gray_24"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintWidth_percent="0.05"
+                app:layout_constraintTop_toTopOf="@id/tv_name"
+                app:layout_constraintBottom_toBottomOf="@id/tv_name"
+                app:layout_constraintEnd_toStartOf="@id/tv_number_of_nights"/>
+            
+            <TextView
+                android:id="@+id/tv_number_of_nights"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:text="2박 3일"
+                android:textColor="@color/text_secondary_gray"
+                app:layout_constraintTop_toTopOf="@id/iv_clock"
+                app:layout_constraintBottom_toBottomOf="@id/iv_clock"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_keyword"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/tv_name"
+                app:layout_constraintStart_toStartOf="@id/tv_name"
+                app:layout_constraintEnd_toEndOf="@id/tv_number_of_nights"
+                tools:listitem="@layout/item_recommend_course_keyword"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_places"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                app:layout_constraintTop_toBottomOf="@id/rv_keyword"
+                app:layout_constraintStart_toStartOf="@id/tv_name"
+                app:layout_constraintEnd_toEndOf="@id/tv_number_of_nights"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:listitem="@layout/item_recommend_course_place"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_btns"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/rv_places"
+                app:layout_constraintStart_toStartOf="@id/tv_name"
+                app:layout_constraintEnd_toEndOf="@id/tv_number_of_nights">
+
+                <View
+                    android:id="@+id/v_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/state_complete_gray"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_map"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/btn_primary_orange"
+                    app:layout_constraintDimensionRatio="1:0.2"
+                    app:layout_constraintTop_toBottomOf="@id/v_line"
+                    app:layout_constraintStart_toStartOf="@id/v_line"
+                    app:layout_constraintEnd_toStartOf="@id/btn_detail"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+                <ImageView
+                    android:id="@+id/iv_map_icon"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/ic_navi_orange_24"
+                    android:elevation="5dp"
+                    android:rotation="45"
+                    android:layout_marginStart="36dp"
+                    android:layout_marginBottom="2dp"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintWidth_percent="0.05"
+                    app:layout_constraintTop_toTopOf="@id/btn_map"
+                    app:layout_constraintBottom_toBottomOf="@id/btn_map"
+                    app:layout_constraintStart_toStartOf="@id/btn_map"
+                    app:layout_constraintEnd_toStartOf="@id/tv_map"/>
+
+                <TextView
+                    android:id="@+id/tv_map"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/recommend_course_go_map"
+                    android:textColor="@color/primary_orange"
+                    android:textStyle="bold"
+                    android:elevation="5dp"
+                    android:layout_marginEnd="36dp"
+                    app:layout_constraintTop_toTopOf="@id/btn_map"
+                    app:layout_constraintStart_toEndOf="@id/iv_map_icon"
+                    app:layout_constraintEnd_toEndOf="@id/btn_map"
+                    app:layout_constraintBottom_toBottomOf="@id/btn_map"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_detail"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="5dp"
+                    android:background="@drawable/btn_primary_orange"
+                    app:layout_constraintTop_toTopOf="@id/btn_map"
+                    app:layout_constraintStart_toEndOf="@id/btn_map"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@id/btn_map"/>
+
+                <TextView
+                    android:id="@+id/tv_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/recommend_course_detail"
+                    android:textColor="@color/primary_orange"
+                    android:textStyle="bold"
+                    android:elevation="5dp"
+                    app:layout_constraintTop_toTopOf="@id/btn_detail"
+                    app:layout_constraintStart_toStartOf="@id/btn_detail"
+                    app:layout_constraintEnd_toEndOf="@id/btn_detail"
+                    app:layout_constraintBottom_toBottomOf="@id/btn_detail"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

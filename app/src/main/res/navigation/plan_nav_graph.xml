@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/plan_nav_graph"
+    app:startDestination="@id/recommendCourseFragment">
+
+    <fragment
+    android:id="@+id/recommendCourseFragment"
+    android:name="com.hyosimroad.hamkkae.presentation.main.plan.recommend.RecommendCourseFragment"
+    android:label="recommend_course_fragment"
+    tools:layout="@layout/fragment_recommend_course">
+    </fragment>
+
+</navigation>

@@ -7,8 +7,9 @@
     <string name="state_before_starting">시작전</string>
 
     <!--keyword-->
-    <string name="keyword_sachal">사찰</string>
+    <string name="keyword_temple">사찰</string>
     <string name="keyword_history">역사</string>
+    <string name="keyword_culture">문화</string>
 
     <!--home-->
     <string name="main_title">함께가효</string>
@@ -52,6 +53,19 @@
     <string name="main_trip_record_title">여행 기록</string>
     <string name="main_trip_record_no_content">아직 여행 기록이 없어요!</string>
     <string name="main_trip_record_date">%s ~ %s</string>
+    
+    
+    <!--plan-->
+    <string name="plan_go_next">다음 단계로</string>
+
+    <!--recomment_course-->
+    <string name="recommend_course_title">추천 코스</string>
+    <string name="recommend_course_subtitle">부모님께 딱 맞는 여행 코스예요</string>
+    <string name="recommend_course_progress_title">3단계: 코스 선택</string>
+    <string name="recommend_course_go_map">지도 보기</string>"
+    <string name="recommend_course_detail">상세보기</string>
+    <string name="recommend_course_done">이 코스로 여행 시작하기</string>
+    <string name="recommend_course_more">다른 코스 더 보기</string>
 
 
 
