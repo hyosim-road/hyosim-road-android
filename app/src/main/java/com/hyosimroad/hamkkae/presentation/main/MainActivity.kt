@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintSet
@@ -23,6 +25,7 @@ import kotlin.jvm.java
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val mainViewModel: MainViewModel by viewModels()
+    private lateinit var planActivityLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +39,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setting() {
+        planActivityLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                // PlanActivity → Trip 완료 후 돌아온 경우
+                Timber.d("main으로 돌아옴!")
+                setVisibilityPlan(true)
+            }
+        }
+
         binding.btnPlan.text = getString(R.string.main_plan_first_btn)
         binding.btnPlan.isSelected=true
 
@@ -57,23 +68,26 @@ class MainActivity : AppCompatActivity() {
 
         if (plan) {
             //binding.cvQuestion.visibility = View.VISIBLE
-            binding.cvTrip.visibility = View.VISIBLE
-            binding.cvSchedule.visibility = View.VISIBLE
-            binding.cvPlan.visibility = View.GONE
+            with(binding){
+                cvTrip.visibility = View.VISIBLE
+                cvSchedule.visibility = View.VISIBLE
+                cvPlan.visibility = View.GONE
+                btnPlan.isSelected=true
 
-            // cvRecent의 top을 cvSchedule의 bottom에 연결
-            binding.cvSchedule.post {
-                val constraintSet = ConstraintSet()
-                constraintSet.clone(binding.clMain)
-                constraintSet.clear(R.id.cv_recent, ConstraintSet.TOP)
-                constraintSet.connect(
-                    R.id.cv_recent,
-                    ConstraintSet.TOP,
-                    R.id.cv_schedule,
-                    ConstraintSet.BOTTOM,
-                    marginTop
-                )
-                constraintSet.applyTo(binding.clMain)
+                // cvRecent의 top을 cvSchedule의 bottom에 연결
+                cvSchedule.post {
+                    val constraintSet = ConstraintSet()
+                    constraintSet.clone(binding.clMain)
+                    constraintSet.clear(R.id.cv_recent, ConstraintSet.TOP)
+                    constraintSet.connect(
+                        R.id.cv_recent,
+                        ConstraintSet.TOP,
+                        R.id.cv_schedule,
+                        ConstraintSet.BOTTOM,
+                        marginTop
+                    )
+                    constraintSet.applyTo(binding.clMain)
+                }
             }
 
             lifecycleScope.launch {
@@ -106,7 +120,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun getTodaySchedule(){
-        val todayScheduleAdapter = TodayScheduleAdapter()
+        val todayScheduleAdapter = TodayScheduleAdapter(false)
         binding.rvMainSchedule.adapter=todayScheduleAdapter
         todayScheduleAdapter.submitList(mainViewModel.todayScheduleList)
     }
@@ -177,8 +191,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun clickPlan(){
         binding.btnPlan.setOnClickListener {
-            val intent = Intent(this, PlanActivity::class.java)
-            startActivity(intent)
+            planActivityLauncher.launch(Intent(this, PlanActivity::class.java))
         }
     }
 

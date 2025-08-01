@@ -13,7 +13,9 @@ import com.hyosimroad.hamkkae.util.StateConstants.TYPE_BEFORE_STARTING
 import com.hyosimroad.hamkkae.util.StateConstants.TYPE_COMPLETE
 import com.hyosimroad.hamkkae.util.StateConstants.TYPE_IN_PROCESS
 
-class TodayScheduleAdapter : ListAdapter<TodaySchedule, TodayScheduleAdapter.TodayScheduleViewHolder>(TodayScheduleDiffCallback) {
+class TodayScheduleAdapter(
+    private val bgVisibility:Boolean
+) : ListAdapter<TodaySchedule, TodayScheduleAdapter.TodayScheduleViewHolder>(TodayScheduleDiffCallback) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -46,11 +48,11 @@ class TodayScheduleAdapter : ListAdapter<TodaySchedule, TodayScheduleAdapter.Tod
                         tvNumber.text = schedule.id.toString()
                     }
                 }
-
                 tvPlace.text = schedule.place
                 tvKeyword.text = schedule.keyword
                 tvTime.text = binding.root.context.getString(R.string.main_time, schedule.startTime, schedule.endTime)
 
+                if(!bgVisibility) ivBgGray.visibility = View.INVISIBLE
             }
         }
     }

@@ -10,6 +10,19 @@
     android:name="com.hyosimroad.hamkkae.presentation.main.plan.recommend.RecommendCourseFragment"
     android:label="recommend_course_fragment"
     tools:layout="@layout/fragment_recommend_course">
+
+        <action
+            android:id="@+id/action_recommendCourseFragment_to_tripStartFragment"
+            app:destination="@id/tripStartFragment" />
+
     </fragment>
+
+    <fragment
+        android:id="@+id/tripStartFragment"
+        android:name="com.hyosimroad.hamkkae.presentation.main.plan.trip_start.TripStartFragment"
+        android:label="trip_start_fragment"
+        tools:layout="@layout/fragment_trip_start">
+    </fragment>
+
 
 </navigation>

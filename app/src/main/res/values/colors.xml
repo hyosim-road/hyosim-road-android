@@ -28,4 +28,12 @@
     <!--plan-->
     <!--course-->
     <color name="course_keyword_text_orange">#C0795A</color>
+
+    <!--complete-->
+    <color name="complete_tip_bg_yellow">#FFFBEF</color>
+    <color name="complete_preview_bg_gray">#EDEDED</color>
+
+    <!--start-->
+    <color name="bg_pink">#FFEEEE</color>
+    <color name="start_pink">#FFF6F6</color>
 </resources>

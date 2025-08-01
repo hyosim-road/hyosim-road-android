@@ -62,11 +62,24 @@
     <string name="recommend_course_title">추천 코스</string>
     <string name="recommend_course_subtitle">부모님께 딱 맞는 여행 코스예요</string>
     <string name="recommend_course_progress_title">3단계: 코스 선택</string>
+    <string name="recommend_course_progress">3/4</string>
     <string name="recommend_course_go_map">지도 보기</string>"
     <string name="recommend_course_detail">상세보기</string>
     <string name="recommend_course_done">이 코스로 여행 시작하기</string>
     <string name="recommend_course_more">다른 코스 더 보기</string>
-
+    
+    <!--trip_complete-->
+    <string name="trip_complete_progress_title">4단계: 여행 시작</string>
+    <string name="trip_complete_progress">4/4</string>
+    <string name="trip_summation_complete">모든 계획이 완료되었습니다!</string>
+    <string name="trip_summation_during">기간</string>
+    <string name="trip_summation_personnel">인원</string>
+    <string name="trip_preview_title">첫날 일정 미리보기</string>
+    <string name="trip_complete_tip_title">준비 완료!</string>
+    <string name="trip_complete_tip_subtitle">부모님과 함께하는 특별한 여행이 시작됩니다.</string>
+    <string name="trip_complete_tip">각 관광지에서 사진을 업로드하면 자동으로 다음 일정으로 진행돼요</string>
+    <string name="trip_complete_trip_start">여행 시작하기</string>
+    <string name="trip_complete_enjoy">즐거운 여행 되세요!</string>
 
 
     <!--mock-->
@@ -84,4 +97,9 @@
     <string name="main_trip_record_mock2">부산 바다 여행</string>
     <string name="date_mock1">2023.12.20</string>
     <string name="date_mock2">2023.12.23</string>
+    
+    <!--trip_complete-->
+    <string name="preview_place_mock">불국사</string>
+    <string name="preview_place_description_mock">신라 천년의 불교문화가 살아있는 곳</string>
+    <string name="preview_place_time_mock">09:00 ~ 11:00</string>
 </resources>

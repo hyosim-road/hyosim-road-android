@@ -2,22 +2,32 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingStart="15dp"
-    android:paddingEnd="15dp"
     android:paddingTop="5dp"
     android:paddingBottom="5dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/iv_bg_gray"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/complete_preview_bg_gray"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <ImageView
         android:id="@+id/iv_icon"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:src="@drawable/ic_complete_blue"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintWidth_percent="0.09"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="@id/iv_bg_gray"/>
 
     <TextView
         android:id="@+id/tv_number"
@@ -69,6 +79,18 @@
         app:layout_constraintTop_toTopOf="@id/tv_place"
         app:layout_constraintBottom_toBottomOf="@id/tv_place"
         app:layout_constraintStart_toEndOf="@id/tv_keyword"/>
+
+    <TextView
+        android:id="@+id/tv_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
+        android:gravity="start"
+        android:textColor="@color/text_secondary_gray"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/tv_place"
+        app:layout_constraintStart_toStartOf="@id/tv_place"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <ImageView
         android:id="@+id/iv_time"
