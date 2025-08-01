@@ -20,7 +20,7 @@ class PlanActivity: AppCompatActivity() {
     }
 
     private fun setting() {
-        binding.tvTripProgressTitle.text=getString(R.string.recommend_course_progress_title)
+        //binding.tvTrip.text=getString(R.string.recommend_course_progress_title)
         binding.btnBack.setOnClickListener {
             finish()
         }
