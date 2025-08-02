@@ -12,7 +12,8 @@ import com.hyosimroad.hamkkae.databinding.ItemRecommendCourseBinding
 import com.hyosimroad.hamkkae.domain.model.Course
 
 class RecommendCourseAdapter(
-    private val clickItem: (Course) -> Unit
+    private val clickItem: (Course) -> Unit,
+    private val clickDetail:(Course) -> Unit
 ) :
     ListAdapter<Course, RecommendCourseAdapter.RecommendCourseViewHolder>(
         RecommendCourseDiffCallback
@@ -118,6 +119,10 @@ class RecommendCourseAdapter(
                 }
 
                 constraintSet.applyTo(clCourse)
+
+                btnDetail.setOnClickListener {
+                    clickDetail(course)
+                }
             }
         }
 

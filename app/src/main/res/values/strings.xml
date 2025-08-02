@@ -97,7 +97,29 @@
     <string name="main_trip_record_mock2">부산 바다 여행</string>
     <string name="date_mock1">2023.12.20</string>
     <string name="date_mock2">2023.12.23</string>
-    
+
+
+    <!--plan-->
+    <!--recommend-->
+    <string name="recommend_during_mock">2박 3일</string>
+    <string name="recommend_description_mock">신라 천년의 역사가 살아 숨쉬는 경주에서 부모님과 함께 우리나라의 찬란한 문화유산을 체험해보세요.</string>
+    <!--detail-->
+    <string name="bar_overview">코스 개요</string>
+    <string name="bar_detail">관광지 상세</string>
+    <string name="bar_transit">교통 정보</string>
+    <string name="bar_tip">여행 팁</string>
+    <string name="overview_highlights">코스 하이라이트</string>
+    <string name="tip_title">부모님과 함께하는 여행 팁</string>
+    <string name="detail_btn_start">이 코스로 여행 시작하기</string>
+    <!--overview-->
+    <string name="overview_preview">일정 미리보기</string>
+    <string name="overview_first_day">첫째 날</string>
+    <!--tip-->
+    <string name="tip_caution">동행 시 주의사항</string>
+    <string name="tip_best_visit">최적 방문 시기</string>
+    <string name="tip_checklist">준비물 체크리스트</string>
+    <string name="tip_bullet">• </string>
+
     <!--trip_complete-->
     <string name="preview_place_mock">불국사</string>
     <string name="preview_place_description_mock">신라 천년의 불교문화가 살아있는 곳</string>
