@@ -30,7 +30,7 @@ class TextAdapter(
             val styled = when (mode) {
                 TextMode.NORMAL -> text
                 TextMode.PREFIX_BOLD -> text.boldPrefixBeforeColon()
-                TextMode.FULL_BOLD -> text.asBold()                // ✅ 전체 Bold
+                TextMode.FULL_BOLD -> text.asBold()
             }
 
             val bullet = ctx.getString(R.string.tip_bullet) // "• "

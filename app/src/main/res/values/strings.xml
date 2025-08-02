@@ -19,7 +19,7 @@
     <string name="main_question_answer">답변하기</string>
     <string name="main_question_later">나중에</string>
 
-    <string name="main_trip_current_location">현재위치: </string>
+    <string name="main_trip_current_location">현재위치: %s</string>
     <string name="main_trip_current_day">• Day %d</string>
     <string name="main_trip_photo">사진</string>
     <string name="main_trip_answers">대화</string>
@@ -124,4 +124,11 @@
     <string name="preview_place_mock">불국사</string>
     <string name="preview_place_description_mock">신라 천년의 불교문화가 살아있는 곳</string>
     <string name="preview_place_time_mock">09:00 ~ 11:00</string>
+
+    <!--trip_detail-->
+    <string name="trip_detail_map">지도</string>
+    <string name="trip_detail_day">Day %d</string>
+    <string name="trip_detail_schedule_today">오늘</string>
+    <string name="trip_detail_pre_question">이전 질문 답변 보기</string>
+    <string name="trip_detail_tip">사진 업로드 팁</string>
 </resources>

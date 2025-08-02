@@ -69,7 +69,7 @@ class RecommendDetailFragment : Fragment() {
             getString(R.string.bar_tip)
         )
 
-        TabLayoutMediator(binding.tlCommunity, binding.vpDetail) { tab, pos ->
+        TabLayoutMediator(binding.tlDetail, binding.vpDetail) { tab, pos ->
             tab.text = titles[pos]
         }.attach()
 

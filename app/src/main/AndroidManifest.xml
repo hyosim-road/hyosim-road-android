@@ -27,6 +27,10 @@
         <activity android:name=".presentation.main.plan.PlanActivity"
             android:exported="false">
         </activity>
+
+        <activity android:name=".presentation.main.trip_continue.TripDetailActivity"
+            android:exported="false">
+        </activity>
     </application>
 
 </manifest>
