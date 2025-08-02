@@ -15,6 +15,21 @@
             android:id="@+id/action_recommendCourseFragment_to_tripStartFragment"
             app:destination="@id/tripStartFragment" />
 
+        <action
+            android:id="@+id/action_recommendCourseFragment_to_recommendDetailFragment"
+            app:destination="@id/recommendDetailFragment"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/recommendDetailFragment"
+        android:name="com.hyosimroad.hamkkae.presentation.main.plan.recommend.detail.RecommendDetailFragment"
+        android:label="recommend_detail_fragment"
+        tools:layout="@layout/fragment_recommend_detail">
+
+        <action
+            android:id="@+id/action_recommendDetailFragment_to_tripStartFragment"
+            app:destination="@id/tripStartFragment" />
     </fragment>
 
     <fragment

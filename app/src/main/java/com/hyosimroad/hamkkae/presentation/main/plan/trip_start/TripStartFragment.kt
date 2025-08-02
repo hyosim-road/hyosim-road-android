@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.hyosimroad.hamkkae.databinding.FragmentTripStartBinding
@@ -62,9 +63,17 @@ class TripStartFragment: Fragment() {
 
     private fun clickStart(){
         binding.btnStart.setOnClickListener {
-            requireActivity().setResult(Activity.RESULT_OK) // ✅ 결과값 설정
-            requireActivity().finish()                     // ✅ PlanActivity 종료
+            goMain()
         }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            goMain()
+        }
+    }
+
+    private fun goMain(){
+        requireActivity().setResult(Activity.RESULT_OK) // ✅ 결과값 설정
+        requireActivity().finish()                     // ✅ PlanActivity 종료
     }
 
     override fun onDestroy() {

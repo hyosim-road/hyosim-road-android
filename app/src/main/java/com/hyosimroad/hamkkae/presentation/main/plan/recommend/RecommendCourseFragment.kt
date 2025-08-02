@@ -49,6 +49,9 @@ class RecommendCourseFragment : Fragment() {
         val recommendCourseAdapter = RecommendCourseAdapter(
             clickItem = { course ->
                 binding.btnNext.isSelected = true
+            },
+            clickDetail = { course ->
+                findNavController().navigate(R.id.action_recommendCourseFragment_to_recommendDetailFragment)
             }
         )
         binding.rvCourse.adapter = recommendCourseAdapter

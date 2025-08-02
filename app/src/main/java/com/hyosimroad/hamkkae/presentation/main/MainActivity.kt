@@ -39,16 +39,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setting() {
-        planActivityLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == RESULT_OK) {
-                // PlanActivity → Trip 완료 후 돌아온 경우
-                Timber.d("main으로 돌아옴!")
-                setVisibilityPlan(true)
+        planActivityLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == RESULT_OK) {
+                    // PlanActivity → Trip 완료 후 돌아온 경우
+                    Timber.d("main으로 돌아옴!")
+                    setVisibilityPlan(true)
+                }
             }
-        }
 
         binding.btnPlan.text = getString(R.string.main_plan_first_btn)
-        binding.btnPlan.isSelected=true
+        binding.btnPlan.isSelected = true
 
         getTodaySchedule()
         getRecents()
@@ -68,11 +69,11 @@ class MainActivity : AppCompatActivity() {
 
         if (plan) {
             //binding.cvQuestion.visibility = View.VISIBLE
-            with(binding){
+            with(binding) {
                 cvTrip.visibility = View.VISIBLE
                 cvSchedule.visibility = View.VISIBLE
                 cvPlan.visibility = View.GONE
-                btnPlan.isSelected=true
+                btnTripDetail.isSelected = true
 
                 // cvRecent의 top을 cvSchedule의 bottom에 연결
                 cvSchedule.post {
@@ -119,43 +120,43 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun getTodaySchedule(){
+    private fun getTodaySchedule() {
         val todayScheduleAdapter = TodayScheduleAdapter(false)
-        binding.rvMainSchedule.adapter=todayScheduleAdapter
+        binding.rvMainSchedule.adapter = todayScheduleAdapter
         todayScheduleAdapter.submitList(mainViewModel.todayScheduleList)
     }
 
-    private fun getRecents(){
+    private fun getRecents() {
         val recentAdapter = RecentAdapter()
         binding.rvMainRecent.adapter = recentAdapter
         val list = mainViewModel.recentActivityList
         Timber.d("recentActivityList: $list")
         recentAdapter.submitList(list)
 
-        with(binding){
-            rvMainRecent.visibility= View.GONE
-            tvRecentNoContent.visibility= View.VISIBLE
+        with(binding) {
+            rvMainRecent.visibility = View.GONE
+            tvRecentNoContent.visibility = View.VISIBLE
         }
     }
 
-    private fun getTripRecords(){
+    private fun getTripRecords() {
         val tripRecordAdapter = TripRecordAdapter()
         binding.rvMainTripRecord.adapter = tripRecordAdapter
         tripRecordAdapter.submitList(mainViewModel.tripRecordList)
-        with(binding){
-            rvMainTripRecord.visibility= View.GONE
-            tvTripRecordNoContent.visibility= View.VISIBLE
+        with(binding) {
+            rvMainTripRecord.visibility = View.GONE
+            tvTripRecordNoContent.visibility = View.VISIBLE
         }
     }
 
-    private fun showQuestion(isShow: Boolean ){
+    private fun showQuestion(isShow: Boolean) {
         val constraintSet = ConstraintSet()
         constraintSet.clone(binding.clMain)
         val marginTop20 = resources.getDimensionPixelSize(R.dimen.margin_20dp)
         val marginTop30 = resources.getDimensionPixelSize(R.dimen.margin_30dp)
 
-        if(isShow){
-            binding.cvQuestion.visibility= View.VISIBLE
+        if (isShow) {
+            binding.cvQuestion.visibility = View.VISIBLE
             binding.cvSchedule.post {
                 val constraintSet = ConstraintSet()
                 constraintSet.clone(binding.clMain)
@@ -171,8 +172,8 @@ class MainActivity : AppCompatActivity() {
             }
 
             startBlinkingAnimation(binding.tvQuestionTitle)
-        }else{
-            binding.cvQuestion.visibility= View.GONE
+        } else {
+            binding.cvQuestion.visibility = View.GONE
             binding.cvSchedule.post {
                 val constraintSet = ConstraintSet()
                 constraintSet.clone(binding.clMain)
@@ -189,13 +190,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun clickPlan(){
+    private fun clickPlan() {
         binding.btnPlan.setOnClickListener {
             planActivityLauncher.launch(Intent(this, PlanActivity::class.java))
         }
     }
 
-    private fun clickSetting(){
+    private fun clickSetting() {
         binding.btnSetting.setOnClickListener {
             Timber.d("setting click!")
             setVisibilityPlan(true)

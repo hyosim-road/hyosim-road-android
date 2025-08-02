@@ -5,6 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import com.hyosimroad.hamkkae.R
 import com.hyosimroad.hamkkae.databinding.ItemRecommendCoursePlaceBinding
 import com.hyosimroad.hamkkae.domain.model.Course
 
@@ -31,6 +33,7 @@ class RecommendCoursePlaceAdapter:
             with(binding){
                 tvPlace.text = place.name
                 tvTime.text = place.time
+                ivIcon.load(R.drawable.ic_location_gray_24)
             }
         }
     }
