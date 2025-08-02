@@ -17,6 +17,7 @@ import com.hyosimroad.hamkkae.presentation.main.adapter.recent.RecentAdapter
 import com.hyosimroad.hamkkae.presentation.main.adapter.today_schedule.TodayScheduleAdapter
 import com.hyosimroad.hamkkae.presentation.main.adapter.trip_record.TripRecordAdapter
 import com.hyosimroad.hamkkae.presentation.main.plan.PlanActivity
+import com.hyosimroad.hamkkae.presentation.main.trip_continue.TripDetailActivity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -75,6 +76,9 @@ class MainActivity : AppCompatActivity() {
                 cvPlan.visibility = View.GONE
                 btnTripDetail.isSelected = true
 
+                setTrip()
+                clickTripDetail()
+
                 // cvRecent의 top을 cvSchedule의 bottom에 연결
                 cvSchedule.post {
                     val constraintSet = ConstraintSet()
@@ -116,6 +120,13 @@ class MainActivity : AppCompatActivity() {
                 )
                 set.applyTo(binding.clMain)
             }
+        }
+    }
+
+    private fun setTrip(){
+        with(binding){
+            tvTripCurrentLocationTitle.text = getString(R.string.main_trip_current_location, "불국사")
+            tvTripDay.text = getString(R.string.main_trip_current_day, 1)
         }
     }
 
@@ -193,6 +204,13 @@ class MainActivity : AppCompatActivity() {
     private fun clickPlan() {
         binding.btnPlan.setOnClickListener {
             planActivityLauncher.launch(Intent(this, PlanActivity::class.java))
+        }
+    }
+
+    private fun clickTripDetail(){
+        binding.btnTripDetail.setOnClickListener {
+            val intent = Intent(this, TripDetailActivity::class.java)
+            startActivity(intent)
         }
     }
 

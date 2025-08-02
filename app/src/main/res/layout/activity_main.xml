@@ -241,17 +241,6 @@
                     app:layout_constraintBottom_toBottomOf="@id/iv_location"/>
 
                 <TextView
-                    android:id='@+id/tv_trip_current_location'
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/main_trip_location_mock"
-                    android:textColor="@color/text_secondary_gray"
-                    android:textSize="15sp"
-                    android:layout_marginStart="3dp"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_trip_current_location_title"
-                    app:layout_constraintStart_toEndOf="@id/tv_trip_current_location_title"/>
-
-                <TextView
                     android:id="@+id/tv_trip_date"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
