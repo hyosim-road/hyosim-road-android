@@ -18,6 +18,7 @@ import com.hyosimroad.hamkkae.presentation.main.adapter.today_schedule.TodaySche
 import com.hyosimroad.hamkkae.presentation.main.adapter.trip_record.TripRecordAdapter
 import com.hyosimroad.hamkkae.presentation.main.plan.PlanActivity
 import com.hyosimroad.hamkkae.presentation.main.trip_continue.TripDetailActivity
+import com.hyosimroad.hamkkae.presentation.main.upload_photo.UploadPhotoActivity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -78,6 +79,7 @@ class MainActivity : AppCompatActivity() {
 
                 setTrip()
                 clickTripDetail()
+                clickUpload()
 
                 // cvRecent의 top을 cvSchedule의 bottom에 연결
                 cvSchedule.post {
@@ -210,6 +212,13 @@ class MainActivity : AppCompatActivity() {
     private fun clickTripDetail(){
         binding.btnTripDetail.setOnClickListener {
             val intent = Intent(this, TripDetailActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun clickUpload(){
+        binding.btnUpload.setOnClickListener {
+            val intent = Intent(this, UploadPhotoActivity::class.java)
             startActivity(intent)
         }
     }
