@@ -8,4 +8,6 @@ class UploadPhotoViewModel: ViewModel() {
         "관광지의 특징적인 배경과 함께 촬영해보세요",
         "가족이 함께 웃고 있는 순간을 놓치지 마세요"
     )
+
+    var image = ""
 }

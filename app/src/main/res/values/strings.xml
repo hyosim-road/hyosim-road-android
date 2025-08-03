@@ -142,4 +142,9 @@
     <string name="upload_photo_upload_again">다시 선택하기</string>
     <string name="upload_photo_upload_complete">업로드 완료</string>
     <string name="upload_photo_tip">📸 사진 촬영 팁</string>
+    <string name="upload_photo_complete">방문 완료!</string>
+    <string name="upload_photo_place">%s 방문이 기록되었어요</string>
+    <string name="upload_photo_complete_photo">업로드된 사진</string>
+    <string name="upload_photo_complete_home">홈 화면으로 이동</string>
+    <string name="upload_photo_complete_share">가족에게 사진 공유하기</string>
 </resources>

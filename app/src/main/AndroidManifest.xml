@@ -36,6 +36,9 @@
 
         <activity android:name=".presentation.main.upload_photo.UploadPhotoActivity"
             android:exported="false"/>
+
+        <activity android:name=".presentation.main.upload_photo.UploadPhotoCompleteActivity"
+            android:exported="false"/>
     </application>
 
 </manifest>
