@@ -36,4 +36,10 @@
     <!--start-->
     <color name="bg_pink">#FFEEEE</color>
     <color name="start_pink">#FFF6F6</color>
+
+    <!--photo-->
+    <color name="photo_bg_blue">#F4F9FF</color>
+    <color name="upload_photo_complete_bg_blue">#E6F1FF</color>
+    <color name="upload_photo_complete_text_blue">#396CAB</color>
+    <color name="upload_photo_complete_state_blue">#CEE4FF</color>
 </resources>

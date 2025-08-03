@@ -76,6 +76,8 @@ class UploadPhotoActivity : AppCompatActivity() {
                             placeholder(R.drawable.image_trip) // 로딩 중 표시될 이미지 (선택 사항, drawable 리소스 필요)
                             error(R.drawable.image_trip) // 오류 시 표시될 이미지 (선택 사항, drawable 리소스 필요)
                         }
+
+                        uploadPhotoViewModel.image = uri.toString()
                     }
                 }
             }
@@ -107,6 +109,13 @@ class UploadPhotoActivity : AppCompatActivity() {
 
         binding.btnReselect.setOnClickListener {
             checkGalleryPermissionAndOpenPicker()
+        }
+
+        binding.btnComplete.setOnClickListener {
+            val intent = Intent(this, UploadPhotoCompleteActivity::class.java)
+            intent.putExtra("image", uploadPhotoViewModel.image)
+            startActivity(intent)
+            finish()
         }
     }
 
