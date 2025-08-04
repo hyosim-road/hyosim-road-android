@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 눌렸을 때 상태 -->
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#1A000000" /> <!-- 검정 10% 투명 = 회색 느낌 -->
+            <stroke
+                android:width="0.5dp"
+                android:color="@color/text_secondary_gray" />
+            <corners android:radius="6dp" />
+        </shape>
+    </item>
+
+    <!-- 기본 상태 -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/transparent" />
+            <stroke
+                android:width="0.5dp"
+                android:color="@color/text_secondary_gray" />
+            <corners android:radius="6dp" />
+        </shape>
+    </item>
+</selector>

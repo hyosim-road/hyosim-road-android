@@ -44,19 +44,43 @@
     <string name="main_recent_just">방금 전</string>
     <string name="main_recent_minute">%d분 전</string>
     <string name="main_recent_hour">%d시간 전</string>
-    
+
     <string name="main_album_title">추억 사진첩</string>
     <string name="main_album_subtitle">여행 추억 모아보기</string>
     <string name="main_tip_title">여행 가이드</string>
     <string name="main_tip_subtitle">앱 사용법과 여행 팁</string>
-    
+
     <string name="main_trip_record_title">여행 기록</string>
     <string name="main_trip_record_no_content">아직 여행 기록이 없어요!</string>
     <string name="main_trip_record_date">%s ~ %s</string>
-    
-    
+
+
     <!--plan-->
     <string name="plan_go_next">다음 단계로</string>
+
+    <!--select_trip_info-->
+    <string name="select_trip_info_title">새 여행 계획</string>
+    <string name="select_trip_info_subtitle">여행 일정에 맞는 코스를 추천해드려요</string>
+    <string name="select_trip_info_progress_title">1단계: 일정 선택</string>
+    <string name="select_trip_info_progress">1/4</string>
+    <string name="select_trip_info_date_title">여행날짜</string>
+    <string name="select_trip_info_date_subtitle">출발일과 도착일을 선택해 주세요</string>
+    <string name="select_trip_info_date_start">여행 시작일</string>
+    <string name="select_trip_info_date_end">여행 종료일</string>
+    <string name="select_trip_info_person_title">인원</string>
+    <string name="select_trip_info_person_count">0명</string>
+    <string name="select_trip_info_budget_title">하루 예산 범위</string>
+    <string name="select_trip_info_budget_low">💰\u00A0\u00A0경제적인\n1인당 10만원 이하</string>
+    <string name="select_trip_info_budget_mid">💳\u00A0\u00A0적당하게\n1인당 10~20만원</string>
+    <string name="select_trip_info_budget_high">💎\u00A0\u00A0여유롭게\n1인당 20만원 이상</string>
+    <string name="select_trip_done">다음 단계로</string>
+    <string name="select_trip_done_message">모든 정보가 입력되었어요!</string>
+
+
+    <!--select_trip_style-->
+    <string name="select_trip_style_subtitle">부모님 취향에 맞는 코스를 추천해드려요</string>
+    <string name="select_trip_style_progress_title">2단계: 취향 선택</string>
+    <string name="select_trip_style_progress">2/4</string>
 
     <!--recomment_course-->
     <string name="recommend_course_title">추천 코스</string>
@@ -67,7 +91,7 @@
     <string name="recommend_course_detail">상세보기</string>
     <string name="recommend_course_done">이 코스로 여행 시작하기</string>
     <string name="recommend_course_more">다른 코스 더 보기</string>
-    
+
     <!--trip_complete-->
     <string name="trip_complete_progress_title">4단계: 여행 시작</string>
     <string name="trip_complete_progress">4/4</string>
@@ -92,7 +116,7 @@
     <string name="main_recent_mock1">경주 여행을 성공적으로 완료했어요!</string>
     <string name="main_recent_mock2">동궁과 월지에서 가족사진 업로드</string>
     <string name="main_recent_mock3">마지막 질문에 답변 완료</string>
-    
+
     <string name="main_trip_record_mock1">제주 자연 힐링 여행</string>
     <string name="main_trip_record_mock2">부산 바다 여행</string>
     <string name="date_mock1">2023.12.20</string>

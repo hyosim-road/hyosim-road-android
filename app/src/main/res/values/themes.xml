@@ -22,5 +22,13 @@
         <item name="android:paddingBottom">5dp</item>
     </style>
 
+    <style name="MyDatePickerDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:buttonBarPositiveButtonStyle">@style/DialogButtonStyle</item>
+        <item name="colorAccent">@color/primary_orange</item>
+    </style>
 
+    <!-- 확인 버튼 텍스트 색상 설정 -->
+    <style name="DialogButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/hover_orange</item>
+    </style>
 </resources>
