@@ -105,6 +105,9 @@ dependencies {
 
     // xml에서 이미지 둥글게 자르기
     implementation("com.google.android.material:material:1.11.0")
+
+    //date picker
+    implementation("com.google.android.material:material:1.11.0")
 }
 
 kapt {

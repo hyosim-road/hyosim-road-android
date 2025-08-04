@@ -3,7 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/plan_nav_graph"
-    app:startDestination="@id/recommendCourseFragment">
+    app:startDestination="@id/selectTripInfoFragment">
+
+    <fragment
+        android:id="@+id/selectTripInfoFragment"
+        android:name="com.hyosimroad.hamkkae.presentation.main.plan.select.SelectTripInfoFragment"
+        android:label="select_trip_info_fragment"
+        tools:layout="@layout/fragment_select_trip_info">
+
+        <action
+            android:id="@+id/action_selectTripInfoFragment_to_selectTripStyleFragment"
+            app:destination="@id/selectTripStyleFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/selectTripStyleFragment"
+        android:name="com.hyosimroad.hamkkae.presentation.main.plan.select.SelectTripStyleFragment"
+        android:label="select_trip_style_fragment"
+        tools:layout="@layout/fragment_select_trip_style">
+
+        <action
+            android:id="@+id/action_selectTripStyleFragment_to_recommendCourseFragment"
+            app:destination="@id/recommendCourseFragment" />
+
+    </fragment>
 
     <fragment
     android:id="@+id/recommendCourseFragment"
