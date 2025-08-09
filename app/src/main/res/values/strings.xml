@@ -92,41 +92,6 @@
     <string name="recommend_course_done">이 코스로 여행 시작하기</string>
     <string name="recommend_course_more">다른 코스 더 보기</string>
 
-    <!--trip_complete-->
-    <string name="trip_complete_progress_title">4단계: 여행 시작</string>
-    <string name="trip_complete_progress">4/4</string>
-    <string name="trip_summation_complete">모든 계획이 완료되었습니다!</string>
-    <string name="trip_summation_during">기간</string>
-    <string name="trip_summation_personnel">인원</string>
-    <string name="trip_preview_title">첫날 일정 미리보기</string>
-    <string name="trip_complete_tip_title">준비 완료!</string>
-    <string name="trip_complete_tip_subtitle">부모님과 함께하는 특별한 여행이 시작됩니다.</string>
-    <string name="trip_complete_tip">각 관광지에서 사진을 업로드하면 자동으로 다음 일정으로 진행돼요</string>
-    <string name="trip_complete_trip_start">여행 시작하기</string>
-    <string name="trip_complete_enjoy">즐거운 여행 되세요!</string>
-
-
-    <!--mock-->
-    <!--home-->
-    <string name="main_question_mock">부모님과 함께 이곳에서 가장 인상 깊었던 순간은 무엇인가요?</string>
-
-    <string name="main_trip_title_mock">경주 역사문화 코스</string>
-    <string name="main_trip_location_mock">불국사</string>
-
-    <string name="main_recent_mock1">경주 여행을 성공적으로 완료했어요!</string>
-    <string name="main_recent_mock2">동궁과 월지에서 가족사진 업로드</string>
-    <string name="main_recent_mock3">마지막 질문에 답변 완료</string>
-
-    <string name="main_trip_record_mock1">제주 자연 힐링 여행</string>
-    <string name="main_trip_record_mock2">부산 바다 여행</string>
-    <string name="date_mock1">2023.12.20</string>
-    <string name="date_mock2">2023.12.23</string>
-
-
-    <!--plan-->
-    <!--recommend-->
-    <string name="recommend_during_mock">2박 3일</string>
-    <string name="recommend_description_mock">신라 천년의 역사가 살아 숨쉬는 경주에서 부모님과 함께 우리나라의 찬란한 문화유산을 체험해보세요.</string>
     <!--detail-->
     <string name="bar_overview">코스 개요</string>
     <string name="bar_detail">관광지 상세</string>
@@ -145,9 +110,17 @@
     <string name="tip_bullet">• </string>
 
     <!--trip_complete-->
-    <string name="preview_place_mock">불국사</string>
-    <string name="preview_place_description_mock">신라 천년의 불교문화가 살아있는 곳</string>
-    <string name="preview_place_time_mock">09:00 ~ 11:00</string>
+    <string name="trip_complete_progress_title">4단계: 여행 시작</string>
+    <string name="trip_complete_progress">4/4</string>
+    <string name="trip_summation_complete">모든 계획이 완료되었습니다!</string>
+    <string name="trip_summation_during">기간</string>
+    <string name="trip_summation_personnel">인원</string>
+    <string name="trip_preview_title">첫날 일정 미리보기</string>
+    <string name="trip_complete_tip_title">준비 완료!</string>
+    <string name="trip_complete_tip_subtitle">부모님과 함께하는 특별한 여행이 시작됩니다.</string>
+    <string name="trip_complete_tip">각 관광지에서 사진을 업로드하면 자동으로 다음 일정으로 진행돼요</string>
+    <string name="trip_complete_trip_start">여행 시작하기</string>
+    <string name="trip_complete_enjoy">즐거운 여행 되세요!</string>
 
     <!--trip_detail-->
     <string name="trip_detail_map">지도</string>
@@ -171,4 +144,47 @@
     <string name="upload_photo_complete_photo">업로드된 사진</string>
     <string name="upload_photo_complete_home">홈 화면으로 이동</string>
     <string name="upload_photo_complete_share">가족에게 사진 공유하기</string>
+
+    <!--photo_album-->
+    <string name="photo_album_title">추억 사진첩</string>
+    <string name="photo_album_subtitle">소중한 여행 추억을 모아보세요</string>
+    <string name="photo_album_statistics">📊 앨범 통계</string>
+    <string name="photo_album_total_albums">총 앨범</string>
+    <string name="photo_album_total_photos">총 사진</string>
+    <string name="photo_album_total_days">총 여행일</string>
+    <string name="photo_album_trip_album">여행 앨범</string>
+    <string name="photo_album_none">아직 앨범이 없네요 😣\n여행 계획부터 세워볼까요?</string>
+    <string name="photo_album_info_format">%s • %d장</string>
+    <string name="photo_album_tag">#%s</string>
+
+
+
+
+    <!--                                  mock                                 -->
+
+
+    <!--home-->
+    <string name="main_question_mock">부모님과 함께 이곳에서 가장 인상 깊었던 순간은 무엇인가요?</string>
+
+    <string name="main_trip_title_mock">경주 역사문화 코스</string>
+    <string name="main_trip_location_mock">불국사</string>
+
+    <string name="main_recent_mock1">경주 여행을 성공적으로 완료했어요!</string>
+    <string name="main_recent_mock2">동궁과 월지에서 가족사진 업로드</string>
+    <string name="main_recent_mock3">마지막 질문에 답변 완료</string>
+
+    <string name="main_trip_record_mock1">제주 자연 힐링 여행</string>
+    <string name="main_trip_record_mock2">부산 바다 여행</string>
+    <string name="date_mock1">2023.12.20</string>
+    <string name="date_mock2">2023.12.23</string>
+
+    <!--plan-->
+    <!--recommend-->
+    <string name="recommend_during_mock">2박 3일</string>
+    <string name="recommend_description_mock">신라 천년의 역사가 살아 숨쉬는 경주에서 부모님과 함께 우리나라의 찬란한 문화유산을 체험해보세요.</string>
+
+    <!--trip_complete-->
+    <string name="preview_place_mock">불국사</string>
+    <string name="preview_place_description_mock">신라 천년의 불교문화가 살아있는 곳</string>
+    <string name="preview_place_time_mock">09:00 ~ 11:00</string>
 </resources>
