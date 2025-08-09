@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cv_album"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="7dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:strokeColor="@color/state_complete_gray"
+        app:strokeWidth="1dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_album"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_image"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/image_trip"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintHeight_percent="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_trip_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/iv_calendar"
+                app:layout_constraintStart_toEndOf="@id/iv_image"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_calendar"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:src="@drawable/ic_calendar_red_24"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintBottom_toTopOf="@id/iv_pin"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintStart_toStartOf="@id/tv_trip_name"
+                app:layout_constraintTop_toBottomOf="@id/tv_trip_name"
+                app:layout_constraintWidth_percent="0.04"
+                app:tint="@color/text_secondary_gray" />
+
+            <TextView
+                android:id="@+id/tv_during"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:textColor="@color/text_secondary_gray"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@id/iv_calendar"
+                app:layout_constraintStart_toEndOf="@id/iv_calendar"
+                app:layout_constraintTop_toTopOf="@id/iv_calendar" />
+
+            <ImageView
+                android:id="@+id/iv_pin"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:src="@drawable/ic_pin_gray_24"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintBottom_toTopOf="@id/rv_keywords"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintStart_toStartOf="@id/iv_calendar"
+                app:layout_constraintTop_toBottomOf="@id/iv_calendar"
+                app:layout_constraintWidth_percent="0.04" />
+
+            <TextView
+                android:id="@+id/tv_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:textColor="@color/text_secondary_gray"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@id/iv_pin"
+                app:layout_constraintStart_toEndOf="@id/iv_pin"
+                app:layout_constraintTop_toTopOf="@id/iv_pin" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_keywords"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/iv_pin"
+                app:layout_constraintTop_toBottomOf="@id/iv_pin"
+                tools:listitem="@layout/item_text" />
+
+            <TextView
+                android:id="@+id/tv_in_process"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/bg_current_orange"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="@string/state_in_progress"
+                android:textColor="@color/white"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_trip_name" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

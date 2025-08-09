@@ -16,6 +16,7 @@ import com.hyosimroad.hamkkae.databinding.ActivityMainBinding
 import com.hyosimroad.hamkkae.presentation.main.adapter.recent.RecentAdapter
 import com.hyosimroad.hamkkae.presentation.main.adapter.today_schedule.TodayScheduleAdapter
 import com.hyosimroad.hamkkae.presentation.main.adapter.trip_record.TripRecordAdapter
+import com.hyosimroad.hamkkae.presentation.main.photo_album.PhotoAlbumActivity
 import com.hyosimroad.hamkkae.presentation.main.plan.PlanActivity
 import com.hyosimroad.hamkkae.presentation.main.trip_continue.TripDetailActivity
 import com.hyosimroad.hamkkae.presentation.main.upload_photo.UploadPhotoActivity
@@ -68,6 +69,8 @@ class MainActivity : AppCompatActivity() {
         val constraintSet = ConstraintSet()
         constraintSet.clone(binding.clMain)
         val marginTop = resources.getDimensionPixelSize(R.dimen.margin_20dp)
+
+        clickPhotoAlbum()
 
         if (plan) {
             //binding.cvQuestion.visibility = View.VISIBLE
@@ -208,18 +211,23 @@ class MainActivity : AppCompatActivity() {
             planActivityLauncher.launch(Intent(this, PlanActivity::class.java))
         }
     }
-
-    private fun clickTripDetail(){
+    private fun clickTripDetail() {
         binding.btnTripDetail.setOnClickListener {
-            val intent = Intent(this, TripDetailActivity::class.java)
-            startActivity(intent)
+            // 새로 만든 메서드 호출
+            navigateTo(TripDetailActivity::class.java)
         }
     }
 
-    private fun clickUpload(){
+    private fun clickUpload() {
         binding.btnUpload.setOnClickListener {
-            val intent = Intent(this, UploadPhotoActivity::class.java)
-            startActivity(intent)
+            // 새로 만든 메서드 호출
+            navigateTo(UploadPhotoActivity::class.java)
+        }
+    }
+
+    private fun clickPhotoAlbum(){
+        binding.clAlbum.setOnClickListener {
+            navigateTo(PhotoAlbumActivity::class.java)
         }
     }
 
@@ -229,6 +237,12 @@ class MainActivity : AppCompatActivity() {
             setVisibilityPlan(true)
         }
     }
+
+    private fun navigateTo(destination: Class<*>){
+        val intent = Intent(this, destination)
+        startActivity(intent)
+    }
+
 
     private fun startBlinkingAnimation(view: View) {
         val blinkAnimation = AlphaAnimation(1.0f, 0.3f).apply {
