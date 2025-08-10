@@ -10,10 +10,11 @@ import androidx.appcompat.app.AppCompatActivity
 import com.hyosimroad.hamkkae.R
 import com.hyosimroad.hamkkae.databinding.ActivityPhotoAlbumBinding
 import com.hyosimroad.hamkkae.presentation.main.MainViewModel
+import com.hyosimroad.hamkkae.presentation.main.photo_album.detail.PhotoAlbumDetailActivity
 import timber.log.Timber
 import kotlin.getValue
 
-class PhotoAlbumActivity: AppCompatActivity() {
+class PhotoAlbumActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPhotoAlbumBinding
     private val photoAlbumViewModel: PhotoAlbumViewModel by viewModels()
 
@@ -29,14 +30,14 @@ class PhotoAlbumActivity: AppCompatActivity() {
     }
 
     private fun setting() {
-       setStatistics()
+        setStatistics()
     }
 
-    private fun setStatistics(){
-        with(binding){
-            tvTotalAlbumsCount.text="3"
-            tvTotalPhotosCount.text="34"
-            tvTotalDaysCount.text="3"
+    private fun setStatistics() {
+        with(binding) {
+            tvTotalAlbumsCount.text = "3"
+            tvTotalPhotosCount.text = "34"
+            tvTotalDaysCount.text = "3"
 
             rvAlbums.visibility = View.VISIBLE
         }
@@ -44,9 +45,15 @@ class PhotoAlbumActivity: AppCompatActivity() {
         setAlbums()
     }
 
-    private fun setAlbums(){
-        val photoAlbumAdapter = PhotoAlbumAdapter()
+    private fun setAlbums() {
+        val photoAlbumAdapter = PhotoAlbumAdapter(clickAlbum = { id -> navigateToDetail(id) })
         binding.rvAlbums.adapter = photoAlbumAdapter
         photoAlbumAdapter.submitList(photoAlbumViewModel.albumList)
+    }
+
+    private fun navigateToDetail(id:Int) {
+        val intent = Intent(this, PhotoAlbumDetailActivity::class.java)
+        intent.putExtra("albumId", id)
+        startActivity(intent)
     }
 }

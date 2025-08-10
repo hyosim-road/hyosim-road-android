@@ -8,12 +8,15 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.hyosimroad.hamkkae.R
 import com.hyosimroad.hamkkae.databinding.ItemPhotoAlbumBinding
 import com.hyosimroad.hamkkae.domain.model.Album
 import timber.log.Timber
 
-class PhotoAlbumAdapter: ListAdapter<Album, PhotoAlbumAdapter.PhotoAlbumViewHolder>(PhotoAlbumDiffCallback) {
+class PhotoAlbumAdapter(
+    private val clickAlbum:(Int) -> Unit
+): ListAdapter<Album, PhotoAlbumAdapter.PhotoAlbumViewHolder>(PhotoAlbumDiffCallback) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -47,15 +50,17 @@ class PhotoAlbumAdapter: ListAdapter<Album, PhotoAlbumAdapter.PhotoAlbumViewHold
 
                 tvTripName.text = album.name
                 tvDuring.text = binding.root.context.getString(
-                    R.string.main_trip_record_date,
+                    R.string.main_trip_record_during,
                     album.startDate,
                     album.endDate
                 )
                 tvInfo.text = binding.root.context.getString(
                     R.string.photo_album_info_format,
                     album.place,
-                    album.photos
+                    album.photos.size
                 )
+
+                ivImage.load(album.photos[0].url)
 
                 val textAdapter = TextAdapter()
                 val layoutManager =
@@ -71,6 +76,10 @@ class PhotoAlbumAdapter: ListAdapter<Album, PhotoAlbumAdapter.PhotoAlbumViewHold
                 }
                 Timber.d("modifylist: $modifyList")
                 textAdapter.submitList(modifyList)
+
+                clAlbum.setOnClickListener {
+                    clickAlbum(album.id)
+                }
             }
         }
 

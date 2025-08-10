@@ -2,11 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <!-- 갤러리-->
     <!-- Android 13 이상 -->
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
-
-    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Android 13 미만 저장-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28"/>
 
     <application
         android:name=".MyApp"
@@ -41,6 +44,8 @@
             android:exported="false"/>
 
         <activity android:name=".presentation.main.photo_album.PhotoAlbumActivity"
+            android:exported="false"/>
+        <activity android:name=".presentation.main.photo_album.detail.PhotoAlbumDetailActivity"
             android:exported="false"/>
     </application>
 
