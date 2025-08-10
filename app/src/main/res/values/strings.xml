@@ -52,7 +52,7 @@
 
     <string name="main_trip_record_title">여행 기록</string>
     <string name="main_trip_record_no_content">아직 여행 기록이 없어요!</string>
-    <string name="main_trip_record_date">%s ~ %s</string>
+    <string name="main_trip_record_during">%s ~ %s</string>
 
 
     <!--plan-->
@@ -151,11 +151,21 @@
     <string name="photo_album_statistics">📊 앨범 통계</string>
     <string name="photo_album_total_albums">총 앨범</string>
     <string name="photo_album_total_photos">총 사진</string>
-    <string name="photo_album_total_days">총 여행일</string>
+    <string name="photo_album_in_process">진행중</string>
     <string name="photo_album_trip_album">여행 앨범</string>
     <string name="photo_album_none">아직 앨범이 없네요 😣\n여행 계획부터 세워볼까요?</string>
     <string name="photo_album_info_format">%s • %d장</string>
     <string name="photo_album_tag">#%s</string>
+
+    <!--photo_album_detail-->
+    <string name="photo_album_detail_trip_keywords">여행 키워드</string>
+    <string name="photo_album_detail_ai_comment">AI가 분석한 이번 여행의 감정과 순간들이에요 🤗</string>
+    <string name="photo_album_detail_galary">사진 갤러리</string>
+    <string name="photo_album_detail_photo_count">%d장</string>
+    <string name="photo_album_detail_num_of_photo">%1$d / %2$d</string>
+    <string name="photo_album_detail_memory_share">🖼️ 추억 공유하기</string>
+    <string name="photo_album_detail_share">공유</string>
+    <string name="photo_album_detail_download">사진 저장</string>
 
 
 

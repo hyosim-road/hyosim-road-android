@@ -69,6 +69,9 @@ dependencies {
 
     implementation("com.kakao.maps.open:android:2.12.8")
 
+    // flexbox
+    implementation("com.google.android.flexbox:flexbox:3.0.0")
+
     // Coil
     implementation("io.coil-kt:coil-compose:2.6.0")
     implementation("io.coil-kt.coil3:coil-compose:3.1.0")

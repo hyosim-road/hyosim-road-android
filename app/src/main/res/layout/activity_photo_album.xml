@@ -118,7 +118,7 @@
                 android:id="@+id/tv_total_days"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/photo_album_total_days"
+                android:text="@string/photo_album_in_process"
                 android:textColor="@color/text_secondary_gray"
                 app:layout_constraintTop_toTopOf="@id/tv_total_album"
                 app:layout_constraintStart_toEndOf="@id/tv_total_photos"

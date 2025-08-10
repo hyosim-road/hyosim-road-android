@@ -31,7 +31,7 @@ class TripRecordAdapter : ListAdapter<TripRecord, TripRecordAdapter.TripRecordVi
         fun bind(tripRecord: TripRecord) {
             with(binding){
                 tvTitle.text = tripRecord.content
-                tvDate.text = binding.root.context.getString(R.string.main_trip_record_date, tripRecord.startDate, tripRecord.endDate)
+                tvDate.text = binding.root.context.getString(R.string.main_trip_record_during, tripRecord.startDate, tripRecord.endDate)
                 tvState.text = tripRecord.state
             }
         }

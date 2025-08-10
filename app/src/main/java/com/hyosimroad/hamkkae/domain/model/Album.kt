@@ -6,6 +6,15 @@ data class Album (
     val startDate:String,
     val endDate:String,
     val place:String,
-    val photos:Int,
+    val photos:List<Photo>,
     val keywords:List<String>
-)
+){
+    data class Photo(
+        val id:Int,
+        val url:String,
+        val place:String,
+        val description:String,
+        val time:String,
+        val keywords:List<String>
+    )
+}
