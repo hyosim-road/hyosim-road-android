@@ -41,6 +41,7 @@ class TripRecordsAdapter: ListAdapter<TripRecord, TripRecordsAdapter.TripRecords
                     crossfade(true)
                     placeholder(R.drawable.ic_hamkkae) // 로딩 중 표시할 이미지
                     error(R.drawable.ic_hamkkae) // 에러 시 표시할 이미지
+                    transformations(RoundedCornersTransformation(16f))
                 }
 
                 val textAdapter = com.hyosimroad.hamkkae.presentation.main.trip_records.adapter.TextAdapter()
