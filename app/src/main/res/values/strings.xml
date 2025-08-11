@@ -167,6 +167,16 @@
     <string name="photo_album_detail_share">공유</string>
     <string name="photo_album_detail_download">사진 저장</string>
 
+    <!--trip_record-->
+    <string name="trip_record_title">여행 기록</string>
+    <string name="trip_record_subtitle">부모님과 함께한 소중한 여행들</string>
+    <string name="trip_record_statistics">📊 여행 통계</string>
+    <string name="trip_record_total_trips">완료한 여행</string>
+    <string name="trip_record_total_days">여행한 날</string>
+    <string name="trip_record_total_answers">답변한 질문</string>
+    <string name="trip_record_none">아직 여행 기록이 없네요 😣\n여행 계획부터 세워볼까요?</string>
+    <string name="trip_record_see_album">사진첩 보기</string>
+    <string name="trip_record_detail">상세보기</string>
 
 
 

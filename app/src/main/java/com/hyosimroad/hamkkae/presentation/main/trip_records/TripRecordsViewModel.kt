@@ -1,44 +1,16 @@
-package com.hyosimroad.hamkkae.presentation.main
+package com.hyosimroad.hamkkae.presentation.main.trip_records
 
-import android.provider.Telephony.TextBasedSmsColumns.STATUS_COMPLETE
 import androidx.lifecycle.ViewModel
+import com.hyosimroad.hamkkae.domain.model.Album
 import com.hyosimroad.hamkkae.domain.model.Album.Photo
-import com.hyosimroad.hamkkae.domain.model.Recent
-import com.hyosimroad.hamkkae.domain.model.TodaySchedule
 import com.hyosimroad.hamkkae.domain.model.TripRecord
-import com.hyosimroad.hamkkae.util.KeywordConstants.KEYWORD_HISTORY
-import com.hyosimroad.hamkkae.util.KeywordConstants.KEYWORD_TEMPLE
-import com.hyosimroad.hamkkae.util.RecentConstants.ANSWER_COMPLETE
-import com.hyosimroad.hamkkae.util.RecentConstants.PHOTO_UPLOAD
-import com.hyosimroad.hamkkae.util.RecentConstants.TRIP_COMPLETE
-import com.hyosimroad.hamkkae.util.RecentConstants.TRIP_START
 import com.hyosimroad.hamkkae.util.StateConstants
-import com.hyosimroad.hamkkae.util.StateConstants.TYPE_BEFORE_STARTING
-import com.hyosimroad.hamkkae.util.StateConstants.TYPE_COMPLETE
-import com.hyosimroad.hamkkae.util.StateConstants.TYPE_IN_PROCESS
 
-class MainViewModel: ViewModel() {
-
-    val todayScheduleList = listOf(
-        TodaySchedule(1, "불국사", KEYWORD_TEMPLE, "09:00", "12:00", TYPE_COMPLETE),
-        TodaySchedule(2, "석굴암", KEYWORD_HISTORY, "13:00", "16:00", TYPE_IN_PROCESS),
-        TodaySchedule(3, "첨성대", KEYWORD_HISTORY, "17:00", "20:00", TYPE_BEFORE_STARTING),
-        TodaySchedule(4, "동궁과 월지", KEYWORD_HISTORY, "13:00", "16:00",TYPE_BEFORE_STARTING)
-    )
-
-
-    val recentActivityList = listOf(
-        Recent(1, TRIP_COMPLETE, "경주 여행을 성공적으로 완료했어요!", 0),
-  /*      Recent(2, PHOTO_UPLOAD, "동궁과 월지에서 가족사진 업로드", 2),
-        Recent(3, ANSWER_COMPLETE, "마지막 질문에 답변 완료", 180),
-        Recent(3, TRIP_START, "경주 여행 시작!", 200),
-        Recent(3, TRIP_COMPLETE, "부산 여행을 성공적으로 완료했어요!", 300),*/
-    )
-
+class TripRecordsViewModel: ViewModel() {
     val tripRecordList = listOf(
         TripRecord(
             id = 1,
-            content = "나 홀로 떠난 경주 역사 탐방, 신라의 숨결을 느끼다.",
+            content = "경주 여행",
             startDate = "2024.09.05",
             endDate = "2024.09.07",
             state = StateConstants.TYPE_BEFORE_STARTING,
@@ -52,7 +24,7 @@ class MainViewModel: ViewModel() {
         ),
         TripRecord(
             id = 2,
-            content = "친구들과 함께하는 부산 먹방 투어 예정! 벌써부터 기대된다.",
+            content = "부산 여행",
             startDate = "2024.12.20",
             endDate = "2024.12.22",
             state = StateConstants.TYPE_COMPLETE,
@@ -90,7 +62,7 @@ class MainViewModel: ViewModel() {
         ),
         TripRecord(
             id = 3,
-            content = "가족들과 함께한 즐거운 제주도 여행, 맛있는 것도 많이 먹고 예쁜 풍경도 실컷 봤다!",
+            content = "제주도 여행",
             startDate = "2024.07.15",
             endDate = "2024.07.18",
             state = StateConstants.TYPE_COMPLETE,
@@ -98,7 +70,7 @@ class MainViewModel: ViewModel() {
             photos = listOf(
                 Photo(
                     id = 101,
-                    url = "https://example.com/jeju_beach.jpg",
+                    url = "https://api.cdn.visitjeju.net/photomng/imgpath/202408/27/f7057419-8ad8-4fac-8b01-ed1119806687.jpg",
                     place = "협재해수욕장",
                     description = "에메랄드빛 바다가 아름다운 협재",
                     time = "2024.07.15 14:30",

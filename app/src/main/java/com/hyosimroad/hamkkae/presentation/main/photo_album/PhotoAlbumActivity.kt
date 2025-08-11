@@ -37,7 +37,7 @@ class PhotoAlbumActivity : AppCompatActivity() {
         with(binding) {
             tvTotalAlbumsCount.text = "3"
             tvTotalPhotosCount.text = "34"
-            tvTotalDaysCount.text = "3"
+            tvTotalInProgressCount.text = "1"
 
             rvAlbums.visibility = View.VISIBLE
         }

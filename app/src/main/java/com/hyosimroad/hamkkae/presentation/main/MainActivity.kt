@@ -19,6 +19,7 @@ import com.hyosimroad.hamkkae.presentation.main.adapter.trip_record.TripRecordAd
 import com.hyosimroad.hamkkae.presentation.main.photo_album.PhotoAlbumActivity
 import com.hyosimroad.hamkkae.presentation.main.plan.PlanActivity
 import com.hyosimroad.hamkkae.presentation.main.trip_continue.TripDetailActivity
+import com.hyosimroad.hamkkae.presentation.main.trip_records.TripRecordsActivity
 import com.hyosimroad.hamkkae.presentation.main.upload_photo.UploadPhotoActivity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -62,6 +63,7 @@ class MainActivity : AppCompatActivity() {
         showQuestion(false)
         clickPlan()
         clickSetting()
+        clickTripRecords()
     }
 
     private fun setVisibilityPlan(plan: Boolean) {
@@ -235,6 +237,13 @@ class MainActivity : AppCompatActivity() {
         binding.btnSetting.setOnClickListener {
             Timber.d("setting click!")
             setVisibilityPlan(true)
+        }
+    }
+
+    private fun clickTripRecords(){
+        binding.btnTripRecordAll.setOnClickListener {
+            Timber.d("click trip detail!")
+            navigateTo(TripRecordsActivity::class.java)
         }
     }
 

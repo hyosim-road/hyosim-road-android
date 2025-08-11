@@ -47,6 +47,8 @@
             android:exported="false"/>
         <activity android:name=".presentation.main.photo_album.detail.PhotoAlbumDetailActivity"
             android:exported="false"/>
+        <activity android:name=".presentation.main.trip_records.TripRecordsActivity"
+            android:exported="false"/>
     </application>
 
 </manifest>
