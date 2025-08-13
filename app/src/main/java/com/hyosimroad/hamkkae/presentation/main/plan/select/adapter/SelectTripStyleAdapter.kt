@@ -39,11 +39,7 @@ class SelectTripStyleAdapter(
 
         init {
             binding.clTripStyle.setOnClickListener {
-                val pos = bindingAdapterPosition
-                if (pos == RecyclerView.NO_POSITION) return@setOnClickListener
-                val item = getItem(pos)
-                val willSelect = !selectedIds.contains(item.id)
-                clickItem(item, willSelect)
+
             }
         }
 
