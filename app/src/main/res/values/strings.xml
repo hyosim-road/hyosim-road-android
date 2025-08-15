@@ -173,13 +173,31 @@
     <string name="trip_record_title">여행 기록</string>
     <string name="trip_record_subtitle">부모님과 함께한 소중한 여행들</string>
     <string name="trip_record_statistics">📊 여행 통계</string>
-    <string name="trip_record_total_trips">완료한 여행</string>
-    <string name="trip_record_total_days">여행한 날</string>
+    <string name="trip_record_total_trips">완료</string>
+    <string name="trip_record_total_days">여행일</string>
     <string name="trip_record_total_answers">답변한 질문</string>
     <string name="trip_record_none">아직 여행 기록이 없네요 😣\n여행 계획부터 세워볼까요?</string>
     <string name="trip_record_see_album">사진첩 보기</string>
     <string name="trip_record_detail">상세보기</string>
 
+    <string name="trip_record_detail_subtitle">상세정보</string>
+    <string name="trip_record_detail_location_and_days">%1$s • %2$d박 %3$d일</string>
+
+    <string name="bar_preview">여행 개요</string>
+    <string name="bar_visited">방문 장소</string>
+    <string name="bar_answers">특별한 순간</string>
+
+    <!--trip_preview-->
+    <string name="trip_preview_keyword">여행 키워드</string>
+    <string name="trip_preview_keyword_description">AI가 분석한 이번 여행의 특별한 감정과 순간들이에요</string>
+    <string name="trip_preview_info">여행 정보</string>
+    <string name="trip_preview_days">여행 기간</string>
+    <string name="trip_preview_participants">참여 인원</string>
+    <string name="trip_preview_budget_range">예산 범위</string>
+    <string name="trip_preview_complete_date">완료 일시</string>
+
+    <!--answers-->
+    <string name="answers_more">+ %d개 더</string>
 
 
     <!--                                  mock                                 -->

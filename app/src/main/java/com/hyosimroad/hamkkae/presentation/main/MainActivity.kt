@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         binding.btnPlan.isSelected = true
 
         getTodaySchedule()
-        getRecents()
+        //getRecents()
         getTripRecords()
 
         setVisibilityPlan(false)
@@ -86,13 +86,13 @@ class MainActivity : AppCompatActivity() {
                 clickTripDetail()
                 clickUpload()
 
-                // cvRecent의 top을 cvSchedule의 bottom에 연결
+                // cvAlbum의 top을 cvSchedule의 bottom에 연결
                 cvSchedule.post {
                     val constraintSet = ConstraintSet()
                     constraintSet.clone(binding.clMain)
-                    constraintSet.clear(R.id.cv_recent, ConstraintSet.TOP)
+                    constraintSet.clear(R.id.cv_album, ConstraintSet.TOP)
                     constraintSet.connect(
-                        R.id.cv_recent,
+                        R.id.cv_album,
                         ConstraintSet.TOP,
                         R.id.cv_schedule,
                         ConstraintSet.BOTTOM,
@@ -113,13 +113,13 @@ class MainActivity : AppCompatActivity() {
             binding.cvSchedule.visibility = View.GONE
             binding.cvPlan.visibility = View.VISIBLE
 
-            // cvRecent의 top을 cvPlan의 bottom에 연결
+            // cvAlbum의 top을 cvPlan의 bottom에 연결
             binding.cvPlan.post {
                 val set = ConstraintSet()
                 set.clone(binding.clMain)
-                set.clear(R.id.cv_recent, ConstraintSet.TOP)
+                set.clear(R.id.cv_album, ConstraintSet.TOP)
                 set.connect(
-                    R.id.cv_recent,
+                    R.id.cv_album,
                     ConstraintSet.TOP,
                     R.id.cv_plan,
                     ConstraintSet.BOTTOM,
@@ -144,7 +144,7 @@ class MainActivity : AppCompatActivity() {
         todayScheduleAdapter.submitList(mainViewModel.todayScheduleList)
     }
 
-    private fun getRecents() {
+   /* private fun getRecents() {
         val recentAdapter = RecentAdapter()
         binding.rvMainRecent.adapter = recentAdapter
         val list = mainViewModel.recentActivityList
@@ -155,7 +155,7 @@ class MainActivity : AppCompatActivity() {
             rvMainRecent.visibility = View.GONE
             tvRecentNoContent.visibility = View.VISIBLE
         }
-    }
+    }*/
 
     private fun getTripRecords() {
         val tripRecordAdapter = TripRecordAdapter()

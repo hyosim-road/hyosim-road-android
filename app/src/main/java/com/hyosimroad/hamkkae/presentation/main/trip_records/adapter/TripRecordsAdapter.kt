@@ -12,7 +12,9 @@ import com.hyosimroad.hamkkae.databinding.ItemTripRecordsDetailBinding
 import com.hyosimroad.hamkkae.domain.model.TripRecord
 import com.hyosimroad.hamkkae.presentation.main.photo_album.TextAdapter
 
-class TripRecordsAdapter: ListAdapter<TripRecord, TripRecordsAdapter.TripRecordsViewHolder>(TripRecordsDiffCallback) {
+class TripRecordsAdapter(
+    private val clickDetail: ()->Unit,
+): ListAdapter<TripRecord, TripRecordsAdapter.TripRecordsViewHolder>(TripRecordsDiffCallback) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -50,6 +52,10 @@ class TripRecordsAdapter: ListAdapter<TripRecord, TripRecordsAdapter.TripRecords
                 }
                 textAdapter.submitList(modifyList)
                 rvKeywords.adapter = textAdapter
+
+                btnDetail.setOnClickListener {
+                    clickDetail()
+                }
             }
         }
     }
