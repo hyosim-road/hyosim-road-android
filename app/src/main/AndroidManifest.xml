@@ -49,6 +49,8 @@
             android:exported="false"/>
         <activity android:name=".presentation.main.trip_records.TripRecordsActivity"
             android:exported="false"/>
+        <activity android:name=".presentation.main.trip_records.detail.TripRecordsDetailActivity"
+            android:exported="false"/>
     </application>
 
 </manifest>

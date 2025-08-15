@@ -9,6 +9,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.hyosimroad.hamkkae.databinding.ActivityTripRecordsBinding
 import com.hyosimroad.hamkkae.presentation.main.trip_records.adapter.TripRecordsAdapter
+import com.hyosimroad.hamkkae.presentation.main.trip_records.detail.TripRecordsDetailActivity
 import timber.log.Timber
 import kotlin.getValue
 
@@ -40,7 +41,12 @@ class TripRecordsActivity: AppCompatActivity() {
     }
 
     private fun setRecords(){
-        val adapter = TripRecordsAdapter()
+        val adapter = TripRecordsAdapter(
+            clickDetail = {
+                val intent = Intent(this, TripRecordsDetailActivity::class.java)
+                startActivity(intent)
+            }
+        )
         binding.rvTrips.adapter = adapter
         adapter.submitList(tripRecordsViewModel.tripRecordList)
     }
