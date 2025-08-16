@@ -20,8 +20,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.hyosimroad.hamkkae.R
 import com.hyosimroad.hamkkae.databinding.ActivityUploadPhotoBinding
-import com.hyosimroad.hamkkae.presentation.main.plan.recommend.detail.tip.TextAdapter
-import com.hyosimroad.hamkkae.presentation.main.plan.recommend.detail.tip.TextMode
+import com.hyosimroad.hamkkae.presentation.main.trip_continue.album.TextAdapter
 import timber.log.Timber
 
 class UploadPhotoActivity : AppCompatActivity() {
@@ -91,7 +90,7 @@ class UploadPhotoActivity : AppCompatActivity() {
             tvTime.text = getString(R.string.main_time, "10:00", "11:00")
         }
 
-        val tipAdapter = TextAdapter(TextMode.NORMAL)
+        val tipAdapter = TextAdapter()
         binding.rvTip.adapter = tipAdapter
         tipAdapter.submitList(uploadPhotoViewModel.tipsList)
 

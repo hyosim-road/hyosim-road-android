@@ -11,8 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.hyosimroad.hamkkae.R
 import com.hyosimroad.hamkkae.databinding.FragmentTripDetailAlbumBinding
-import com.hyosimroad.hamkkae.presentation.main.plan.recommend.detail.tip.TextAdapter
-import com.hyosimroad.hamkkae.presentation.main.plan.recommend.detail.tip.TextMode
 
 class TripDetailAlbumFragment: Fragment() {
     private var _binding: FragmentTripDetailAlbumBinding? = null
@@ -43,7 +41,7 @@ class TripDetailAlbumFragment: Fragment() {
     }
 
     private fun getTips(){
-        val tipsAdpater = TextAdapter(TextMode.NORMAL)
+        val tipsAdpater = TextAdapter()
         binding.rvTips.adapter = tipsAdpater
         tipsAdpater.submitList(tripDetailAlbumViewModel.tipList)
 

@@ -97,14 +97,23 @@
     <!--detail-->
     <string name="bar_overview">코스 개요</string>
     <string name="bar_detail">관광지 상세</string>
-    <string name="bar_transit">교통 정보</string>
-    <string name="bar_tip">여행 팁</string>
+    <string name="bar_restaurant">맛집 정보</string>
+    <string name="bar_accommodation">숙소 정보</string>
     <string name="overview_highlights">코스 하이라이트</string>
     <string name="tip_title">부모님과 함께하는 여행 팁</string>
     <string name="detail_btn_start">이 코스로 여행 시작하기</string>
     <!--overview-->
     <string name="overview_preview">일정 미리보기</string>
     <string name="overview_first_day">첫째 날</string>
+    
+    <!--info-->
+    <string name="info_signature">대표 메뉴</string>
+    <string name="info_amenities">편의시설</string>
+    <string name="info_call">전화하기</string>
+    <string name="info_map">지도보기</string>
+    <string name="info_checkin">체크인</string>
+    <string name="info_checkout">체크아웃</string>
+    
     <!--tip-->
     <string name="tip_caution">동행 시 주의사항</string>
     <string name="tip_best_visit">최적 방문 시기</string>

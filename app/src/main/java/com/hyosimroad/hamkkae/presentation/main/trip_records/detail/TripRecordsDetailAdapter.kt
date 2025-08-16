@@ -3,9 +3,6 @@ package com.hyosimroad.hamkkae.presentation.main.trip_records.detail
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.hyosimroad.hamkkae.presentation.main.plan.recommend.detail.detail.RecommendDetailDetailFragment
-import com.hyosimroad.hamkkae.presentation.main.plan.recommend.detail.overview.RecommendDetailOverviewFragment
-import com.hyosimroad.hamkkae.presentation.main.plan.recommend.detail.tip.RecommendDetailTipFragment
 import com.hyosimroad.hamkkae.presentation.main.trip_records.detail.answers.AnswersFragment
 import com.hyosimroad.hamkkae.presentation.main.trip_records.detail.overview.OverviewFragment
 import com.hyosimroad.hamkkae.presentation.main.trip_records.detail.visited.VisitedFragment
