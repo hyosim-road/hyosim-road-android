@@ -189,13 +189,15 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_trips"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:visibility="gone"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toBottomOf="@id/tv_trip_records"
-            app:layout_constraintStart_toStartOf="@id/cl_statistics"
-            app:layout_constraintEnd_toEndOf="@id/cl_statistics"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             tools:listitem="@layout/item_photo_album"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

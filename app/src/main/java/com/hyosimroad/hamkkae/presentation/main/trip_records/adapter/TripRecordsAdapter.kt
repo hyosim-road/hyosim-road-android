@@ -35,9 +35,9 @@ class TripRecordsAdapter(
             with(binding){
                 tvTripName.text=tripRecord.content
                 tvDuring.text=binding.root.context.getString(R.string.main_trip_record_during, tripRecord.startDate, tripRecord.endDate)
-                tvTripInfo.text=tripRecord.place
+                /*tvTripInfo.text=tripRecord.place
                 tvPhotoCount.text=tripRecord.photos.size.toString()
-                tvAnswerCount.text=tripRecord.answers.size.toString()
+                tvAnswerCount.text=tripRecord.answers.size.toString()*/
 
                 ivImage.load(if(tripRecord.photos.isNotEmpty()) tripRecord.photos[0].url else "") {
                     crossfade(true)
@@ -51,11 +51,14 @@ class TripRecordsAdapter(
                     binding.root.context.getString(R.string.photo_album_tag, it)
                 }
                 textAdapter.submitList(modifyList)
-                rvKeywords.adapter = textAdapter
+                clTrip.setOnClickListener {
+                    clickDetail()
+                }
+               /* rvKeywords.adapter = textAdapter
 
                 btnDetail.setOnClickListener {
                     clickDetail()
-                }
+                }*/
             }
         }
     }
