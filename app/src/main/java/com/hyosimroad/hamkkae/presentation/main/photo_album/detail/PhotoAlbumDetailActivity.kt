@@ -35,7 +35,7 @@ class PhotoAlbumDetailActivity : AppCompatActivity() {
     }
 
     private fun setting() {
-        val id = intent.getIntExtra("albumId", 0)
+        val id = intent.getIntExtra("albumId", 1)
         photoAlbumDetailViewModel.album = photoAlbumViewModel.albumList[id - 1]
 
         binding.tvTitle.text = photoAlbumDetailViewModel.album.name

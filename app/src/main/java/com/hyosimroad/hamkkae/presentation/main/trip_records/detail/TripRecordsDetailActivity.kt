@@ -1,5 +1,6 @@
 package com.hyosimroad.hamkkae.presentation.main.trip_records.detail
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
@@ -9,6 +10,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.hyosimroad.hamkkae.R
 import com.hyosimroad.hamkkae.databinding.ActivityTripRecordsDetailBinding
+import com.hyosimroad.hamkkae.presentation.main.photo_album.detail.PhotoAlbumDetailActivity
 import com.hyosimroad.hamkkae.presentation.main.plan.recommend.detail.RecommendDetailAdapter
 import com.hyosimroad.hamkkae.presentation.main.trip_records.TripRecordsViewModel
 import timber.log.Timber
@@ -34,6 +36,8 @@ class TripRecordsDetailActivity: AppCompatActivity() {
     private fun setting() {
         setTrip()
         showTab()
+
+        clickAlbum()
     }
     
     private fun setTrip(){
@@ -105,6 +109,13 @@ class TripRecordsDetailActivity: AppCompatActivity() {
             lp.height = page.measuredHeight
             vp.layoutParams = lp
             vp.invalidate()
+        }
+    }
+
+    private fun clickAlbum(){
+        binding.btnAlbum.setOnClickListener {
+            val intent = Intent(this, PhotoAlbumDetailActivity::class.java)
+            startActivity(intent)
         }
     }
 
