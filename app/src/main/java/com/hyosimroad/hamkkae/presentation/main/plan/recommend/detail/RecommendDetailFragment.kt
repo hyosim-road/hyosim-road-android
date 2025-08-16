@@ -65,8 +65,8 @@ class RecommendDetailFragment : Fragment() {
         val titles = listOf(
             getString(R.string.bar_overview),
             getString(R.string.bar_detail),
-            //getString(R.string.bar_transit),
-            getString(R.string.bar_tip)
+            getString(R.string.bar_restaurant),
+            getString(R.string.bar_accommodation)
         )
 
         TabLayoutMediator(binding.tlDetail, binding.vpDetail) { tab, pos ->

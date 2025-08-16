@@ -6,12 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
-import coil.load
 import com.hyosimroad.hamkkae.R
 import com.hyosimroad.hamkkae.databinding.DialogPhotoDetailBinding
-import com.hyosimroad.hamkkae.presentation.main.plan.recommend.detail.tip.TextAdapter
 import timber.log.Timber
 
 class PhotoAlbumDetailDialogFragment : DialogFragment() {
