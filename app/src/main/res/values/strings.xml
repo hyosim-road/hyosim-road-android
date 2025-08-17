@@ -1,6 +1,58 @@
 <resources>
     <string name="app_name">hamkkae</string>
 
+    <!--auth-->
+    <string name="login_title">함께가효</string>
+    <string name="login_subtitle">부모님과 함께하는 특별한 여행</string>
+    <string name="login_id_title">아이디</string>
+    <string name="login_id">아이디를 입력하세요</string>
+    <string name="login_pw_title">비밀번호</string>
+    <string name="login_pw">비밀번호를 입력하세요</string>
+    <string name="login_button">로그인</string>
+    <string name="login_to_join">계정이 없으신가요? 회원가입</string>
+    <string name="login_to_find">계정을 잊으셨나요? 아이디, 비밀번호 찾기</string>
+
+    <string name="signup_title">회원가입</string>
+    <string name="signup_agree_subtitle">서비스 이용을 위한 약관에 동의해주세요</string>
+    <string name="signup_agree_all">전체 동의하기</string>
+    <string name="signup_agree_service">[필수] 서비스 이용약관</string>
+    <string name="signup_agree_personal">[필수] 개인정보 처리방침</string>
+    <string name="signup_agree_marketing">[선택] 마케팅 정보 수신 동의</string>
+    <string name="signup_agree_button">다음 단계로</string>
+    <string name="signup_to_login">이미 계정이 있으신가요? 로그인</string>
+
+    <string name="signup_info_subtitle">서비스 이용을 위한 정보를 입력해주세요</string>
+    <string name="signup_info_id_title">아이디</string>
+    <string name="signup_info_id">아이디를 입력하세요</string>
+    <string name="signup_info_id_detail">확인</string>
+    <string name="signup_info_pw_title">비밀번호</string>
+    <string name="signup_info_pw">비밀번호를 입력하세요</string>
+    <string name="signup_info_pw_check_title">비밀번호 확인</string>
+    <string name="signup_info_pw_check">비밀번호를 입력하세요</string>
+    <string name="signup_info_email_title">이메일</string>
+    <string name="signup_info_email">이메일을 입력하세요</string>
+    <string name="signup_info_email_detail">인증 요청</string>
+    <string name="signup_info_code_title">코드</string>
+    <string name="signup_info_code">코드를 입력하세요</string>
+    <string name="signup_info_code_detail">확인</string>
+    <string name="signup_info_button">회원가입</string>
+
+    <string name="find_title">계정 찾기</string>
+    <string name="find_subtitle">계정을 찾기 위한 정보를 입력해주세요</string>
+    <string name="find_id_button">아이디 찾기</string>
+    <string name="find_pw_button">비밀번호 찾기</string>
+    <string name="find_to_login">계정이 기억나셨나요? 로그인</string>
+
+    <string name="find_id_name_title">이름</string>
+    <string name="find_id_name">이름을 입력해주세요</string>
+    <string name="find_id_email_title">이메일</string>
+    <string name="find_id_email">이메일을 입력해주세요</string>
+
+    <string name="find_pw_id_title">아이디</string>
+    <string name="find_pw_id">아이디를 입력해주세요</string>
+    <string name="find_pw_email_title">이메일</string>
+    <string name="find_pw_email">이메일을 입력해주세요</string>
+
     <!--state-->
     <string name="state_complete">완료</string>
     <string name="state_in_progress">진행중</string>
@@ -105,7 +157,7 @@
     <!--overview-->
     <string name="overview_preview">일정 미리보기</string>
     <string name="overview_first_day">첫째 날</string>
-    
+
     <!--info-->
     <string name="info_signature">대표 메뉴</string>
     <string name="info_amenities">편의시설</string>
@@ -113,7 +165,7 @@
     <string name="info_map">지도보기</string>
     <string name="info_checkin">체크인</string>
     <string name="info_checkout">체크아웃</string>
-    
+
     <!--tip-->
     <string name="tip_caution">동행 시 주의사항</string>
     <string name="tip_best_visit">최적 방문 시기</string>
@@ -207,7 +259,6 @@
 
     <!--answers-->
     <string name="answers_more">+ %d개 더</string>
-
 
     <!--                                  mock                                 -->
 
