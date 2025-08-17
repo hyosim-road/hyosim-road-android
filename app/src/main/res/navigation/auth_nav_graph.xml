@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/auth_nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.hyosimroad.hamkkae.presentation.main.auth.login.LoginFragment"
+        android:label="로그인"
+        tools:layout="@layout/fragment_login">
+
+        <action
+            android:id="@+id/action_loginFragment_to_signupAgreeFragment"
+            app:destination="@id/signupAgreeFragment" />
+
+        <action
+            android:id="@+id/action_loginFragment_to_findFragment"
+            app:destination="@id/findFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/signupAgreeFragment"
+        android:name="com.hyosimroad.hamkkae.presentation.main.auth.signup.SignupAgreeFragment"
+        android:label="회원가입 약관 동의"
+        tools:layout="@layout/fragment_signup_agree" />
+
+    <action
+        android:id="@+id/action_signupAgreeFragment_to_signupInfoFragment"
+        app:destination="@id/signupInfoFragment" />
+
+    <action
+        android:id="@+id/action_signupAgreeFragment_to_loginFragment"
+        app:destination="@id/loginFragment" />
+
+    <fragment
+        android:id="@+id/signupInfoFragment"
+        android:name="com.hyosimroad.hamkkae.presentation.main.auth.signup.SignupInfoFragment"
+        android:label="회원가입 정보 입력"
+        tools:layout="@layout/fragment_signup_info">
+
+        <action
+            android:id="@+id/action_signupInfoFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/findFragment"
+        android:name="com.hyosimroad.hamkkae.presentation.main.auth.find.FindFragment"
+        android:label="계정 찾기"
+        tools:layout="@layout/fragment_find">
+
+        <action
+            android:id="@+id/action_findFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+</navigation>

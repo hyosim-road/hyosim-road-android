@@ -20,7 +20,7 @@ import java.util.Locale
 class SelectTripInfoFragment : Fragment() {
     private var _binding: FragmentSelectTripInfoBinding? = null
     private val binding: FragmentSelectTripInfoBinding
-        get() = requireNotNull(_binding) { "home fragment is null" }
+        get() = requireNotNull(_binding) { "plan-trip-info fragment is null" }
 
     private var selectedStartDate: String? = null
     private var selectedEndDate: String? = null
