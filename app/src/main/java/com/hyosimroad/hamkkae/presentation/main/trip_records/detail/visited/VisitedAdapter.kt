@@ -6,15 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
-import coil.transform.RoundedCornersTransformation
 import com.hyosimroad.hamkkae.R
 import com.hyosimroad.hamkkae.databinding.ItemTripDetailScheduleBinding
-import com.hyosimroad.hamkkae.databinding.ItemTripRecordsDetailBinding
 import com.hyosimroad.hamkkae.domain.model.TotalCourse
-import com.hyosimroad.hamkkae.domain.model.TripRecord
-import com.hyosimroad.hamkkae.presentation.main.adapter.today_schedule.TodayScheduleAdapter
-import com.hyosimroad.hamkkae.presentation.main.trip_continue.schedule.TripDetailScheduleAdapter
+import com.hyosimroad.hamkkae.presentation.main.home.adapter.today_schedule.TodayScheduleAdapter
 
 class VisitedAdapter :
     ListAdapter<TotalCourse, VisitedAdapter.VisitedViewHolder>(

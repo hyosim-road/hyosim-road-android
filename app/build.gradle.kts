@@ -63,6 +63,7 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.navigation.fragment.ktx)
     implementation(libs.navigation.ui.ktx)
+    implementation(libs.androidx.coordinatorlayout)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -111,6 +112,9 @@ dependencies {
 
     //date picker
     implementation("com.google.android.material:material:1.11.0")
+
+    // 위치
+    implementation("com.google.android.gms:play-services-location:21.0.1")
 }
 
 kapt {

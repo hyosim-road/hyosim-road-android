@@ -10,6 +10,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.hyosimroad.hamkkae.R
 import com.hyosimroad.hamkkae.databinding.ActivityTripRecordsDetailBinding
+import com.hyosimroad.hamkkae.presentation.main.map.MapActivity
 import com.hyosimroad.hamkkae.presentation.main.photo_album.detail.PhotoAlbumDetailActivity
 import com.hyosimroad.hamkkae.presentation.main.plan.recommend.detail.RecommendDetailAdapter
 import com.hyosimroad.hamkkae.presentation.main.trip_records.TripRecordsViewModel
@@ -38,6 +39,7 @@ class TripRecordsDetailActivity: AppCompatActivity() {
         showTab()
 
         clickAlbum()
+        clickMap()
     }
     
     private fun setTrip(){
@@ -115,6 +117,13 @@ class TripRecordsDetailActivity: AppCompatActivity() {
     private fun clickAlbum(){
         binding.btnAlbum.setOnClickListener {
             val intent = Intent(this, PhotoAlbumDetailActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun clickMap(){
+        binding.btnMap.setOnClickListener {
+            val intent = Intent(this, MapActivity::class.java)
             startActivity(intent)
         }
     }

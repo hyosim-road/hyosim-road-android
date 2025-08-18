@@ -1,5 +1,6 @@
 package com.hyosimroad.hamkkae.presentation.main.plan.recommend.detail.restaurant
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.hyosimroad.hamkkae.databinding.FragmentRecommendDetailInfoBinding
+import com.hyosimroad.hamkkae.presentation.main.map.MapActivity
 import timber.log.Timber
+import kotlin.jvm.java
 
 class RecommendDetailInfoFragment : Fragment() {
     companion object {
@@ -50,7 +53,12 @@ class RecommendDetailInfoFragment : Fragment() {
 
     private fun getList(category:String) {
         Timber.d("category: $category")
-        val infoAdapter = RecommendDetailInfoAdapter(category)
+        val infoAdapter = RecommendDetailInfoAdapter(
+            category,
+            clickMap = {
+                val intent = Intent(requireActivity(), MapActivity::class.java)
+                startActivity(intent)
+            })
         binding.rvInfos.adapter = infoAdapter
         infoAdapter.submitList(
             if (category == "restaurant") restaurantViewModel.restaurantList

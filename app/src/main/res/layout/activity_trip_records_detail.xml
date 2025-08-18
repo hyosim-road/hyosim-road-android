@@ -69,6 +69,44 @@
                     app:layout_constraintStart_toStartOf="@id/tv_title"
                     app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
+                <LinearLayout
+                    android:id="@+id/btn_map"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:background="@drawable/bg_detail_white"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="20dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/btn_back"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_subtitle">
+
+                    <ImageView
+                        android:id="@+id/iv_navi"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:rotation="45"
+                        android:src="@drawable/ic_navi_gray_24" />
+
+                    <TextView
+                        android:id="@+id/tv_map"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/trip_detail_map"
+                        android:textColor="@color/text_secondary_gray"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:includeFontPadding="false" />
+                </LinearLayout>
+
                 <View
                     android:id="@+id/v_line"
                     android:layout_width="match_parent"

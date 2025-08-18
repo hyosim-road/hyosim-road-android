@@ -11,6 +11,10 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28"/>
 
+    <!--위치 권한-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
         android:name=".MyApp"
         android:allowBackup="true"
@@ -22,22 +26,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Hamkkae">
 
-        <activity android:name=".presentation.main.auth.AuthActivity"
-            android:exported="true">
-            <intent-filter>
+        <activity android:name=".presentation.auth.AuthActivity"
+            android:exported="false">
+            <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>-->
         </activity>
 
         <activity
-            android:name=".presentation.main.MainActivity"
+            android:name=".presentation.main.home.MainActivity"
             android:exported="true">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity android:name=".presentation.main.plan.PlanActivity"
@@ -59,6 +63,8 @@
         <activity android:name=".presentation.main.trip_records.TripRecordsActivity"
             android:exported="false"/>
         <activity android:name=".presentation.main.trip_records.detail.TripRecordsDetailActivity"
+            android:exported="false"/>
+        <activity android:name=".presentation.main.map.MapActivity"
             android:exported="false"/>
     </application>
 

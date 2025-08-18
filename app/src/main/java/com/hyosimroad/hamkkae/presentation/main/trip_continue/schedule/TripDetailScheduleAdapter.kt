@@ -8,9 +8,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.hyosimroad.hamkkae.R
 import com.hyosimroad.hamkkae.databinding.ItemTripDetailScheduleBinding
-import com.hyosimroad.hamkkae.domain.model.Course
 import com.hyosimroad.hamkkae.domain.model.TotalCourse
-import com.hyosimroad.hamkkae.presentation.main.adapter.today_schedule.TodayScheduleAdapter
+import com.hyosimroad.hamkkae.presentation.main.home.adapter.today_schedule.TodayScheduleAdapter
 
 class TripDetailScheduleAdapter :
     ListAdapter<TotalCourse, TripDetailScheduleAdapter.TripDetailScheduleViewHolder>(

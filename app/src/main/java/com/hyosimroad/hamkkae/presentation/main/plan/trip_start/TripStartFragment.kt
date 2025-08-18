@@ -11,9 +11,7 @@ import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.hyosimroad.hamkkae.databinding.FragmentTripStartBinding
-import com.hyosimroad.hamkkae.presentation.main.adapter.today_schedule.TodayScheduleAdapter
-import com.hyosimroad.hamkkae.presentation.main.plan.recommend.RecommendCourseViewModel
-import com.hyosimroad.hamkkae.presentation.main.plan.recommend.adapter.RecommendCourseAdapter
+import com.hyosimroad.hamkkae.presentation.main.home.adapter.today_schedule.TodayScheduleAdapter
 import timber.log.Timber
 import kotlin.getValue
 

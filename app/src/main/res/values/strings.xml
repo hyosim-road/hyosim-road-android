@@ -260,6 +260,9 @@
     <!--answers-->
     <string name="answers_more">+ %d개 더</string>
 
+    <!--map-->
+    <string name="map_navigate">길찾기</string>
+
     <!--                                  mock                                 -->
 
 
