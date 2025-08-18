@@ -19,8 +19,10 @@ import com.hyosimroad.hamkkae.databinding.ItemRecommendDetailInfoBinding
 import com.hyosimroad.hamkkae.databinding.ItemTextBinding
 import com.hyosimroad.hamkkae.domain.model.Info
 
-class RecommendDetailInfoAdapter(private val category: String) :
-    ListAdapter<Info, RecommendDetailInfoAdapter.RecommendDetailInfoViewHolder>(
+class RecommendDetailInfoAdapter(
+    private val category: String,
+    private val clickMap: () -> Unit
+) : ListAdapter<Info, RecommendDetailInfoAdapter.RecommendDetailInfoViewHolder>(
         RecommendDetailInfoDiffCallback
     ) {
 
@@ -78,6 +80,10 @@ class RecommendDetailInfoAdapter(private val category: String) :
                     val params = tvAddition.layoutParams as ConstraintLayout.LayoutParams
                     params.topToBottom = R.id.cl_checkin
                     tvAddition.layoutParams = params
+                }
+
+                btnMap.setOnClickListener {
+                    clickMap()
                 }
             }
         }

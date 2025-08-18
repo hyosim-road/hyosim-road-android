@@ -1,27 +1,18 @@
 package com.hyosimroad.hamkkae.presentation.main.plan.recommend.detail
 
-import android.animation.ObjectAnimator
-import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AccelerateDecelerateInterpolator
-import androidx.compose.runtime.key
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.hyosimroad.hamkkae.R
 import com.hyosimroad.hamkkae.databinding.FragmentRecommendDetailBinding
-import com.hyosimroad.hamkkae.databinding.FragmentTripStartBinding
-import com.hyosimroad.hamkkae.presentation.main.adapter.today_schedule.TodayScheduleAdapter
 import com.hyosimroad.hamkkae.presentation.main.plan.recommend.adapter.RecommendCourseKeywordAdapter
-import com.hyosimroad.hamkkae.presentation.main.plan.trip_start.TripStartViewModel
 import timber.log.Timber
-import kotlin.getValue
 
 class RecommendDetailFragment : Fragment() {
     private var _binding: FragmentRecommendDetailBinding? = null

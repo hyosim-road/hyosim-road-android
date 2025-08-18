@@ -15,6 +15,6 @@ class MyApp: Application() {
     override fun onCreate() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
-        //KakaoMapSdk.init(this, BuildConfig.KAKAO_NATIVE_APP_KEY);
+        KakaoMapSdk.init(this, BuildConfig.KAKAO_NATIVE_APP_KEY);
     }
 }

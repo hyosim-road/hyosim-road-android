@@ -263,7 +263,7 @@
                 app:layout_constraintEnd_toEndOf="@id/rv_addition"/>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_call"
+                android:id="@+id/btn_map"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:layout_marginBottom="15dp"

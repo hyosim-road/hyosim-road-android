@@ -1,11 +1,13 @@
 package com.hyosimroad.hamkkae.presentation.main.trip_continue
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import com.hyosimroad.hamkkae.R
 import com.hyosimroad.hamkkae.databinding.ActivityTripDetailBinding
+import com.hyosimroad.hamkkae.presentation.main.map.MapActivity
 import com.hyosimroad.hamkkae.presentation.main.trip_continue.album.TripDetailAlbumFragment
 import com.hyosimroad.hamkkae.presentation.main.trip_continue.schedule.TripDetailScheduleFragment
 
@@ -26,6 +28,7 @@ class TripDetailActivity: AppCompatActivity() {
     private fun setting() {
         currentInfo()
         setTab()
+        clickMap()
     }
 
     private fun currentInfo(){
@@ -55,6 +58,12 @@ class TripDetailActivity: AppCompatActivity() {
                 tab.setText("여행 사진첩").setIcon(R.drawable.ic_camera_white_24)
             }
         }.attach()
+    }
 
+    private fun clickMap(){
+        binding.btnMap.setOnClickListener {
+            val intent = Intent(this, MapActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
