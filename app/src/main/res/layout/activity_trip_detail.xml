@@ -40,6 +40,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:text="@string/main_trip_title_mock"
+                android:textColor="@color/dark_gray"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@id/tv_date"

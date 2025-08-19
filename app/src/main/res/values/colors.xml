@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
+    <color name="dark_gray">#2C2C2C</color>
     <color name="white">#FFFFFFFF</color>
 
     <color name="primary_orange">#FB923C</color>
@@ -47,4 +48,18 @@
     <color name="upload_photo_complete_bg_blue">#E6F1FF</color>
     <color name="upload_photo_complete_text_blue">#396CAB</color>
     <color name="upload_photo_complete_state_blue">#CEE4FF</color>
+
+    <!--photo-->
+    <color name="security_blue_background">#F4F6FF</color>
+    <color name="security_blue_border">#9EA6C7</color>
+    <color name="security_blue_title">#383F64</color>
+    <color name="security_blue_text">#4B5792</color>
+    <color name="tip_yellow_title">#574103</color>
+    <color name="tip_yellow_text">#876410</color>
+    <color name="tip_yellow_shadow">#AF8218</color>
+    <color name="safety_green_background">#E9F6EB</color>
+    <color name="safety_green_border">#73A27D</color>
+    <color name="safety_green_title">#1C4E2A</color>
+    <color name="safety_green_text">#376641</color>
+
 </resources>

@@ -42,6 +42,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
+                android:textColor="@color/dark_gray"
                 android:textSize="17sp"
                 app:layout_constraintTop_toTopOf="@id/iv_trip_photo"
                 app:layout_constraintStart_toEndOf="@id/iv_trip_photo"

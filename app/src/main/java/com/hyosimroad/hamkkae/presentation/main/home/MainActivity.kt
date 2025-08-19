@@ -20,6 +20,7 @@ import com.hyosimroad.hamkkae.presentation.main.plan.PlanActivity
 import com.hyosimroad.hamkkae.presentation.main.trip_continue.TripDetailActivity
 import com.hyosimroad.hamkkae.presentation.main.trip_records.TripRecordsActivity
 import com.hyosimroad.hamkkae.presentation.main.upload_photo.UploadPhotoActivity
+import com.hyosimroad.hamkkae.presentation.main.setting.SettingActivity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -235,7 +236,9 @@ class MainActivity : AppCompatActivity() {
     private fun clickSetting() {
         binding.btnSetting.setOnClickListener {
             Timber.d("setting click!")
-            setVisibilityPlan(true)
+
+            val intent = Intent(it.context, SettingActivity::class.java)
+            startActivity(intent)
         }
     }
 
