@@ -12,21 +12,19 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.hyosimroad.hamkkae.R
 import com.hyosimroad.hamkkae.databinding.FragmentSelectTripStyleBinding
+import com.hyosimroad.hamkkae.domain.model.TripStyle
 import com.hyosimroad.hamkkae.presentation.main.plan.select.adapter.SelectTripStyleAdapter
 import timber.log.Timber
 
-class SelectTripStyleFragment: Fragment() {
+class SelectTripStyleFragment : Fragment() {
     private var _binding: FragmentSelectTripStyleBinding? = null
     private val binding: FragmentSelectTripStyleBinding
         get() = requireNotNull(_binding) { "home fragment is null" }
 
     private val selectTripStyleViewModel: SelectTripStyleViewModel by viewModels()
+    private lateinit var tripStyleAdapter: SelectTripStyleAdapter
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentSelectTripStyleBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -34,19 +32,16 @@ class SelectTripStyleFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Timber.d("selectTripStyleFragment started!")
+
+        setupRecyclerView()
+        observeViewModel()
+
         setting()
     }
 
-    private fun setting() {
-        binding.pbTrip.progress = 50
-
-        val animator = ObjectAnimator.ofInt(binding.pbTrip, "progress", 25, 50)
-        animator.duration = 1000 // 1초
-        animator.interpolator = AccelerateDecelerateInterpolator()
-        animator.start()
-
-        val tripStyleAdapter = SelectTripStyleAdapter { style, selected ->
-            Timber.d("Clicked style=${style.name}, selected=$selected")
+    private fun setupRecyclerView() {
+        tripStyleAdapter = SelectTripStyleAdapter { style ->
+            selectTripStyleViewModel.toggleTripStyleSelection(style)
         }
 
         binding.rvTripStyle.apply {
@@ -54,13 +49,26 @@ class SelectTripStyleFragment: Fragment() {
             adapter = tripStyleAdapter
             setHasFixedSize(true)
         }
-
         tripStyleAdapter.submitList(selectTripStyleViewModel.tripStyleList)
+    }
 
-        binding.btnNext.isEnabled = true
-        binding.btnNext.isSelected = true
-        binding.tvDone.visibility = View.GONE
+    private fun observeViewModel() {
+        selectTripStyleViewModel.selectedStyles.observe(viewLifecycleOwner) { selectedList ->
+            tripStyleAdapter.submitSelection(selectedList)
 
+            val isSelectionNotEmpty = selectedList.isNotEmpty()
+            binding.btnNext.isEnabled = isSelectionNotEmpty
+            binding.btnNext.isSelected = isSelectionNotEmpty
+            binding.tvDone.visibility = if (isSelectionNotEmpty) View.VISIBLE else View.GONE
+        }
+    }
+
+    private fun setting() {
+        binding.pbTrip.progress = 50
+        val animator = ObjectAnimator.ofInt(binding.pbTrip, "progress", 25, 50)
+        animator.duration = 1000
+        animator.interpolator = AccelerateDecelerateInterpolator()
+        animator.start()
         clickNextButton()
     }
 

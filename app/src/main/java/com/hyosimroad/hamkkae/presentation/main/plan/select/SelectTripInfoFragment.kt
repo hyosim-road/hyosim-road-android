@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.hyosimroad.hamkkae.R
 import com.hyosimroad.hamkkae.databinding.FragmentSelectTripInfoBinding
@@ -22,10 +23,7 @@ class SelectTripInfoFragment : Fragment() {
     private val binding: FragmentSelectTripInfoBinding
         get() = requireNotNull(_binding) { "plan-trip-info fragment is null" }
 
-    private var selectedStartDate: String? = null
-    private var selectedEndDate: String? = null
-
-    private var personCount = 0
+    private val viewModel: SelectTripInfoViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -37,18 +35,54 @@ class SelectTripInfoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Timber.d("selectTripInfoFragment started!")
+
         setting()
         setDate()
         setPerson()
         setBudget()
         clickNextButton()
+        observeViewModel()
+    }
+
+    private fun observeViewModel() {
+        viewModel.startDate.observe(viewLifecycleOwner) { date ->
+            binding.tvStartDate.text = date ?: "시작 날짜"
+            binding.tvEndDate.isEnabled = (date != null)
+            checkAllInfoEntered()
+        }
+
+        viewModel.endDate.observe(viewLifecycleOwner) { date ->
+            binding.tvEndDate.text = date ?: "종료 날짜"
+            val colorRes = if (date != null) R.color.hover_orange else android.R.color.transparent
+            binding.clSelectDate.strokeColor = ContextCompat.getColor(requireContext(), colorRes)
+            checkAllInfoEntered()
+        }
+
+        viewModel.personCount.observe(viewLifecycleOwner) { count ->
+            binding.tvPersonCount.text = "${count}명"
+            updatePersonBorder()
+            checkAllInfoEntered()
+        }
+
+        viewModel.selectedBudget.observe(viewLifecycleOwner) { selectedBudgetId ->
+            val budgetViews = listOf(binding.tvBudgetLow, binding.tvBudgetMid, binding.tvBudgetHigh)
+            budgetViews.forEach { view ->
+                val isSelected = view.id == selectedBudgetId
+                view.isSelected = isSelected
+                val backgroundRes = if (isSelected) R.drawable.bg_selected_info_box else R.drawable.bg_select_info_box
+                view.setBackgroundResource(backgroundRes)
+            }
+            val colorRes = if (selectedBudgetId != null) R.color.hover_orange else android.R.color.transparent
+            binding.clSelectBudget.strokeColor = ContextCompat.getColor(requireContext(), colorRes)
+            checkAllInfoEntered()
+        }
     }
 
     private fun setting() {
         binding.pbTrip.progress = 25
 
         val animator = ObjectAnimator.ofInt(binding.pbTrip, "progress", 0, 25)
-        animator.duration = 1000 // 1초
+        animator.duration = 1000
         animator.interpolator = AccelerateDecelerateInterpolator()
         animator.start()
 
@@ -65,24 +99,19 @@ class SelectTripInfoFragment : Fragment() {
     }
 
     private fun setDate() {
-        binding.tvEndDate.isEnabled = false
-
         binding.tvStartDate.setOnClickListener {
-            showDatePicker { selectedDate ->
-                selectedStartDate = selectedDate
-                binding.tvStartDate.text = selectedDate
-                binding.tvEndDate.isEnabled = true
+            val today = Calendar.getInstance()
+            showDatePicker(minDate = today.timeInMillis) { selectedDate ->
+                viewModel.setStartDate(selectedDate)
+                viewModel.setEndDate(null)
             }
         }
 
         binding.tvEndDate.setOnClickListener {
-            if (selectedStartDate != null) {
-                showDatePicker(minDate = selectedStartDate!!.toMillis()) { selectedDate ->
-                    selectedEndDate = selectedDate
-                    binding.tvEndDate.text = selectedDate
-                    binding.clSelectDate.strokeColor =
-                        ContextCompat.getColor(requireContext(), R.color.hover_orange)
-                    checkAllInfoEntered()
+            val minDateMillis = viewModel.startDate.value?.toMillis()
+            if (minDateMillis != null) {
+                showDatePicker(minDate = minDateMillis) { selectedDate ->
+                    viewModel.setEndDate(selectedDate)
                 }
             }
         }
@@ -122,66 +151,38 @@ class SelectTripInfoFragment : Fragment() {
     }
 
     private fun setPerson() {
-        binding.tvPersonCount.text = personCount.toString() + "명"
-
         binding.btnDecrease.setOnClickListener {
-            if (personCount > 0) {
-                personCount--
-                binding.tvPersonCount.text = personCount.toString() + "명"
-                updatePersonBorder()
-                checkAllInfoEntered()
+            val currentCount = viewModel.personCount.value ?: 0
+            if (currentCount > 0) {
+                viewModel.setPersonCount(currentCount - 1)
             }
         }
 
         binding.btnIncrease.setOnClickListener {
-            personCount++
-            binding.tvPersonCount.text = personCount.toString() + "명"
-            updatePersonBorder()
-            checkAllInfoEntered()
+            val currentCount = viewModel.personCount.value ?: 0
+            viewModel.setPersonCount(currentCount + 1)
         }
     }
 
     private fun updatePersonBorder() {
-        val color = if (personCount > 0) {
-            R.color.hover_orange
-        } else {
-            android.R.color.transparent
-        }
-
+        val count = viewModel.personCount.value ?: 0
+        val color = if (count > 0) R.color.hover_orange else android.R.color.transparent
         binding.clSelectPerson.strokeColor = ContextCompat.getColor(requireContext(), color)
     }
 
     private fun setBudget() {
-        val budgetViews = listOf(
-            binding.tvBudgetLow, binding.tvBudgetMid, binding.tvBudgetHigh
-        )
-
+        val budgetViews = listOf(binding.tvBudgetLow, binding.tvBudgetMid, binding.tvBudgetHigh)
         budgetViews.forEach { view ->
             view.setOnClickListener {
-                budgetViews.forEach {
-                    it.isSelected = false
-                    it.setBackgroundResource(R.drawable.bg_select_info_box)
-                }
-
-                view.isSelected = true
-                view.setBackgroundResource(R.drawable.bg_selected_info_box)
-
-                binding.clSelectBudget.strokeColor =
-                    ContextCompat.getColor(requireContext(), R.color.hover_orange)
-
-                checkAllInfoEntered()
+                viewModel.setSelectedBudget(view.id)
             }
         }
     }
 
     private fun checkAllInfoEntered() {
-        val isDateSelected = !selectedStartDate.isNullOrEmpty() && !selectedEndDate.isNullOrEmpty()
-        val isPersonSelected = personCount > 0
-        val isBudgetSelected = listOf(
-            binding.tvBudgetLow,
-            binding.tvBudgetMid,
-            binding.tvBudgetHigh
-        ).any { it.isSelected }
+        val isDateSelected = !viewModel.startDate.value.isNullOrEmpty() && !viewModel.endDate.value.isNullOrEmpty()
+        val isPersonSelected = (viewModel.personCount.value ?: 0) > 0
+        val isBudgetSelected = viewModel.selectedBudget.value != null
 
         val allInfoEntered = isDateSelected && isPersonSelected && isBudgetSelected
 
