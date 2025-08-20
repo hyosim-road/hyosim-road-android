@@ -27,6 +27,12 @@
     <string name="signup_info_id_detail">확인</string>
     <string name="signup_info_pw_title">비밀번호</string>
     <string name="signup_info_pw">비밀번호를 입력하세요</string>
+    <string name="signup_pw_rule_title">비밀번호 요구사항</string>
+    <string name="signup_pw_rule1">8자 이상</string>
+    <string name="signup_pw_rule2">영문 대문자 포함</string>
+    <string name="signup_pw_rule3">영문 소문자 포함</string>
+    <string name="signup_pw_rule4">숫자 포함</string>
+    <string name="signup_pw_rule5">특수문자 포함</string>
     <string name="signup_info_pw_check_title">비밀번호 확인</string>
     <string name="signup_info_pw_check">비밀번호를 입력하세요</string>
     <string name="signup_info_email_title">이메일</string>
@@ -263,7 +269,7 @@
     <!--map-->
     <string name="map_navigate">길찾기</string>
 
-    <!--                                  mock                                 -->
+    <!--mock-->
 
 
     <!--home-->
@@ -290,4 +296,49 @@
     <string name="preview_place_mock">불국사</string>
     <string name="preview_place_description_mock">신라 천년의 불교문화가 살아있는 곳</string>
     <string name="preview_place_time_mock">09:00 ~ 11:00</string>
+
+    <!--setting-->
+    <string name="setting_title">설정</string>
+    <string name="setting_user">사용자 설정</string>
+    <string name="setting_change_pw">비밀번호 변경</string>
+    <string name="setting_dark_mode">다크 모드</string>
+    <string name="setting_question">질문 알림</string>
+
+    <string name="setting_support">지원 및 정보</string>
+    <string name="setting_customer_center">고객센터</string>
+    <string name="setting_app_info">앱 정보</string>
+    <string name="setting_service">서비스 이용약관</string>
+    <string name="setting_personal">개인정보 처리방침</string>
+
+    <string name="setting_logout">로그아웃</string>
+    <string name="setting_version">함께가효 v1.0.0</string>
+    <string name="setting_subtitle">부모님과 함께하는 특별한 여행</string>
+
+    <string name="setting_change_pw_title">비밀번호 변경</string>
+    <string name="setting_security_title">보안 확인</string>
+    <string name="setting_security_subtitle">계정 보안을 위해 현재 비밀번호를 먼저 확인합니다.</string>
+    <string name="setting_check_pw_title">현재 비밀번호 확인</string>
+    <string name="setting_current_pw_subtitle">현재 비밀번호</string>
+    <string name="setting_current_pw">현재 비밀번호를 입력하세요</string>
+    <string name="setting_check_pw_button">비밀번호 확인</string>
+    <string name="setting_to_find_pw">비밀번호를 잊으셨나요? 비밀번호 찾기</string>
+    <string name="setting_security_tip_title">보안 팁</string>
+    <string name="setting_security_tip1">• 다른 사람이 보고 있지 않은지 확인하세요.</string>
+    <string name="setting_security_tip2">• 공용 컴퓨터에서는 비밀번호 변경을 피하세요.</string>
+    <string name="setting_security_tip3">• 변경 후에는 다른 기기에서 다시 로그인해야 합니다.</string>
+
+    <string name="setting_change_pw_subtitle">새 비밀번호 설정</string>
+    <string name="setting_new_pw_title">새 비밀번호</string>
+    <string name="setting_new_pw">새 비밀번호를 입력하세요</string>
+    <string name="setting_new_pw2_title">비밀번호 확인</string>
+    <string name="setting_new_pw2">새 비밀번호를 다시 입력하세요</string>
+    <string name="setting_change_pw_button">비밀번호 변경</string>
+    <string name="setting_safety_tip_title">안전한 비밀번호 만들기</string>
+    <string name="setting_safety_tip1">• 개인정보(이름, 생일 등)와 관련없는 비밀번호</string>
+    <string name="setting_safety_tip2">• 다른 사이트와 다른 고유한 비밀번호</string>
+    <string name="setting_safety_tip3">• 예측하기 어려운 문자 조합</string>
+    <string name="setting_safety_tip4">• 정기적인 비밀번호 변경 (3~6개월마다)</string>
+
+
+    <string name="setting_customer_center_title">고객센터</string>
 </resources>

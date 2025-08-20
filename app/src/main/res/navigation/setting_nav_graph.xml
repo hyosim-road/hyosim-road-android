@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/setting_nav_graph"
+    app:startDestination="@id/settingFragment">
+
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.hyosimroad.hamkkae.presentation.main.setting.SettingFragment"
+        android:label="설정"
+        tools:layout="@layout/fragment_setting">
+
+        <action
+            android:id="@+id/action_settingFragment_to_checkPwFragment"
+            app:destination="@id/checkPwFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/checkPwFragment"
+        android:name="com.hyosimroad.hamkkae.presentation.main.setting.user.CheckPwFragment"
+        android:label="비밀번호 확인"
+        tools:layout="@layout/fragment_check_pw">
+
+        <action
+            android:id="@+id/action_checkPwFragment_to_changePwFragment"
+            app:destination="@id/changePwFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/changePwFragment"
+        android:name="com.hyosimroad.hamkkae.presentation.main.setting.user.ChangePwFragment"
+        android:label="비밀번호 변경"
+        tools:layout="@layout/fragment_change_pw" />
+</navigation>
