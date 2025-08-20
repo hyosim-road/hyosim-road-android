@@ -100,6 +100,7 @@
                     android:gravity="center"
                     android:padding="10dp"
                     android:text="@string/select_trip_info_date_start"
+                    android:textColor="@color/dark_gray"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toStartOf="@id/tv_end_date"
                     app:layout_constraintStart_toStartOf="parent"
@@ -114,6 +115,7 @@
                     android:gravity="center"
                     android:padding="10dp"
                     android:text="@string/select_trip_info_date_end"
+                    android:textColor="@color/dark_gray"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@id/tv_start_date"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -181,6 +183,7 @@
                     android:text="@string/select_trip_info_person_count"
                     android:textSize="16sp"
                     android:textStyle="bold"
+                    android:textColor="@color/dark_gray"
                     app:layout_constraintBottom_toBottomOf="@id/btn_decrease"
                     app:layout_constraintEnd_toStartOf="@id/btn_increase"
                     app:layout_constraintStart_toEndOf="@id/btn_decrease"
@@ -255,6 +258,7 @@
                         android:background="@drawable/bg_select_info_box"
                         android:gravity="center"
                         android:padding="12dp"
+                        android:textColor="@color/dark_gray"
                         android:text="@string/select_trip_info_budget_low"
                         android:textSize="14sp"
                         android:textStyle="bold" />
@@ -267,6 +271,7 @@
                         android:background="@drawable/bg_select_info_box"
                         android:gravity="center"
                         android:padding="12dp"
+                        android:textColor="@color/dark_gray"
                         android:text="@string/select_trip_info_budget_mid"
                         android:textSize="14sp"
                         android:textStyle="bold" />
@@ -278,6 +283,7 @@
                         android:background="@drawable/bg_select_info_box"
                         android:gravity="center"
                         android:padding="12dp"
+                        android:textColor="@color/dark_gray"
                         android:text="@string/select_trip_info_budget_high"
                         android:textSize="14sp"
                         android:textStyle="bold" />
