@@ -17,16 +17,23 @@ import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.hyosimroad.hamkkae.R
 import com.hyosimroad.hamkkae.databinding.FragmentLoginBinding
+import com.hyosimroad.hamkkae.extension.auth.LoginState
 import com.hyosimroad.hamkkae.presentation.main.home.MainActivity
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding: FragmentLoginBinding
         get() = requireNotNull(_binding) { "login fragment is null" }
+    private val loginViewModel: LoginViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -50,6 +57,8 @@ class LoginFragment : Fragment() {
             fullTextResId = R.string.login_to_find,
             targetText = "아이디, 비밀번호 찾기"
         )
+
+        checkLogin()
 
         clickLoginButton()
         clickSignupButton()
@@ -84,11 +93,35 @@ class LoginFragment : Fragment() {
         textView.text = spannableString
     }
 
+    private fun checkLogin(){
+        lifecycleScope.launch {
+            loginViewModel.loginState.collect { state->
+                when(state){
+                    is LoginState.Success ->{
+                        val intent = Intent(requireContext(), MainActivity::class.java)
+                        intent.putExtra("token", state.response.data.accessToken)
+                        startActivity(intent)
+                        requireActivity().finish()
+                    }
+                    is LoginState.Error ->{
+                        Timber.e("login state error!: ${state.message}")
+                    }
+                    is LoginState.Loading ->{
+                        Timber.d("login state is loading...")
+                    }
+                    is LoginState.Idle ->{
+
+                    }
+                }
+            }
+        }
+    }
+
     private fun clickLoginButton() {
         binding.btnLogin.setOnClickListener {
-            val intent = Intent(requireContext(), MainActivity::class.java)
-            startActivity(intent)
-            requireActivity().finish()
+            val email = binding.etId.text.toString()
+            val pw = binding.etPw.text.toString()
+            loginViewModel.login(email, pw)
         }
     }
 

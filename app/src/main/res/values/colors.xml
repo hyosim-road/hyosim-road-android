@@ -20,6 +20,8 @@
     <color name="auth_box_gray">#DDDDDD</color>
     <color name="auth_gray">#BFBFBF</color>
     <color name="auth_box_orange">#FB923C</color>
+    <color name="auth_check_green">#1BA54E</color>
+    <color name="auth_no_red">#DC2626</color>
 
     <!--state-->
     <color name="state_complete_gray">#E5E5E5</color>

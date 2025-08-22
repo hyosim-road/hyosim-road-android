@@ -28,6 +28,12 @@ android {
             "KAKAO_NATIVE_APP_KEY",
             gradleLocalProperties(rootDir, providers).getProperty("native.app.key")
         )
+
+        buildConfigField(
+            "String",
+            "BASE_URL",
+            gradleLocalProperties(rootDir, providers).getProperty("base.url")
+        )
     }
 
     buildTypes {
