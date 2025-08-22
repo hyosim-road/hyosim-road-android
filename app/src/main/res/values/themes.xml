@@ -32,4 +32,11 @@
     <style name="DialogButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
         <item name="android:textColor">@color/hover_orange</item>
     </style>
+
+    <!--input style-->
+    <style name="ShapeAppearance.TextInputLayout.Rounded" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">4dp</item> <!-- 원하는 radius 값 -->
+    </style>
+
 </resources>

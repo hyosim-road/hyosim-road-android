@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingVertical="4dp">
+
+    <!-- 체크/엑스 아이콘 -->
+    <ImageView
+        android:id="@+id/ivRuleIcon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/ic_no_white_24"
+        app:tint="@color/text_secondary_gray" />
+
+    <!-- 텍스트 -->
+    <TextView
+        android:id="@+id/tvRuleText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_weight="1"
+        android:text="@string/signup_pw_rule1"
+        android:textColor="@color/text_secondary_gray"
+        android:textSize="14sp" />
+</LinearLayout>

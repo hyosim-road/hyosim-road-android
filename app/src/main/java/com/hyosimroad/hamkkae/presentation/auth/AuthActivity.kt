@@ -4,7 +4,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.hyosimroad.hamkkae.databinding.ActivityAuthBinding
 import com.hyosimroad.hamkkae.databinding.ActivityPlanBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AuthActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAuthBinding
 

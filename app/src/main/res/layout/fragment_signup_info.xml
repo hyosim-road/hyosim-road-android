@@ -1,62 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
-    <TextView
-        android:id="@+id/tv_signup_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/signup_title"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/tv_signup_subtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/signup_info_subtitle"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_signup_title" />
+        <TextView
+            android:id="@+id/tv_signup_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/signup_title"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_signup_id_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:layout_marginStart="2dp"
-        android:text="@string/signup_info_id_title"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/mcv_signup_id"
-        app:layout_constraintTop_toBottomOf="@id/tv_signup_subtitle" />
+        <TextView
+            android:id="@+id/tv_signup_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/signup_info_subtitle"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_signup_title" />
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/mcv_signup_id"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="32dp"
-        android:layout_marginTop="6dp"
-        app:cardCornerRadius="6dp"
-        app:cardElevation="6dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_signup_id_title"
-        app:strokeColor="@color/auth_box_gray"
-        app:strokeWidth="1dp">
+        <TextView
+            android:id="@+id/tv_signup_id_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="35dp"
+            android:text="@string/signup_info_id_title"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/ll_signup_id"
+            app:layout_constraintTop_toBottomOf="@id/tv_signup_subtitle" />
+
+        <!--<com.google.android.material.card.MaterialCardView
+            android:id="@+id/mcv_signup_id"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="6dp"
+            app:cardCornerRadius="6dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_signup_id_title"
+            app:strokeColor="@color/auth_box_gray"
+            app:strokeWidth="1dp">-->
 
         <LinearLayout
+            android:id="@+id/ll_signup_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="6dp"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:gravity="center_vertical">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_signup_id_title">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_signup_id"
@@ -64,8 +73,11 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:boxBackgroundColor="@android:color/white"
-                app:boxBackgroundMode="none"
-                app:hintEnabled="false">
+                app:boxBackgroundMode="outline"
+                app:boxStrokeColor="@color/auth_box_gray"
+                app:boxStrokeWidth="1dp"
+                app:hintEnabled="false"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.TextInputLayout.Rounded">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etSignupId"
@@ -77,98 +89,147 @@
                     android:paddingVertical="15dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <androidx.appcompat.widget.AppCompatButton
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_check_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp"
-                android:layout_marginEnd="6dp"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
                 android:backgroundTint="@color/auth_gray"
+                android:elevation="0dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp"
+                android:minHeight="0dp"
+                android:paddingHorizontal="0dp"
                 android:text="@string/signup_info_id_detail"
                 android:textColor="@color/white"
-                android:textSize="16sp"
-                android:elevation="0dp"/>
+                android:textSize="13sp"
+                android:ellipsize="none"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:lines="1"
+                android:gravity="center"
+                app:cornerRadius="4dp" />
+
         </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
+        <!--</com.google.android.material.card.MaterialCardView>-->
 
-    <TextView
-        android:id="@+id/tv_signup_pw_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="2dp"
-        android:text="@string/signup_info_pw_title"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/mcv_signup_pw"
-        app:layout_constraintTop_toBottomOf="@id/mcv_signup_id" />
+        <ImageView
+            android:id="@+id/ic_id"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="2dp"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="@id/ll_signup_id"
+            app:layout_constraintTop_toBottomOf="@id/ll_signup_id"
+            app:layout_constraintWidth_percent="0.05" />
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/mcv_signup_pw"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="32dp"
-        android:layout_marginTop="6dp"
-        app:cardCornerRadius="6dp"
-        app:cardElevation="6dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_signup_pw_title"
-        app:strokeColor="@color/auth_box_gray"
-        app:strokeWidth="1dp">
+        <TextView
+            android:id="@+id/tv_available_id"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            app:layout_constraintBottom_toBottomOf="@id/ic_id"
+            app:layout_constraintEnd_toEndOf="@id/ll_signup_id"
+            app:layout_constraintStart_toEndOf="@id/ic_id"
+            app:layout_constraintTop_toTopOf="@id/ic_id" />
+
+        <TextView
+            android:id="@+id/tv_signup_pw_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/signup_info_pw_title"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/til_signup_pw"
+            app:layout_constraintTop_toBottomOf="@id/tv_available_id" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_signup_pw"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="6dp"
             app:boxBackgroundColor="@android:color/white"
-            app:boxBackgroundMode="none"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="@color/auth_box_gray"
+            app:boxStrokeWidth="1dp"
             app:endIconMode="password_toggle"
-            app:hintEnabled="false">
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_signup_pw_title"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.TextInputLayout.Rounded">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etSignupPw"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:hint="@string/signup_info_pw_check"
+                android:hint="@string/signup_info_pw"
                 android:inputType="textPassword"
                 android:paddingVertical="15dp" />
         </com.google.android.material.textfield.TextInputLayout>
-    </com.google.android.material.card.MaterialCardView>
 
-    <TextView
-        android:id="@+id/tv_signup_pw_check_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/signup_info_pw_check_title"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/mcv_signup_pw_check"
-        app:layout_constraintTop_toBottomOf="@id/mcv_signup_pw" />
+        <!--<com.google.android.material.card.MaterialCardView
+            android:id="@+id/mcv_signup_pw"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="6dp"
+            app:cardCornerRadius="6dp"
+            app:cardElevation="6dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_signup_pw_title"
+            app:strokeColor="@color/auth_box_gray"
+            app:strokeWidth="1dp">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/mcv_signup_pw_check"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="32dp"
-        android:layout_marginTop="6dp"
-        app:cardCornerRadius="6dp"
-        app:cardElevation="6dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_signup_pw_check_title"
-        app:strokeColor="@color/auth_box_gray"
-        app:strokeWidth="1dp">
+
+        </com.google.android.material.card.MaterialCardView>-->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_pw_rule"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintEnd_toEndOf="@id/til_signup_pw"
+            app:layout_constraintStart_toStartOf="@id/til_signup_pw"
+            app:layout_constraintTop_toBottomOf="@id/til_signup_pw"
+            app:spanCount="2"
+            tools:listitem="@layout/item_pw_rule" />
+
+        <TextView
+            android:id="@+id/tv_signup_pw_check_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/signup_info_pw_check_title"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/til_signup_pw_check"
+            app:layout_constraintTop_toBottomOf="@id/rv_pw_rule" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_signup_pw_check"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="6dp"
             app:boxBackgroundColor="@android:color/white"
-            app:boxBackgroundMode="none"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="@color/auth_box_gray"
+            app:boxStrokeWidth="1dp"
             app:endIconMode="password_toggle"
-            app:hintEnabled="false">
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_signup_pw_check_title"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.TextInputLayout.Rounded">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etSignupPw_check"
@@ -179,38 +240,66 @@
                 android:inputType="textPassword"
                 android:paddingVertical="15dp" />
         </com.google.android.material.textfield.TextInputLayout>
-    </com.google.android.material.card.MaterialCardView>
 
-    <TextView
-        android:id="@+id/tv_signup_email_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="2dp"
-        android:text="@string/signup_info_email_title"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/mcv_signup_email"
-        app:layout_constraintTop_toBottomOf="@id/mcv_signup_pw_check" />
+        <!--<com.google.android.material.card.MaterialCardView
+            android:id="@+id/mcv_signup_pw_check"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="6dp"
+            app:cardCornerRadius="6dp"
+            app:cardElevation="6dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_signup_pw_check_title"
+            app:strokeColor="@color/auth_box_gray"
+            app:strokeWidth="1dp">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/mcv_signup_email"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="32dp"
-        android:layout_marginTop="6dp"
-        app:cardCornerRadius="6dp"
-        app:cardElevation="6dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_signup_email_title"
-        app:strokeColor="@color/auth_box_gray"
-        app:strokeWidth="1dp">
+
+        </com.google.android.material.card.MaterialCardView>-->
+
+        <ImageView
+            android:id="@+id/ic_same_pw"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="2dp"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="@id/til_signup_pw_check"
+            app:layout_constraintTop_toBottomOf="@id/til_signup_pw_check"
+            app:layout_constraintWidth_percent="0.05" />
+
+        <TextView
+            android:id="@+id/tv_same_pw"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            app:layout_constraintBottom_toBottomOf="@id/ic_same_pw"
+            app:layout_constraintEnd_toEndOf="@id/til_signup_pw_check"
+            app:layout_constraintStart_toEndOf="@id/ic_same_pw"
+            app:layout_constraintTop_toTopOf="@id/ic_same_pw" />
+
+        <TextView
+            android:id="@+id/tv_signup_email_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/signup_info_email_title"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/ll_signup_email"
+            app:layout_constraintTop_toBottomOf="@id/tv_same_pw" />
 
         <LinearLayout
+            android:id="@+id/ll_signup_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="6dp"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:gravity="center_vertical">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_signup_email_title">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_signup_email"
@@ -218,8 +307,11 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:boxBackgroundColor="@android:color/white"
-                app:boxBackgroundMode="none"
-                app:hintEnabled="false">
+                app:boxBackgroundMode="outline"
+                app:boxStrokeColor="@color/auth_box_gray"
+                app:boxStrokeWidth="1dp"
+                app:hintEnabled="false"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.TextInputLayout.Rounded">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etSignupEmail"
@@ -231,51 +323,130 @@
                     android:paddingVertical="15dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <androidx.appcompat.widget.AppCompatButton
+           <!-- <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/btn_request_email_code"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp"
-                android:layout_marginEnd="6dp"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/btn_email"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp">
+
+                &lt;!&ndash; 버튼 텍스트 &ndash;&gt;
+                <TextView
+                    android:id="@+id/tv_request_email_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/signup_info_email_detail"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+                &lt;!&ndash; 로딩 인디케이터 (중앙) &ndash;&gt;
+                <com.google.android.material.progressindicator.CircularProgressIndicator
+                    android:id="@+id/progress_email"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:visibility="gone"
+                    app:indicatorColor="@color/white"
+                    app:indicatorSize="24dp"
+                    app:trackThickness="3dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_request_email_code"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
                 android:backgroundTint="@color/auth_gray"
+                android:elevation="0dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp"
+                android:paddingHorizontal="0dp"
+                android:minHeight="0dp"
                 android:text="@string/signup_info_email_detail"
                 android:textColor="@color/white"
-                android:textSize="16sp"
-                android:elevation="0dp"/>
+                android:textSize="13sp"
+                android:ellipsize="none"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:lines="1"
+                android:gravity="center"
+                app:cornerRadius="4dp" />
         </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
 
-    <TextView
-        android:id="@+id/tv_signup_code_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="2dp"
-        android:text="@string/signup_info_code_title"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/mcv_signup_code"
-        app:layout_constraintTop_toBottomOf="@id/mcv_signup_email" />
+        <!--<com.google.android.material.card.MaterialCardView
+            android:id="@+id/mcv_signup_email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="6dp"
+            app:cardCornerRadius="6dp"
+            app:cardElevation="6dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_signup_email_title"
+            app:strokeColor="@color/auth_box_gray"
+            app:strokeWidth="1dp">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/mcv_signup_code"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="32dp"
-        android:layout_marginTop="6dp"
-        app:cardCornerRadius="6dp"
-        app:cardElevation="6dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_signup_code_title"
-        app:strokeColor="@color/auth_box_gray"
-        app:strokeWidth="1dp">
+
+        </com.google.android.material.card.MaterialCardView>-->
+
+        <ImageView
+            android:id="@+id/ic_email"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="2dp"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="@id/ll_signup_email"
+            app:layout_constraintTop_toBottomOf="@id/ll_signup_email"
+            app:layout_constraintWidth_percent="0.05" />
+
+        <TextView
+            android:id="@+id/tv_available_email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            app:layout_constraintBottom_toBottomOf="@id/ic_email"
+            app:layout_constraintEnd_toEndOf="@id/ll_signup_email"
+            app:layout_constraintStart_toEndOf="@id/ic_email"
+            app:layout_constraintTop_toTopOf="@id/ic_email" />
+
+        <TextView
+            android:id="@+id/tv_signup_code_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/signup_info_code_title"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/ll_code"
+            app:layout_constraintTop_toBottomOf="@id/tv_available_email" />
 
         <LinearLayout
+            android:id="@+id/ll_code"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="6dp"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:gravity="center_vertical">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_signup_code_title">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_signup_code"
@@ -283,8 +454,11 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:boxBackgroundColor="@android:color/white"
-                app:boxBackgroundMode="none"
-                app:hintEnabled="false">
+                app:boxBackgroundMode="outline"
+                app:boxStrokeColor="@color/auth_box_gray"
+                app:boxStrokeWidth="1dp"
+                app:hintEnabled="false"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.TextInputLayout.Rounded">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etSignupCode"
@@ -296,45 +470,88 @@
                     android:paddingVertical="15dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <androidx.appcompat.widget.AppCompatButton
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_check_email_code"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp"
-                android:layout_marginEnd="6dp"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
                 android:backgroundTint="@color/auth_gray"
+                android:elevation="0dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:minHeight="0dp"
                 android:text="@string/signup_info_code_detail"
                 android:textColor="@color/white"
-                android:textSize="16sp"
-                android:elevation="0dp"/>
+                android:textSize="13sp"
+                app:cornerRadius="4dp" />
         </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_signup"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:layout_marginHorizontal="32dp"
-        android:background="@drawable/btn_primary_pressed"
-        android:paddingVertical="15dp"
-        android:text="@string/signup_info_button"
-        android:textSize="15sp"
-        android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/mcv_signup_code"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <!--<com.google.android.material.card.MaterialCardView
+            android:id="@+id/mcv_signup_code"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="6dp"
+            app:cardCornerRadius="6dp"
+            app:cardElevation="6dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_signup_code_title"
+            app:strokeColor="@color/auth_box_gray"
+            app:strokeWidth="1dp">
 
-    <TextView
-        android:id="@+id/tv_to_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/signup_to_login"
-        android:textSize="15sp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_signup" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>-->
+
+        <ImageView
+            android:id="@+id/ic_code"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="2dp"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="@id/ll_code"
+            app:layout_constraintTop_toBottomOf="@id/ll_code"
+            app:layout_constraintWidth_percent="0.05" />
+
+        <TextView
+            android:id="@+id/tv_available_code"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            app:layout_constraintBottom_toBottomOf="@id/ic_code"
+            app:layout_constraintEnd_toEndOf="@id/ll_code"
+            app:layout_constraintStart_toEndOf="@id/ic_code"
+            app:layout_constraintTop_toTopOf="@id/ic_code" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_signup"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="35dp"
+            android:background="@drawable/btn_primary"
+            android:paddingVertical="15dp"
+            android:text="@string/signup_info_button"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_available_code" />
+
+        <TextView
+            android:id="@+id/tv_to_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:text="@string/signup_to_login"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_signup" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
