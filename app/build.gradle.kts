@@ -106,7 +106,7 @@ dependencies {
     //hilt
     implementation("com.google.dagger:hilt-android:2.48")
     kapt("com.google.dagger:hilt-android-compiler:2.46.1")
-    kapt("com.google.dagger:dagger-android-processor:2.46.1")
+    // kapt("com.google.dagger:dagger-android-processor:2.46.1")
 
     //coroutine
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")

@@ -1,10 +1,10 @@
 package com.hyosimroad.hamkkae.domain.repository
 
-import com.hyosimroad.hamkkae.data.request_dto.login.LoginRequestDto
-import com.hyosimroad.hamkkae.data.response_dto.login.CheckIdResponseDto
-import com.hyosimroad.hamkkae.data.response_dto.login.EmailResponseDto
-import com.hyosimroad.hamkkae.data.response_dto.login.LoginResponseDto
-import com.hyosimroad.hamkkae.data.response_dto.login.SendResponseDto
+import com.hyosimroad.hamkkae.data.response_dto.auth.CheckIdResponseDto
+import com.hyosimroad.hamkkae.data.response_dto.auth.EmailResponseDto
+import com.hyosimroad.hamkkae.data.response_dto.auth.GetMyIdResponseDto
+import com.hyosimroad.hamkkae.data.response_dto.auth.LoginResponseDto
+import com.hyosimroad.hamkkae.data.response_dto.auth.SendResponseDto
 
 interface AuthRepository {
     // login
@@ -23,5 +23,8 @@ interface AuthRepository {
         id: String,
         pw: String,
         email: String
-    ): Result<EmailResponseDto>
+    ): Result<SendResponseDto>
+
+    // find
+    suspend fun getMyId(email:String): Result<GetMyIdResponseDto>
 }

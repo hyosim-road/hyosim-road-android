@@ -47,15 +47,16 @@
     <string name="signup_info_email_title">이메일</string>
     <string name="signup_info_email">hamkkae@example.com</string>
     <string name="signup_info_email_detail">인증 요청</string>
-    <string name="signup_info_email_sending">요청중</string>
+    <string name="signup_info_email_sending">발송중</string>
     <string name="signup_info_email_resend">재인증</string>
     <string name="signup_info_email_rule">올바른 이메일 형식이 아닙니다</string>
-    <string name="signup_info_email_send">요청을 보냈습니다</string>
+    <string name="signup_info_email_send">인증번호를 발송했습니다</string>
+    <string name="signup_info_email_finished">인증 시간이 만료되었습니다.</string>
     
-    <string name="signup_info_code_title">코드</string>
-    <string name="signup_info_code">코드를 입력하세요</string>
-    <string name="signup_info_code_match">코드가 일치합니다</string>
-    <string name="signup_info_code_no_match">코드가 일치하지 않습니다</string>
+    <string name="signup_info_code_title">인증번호</string>
+    <string name="signup_info_code">인증번호를 입력하세요</string>
+    <string name="signup_info_code_match">인증번호가 일치합니다</string>
+    <string name="signup_info_code_no_match">인증번호가 일치하지 않습니다</string>
 
     <string name="signup_info_code_detail">확인</string>
     <string name="signup_info_button">회원가입</string>

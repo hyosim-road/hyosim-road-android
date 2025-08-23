@@ -1,12 +1,13 @@
 package com.hyosimroad.hamkkae.data.repository_impl
 
 import com.hyosimroad.hamkkae.data.datasource.AuthDataSource
-import com.hyosimroad.hamkkae.data.request_dto.login.LoginRequestDto
-import com.hyosimroad.hamkkae.data.request_dto.login.VerifyRequestDto
-import com.hyosimroad.hamkkae.data.response_dto.login.CheckIdResponseDto
-import com.hyosimroad.hamkkae.data.response_dto.login.EmailResponseDto
-import com.hyosimroad.hamkkae.data.response_dto.login.LoginResponseDto
-import com.hyosimroad.hamkkae.data.response_dto.login.SendResponseDto
+import com.hyosimroad.hamkkae.data.request_dto.auth.LoginRequestDto
+import com.hyosimroad.hamkkae.data.request_dto.auth.VerifyRequestDto
+import com.hyosimroad.hamkkae.data.response_dto.auth.CheckIdResponseDto
+import com.hyosimroad.hamkkae.data.response_dto.auth.EmailResponseDto
+import com.hyosimroad.hamkkae.data.response_dto.auth.GetMyIdResponseDto
+import com.hyosimroad.hamkkae.data.response_dto.auth.LoginResponseDto
+import com.hyosimroad.hamkkae.data.response_dto.auth.SendResponseDto
 import com.hyosimroad.hamkkae.domain.repository.AuthRepository
 import timber.log.Timber
 import javax.inject.Inject
@@ -51,11 +52,19 @@ class AuthRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun signUp(id: String, pw: String, email: String): Result<EmailResponseDto> {
+    override suspend fun signUp(id: String, pw: String, email: String): Result<SendResponseDto> {
         return runCatching {
-            dataSource.signUp(com.hyosimroad.hamkkae.data.request_dto.login.SignUpRequestDto(id, pw, email))
+            dataSource.signUp(com.hyosimroad.hamkkae.data.request_dto.auth.SignUpRequestDto(id, pw, email))
         }.onFailure {
             Timber.e("auth repository signUp fail: $it")
+        }
+    }
+
+    override suspend fun getMyId(email: String): Result<GetMyIdResponseDto> {
+        return runCatching {
+            dataSource.getMyId(email)
+        }.onFailure {
+            Timber.e("auth repository getMyId fail: $it")
         }
     }
 }

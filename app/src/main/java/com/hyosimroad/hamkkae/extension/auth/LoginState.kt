@@ -1,6 +1,6 @@
 package com.hyosimroad.hamkkae.extension.auth
 
-import com.hyosimroad.hamkkae.data.response_dto.login.LoginResponseDto
+import com.hyosimroad.hamkkae.data.response_dto.auth.LoginResponseDto
 
 sealed class LoginState {
     data class Success(val response: LoginResponseDto) : LoginState()

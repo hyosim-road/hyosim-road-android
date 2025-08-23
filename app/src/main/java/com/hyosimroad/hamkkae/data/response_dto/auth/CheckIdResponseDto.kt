@@ -1,10 +1,10 @@
-package com.hyosimroad.hamkkae.data.response_dto.login
+package com.hyosimroad.hamkkae.data.response_dto.auth
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class LoginResponseDto (
+data class CheckIdResponseDto (
     @SerialName("success")
     val success:Boolean,
     @SerialName("status")
@@ -16,9 +16,7 @@ data class LoginResponseDto (
 ){
     @Serializable
     data class Data(
-        @SerialName("accessToken")
-        val accessToken:String,
-        @SerialName("refreshToken")
-        val refreshToken:String
+        @SerialName("isExist")
+        val isExist:Boolean,
     )
 }

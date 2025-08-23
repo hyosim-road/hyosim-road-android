@@ -44,7 +44,8 @@
                 android:gravity="center_vertical"
                 android:hint="@string/find_pw_id"
                 android:inputType="text"
-                android:paddingVertical="15dp" />
+                android:paddingVertical="15dp"
+                android:textCursorDrawable="@null"/>
         </com.google.android.material.textfield.TextInputLayout>
     </com.google.android.material.card.MaterialCardView>
 
@@ -88,7 +89,8 @@
                 android:gravity="center_vertical"
                 android:hint="@string/find_id_email"
                 android:inputType="textEmailAddress"
-                android:paddingVertical="15dp" />
+                android:paddingVertical="15dp"
+                android:textCursorDrawable="@null"/>
         </com.google.android.material.textfield.TextInputLayout>
     </com.google.android.material.card.MaterialCardView>
 

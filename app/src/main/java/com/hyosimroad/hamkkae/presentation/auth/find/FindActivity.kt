@@ -9,23 +9,20 @@ import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import android.text.style.UnderlineSpan
 import android.util.TypedValue
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
-import androidx.navigation.NavOptions
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
 import com.hyosimroad.hamkkae.R
-import com.hyosimroad.hamkkae.databinding.ActivityAuthBinding
 import com.hyosimroad.hamkkae.databinding.ActivityFindBinding
-import timber.log.Timber
+import com.hyosimroad.hamkkae.presentation.auth.find.id.FindIdFragment
+import com.hyosimroad.hamkkae.presentation.auth.find.pw.FindPwFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FindActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFindBinding
 
@@ -53,8 +50,8 @@ class FindActivity : AppCompatActivity() {
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when (tab?.position) {
-                    0 -> replaceFragment(FindIdFragment())
-                    1 -> replaceFragment(FindPwFragment())
+                    0 -> replaceFragment(FindIdFragment(), null)
+                    1 -> replaceFragment(FindPwFragment(), null)
                 }
             }
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
@@ -65,7 +62,13 @@ class FindActivity : AppCompatActivity() {
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText(getString(R.string.find_pw_button)))
     }
 
-    fun replaceFragment(fragment: Fragment) {
+    fun replaceFragment(fragment: Fragment, email: String?) {
+        val bundle = Bundle()
+        if (!email.isNullOrEmpty()) {
+            bundle.putString("email", email)
+            fragment.arguments = bundle
+        }
+
         supportFragmentManager.commit {
             replace(R.id.fcv_find, fragment)
             setReorderingAllowed(true)
