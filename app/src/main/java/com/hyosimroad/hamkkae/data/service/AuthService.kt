@@ -1,12 +1,13 @@
 package com.hyosimroad.hamkkae.data.service
 
-import com.hyosimroad.hamkkae.data.request_dto.login.LoginRequestDto
-import com.hyosimroad.hamkkae.data.request_dto.login.SignUpRequestDto
-import com.hyosimroad.hamkkae.data.request_dto.login.VerifyRequestDto
-import com.hyosimroad.hamkkae.data.response_dto.login.CheckIdResponseDto
-import com.hyosimroad.hamkkae.data.response_dto.login.EmailResponseDto
-import com.hyosimroad.hamkkae.data.response_dto.login.LoginResponseDto
-import com.hyosimroad.hamkkae.data.response_dto.login.SendResponseDto
+import com.hyosimroad.hamkkae.data.request_dto.auth.LoginRequestDto
+import com.hyosimroad.hamkkae.data.request_dto.auth.SignUpRequestDto
+import com.hyosimroad.hamkkae.data.request_dto.auth.VerifyRequestDto
+import com.hyosimroad.hamkkae.data.response_dto.auth.CheckIdResponseDto
+import com.hyosimroad.hamkkae.data.response_dto.auth.EmailResponseDto
+import com.hyosimroad.hamkkae.data.response_dto.auth.GetMyIdResponseDto
+import com.hyosimroad.hamkkae.data.response_dto.auth.LoginResponseDto
+import com.hyosimroad.hamkkae.data.response_dto.auth.SendResponseDto
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -38,6 +39,11 @@ interface AuthService {
     @POST("/auth/join")
     suspend fun signUp(
         @Body signUpRequestDto: SignUpRequestDto
-    ): EmailResponseDto
+    ): SendResponseDto
+
+    @GET("/account/my-id")
+    suspend fun getMyId(
+        @Query("email") email:String
+    ): GetMyIdResponseDto
 
 }

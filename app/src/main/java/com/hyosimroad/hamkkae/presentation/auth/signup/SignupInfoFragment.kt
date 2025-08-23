@@ -3,6 +3,7 @@ package com.hyosimroad.hamkkae.presentation.auth.signup
 import android.content.res.ColorStateList
 import android.graphics.Typeface
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.AbsoluteSizeSpan
@@ -30,6 +31,7 @@ import com.hyosimroad.hamkkae.domain.model.PasswordRule
 import com.hyosimroad.hamkkae.extension.auth.CheckIdState
 import com.hyosimroad.hamkkae.extension.auth.CodeState
 import com.hyosimroad.hamkkae.extension.auth.SendEmailState
+import com.hyosimroad.hamkkae.extension.auth.SignUpState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -75,7 +77,7 @@ class SignupInfoFragment : Fragment() {
             checkPw(it.toString())
         }
         checkEmail()
-        binding.etSignupCode.addTextChangedListener{
+        binding.etSignupCode.addTextChangedListener {
             binding.btnCheckEmailCode.isEnabled = true
             binding.btnCheckEmailCode.backgroundTintList =
                 ColorStateList.valueOf(requireContext().getColor(R.color.auth_box_orange))
@@ -196,10 +198,10 @@ class SignupInfoFragment : Fragment() {
 
         binding.tilSignupPw.setBoxStrokeColor(
             when {
-            password.isEmpty() -> gray                // 입력 없음
-            rules.all { it.isSatisfied } -> greenColor     // 모두 충족
-            else -> redColor                               // 일부만 충족
-        })
+                password.isEmpty() -> gray                // 입력 없음
+                rules.all { it.isSatisfied } -> greenColor     // 모두 충족
+                else -> redColor                               // 일부만 충족
+            })
     }
 
     private fun validatePasswordMatch() {
@@ -335,12 +337,28 @@ class SignupInfoFragment : Fragment() {
                         with(binding) {
                             tvAvailableEmail.apply {
                                 visibility = View.VISIBLE
-                                text = getString(R.string.signup_info_email_send)
                                 setTextColor(requireContext().getColor(R.color.auth_check_green))
                             }
 
-                            btnRequestEmailCode.text = getString(R.string.signup_info_email_resend )
+                            btnRequestEmailCode.text = getString(R.string.signup_info_email_resend)
                             checkSignUpAvailable()
+
+                            // 5분 타이머 시작 (300초 = 300000ms)
+                            object : CountDownTimer(5 * 60 * 1000, 1000) {
+                                override fun onTick(millisUntilFinished: Long) {
+                                    val minutes = (millisUntilFinished / 1000) / 60
+                                    val seconds = (millisUntilFinished / 1000) % 60
+                                    tvAvailableEmail.text =
+                                        getString(R.string.signup_info_email_send) +
+                                                " (${String.format("%02d:%02d", minutes, seconds)})"
+                                }
+
+                                override fun onFinish() {
+                                    tvAvailableEmail.text =
+                                        getString(R.string.signup_info_email_finished)
+                                    tvAvailableEmail.setTextColor(requireContext().getColor(R.color.auth_no_red))
+                                }
+                            }.start()
                         }
                     }
 
@@ -365,7 +383,7 @@ class SignupInfoFragment : Fragment() {
     private fun setEmailButtonLoading(isLoading: Boolean) {
         if (isLoading) {
             val grayColor = ContextCompat.getColor(requireContext(), R.color.auth_gray)
-            binding.btnRequestEmailCode.apply{
+            binding.btnRequestEmailCode.apply {
                 text = getString(R.string.signup_info_email_sending)
                 isEnabled = false
                 backgroundTintList = ColorStateList.valueOf(grayColor)
@@ -384,14 +402,14 @@ class SignupInfoFragment : Fragment() {
                 when (state) {
                     is CodeState.Success -> {
                         if (state.success) {
-                            binding.tvAvailableCode.apply{
+                            binding.tvAvailableCode.apply {
                                 visibility = View.VISIBLE
                                 text = getString(R.string.signup_info_code_match)
                                 setTextColor(requireContext().getColor(R.color.auth_check_green))
                                 checkSignUpAvailable()
                             }
-                        }else{
-                            binding.tvAvailableCode.apply{
+                        } else {
+                            binding.tvAvailableCode.apply {
                                 visibility = View.VISIBLE
                                 text = getString(R.string.signup_info_code_no_match)
                                 setTextColor(requireContext().getColor(R.color.auth_no_red))
@@ -437,20 +455,37 @@ class SignupInfoFragment : Fragment() {
         Timber.d("idOk: ${idOk}, emailOk: ${emailOk}, codeOk: ${codeOk}, pwOk: ${pwOk}")
 
         binding.btnSignup.isEnabled = allOk
-        binding.btnSignup.isSelected=allOk
+        binding.btnSignup.isSelected = allOk
     }
 
 
     private fun clickSignupButton() {
+        lifecycleScope.launch {
+            signupInfoViewModel.signUpState.collect { state ->
+                when (state) {
+                    is SignUpState.Success -> {
+                        findNavController().navigate(
+                            R.id.action_signupInfoFragment_to_loginFragment,
+                            null,
+                            NavOptions.Builder()
+                                .setPopUpTo(R.id.signupInfoFragment, true)
+                                .setPopUpTo(R.id.signupAgreeFragment, true)
+                                .build()
+                        )
+                    }
+
+                    is SignUpState.Error -> {
+
+                    }
+
+                    is SignUpState.Loading -> {
+                    }
+                }
+            }
+        }
+
         binding.btnSignup.setOnClickListener {
-            findNavController().navigate(
-                R.id.action_signupInfoFragment_to_loginFragment,
-                null,
-                NavOptions.Builder()
-                    .setPopUpTo(R.id.signupInfoFragment, true)
-                    .setPopUpTo(R.id.signupAgreeFragment, true)
-                    .build()
-            )
+            signupInfoViewModel.signUp(binding.etSignupPw.text.toString())
         }
     }
 

@@ -1,10 +1,10 @@
-package com.hyosimroad.hamkkae.data.response_dto.login
+package com.hyosimroad.hamkkae.data.response_dto.auth
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class CheckIdResponseDto (
+data class GetMyIdResponseDto (
     @SerialName("success")
     val success:Boolean,
     @SerialName("status")
@@ -12,11 +12,5 @@ data class CheckIdResponseDto (
     @SerialName("message")
     val message:String,
     @SerialName("data")
-    val data:Data
-){
-    @Serializable
-    data class Data(
-        @SerialName("isExist")
-        val isExist:Boolean,
-    )
-}
+    val data: EmailResponseDto.Data
+)

@@ -1,4 +1,4 @@
-package com.hyosimroad.hamkkae.presentation.auth.find
+package com.hyosimroad.hamkkae.presentation.auth.find.pw
 
 import android.os.Bundle
 import android.view.LayoutInflater

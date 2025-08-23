@@ -1,12 +1,13 @@
 package com.hyosimroad.hamkkae.data.datasource
 
-import com.hyosimroad.hamkkae.data.request_dto.login.LoginRequestDto
-import com.hyosimroad.hamkkae.data.request_dto.login.SignUpRequestDto
-import com.hyosimroad.hamkkae.data.request_dto.login.VerifyRequestDto
-import com.hyosimroad.hamkkae.data.response_dto.login.CheckIdResponseDto
-import com.hyosimroad.hamkkae.data.response_dto.login.EmailResponseDto
-import com.hyosimroad.hamkkae.data.response_dto.login.LoginResponseDto
-import com.hyosimroad.hamkkae.data.response_dto.login.SendResponseDto
+import com.hyosimroad.hamkkae.data.request_dto.auth.LoginRequestDto
+import com.hyosimroad.hamkkae.data.request_dto.auth.SignUpRequestDto
+import com.hyosimroad.hamkkae.data.request_dto.auth.VerifyRequestDto
+import com.hyosimroad.hamkkae.data.response_dto.auth.CheckIdResponseDto
+import com.hyosimroad.hamkkae.data.response_dto.auth.EmailResponseDto
+import com.hyosimroad.hamkkae.data.response_dto.auth.GetMyIdResponseDto
+import com.hyosimroad.hamkkae.data.response_dto.auth.LoginResponseDto
+import com.hyosimroad.hamkkae.data.response_dto.auth.SendResponseDto
 
 interface AuthDataSource {
     // login
@@ -16,5 +17,8 @@ interface AuthDataSource {
     suspend fun checkId(id:String): CheckIdResponseDto
     suspend fun send(email:String): SendResponseDto
     suspend fun verify(verifyRequestDto: VerifyRequestDto): EmailResponseDto
-    suspend fun signUp(signUpRequestDto: SignUpRequestDto): EmailResponseDto
+    suspend fun signUp(signUpRequestDto: SignUpRequestDto): SendResponseDto
+
+    // find
+    suspend fun getMyId(email:String): GetMyIdResponseDto
 }
