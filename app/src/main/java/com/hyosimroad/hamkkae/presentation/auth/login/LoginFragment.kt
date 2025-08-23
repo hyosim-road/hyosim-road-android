@@ -23,6 +23,7 @@ import androidx.navigation.fragment.findNavController
 import com.hyosimroad.hamkkae.R
 import com.hyosimroad.hamkkae.databinding.FragmentLoginBinding
 import com.hyosimroad.hamkkae.extension.auth.LoginState
+import com.hyosimroad.hamkkae.presentation.auth.find.FindActivity
 import com.hyosimroad.hamkkae.presentation.main.home.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -133,7 +134,8 @@ class LoginFragment : Fragment() {
 
     private fun clickFindButton() {
         binding.tvToFind.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_findFragment)
+            val intent = Intent(requireContext(), FindActivity::class.java)
+            startActivity(intent)
         }
     }
 

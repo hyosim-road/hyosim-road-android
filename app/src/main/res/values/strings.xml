@@ -63,6 +63,15 @@
     <string name="find_title">계정 찾기</string>
     <string name="find_subtitle">계정을 찾기 위한 정보를 입력해주세요</string>
     <string name="find_id_button">아이디 찾기</string>
+    <string name="find_id_send">인증번호 발송</string>
+    <string name="find_id_code">인증번호</string>
+    <string name="find_id_input_code">6자리 인증번호를 입력하세요</string>
+    <string name="find_id_verify">인증 확인</string>
+    <string name="find_id_resend">다시 발송</string>
+    <string name="find_id_show">아이디를 찾았습니다</string>
+    <string name="find_id_can_login">위 아이디로 로그인하실 수 있습니다.</string>
+    <string name="find_id_go_login">로그인하러 가기</string>
+
     <string name="find_pw_button">비밀번호 찾기</string>
     <string name="find_to_login">계정이 기억나셨나요? 로그인</string>
 

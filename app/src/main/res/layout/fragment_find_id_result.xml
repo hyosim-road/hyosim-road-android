@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_yellow"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/ll_show"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_white_stroke"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/tv_find"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/find_id_show"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:id="@+id/tv_user_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="testuser"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:layout_marginTop="6dp"/>
+
+        <TextView
+            android:id="@+id/tv_can_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/find_id_can_login"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="20dp"/>
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_login"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/btn_primary_pressed"
+        android:paddingVertical="15dp"
+        android:text="@string/find_id_go_login"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_show" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_find_pw"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_white_stroke"
+        android:paddingVertical="15dp"
+        android:text="@string/find_pw_button"
+        android:textColor="@color/text_secondary_gray"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_login" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

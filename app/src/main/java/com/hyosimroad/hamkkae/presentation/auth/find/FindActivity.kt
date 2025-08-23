@@ -14,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
@@ -21,33 +22,31 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
 import com.hyosimroad.hamkkae.R
-import com.hyosimroad.hamkkae.databinding.FragmentFindBinding
+import com.hyosimroad.hamkkae.databinding.ActivityAuthBinding
+import com.hyosimroad.hamkkae.databinding.ActivityFindBinding
 import timber.log.Timber
 
-class FindFragment : Fragment() {
-    private var _binding: FragmentFindBinding? = null
-    private val binding: FragmentFindBinding
-        get() = requireNotNull(_binding) { "Find fragment is null" }
+class FindActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityFindBinding
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentFindBinding.inflate(inflater, container, false)
-        return binding.root
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        initBinds()
+        setting()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        Timber.d("FingFragment started!")
+    private fun initBinds() {
+        binding = ActivityFindBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+    }
 
+    private fun setting(){
         setupTab()
         applySpannableStyle(
             textView = binding.tvToLogin,
             fullTextResId = R.string.find_to_login,
             targetText = "로그인"
         )
-
-        clickLoginButton()
     }
 
     private fun setupTab() {
@@ -66,9 +65,9 @@ class FindFragment : Fragment() {
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText(getString(R.string.find_pw_button)))
     }
 
-    private fun replaceFragment(fragment: Fragment) {
-        childFragmentManager.commit {
-            replace(R.id.fragment_container, fragment)
+    fun replaceFragment(fragment: Fragment) {
+        supportFragmentManager.commit {
+            replace(R.id.fcv_find, fragment)
             setReorderingAllowed(true)
         }
     }
@@ -84,7 +83,7 @@ class FindFragment : Fragment() {
 
         if (startIndex != -1) {
             val endIndex = startIndex + targetText.length
-            val color = ContextCompat.getColor(requireContext(), R.color.auth_box_orange)
+            val color = ContextCompat.getColor(this, R.color.auth_box_orange)
 
             val sizeInPx = TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_SP,
@@ -101,20 +100,7 @@ class FindFragment : Fragment() {
         textView.text = spannableString
     }
 
-    private fun clickLoginButton() {
-        binding.tvToLogin.setOnClickListener {
-            findNavController().navigate(
-                R.id.action_findFragment_to_loginFragment,
-                null,
-                NavOptions.Builder()
-                    .setPopUpTo(R.id.findFragment, true)
-                    .build()
-            )
-        }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
+    fun selectTab(index: Int) {
+        binding.tabLayout.getTabAt(index)?.select()
     }
 }
