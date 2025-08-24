@@ -3,7 +3,9 @@ package com.hyosimroad.hamkkae.presentation.main.setting
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.hyosimroad.hamkkae.databinding.ActivitySettingBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SettingActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySettingBinding
 

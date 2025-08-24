@@ -48,6 +48,8 @@ class SignupInfoFragment : Fragment() {
         ContextCompat.getColor(requireContext(), R.color.auth_check_green)
     }
 
+    private var countDownTimer: CountDownTimer? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -343,8 +345,10 @@ class SignupInfoFragment : Fragment() {
                             btnRequestEmailCode.text = getString(R.string.signup_info_email_resend)
                             checkSignUpAvailable()
 
+                            countDownTimer?.cancel()
+
                             // 5분 타이머 시작 (300초 = 300000ms)
-                            object : CountDownTimer(5 * 60 * 1000, 1000) {
+                            countDownTimer = object : CountDownTimer(5 * 60 * 1000, 1000) {
                                 override fun onTick(millisUntilFinished: Long) {
                                     val minutes = (millisUntilFinished / 1000) / 60
                                     val seconds = (millisUntilFinished / 1000) % 60
@@ -360,6 +364,8 @@ class SignupInfoFragment : Fragment() {
                                 }
                             }.start()
                         }
+
+                        signupInfoViewModel.sendStateLoading()
                     }
 
                     is SendEmailState.Error -> {
@@ -383,10 +389,14 @@ class SignupInfoFragment : Fragment() {
     private fun setEmailButtonLoading(isLoading: Boolean) {
         if (isLoading) {
             val grayColor = ContextCompat.getColor(requireContext(), R.color.auth_gray)
-            binding.btnRequestEmailCode.apply {
-                text = getString(R.string.signup_info_email_sending)
-                isEnabled = false
-                backgroundTintList = ColorStateList.valueOf(grayColor)
+            with(binding){
+                btnRequestEmailCode.apply {
+                    text = getString(R.string.signup_info_email_sending)
+                    isEnabled = false
+                    backgroundTintList = ColorStateList.valueOf(grayColor)
+                }
+
+                tvAvailableEmail.visibility = View.GONE
             }
         } else {
             val orangeColor = ContextCompat.getColor(requireContext(), R.color.auth_box_orange)
@@ -506,5 +516,6 @@ class SignupInfoFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        countDownTimer?.cancel()
     }
 }

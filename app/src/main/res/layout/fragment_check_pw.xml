@@ -161,9 +161,22 @@
                         android:gravity="center_vertical"
                         android:hint="@string/setting_current_pw"
                         android:inputType="textPassword"
-                        android:paddingVertical="15dp" />
+                        android:paddingVertical="15dp"
+                        android:textCursorDrawable="@null"/>
                 </com.google.android.material.textfield.TextInputLayout>
             </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/tv_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
+                android:textColor="@color/auth_no_red"
+                app:layout_constraintTop_toBottomOf="@id/mcv_check_pw"
+                app:layout_constraintStart_toStartOf="@id/tv_check_pw"
+                app:layout_constraintEnd_toEndOf="@id/mcv_check_pw"/>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_check_pw"
@@ -171,7 +184,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="30dp"
-                android:background="@drawable/btn_primary_unselected"
+                android:background="@drawable/btn_primary"
                 android:paddingVertical="15dp"
                 android:text="@string/setting_check_pw_button"
                 android:textColor="@color/white"

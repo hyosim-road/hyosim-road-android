@@ -31,5 +31,11 @@
         android:id="@+id/changePwFragment"
         android:name="com.hyosimroad.hamkkae.presentation.main.setting.user.ChangePwFragment"
         android:label="비밀번호 변경"
-        tools:layout="@layout/fragment_change_pw" />
+        tools:layout="@layout/fragment_change_pw">
+
+        <action
+            android:id="@+id/action_changePwFragment_to_settingFragment"
+            app:destination="@id/settingFragment" />
+
+    </fragment>
 </navigation>

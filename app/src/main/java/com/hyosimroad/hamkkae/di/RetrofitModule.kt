@@ -1,11 +1,14 @@
 package com.hyosimroad.hamkkae.di
 
+import android.content.Context
 import android.content.SharedPreferences
 import com.hyosimroad.hamkkae.BuildConfig
+import com.hyosimroad.hamkkae.data.network.HeaderInterceptor
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.json.Json
 import okhttp3.Interceptor
@@ -22,10 +25,19 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object RetrofitModule {
+
     @Provides
     @Singleton
-    fun provideHeaderIntercepter(autoLoginPrefeneces: SharedPreferences): HeaderInterceptor =
-        HeaderInterceptor(autoLoginPrefeneces)
+    fun provideSharedPreferences(
+        @ApplicationContext context: Context
+    ): SharedPreferences {
+        return context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+    }
+
+    @Provides
+    @Singleton
+    fun provideHeaderIntercepter(@ApplicationContext context: Context): HeaderInterceptor =
+        HeaderInterceptor(context)
 
     @Singleton
     @Provides
@@ -37,11 +49,16 @@ object RetrofitModule {
     @Provides
     @Singleton
     fun provideOkHttpClient(
-        interceptor: HttpLoggingInterceptor,
+        headerInterceptor: HeaderInterceptor, // ✅ 토큰 붙이는 인터셉터
+        loggingInterceptor: HttpLoggingInterceptor
     ): OkHttpClient {
-        return OkHttpClient.Builder().addInterceptor(interceptor)
-            .connectTimeout(100, TimeUnit.SECONDS).readTimeout(100, TimeUnit.SECONDS)
-            .writeTimeout(100, TimeUnit.SECONDS).build()
+        return OkHttpClient.Builder()
+            .addInterceptor(headerInterceptor) // ✅ 먼저 토큰 붙이기
+            .addInterceptor(loggingInterceptor) // ✅ 그다음 로깅
+            .connectTimeout(100, TimeUnit.SECONDS)
+            .readTimeout(100, TimeUnit.SECONDS)
+            .writeTimeout(100, TimeUnit.SECONDS)
+            .build()
     }
 
     @Provides
