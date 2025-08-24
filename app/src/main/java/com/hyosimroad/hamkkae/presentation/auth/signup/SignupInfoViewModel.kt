@@ -138,4 +138,8 @@ class SignupInfoViewModel @Inject constructor(
             }
         }
     }
+
+    suspend fun sendStateLoading(){
+        sendEmailState.emit(SendEmailState.Loading)
+    }
 }
