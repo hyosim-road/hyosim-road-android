@@ -29,7 +29,7 @@ class ChangePwViewModel @Inject constructor(
 
     fun checkPw(password: String) {
         viewModelScope.launch {
-            settingRepository.checkPw(TokenManager.getToken(context)!!, password).onSuccess {
+            settingRepository.checkPw(password).onSuccess {
                 _checkPwState.emit(CheckPwState.Success(it.data.isCorrect))
             }.onFailure {
                 _checkPwState.emit(CheckPwState.Error("Error response failure: ${it.message}"))
@@ -52,7 +52,7 @@ class ChangePwViewModel @Inject constructor(
 
     fun changePw(password: String) {
         viewModelScope.launch {
-            settingRepository.resetPw(TokenManager.getToken(context)!!, password).onSuccess {
+            settingRepository.resetPw( password).onSuccess {
                 _changePwState.emit(ChangePwState.Success(it.status))
             }.onFailure {
                 _changePwState.emit(ChangePwState.Error("Error response failure: ${it.message}"))

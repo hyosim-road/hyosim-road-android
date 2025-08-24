@@ -5,6 +5,6 @@ import com.hyosimroad.hamkkae.data.response_dto.setting.CheckPasswordResponseDto
 
 interface SettingDataSource {
     // change password
-    suspend fun checkPw(accessToken:String, password:String): CheckPasswordResponseDto
-    suspend fun resetPw(accessToken:String, password:String): SendResponseDto
+    suspend fun checkPw( password:String): CheckPasswordResponseDto
+    suspend fun resetPw(password:String): SendResponseDto
 }

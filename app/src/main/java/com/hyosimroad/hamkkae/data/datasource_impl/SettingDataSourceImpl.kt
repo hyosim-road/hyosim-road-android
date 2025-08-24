@@ -9,7 +9,7 @@ import javax.inject.Inject
 class SettingDataSourceImpl @Inject constructor(
     private val settingService: SettingService
 ): SettingDataSource {
-    override suspend fun checkPw(accessToken: String, password: String): CheckPasswordResponseDto = settingService.checkPw(accessToken, password)
-    override suspend fun resetPw(accessToken: String, password: String): SendResponseDto = settingService.resetPw(accessToken, password)
+    override suspend fun checkPw( password: String): CheckPasswordResponseDto = settingService.checkPw( password)
+    override suspend fun resetPw(password: String): SendResponseDto = settingService.resetPw(password)
 
 }
