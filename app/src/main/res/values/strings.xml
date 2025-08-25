@@ -337,8 +337,8 @@
     <string name="setting_app_info">앱 정보</string>
     <string name="setting_service">서비스 이용약관</string>
     <string name="setting_personal">개인정보 처리방침</string>
-
     <string name="setting_logout">로그아웃</string>
+    <string name="setting_withdrawal">회원탈퇴</string>
     <string name="setting_version">함께가효 v1.0.0</string>
     <string name="setting_subtitle">부모님과 함께하는 특별한 여행</string>
 
@@ -367,6 +367,28 @@
     <string name="setting_safety_tip3">• 예측하기 어려운 문자 조합</string>
     <string name="setting_safety_tip4">• 정기적인 비밀번호 변경 (3~6개월마다)</string>
 
-
     <string name="setting_customer_center_title">고객센터</string>
+    <string name="setting_ask_type">문의 유형</string>
+    <string name="setting_ask_type_hint">선택해주세요</string>
+    <string name="setting_ask_type1">기능 관련</string>
+    <string name="setting_ask_type2">오류 신고</string>
+    <string name="setting_ask_type3">계정 문제</string>
+    <string name="setting_ask_type4">기타</string>
+    <string-array name="setting_ask_types">
+        <item>@string/setting_ask_type_hint</item>
+        <item>@string/setting_ask_type1</item>
+        <item>@string/setting_ask_type2</item>
+        <item>@string/setting_ask_type3</item>
+        <item>@string/setting_ask_type4</item>
+    </string-array>
+    <string name="setting_ask_title">제목</string>
+    <string name="setting_ask_title_hint">문의 제목을 입력하세요</string>
+    <string name="setting_ask_context">문의 내용</string>
+    <string name="setting_ask_context_hint">자세한 문의 내용을 입력해주세요</string>
+    <string name="setting_ask_email">답변 받을 이메일</string>
+    <string name="setting_ask_email_hind">답변 받을 이메일을 입력해주세요</string>
+    <string name="setting_ask_guide">문의 접수 후 1~2일 내에 답변드리겠습니다.</string>
+    <string name="setting_ask_button">문의하기</string>
+    <string name="setting_ask_cancellation">취소</string>
+
 </resources>

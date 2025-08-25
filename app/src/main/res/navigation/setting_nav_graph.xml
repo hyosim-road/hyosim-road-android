@@ -14,6 +14,10 @@
         <action
             android:id="@+id/action_settingFragment_to_checkPwFragment"
             app:destination="@id/checkPwFragment" />
+
+        <action
+            android:id="@+id/action_settingFragment_to_customerCenterFragment"
+            app:destination="@id/customerCenterFragment" />
     </fragment>
 
     <fragment
@@ -36,6 +40,13 @@
         <action
             android:id="@+id/action_changePwFragment_to_settingFragment"
             app:destination="@id/settingFragment" />
-
     </fragment>
+
+    <fragment
+        android:id="@+id/customerCenterFragment"
+        android:name="com.hyosimroad.hamkkae.presentation.main.setting.support.CustomerCenterFragment"
+        android:label="고객센터"
+        tools:layout="@layout/fragment_customer_center">
+    </fragment>
+
 </navigation>
