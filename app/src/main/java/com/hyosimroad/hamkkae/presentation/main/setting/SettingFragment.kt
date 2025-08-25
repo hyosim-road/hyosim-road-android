@@ -25,9 +25,10 @@ class SettingFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Timber.d("LoginFragment started!")
+        Timber.d("SettingFragment started!")
 
         ClickChangePwButton()
+        ClickCustomerCenterButton()
     }
 
     private fun ClickChangePwButton() {
@@ -36,8 +37,14 @@ class SettingFragment: Fragment() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    private fun ClickCustomerCenterButton() {
+        binding.tvCustomerCenter.setOnClickListener {
+            findNavController().navigate(R.id.action_settingFragment_to_customerCenterFragment)
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
     }
 }
