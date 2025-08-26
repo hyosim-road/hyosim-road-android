@@ -20,10 +20,12 @@ import com.hyosimroad.hamkkae.R
 import com.hyosimroad.hamkkae.databinding.ActivityFindBinding
 import com.hyosimroad.hamkkae.presentation.auth.find.id.FindIdFragment
 import com.hyosimroad.hamkkae.presentation.auth.find.pw.FindPwFragment
+import com.hyosimroad.hamkkae.presentation.auth.login.LoginFragment
+import com.hyosimroad.hamkkae.presentation.main.setting.user.ChangePwNavigator
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FindActivity : AppCompatActivity() {
+class FindActivity : AppCompatActivity(), ChangePwNavigator {
     private lateinit var binding: ActivityFindBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -105,5 +107,12 @@ class FindActivity : AppCompatActivity() {
 
     fun selectTab(index: Int) {
         binding.tabLayout.getTabAt(index)?.select()
+    }
+
+    override fun onPasswordChanged() {
+        // supportFragmentManager 기반 이동
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fcv_find, FindPwFragment())
+            .commit()
     }
 }

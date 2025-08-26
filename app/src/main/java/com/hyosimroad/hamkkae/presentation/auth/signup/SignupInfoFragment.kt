@@ -15,6 +15,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.compose.ui.graphics.Color
 import androidx.core.content.ContextCompat
@@ -369,7 +370,8 @@ class SignupInfoFragment : Fragment() {
                     }
 
                     is SendEmailState.Error -> {
-                        // 인터넷 에러..
+                        setEmailButtonLoading(false)
+                        Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
                     }
 
                     is SendEmailState.Loading -> {

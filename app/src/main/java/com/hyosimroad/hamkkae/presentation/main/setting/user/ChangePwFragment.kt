@@ -1,5 +1,6 @@
 package com.hyosimroad.hamkkae.presentation.main.setting.user
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +27,15 @@ class ChangePwFragment : Fragment() {
     private val binding: FragmentChangePwBinding
         get() = requireNotNull(_binding) { "setting fragment is null" }
     private val pwViewModel: ChangePwViewModel by viewModels()
+    private var navigator: ChangePwNavigator? = null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        // Activity가 ChangePwNavigator 구현했는지 확인
+        if (context is ChangePwNavigator) {
+            navigator = context
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -105,8 +115,9 @@ class ChangePwFragment : Fragment() {
             pwViewModel.changePwState.collect { state ->
                 when (state) {
                     is ChangePwState.Success -> {
+                        navigator?.onPasswordChanged()
                         // 스택의 모든 fragment 삭제
-                        findNavController().navigate(
+                        /*findNavController().navigate(
                             R.id.settingFragment,
                             null,
                             navOptions {
@@ -114,7 +125,7 @@ class ChangePwFragment : Fragment() {
                                     inclusive = true
                                 }
                             }
-                        )
+                        )*/
                     }
                     is ChangePwState.Error->{
                         // 인터넷 오류..
@@ -128,6 +139,11 @@ class ChangePwFragment : Fragment() {
             val newPw = binding.etNewPw.text.toString()
             pwViewModel.changePw(newPw)
         }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        navigator = null
     }
 
     override fun onDestroy() {

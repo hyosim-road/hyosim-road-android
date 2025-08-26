@@ -1,3 +1,4 @@
+/*
 package com.hyosimroad.hamkkae.util
 
 import android.content.Context
@@ -33,4 +34,4 @@ object TokenManager {
         val prefs = getEncryptedPrefs(context)
         prefs.edit().remove(KEY_TOKEN).apply()
     }
-}
+}*/

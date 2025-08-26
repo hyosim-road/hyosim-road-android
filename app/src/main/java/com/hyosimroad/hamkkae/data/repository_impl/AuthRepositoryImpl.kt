@@ -8,6 +8,7 @@ import com.hyosimroad.hamkkae.data.response_dto.auth.EmailResponseDto
 import com.hyosimroad.hamkkae.data.response_dto.auth.GetMyIdResponseDto
 import com.hyosimroad.hamkkae.data.response_dto.auth.LoginResponseDto
 import com.hyosimroad.hamkkae.data.response_dto.auth.SendResponseDto
+import com.hyosimroad.hamkkae.data.response_dto.auth.VerifyIdEmailResponseDto
 import com.hyosimroad.hamkkae.domain.repository.AuthRepository
 import timber.log.Timber
 import javax.inject.Inject
@@ -60,11 +61,23 @@ class AuthRepositoryImpl @Inject constructor(
         }
     }
 
+    // find
     override suspend fun getMyId(email: String): Result<GetMyIdResponseDto> {
         return runCatching {
             dataSource.getMyId(email)
         }.onFailure {
             Timber.e("auth repository getMyId fail: $it")
+        }
+    }
+
+    override suspend fun verifyIdEmail(
+        id: String,
+        email: String
+    ): Result<VerifyIdEmailResponseDto> {
+        return runCatching {
+            dataSource.verifyIdEmail(com.hyosimroad.hamkkae.data.request_dto.auth.VerifyIdEmailRequestDto(id, email))
+        }.onFailure {
+            Timber.e("auth repository verifyIdEmail fail: $it")
         }
     }
 }

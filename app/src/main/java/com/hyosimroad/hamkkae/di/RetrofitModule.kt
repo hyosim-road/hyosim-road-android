@@ -4,6 +4,9 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.hyosimroad.hamkkae.BuildConfig
 import com.hyosimroad.hamkkae.data.network.HeaderInterceptor
+import com.hyosimroad.hamkkae.domain.repository.TokenRepository
+import com.hyosimroad.hamkkae.util.isJsonArray
+import com.hyosimroad.hamkkae.util.isJsonObject
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
@@ -36,14 +39,19 @@ object RetrofitModule {
 
     @Provides
     @Singleton
-    fun provideHeaderIntercepter(@ApplicationContext context: Context): HeaderInterceptor =
-        HeaderInterceptor(context)
+    fun provideHeaderIntercepter(
+        tokenRepository: TokenRepository
+    ): HeaderInterceptor =
+        HeaderInterceptor(tokenRepository)
 
     @Singleton
     @Provides
-    fun provideInterceptor(): Interceptor {
-        return HttpLoggingInterceptor()
-            .setLevel(HttpLoggingInterceptor.Level.BODY)
+    fun provideLoggingInterceptor(): HttpLoggingInterceptor {
+        return HttpLoggingInterceptor { message ->
+            Timber.tag("OkHttp").d(message) // 간단하게 출력
+        }.apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
     }
 
     @Provides
@@ -59,26 +67,6 @@ object RetrofitModule {
             .readTimeout(100, TimeUnit.SECONDS)
             .writeTimeout(100, TimeUnit.SECONDS)
             .build()
-    }
-
-    @Provides
-    @Singleton
-    fun provideLoggingInterceptor(): HttpLoggingInterceptor {
-        val loggingInterceptor = HttpLoggingInterceptor { message ->
-            when {
-                message.isJsonObject() ->
-                    Timber.tag("okhttp").d(JSONObject(message).toString(4))
-
-                message.isJsonArray() ->
-                    Timber.tag("okhttp").d(JSONObject(message).toString(4))
-
-                else -> {
-                    Timber.tag("okhttp").d("CONNECTION INFO -> $message")
-                }
-            }
-        }
-        loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-        return loggingInterceptor
     }
 
     @Provides
@@ -100,6 +88,3 @@ object RetrofitModule {
         return Json.asConverterFactory("application/json".toMediaType())
     }
 }
-
-fun String?.isJsonObject(): Boolean = this?.startsWith("{") == true && this.endsWith("}")
-fun String?.isJsonArray(): Boolean = this?.startsWith("[") == true && this.endsWith("]")

@@ -6,7 +6,6 @@ import com.hyosimroad.hamkkae.core.BaseViewModel
 import com.hyosimroad.hamkkae.domain.repository.SettingRepository
 import com.hyosimroad.hamkkae.extension.setting.ChangePwState
 import com.hyosimroad.hamkkae.extension.setting.CheckPwState
-import com.hyosimroad.hamkkae.util.TokenManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableSharedFlow
