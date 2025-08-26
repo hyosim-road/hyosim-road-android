@@ -2,12 +2,14 @@ package com.hyosimroad.hamkkae.data.service
 
 import com.hyosimroad.hamkkae.data.request_dto.auth.LoginRequestDto
 import com.hyosimroad.hamkkae.data.request_dto.auth.SignUpRequestDto
+import com.hyosimroad.hamkkae.data.request_dto.auth.VerifyIdEmailRequestDto
 import com.hyosimroad.hamkkae.data.request_dto.auth.VerifyRequestDto
 import com.hyosimroad.hamkkae.data.response_dto.auth.CheckIdResponseDto
 import com.hyosimroad.hamkkae.data.response_dto.auth.EmailResponseDto
 import com.hyosimroad.hamkkae.data.response_dto.auth.GetMyIdResponseDto
 import com.hyosimroad.hamkkae.data.response_dto.auth.LoginResponseDto
 import com.hyosimroad.hamkkae.data.response_dto.auth.SendResponseDto
+import com.hyosimroad.hamkkae.data.response_dto.auth.VerifyIdEmailResponseDto
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -41,9 +43,15 @@ interface AuthService {
         @Body signUpRequestDto: SignUpRequestDto
     ): SendResponseDto
 
-    @GET("/account/my-id")
+    // find
+    @GET("/auth/my-id")
     suspend fun getMyId(
         @Query("email") email:String
     ): GetMyIdResponseDto
+
+    @POST("/account/verify-id-email")
+    suspend fun verifyIdEmail(
+        @Body verifyIdEmailRequestDto: VerifyIdEmailRequestDto
+    ): VerifyIdEmailResponseDto
 
 }

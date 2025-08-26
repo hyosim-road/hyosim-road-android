@@ -6,6 +6,7 @@ import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.widget.ImageViewCompat
 import androidx.core.widget.addTextChangedListener
@@ -151,6 +152,9 @@ class FindIdFragment : Fragment() {
 
                     is SendEmailState.Error -> {
                         Timber.d("send email state error: ${state.message}")
+                        setEmailButtonLoading(false)
+
+                        Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -179,8 +183,11 @@ class FindIdFragment : Fragment() {
             }
         } else {
             val orangeColor = ContextCompat.getColor(requireContext(), R.color.auth_box_orange)
-            binding.btnSend.isEnabled = true
-            binding.btnSend.backgroundTintList = ColorStateList.valueOf(orangeColor)
+            binding.btnSend.apply{
+                text = getString(R.string.find_id_send)
+                isEnabled = true
+                backgroundTintList = ColorStateList.valueOf(orangeColor)
+            }
         }
     }
 

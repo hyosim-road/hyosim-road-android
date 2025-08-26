@@ -5,6 +5,7 @@ import com.hyosimroad.hamkkae.data.response_dto.auth.EmailResponseDto
 import com.hyosimroad.hamkkae.data.response_dto.auth.GetMyIdResponseDto
 import com.hyosimroad.hamkkae.data.response_dto.auth.LoginResponseDto
 import com.hyosimroad.hamkkae.data.response_dto.auth.SendResponseDto
+import com.hyosimroad.hamkkae.data.response_dto.auth.VerifyIdEmailResponseDto
 
 interface AuthRepository {
     // login
@@ -27,4 +28,5 @@ interface AuthRepository {
 
     // find
     suspend fun getMyId(email:String): Result<GetMyIdResponseDto>
+    suspend fun verifyIdEmail(id:String, email:String): Result<VerifyIdEmailResponseDto>
 }

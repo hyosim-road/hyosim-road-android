@@ -1,14 +1,11 @@
 package com.hyosimroad.hamkkae.presentation.auth.login
 
-import android.content.Context
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hyosimroad.hamkkae.core.BaseViewModel
 import com.hyosimroad.hamkkae.domain.repository.AuthRepository
 import com.hyosimroad.hamkkae.extension.auth.LoginState
-import com.hyosimroad.hamkkae.util.TokenManager
+import com.hyosimroad.hamkkae.util.SessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -20,8 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val authRepository: AuthRepository,
-    @ApplicationContext private val context: Context
+    private val authRepository: AuthRepository
 ) : BaseViewModel() {
     private var _loginState = MutableStateFlow<LoginState>(LoginState.Loading)
     val loginState: StateFlow<LoginState> = _loginState.asStateFlow()
@@ -30,7 +26,7 @@ class LoginViewModel @Inject constructor(
         viewModelScope.launch {
             authRepository.login(email, pw).onSuccess { response->
                 _loginState.value=LoginState.Success(response)
-                TokenManager.saveToken(context, response.data.accessToken)
+                SessionManager.setToken(response.data.accessToken)
                 Timber.d("login state success")
             }.onFailure {
                 _loginState.value=LoginState.Error("Error response failure: ${it.message}")

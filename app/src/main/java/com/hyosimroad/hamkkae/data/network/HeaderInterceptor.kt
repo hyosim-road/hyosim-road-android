@@ -1,21 +1,17 @@
 package com.hyosimroad.hamkkae.data.network
 
-import android.content.Context
-import android.content.SharedPreferences
-import com.hyosimroad.hamkkae.util.TokenManager
-import kotlinx.coroutines.runBlocking
+
+import com.hyosimroad.hamkkae.domain.repository.TokenRepository
 import okhttp3.Interceptor
 import okhttp3.Response
-import javax.inject.Inject
 
-class HeaderInterceptor @Inject constructor(
-    private val context: Context
-) : Interceptor {
+class HeaderInterceptor(
+    private val tokenRepository: TokenRepository
+): Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
-        val originalRequest = chain.request()
-
         // 토큰 가져오기
-        val token = TokenManager.getToken(context)
+        val token = tokenRepository.getToken()
+        val originalRequest = chain.request()
 
         // 토큰이 없으면 그냥 원래 요청 진행
         // 있으면 Bearer 붙여서 저장

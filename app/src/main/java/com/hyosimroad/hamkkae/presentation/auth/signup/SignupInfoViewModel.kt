@@ -69,7 +69,6 @@ class SignupInfoViewModel @Inject constructor(
             authRepository.send(email).onSuccess {
                 _sendEmailState.emit(SendEmailState.Success(it.message))
             }.onFailure {
-                _sendEmailState.emit(SendEmailState.Error("Error response failure: ${it.message}"))
                 if (it is HttpException) {
                     try {
                         val errorBody: ResponseBody? = it.response()?.errorBody()
@@ -81,7 +80,7 @@ class SignupInfoViewModel @Inject constructor(
                         _sendEmailState.emit(SendEmailState.Error("알 수 없는 에러가 발생했습니다."))
                     }
                 } else {
-                    _sendEmailState.emit(SendEmailState.Error("네트워크 에러 또는 알 수 없는 오류: ${it.message}"))
+                    _sendEmailState.emit(SendEmailState.Error("${it.message}"))
                 }
             }
         }
