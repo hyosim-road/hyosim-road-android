@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/selectTripInfoFragment"
-        android:name="com.hyosimroad.hamkkae.presentation.main.plan.select.SelectTripInfoFragment"
+        android:name="com.hyosim.hamkkae.presentation.main.plan.select.SelectTripInfoFragment"
         android:label="select_trip_info_fragment"
         tools:layout="@layout/fragment_select_trip_info">
 
@@ -18,7 +18,7 @@
 
     <fragment
         android:id="@+id/selectTripStyleFragment"
-        android:name="com.hyosimroad.hamkkae.presentation.main.plan.select.SelectTripStyleFragment"
+        android:name="com.hyosim.hamkkae.presentation.main.plan.select.SelectTripStyleFragment"
         android:label="select_trip_style_fragment"
         tools:layout="@layout/fragment_select_trip_style">
 
@@ -30,7 +30,7 @@
 
     <fragment
     android:id="@+id/recommendCourseFragment"
-    android:name="com.hyosimroad.hamkkae.presentation.main.plan.recommend.RecommendCourseFragment"
+    android:name="com.hyosim.hamkkae.presentation.main.plan.recommend.RecommendCourseFragment"
     android:label="recommend_course_fragment"
     tools:layout="@layout/fragment_recommend_course">
 
@@ -46,7 +46,7 @@
 
     <fragment
         android:id="@+id/recommendDetailFragment"
-        android:name="com.hyosimroad.hamkkae.presentation.main.plan.recommend.detail.RecommendDetailFragment"
+        android:name="com.hyosim.hamkkae.presentation.main.plan.recommend.detail.RecommendDetailFragment"
         android:label="recommend_detail_fragment"
         tools:layout="@layout/fragment_recommend_detail">
 
@@ -57,7 +57,7 @@
 
     <fragment
         android:id="@+id/tripStartFragment"
-        android:name="com.hyosimroad.hamkkae.presentation.main.plan.trip_start.TripStartFragment"
+        android:name="com.hyosim.hamkkae.presentation.main.plan.trip_start.TripStartFragment"
         android:label="trip_start_fragment"
         tools:layout="@layout/fragment_trip_start">
     </fragment>
