@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.hyosim.hamkkae">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -69,6 +70,8 @@
         <activity android:name=".presentation.main.map.MapActivity"
             android:exported="false"/>
         <activity android:name=".presentation.main.setting.SettingActivity"
+            android:exported="false"/>
+        <activity android:name=".presentation.main.family_conversation.FamilyConversationActivity"
             android:exported="false"/>
     </application>
 

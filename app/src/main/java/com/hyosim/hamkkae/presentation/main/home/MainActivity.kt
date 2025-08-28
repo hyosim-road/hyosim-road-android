@@ -13,6 +13,7 @@ import androidx.constraintlayout.widget.ConstraintSet
 import androidx.lifecycle.lifecycleScope
 import com.hyosim.hamkkae.R
 import com.hyosim.hamkkae.databinding.ActivityMainBinding
+import com.hyosim.hamkkae.presentation.main.family_conversation.FamilyConversationActivity
 import com.hyosim.hamkkae.presentation.main.home.adapter.today_schedule.TodayScheduleAdapter
 import com.hyosim.hamkkae.presentation.main.home.adapter.trip_record.TripRecordAdapter
 import com.hyosim.hamkkae.presentation.main.photo_album.PhotoAlbumActivity
@@ -85,6 +86,7 @@ class MainActivity : AppCompatActivity() {
                 setTrip()
                 clickTripDetail()
                 clickUpload()
+                clickAnswer()
 
                 // cvAlbum의 top을 cvSchedule의 bottom에 연결
                 cvSchedule.post {
@@ -213,6 +215,13 @@ class MainActivity : AppCompatActivity() {
             planActivityLauncher.launch(Intent(this, PlanActivity::class.java))
         }
     }
+
+    private fun clickAnswer() {
+        binding.btnAnswer.setOnClickListener {
+            navigateTo(FamilyConversationActivity::class.java)
+        }
+    }
+
     private fun clickTripDetail() {
         binding.btnTripDetail.setOnClickListener {
             // 새로 만든 메서드 호출
