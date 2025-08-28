@@ -11,11 +11,11 @@ plugins {
 }
 
 android {
-    namespace = "com.hyosimroad.hamkkae"
+    namespace = "com.hyosim.hamkkae"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.hyosimroad.hamkkae"
+        applicationId = "com.hyosim.hamkkae"
         minSdk = 28
         targetSdk = 36
         versionCode = 1

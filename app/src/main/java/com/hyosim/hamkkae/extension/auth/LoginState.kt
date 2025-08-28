@@ -1,0 +1,10 @@
+package com.hyosim.hamkkae.extension.auth
+
+import com.hyosim.hamkkae.data.response_dto.auth.LoginResponseDto
+
+sealed class LoginState {
+    data class Success(val response: LoginResponseDto) : LoginState()
+    data class Error(val message: String) : LoginState()
+    data object Loading : LoginState()
+    data object Idle : LoginState()
+}

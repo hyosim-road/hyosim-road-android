@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/settingFragment"
-        android:name="com.hyosimroad.hamkkae.presentation.main.setting.SettingFragment"
+        android:name="com.hyosim.hamkkae.presentation.main.setting.SettingFragment"
         android:label="설정"
         tools:layout="@layout/fragment_setting">
 
@@ -22,7 +22,7 @@
 
     <fragment
         android:id="@+id/checkPwFragment"
-        android:name="com.hyosimroad.hamkkae.presentation.main.setting.user.CheckPwFragment"
+        android:name="com.hyosim.hamkkae.presentation.main.setting.user.CheckPwFragment"
         android:label="비밀번호 확인"
         tools:layout="@layout/fragment_check_pw">
 
@@ -33,7 +33,7 @@
 
     <fragment
         android:id="@+id/changePwFragment"
-        android:name="com.hyosimroad.hamkkae.presentation.main.setting.user.ChangePwFragment"
+        android:name="com.hyosim.hamkkae.presentation.main.setting.user.ChangePwFragment"
         android:label="비밀번호 변경"
         tools:layout="@layout/fragment_change_pw">
 
@@ -44,7 +44,7 @@
 
     <fragment
         android:id="@+id/customerCenterFragment"
-        android:name="com.hyosimroad.hamkkae.presentation.main.setting.support.CustomerCenterFragment"
+        android:name="com.hyosim.hamkkae.presentation.main.setting.support.CustomerCenterFragment"
         android:label="고객센터"
         tools:layout="@layout/fragment_customer_center">
     </fragment>

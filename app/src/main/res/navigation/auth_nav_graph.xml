@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.hyosimroad.hamkkae.presentation.auth.login.LoginFragment"
+        android:name="com.hyosim.hamkkae.presentation.auth.login.LoginFragment"
         android:label="로그인"
         tools:layout="@layout/fragment_login">
 
@@ -18,7 +18,7 @@
 
     <fragment
         android:id="@+id/signupAgreeFragment"
-        android:name="com.hyosimroad.hamkkae.presentation.auth.signup.SignupAgreeFragment"
+        android:name="com.hyosim.hamkkae.presentation.auth.signup.SignupAgreeFragment"
         android:label="회원가입 약관 동의"
         tools:layout="@layout/fragment_signup_agree" />
 
@@ -32,7 +32,7 @@
 
     <fragment
         android:id="@+id/signupInfoFragment"
-        android:name="com.hyosimroad.hamkkae.presentation.auth.signup.SignupInfoFragment"
+        android:name="com.hyosim.hamkkae.presentation.auth.signup.SignupInfoFragment"
         android:label="회원가입 정보 입력"
         tools:layout="@layout/fragment_signup_info">
 
