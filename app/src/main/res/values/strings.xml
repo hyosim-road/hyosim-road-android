@@ -140,6 +140,8 @@
     <string name="main_trip_record_during">%s ~ %s</string>
 
     <!--plan-->
+    <string name="plan_title">여행 계획</string>
+    <string name="plan_subtitle">부모님께 딱 맞는 여행을 계획해보세요</string>
     <string name="plan_go_next">다음 단계로</string>
 
     <!--select_trip_info-->
@@ -171,8 +173,6 @@
     <string name="select_trip_style_done_message">여행 스타일이 선택되었어요!</string>
 
     <!--recomment_course-->
-    <string name="recommend_course_title">추천 코스</string>
-    <string name="recommend_course_subtitle">부모님께 딱 맞는 여행 코스예요</string>
     <string name="recommend_course_progress_title">3단계: 코스 선택</string>
     <string name="recommend_course_progress">3/4</string>
     <string name="recommend_course_go_map">지도 보기</string>"
@@ -305,6 +305,7 @@
 
     <string name="main_trip_title_mock">경주 역사문화 코스</string>
     <string name="main_trip_location_mock">불국사</string>
+    <string name="main_trip_time">2시간 전</string>
 
     <string name="main_recent_mock1">경주 여행을 성공적으로 완료했어요!</string>
     <string name="main_recent_mock2">동궁과 월지에서 가족사진 업로드</string>
@@ -324,6 +325,20 @@
     <string name="preview_place_mock">불국사</string>
     <string name="preview_place_description_mock">신라 천년의 불교문화가 살아있는 곳</string>
     <string name="preview_place_time_mock">09:00 ~ 11:00</string>
+
+
+    <!--family conversation-->
+    <string name="family_conversation_title">가족 대화</string>
+    <string name="family_conversation_subtitle">소중한 순간을 기록해보세요</string>
+    <string name="family_conversation_location">관광지</string>
+    <string name="family_conversation_question">여기에는 질문 내용이 들어갑니다. 어떤 질문일까요?</string>
+    <string name="family_conversation_answer">대화 기록</string>
+    <string name="family_conversation_answer_hint">부모님과 특별한 순간을 자유롭게 적어주세요. 어떤 대화를 나누셨나요? 어떤 감정을 느끼셨나요?</string>
+    <string name="family_conversation_save">대화 저장</string>
+    <string name="family_conversation_saved_answer">사용자가 입력한 대화</string>
+    <string name="family_conversation_to_home">홈 화면으로</string>
+    <string name="family_conversation_before_title">이전 대화</string>
+
 
     <!--setting-->
     <string name="setting_title">설정</string>
