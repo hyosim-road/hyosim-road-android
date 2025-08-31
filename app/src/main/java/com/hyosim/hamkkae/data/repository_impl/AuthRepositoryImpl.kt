@@ -88,4 +88,12 @@ class AuthRepositoryImpl @Inject constructor(
             Timber.e("auth repository verifyIdEmail fail: $it")
         }
     }
+
+    override suspend fun sendTempPw(email: String): Result<SendResponseDto> {
+        return runCatching {
+            dataSource.sendTempPw(email)
+        }.onFailure {
+            Timber.e("auth repository sendTempPw fail: $it")
+        }
+    }
 }

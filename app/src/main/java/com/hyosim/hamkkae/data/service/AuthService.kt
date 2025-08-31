@@ -59,4 +59,9 @@ interface AuthService {
         @Body verifyIdEmailRequestDto: VerifyIdEmailRequestDto
     ): VerifyIdEmailResponseDto
 
+    @GET("/email/temp-password")
+    suspend fun sendTempPw(
+        @Query("email") email:String
+    ): SendResponseDto
+
 }
