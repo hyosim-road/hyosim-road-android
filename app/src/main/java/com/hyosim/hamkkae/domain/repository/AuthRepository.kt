@@ -30,4 +30,5 @@ interface AuthRepository {
     // find
     suspend fun getMyId(email:String): Result<GetMyIdResponseDto>
     suspend fun verifyIdEmail(id:String, email:String): Result<VerifyIdEmailResponseDto>
+    suspend fun sendTempPw(email:String): Result<SendResponseDto>
 }

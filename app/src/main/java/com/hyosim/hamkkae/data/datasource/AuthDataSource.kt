@@ -25,4 +25,5 @@ interface AuthDataSource {
     // find
     suspend fun getMyId(email: String): GetMyIdResponseDto
     suspend fun verifyIdEmail(verifyIdEmailRequestDto: VerifyIdEmailRequestDto): VerifyIdEmailResponseDto
+    suspend fun sendTempPw(email:String): SendResponseDto
 }

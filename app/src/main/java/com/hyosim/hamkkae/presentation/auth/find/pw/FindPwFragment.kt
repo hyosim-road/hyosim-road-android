@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.widget.ImageViewCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
@@ -17,6 +19,7 @@ import com.hyosim.hamkkae.R
 import com.hyosim.hamkkae.databinding.FragmentFindPwBinding
 import com.hyosim.hamkkae.extension.auth.CodeState
 import com.hyosim.hamkkae.extension.auth.SendEmailState
+import com.hyosim.hamkkae.extension.auth.SendTempPwState
 import com.hyosim.hamkkae.extension.auth.VerifyIdEmailState
 import com.hyosim.hamkkae.presentation.auth.find.FindActivity
 import com.hyosim.hamkkae.presentation.main.setting.user.ChangePwFragment
@@ -100,7 +103,7 @@ class FindPwFragment : Fragment() {
         binding.etEmail.addTextChangedListener {
             val regex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$".toRegex()
             if (it.toString().matches(regex)) {
-                with(binding){
+                with(binding) {
                     tvAvailableEmail.visibility = View.GONE
                     icEmail.visibility = View.INVISIBLE
 
@@ -113,7 +116,7 @@ class FindPwFragment : Fragment() {
                     }
                 }
             } else {
-                with(binding){
+                with(binding) {
                     tvAvailableEmail.apply {
                         visibility = View.VISIBLE
                         text = getString(R.string.signup_info_email_rule)
@@ -124,7 +127,12 @@ class FindPwFragment : Fragment() {
                     icEmail.setImageResource(R.drawable.ic_no_white_24)  // 아이콘 설정
                     ImageViewCompat.setImageTintList(
                         binding.icEmail,
-                        ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.auth_no_red))
+                        ColorStateList.valueOf(
+                            ContextCompat.getColor(
+                                requireContext(),
+                                R.color.auth_no_red
+                            )
+                        )
                     )
                 }
 
@@ -267,7 +275,8 @@ class FindPwFragment : Fragment() {
                     CodeState.Loading -> {}
                     is CodeState.Success -> {
                         if (state.success) {
-                            (activity as? FindActivity)?.showChangeFragment(state.email!!)
+                            sendTempPw(state.email!!)
+                            findPwViewModel.sendTempPw(state.email)
                         } else {
                             with(binding) {
                                 tvAvailableCode.apply {
@@ -290,6 +299,12 @@ class FindPwFragment : Fragment() {
                                         )
                                     )
                                 )
+
+                                btnVerifyCode.apply {
+                                    isEnabled = true;
+                                    text = getString(R.string.find_id_verify)
+                                    backgroundTintList = ColorStateList.valueOf(requireContext().getColor(R.color.auth_box_orange))
+                                }
                             }
                         }
                     }
@@ -302,9 +317,39 @@ class FindPwFragment : Fragment() {
         }
 
         binding.btnVerifyCode.setOnClickListener {
+            binding.etCode.clearFocus()
+            binding.etEmail.clearFocus()
+
+            WindowInsetsControllerCompat(requireActivity().window, binding.root)
+                .hide(WindowInsetsCompat.Type.ime())
+
             val email = binding.etEmail.text.toString()
             val code = binding.etCode.text.toString()
+            binding.btnVerifyCode.apply {
+                isEnabled = false
+                text = "인증 중..."
+                backgroundTintList =
+                    ColorStateList.valueOf(requireContext().getColor(R.color.auth_gray))
+            }
             findPwViewModel.verifyCode(email, code)
+        }
+    }
+
+    private fun sendTempPw(email: String) {
+        lifecycleScope.launch {
+            findPwViewModel.sendTempPwState.collect { state ->
+                when (state) {
+                    is SendTempPwState.Loading -> {}
+                    is SendTempPwState.Success -> {
+                        (activity as? FindActivity)?.showChangeFragment(email)
+                        Timber.d("send temp pw success!")
+                    }
+
+                    is SendTempPwState.Error -> {
+                        Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
         }
     }
 
