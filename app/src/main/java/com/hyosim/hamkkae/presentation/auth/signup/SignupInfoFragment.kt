@@ -28,6 +28,7 @@ import androidx.navigation.fragment.findNavController
 import com.hyosim.hamkkae.R
 import com.hyosim.hamkkae.databinding.FragmentSignupInfoBinding
 import com.hyosim.hamkkae.domain.model.PasswordRule
+import com.hyosim.hamkkae.extension.auth.CheckEmailState
 import com.hyosim.hamkkae.extension.auth.CheckIdState
 import com.hyosim.hamkkae.extension.auth.CodeState
 import com.hyosim.hamkkae.extension.auth.SendEmailState
@@ -87,7 +88,7 @@ class SignupInfoFragment : Fragment() {
 
         isIdAvailable()
         validatePasswordMatch()
-        sendEmail()
+        checkExistEmail()
         checkCode()
 
         clickSignupButton()
@@ -330,6 +331,58 @@ class SignupInfoFragment : Fragment() {
         }
     }
 
+    private fun checkExistEmail() {
+        lifecycleScope.launch {
+            signupInfoViewModel.checkEmailState.collect { state ->
+                when (state) {
+                    is CheckEmailState.Success -> {
+                        if (state.isExist) {
+                            binding.tvAvailableEmail.apply {
+                                text = getText(R.string.signup_info_email_exist)
+                                setTextColor(requireContext().getColor(R.color.auth_no_red))
+                                visibility = View.VISIBLE
+                            }
+                            setEmailButtonLoading(false)
+                            binding.btnRequestEmailCode.text =
+                                getString(R.string.signup_info_email_detail)
+                        } else {
+                            sendEmail()
+                            signupInfoViewModel.sendEmail(state.email)
+                        }
+                        signupInfoViewModel.checkEmailStateLoading()
+                    }
+
+                    is CheckEmailState.Error -> {
+                        // 저장된 값이 없는 것 == 새로운 이메일
+                        if(state.status=="MEMBER404"){
+                            sendEmail()
+                            signupInfoViewModel.sendEmail(state.email)
+                        }
+                        // 알 수 없는 오류
+                        else{
+                            setEmailButtonLoading(false)
+                            binding.btnRequestEmailCode.text = getString(R.string.signup_info_email_detail)
+                            Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
+                        }
+                        Timber.e("${state.message}, code: ${state.status}")
+                        signupInfoViewModel.checkEmailStateLoading()
+                    }
+
+                    is CheckEmailState.Loading -> {
+
+                    }
+
+                }
+            }
+        }
+
+        binding.btnRequestEmailCode.setOnClickListener {
+            setEmailButtonLoading(true)
+            val email = binding.etSignupEmail.text.toString()
+            signupInfoViewModel.checkEmail(email)
+        }
+    }
+
     private fun sendEmail() {
         lifecycleScope.launch {
             signupInfoViewModel.sendEmailState.collect { state ->
@@ -379,18 +432,12 @@ class SignupInfoFragment : Fragment() {
                 }
             }
         }
-
-        binding.btnRequestEmailCode.setOnClickListener {
-            setEmailButtonLoading(true)
-            val email = binding.etSignupEmail.text.toString()
-            signupInfoViewModel.sendEmail(email)
-        }
     }
 
     private fun setEmailButtonLoading(isLoading: Boolean) {
         if (isLoading) {
             val grayColor = ContextCompat.getColor(requireContext(), R.color.auth_gray)
-            with(binding){
+            with(binding) {
                 btnRequestEmailCode.apply {
                     text = getString(R.string.signup_info_email_sending)
                     isEnabled = false

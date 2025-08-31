@@ -16,12 +16,13 @@ interface AuthDataSource {
     suspend fun login(loginRequestDto: LoginRequestDto): LoginResponseDto
 
     // sign up
-    suspend fun checkId(id:String): CheckIdResponseDto
-    suspend fun send(email:String): SendResponseDto
+    suspend fun checkId(id: String): CheckIdResponseDto
+    suspend fun checkEmail(email: String): CheckIdResponseDto
+    suspend fun send(email: String): SendResponseDto
     suspend fun verify(verifyRequestDto: VerifyRequestDto): EmailResponseDto
     suspend fun signUp(signUpRequestDto: SignUpRequestDto): SendResponseDto
 
     // find
-    suspend fun getMyId(email:String): GetMyIdResponseDto
+    suspend fun getMyId(email: String): GetMyIdResponseDto
     suspend fun verifyIdEmail(verifyIdEmailRequestDto: VerifyIdEmailRequestDto): VerifyIdEmailResponseDto
 }

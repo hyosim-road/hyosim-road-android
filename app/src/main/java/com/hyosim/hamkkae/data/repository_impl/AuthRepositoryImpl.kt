@@ -34,6 +34,14 @@ class AuthRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun checkEmail(email: String): Result<CheckIdResponseDto> {
+        return runCatching {
+            dataSource.checkEmail(email)
+        }.onFailure {
+            Timber.e("auth repository checkEmail fail: $it")
+        }
+    }
+
     override suspend fun send(email: String): Result<SendResponseDto> {
         return runCatching {
             dataSource.send(email)

@@ -1,25 +1,23 @@
-package com.hyosim.hamkkae.presentation.auth.find.id
+package com.hyosim.hamkkae.presentation.auth.find.pw
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.hyosim.hamkkae.databinding.FragmentFindIdResultBinding
-import com.hyosim.hamkkae.presentation.auth.find.FindActivity
-import dagger.hilt.android.AndroidEntryPoint
+import com.hyosim.hamkkae.R
+import com.hyosim.hamkkae.databinding.FragmentFindPwResultBinding
 import timber.log.Timber
 
-    @AndroidEntryPoint
-class FindIdResultFragment : Fragment() {
-    private var _binding: FragmentFindIdResultBinding? = null
-    private val binding: FragmentFindIdResultBinding
+class FindPwResultFragment: Fragment() {
+    private var _binding: FragmentFindPwResultBinding? = null
+    private val binding: FragmentFindPwResultBinding
         get() = requireNotNull(_binding) { "Find Result fragment is null" }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentFindIdResultBinding.inflate(inflater, container, false)
+        _binding = FragmentFindPwResultBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -30,17 +28,13 @@ class FindIdResultFragment : Fragment() {
     }
 
     private fun setting() {
-        val id = arguments?.getString("id")
-        id.let {
-            binding.tvUserId.text = it
+        val email = arguments?.getString("email")
+        email.let {
+            binding.tvSendTo.text = getString(R.string.find_pw_send_to, it)
         }
 
         binding.btnLogin.setOnClickListener {
             requireActivity().finish()
-        }
-
-        binding.btnFindPw.setOnClickListener {
-            (activity as? FindActivity)?.selectTab(1)
         }
     }
 

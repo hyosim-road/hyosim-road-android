@@ -16,6 +16,7 @@ interface AuthRepository {
 
     // sign up
     suspend fun checkId(id:String):Result<CheckIdResponseDto>
+    suspend fun checkEmail(email:String):Result<CheckIdResponseDto>
     suspend fun send(
         email: String
     ): Result<SendResponseDto>

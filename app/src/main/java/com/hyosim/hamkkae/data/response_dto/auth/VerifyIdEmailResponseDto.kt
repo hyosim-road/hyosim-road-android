@@ -11,4 +11,12 @@ data class VerifyIdEmailResponseDto (
     val status:String,
     @SerialName("message")
     val message:String,
-)
+    @SerialName("data")
+    val data:Data
+){
+    @Serializable
+    data class Data(
+        @SerialName("isCorrect")
+        val isCorrect:Boolean,
+    )
+}

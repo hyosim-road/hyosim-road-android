@@ -28,6 +28,11 @@ interface AuthService {
         @Query("id") id:String
     ): CheckIdResponseDto
 
+    @GET("/auth/check-email")
+    suspend fun checkEmail(
+        @Query("email") email:String
+    ): CheckIdResponseDto
+
     @POST("/email/send")
     suspend fun send(
         @Body email:String
@@ -49,7 +54,7 @@ interface AuthService {
         @Query("email") email:String
     ): GetMyIdResponseDto
 
-    @POST("/account/verify-id-email")
+    @POST("/auth/verify-id-email")
     suspend fun verifyIdEmail(
         @Body verifyIdEmailRequestDto: VerifyIdEmailRequestDto
     ): VerifyIdEmailResponseDto

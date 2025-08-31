@@ -1,257 +1,265 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_back"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/ic_back_black_24"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:text="@string/setting_customer_center_title"
-            android:textColor="@color/dark_gray"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/btn_back"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <View
-            android:id="@+id/v_line"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@color/header_line_orange"
-            app:layout_constraintBottom_toBottomOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cv_customer_service"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        app:cardCornerRadius="6dp"
-        app:cardElevation="2dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cl_header">
+        android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="24dp">
+            android:background="@android:color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/tv_ask_type_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/setting_ask_type"
-                android:textColor="@color/dark_gray"
-                android:textSize="16sp"
-                android:textStyle="bold"
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_back"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/ic_back_black_24"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <Spinner
-                android:id="@+id/spinner_ask_type"
-                android:layout_width="0dp"
-                android:layout_height="44dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/spinner_border"
-                android:spinnerMode="dropdown"
-                android:gravity="center_vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_ask_type_label" />
-
             <TextView
-                android:id="@+id/tv_ask_title_label"
-                android:layout_width="wrap_content"
+                android:id="@+id/tv_title"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="@string/setting_ask_title"
+                android:layout_marginStart="20dp"
+                android:text="@string/setting_customer_center_title"
                 android:textColor="@color/dark_gray"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/spinner_ask_type" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_ask_title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:boxBackgroundColor="@android:color/white"
-                app:boxBackgroundMode="outline"
-                app:boxStrokeColor="@color/auth_box_gray"
-                app:boxStrokeWidth="1dp"
-                app:hintEnabled="false"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_ask_title_label"
-                app:shapeAppearanceOverlay="@style/ShapeAppearance.TextInputLayout.Rounded">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_ask_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/setting_ask_title_hint"
-                    android:inputType="text"
-                    android:paddingVertical="15dp"
-                    android:textCursorDrawable="@null"
-                    android:textSize="14sp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <TextView
-                android:id="@+id/tv_ask_context_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="@string/setting_ask_context"
-                android:textColor="@color/dark_gray"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/til_ask_title" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_ask_context"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:boxBackgroundColor="@android:color/white"
-                app:boxBackgroundMode="outline"
-                app:boxStrokeColor="@color/auth_box_gray"
-                app:boxStrokeWidth="1dp"
-                app:hintEnabled="false"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_ask_context_label"
-                app:shapeAppearanceOverlay="@style/ShapeAppearance.TextInputLayout.Rounded">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_ask_context"
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:gravity="top|start"
-                    android:hint="@string/setting_ask_context_hint"
-                    android:inputType="textMultiLine"
-                    android:padding="16dp"
-                    android:textCursorDrawable="@null"
-                    android:textSize="14sp" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <TextView
-                android:id="@+id/tv_ask_email_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="@string/setting_ask_email"
-                android:textColor="@color/dark_gray"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/til_ask_context" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_ask_email"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:boxBackgroundColor="@android:color/white"
-                app:boxBackgroundMode="outline"
-                app:boxStrokeColor="@color/auth_box_gray"
-                app:boxStrokeWidth="1dp"
-                app:hintEnabled="false"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_ask_email_label"
-                app:shapeAppearanceOverlay="@style/ShapeAppearance.TextInputLayout.Rounded">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_ask_email"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/setting_ask_email_hind"
-                    android:inputType="textEmailAddress"
-                    android:paddingVertical="15dp"
-                    android:textCursorDrawable="@null"
-                    android:textSize="14sp" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <TextView
-                android:id="@+id/tv_ask_guide"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:background="@color/auth_box_gray"
-                android:padding="15dp"
-                android:text="@string/setting_ask_guide"
-                android:textColor="@color/text_secondary_gray"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/til_ask_email" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_cancellation"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="0dp"
-                android:layout_height="55dp"
-                android:layout_marginTop="36dp"
-                android:layout_marginEnd="8dp"
-                android:text="@string/setting_ask_cancellation"
-                android:textColor="@color/dark_gray"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/btn_ask"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_ask_guide"
-                app:strokeColor="@color/auth_box_gray" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_ask"
-                android:layout_width="0dp"
-                android:layout_height="55dp"
-                android:layout_marginStart="8dp"
-                android:backgroundTint="@color/primary_orange"
-                android:text="@string/setting_ask_button"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_weight="2"
-                app:layout_constraintStart_toEndOf="@id/btn_cancellation"
-                app:layout_constraintTop_toTopOf="@id/btn_cancellation" />
+                app:layout_constraintStart_toEndOf="@id/btn_back"
+                app:layout_constraintTop_toTopOf="parent" />
 
+            <View
+                android:id="@+id/v_line"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/header_line_orange"
+                app:layout_constraintBottom_toBottomOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_customer_service"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            app:cardCornerRadius="6dp"
+            app:cardElevation="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cl_header"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="24dp">
+
+                <TextView
+                    android:id="@+id/tv_ask_type_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/setting_ask_type"
+                    android:textColor="@color/dark_gray"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Spinner
+                    android:id="@+id/spinner_ask_type"
+                    android:layout_width="0dp"
+                    android:layout_height="44dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/spinner_border"
+                    android:gravity="center_vertical"
+                    android:spinnerMode="dropdown"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_ask_type_label" />
+
+                <TextView
+                    android:id="@+id/tv_ask_title_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="@string/setting_ask_title"
+                    android:textColor="@color/dark_gray"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/spinner_ask_type" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_ask_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:boxBackgroundColor="@android:color/white"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="@color/auth_box_gray"
+                    app:boxStrokeWidth="1dp"
+                    app:hintEnabled="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_ask_title_label"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearance.TextInputLayout.Rounded">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_ask_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/setting_ask_title_hint"
+                        android:inputType="text"
+                        android:paddingVertical="15dp"
+                        android:textCursorDrawable="@null"
+                        android:textSize="14sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tv_ask_context_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="@string/setting_ask_context"
+                    android:textColor="@color/dark_gray"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/til_ask_title" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_ask_context"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:boxBackgroundColor="@android:color/white"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="@color/auth_box_gray"
+                    app:boxStrokeWidth="1dp"
+                    app:hintEnabled="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_ask_context_label"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearance.TextInputLayout.Rounded">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_ask_context"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:gravity="top|start"
+                        android:hint="@string/setting_ask_context_hint"
+                        android:inputType="textMultiLine"
+                        android:padding="16dp"
+                        android:textCursorDrawable="@null"
+                        android:textSize="14sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tv_ask_email_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="@string/setting_ask_email"
+                    android:textColor="@color/dark_gray"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/til_ask_context" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_ask_email"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:boxBackgroundColor="@android:color/white"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="@color/auth_box_gray"
+                    app:boxStrokeWidth="1dp"
+                    app:hintEnabled="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_ask_email_label"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearance.TextInputLayout.Rounded">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_ask_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/setting_ask_email_hind"
+                        android:inputType="textEmailAddress"
+                        android:paddingVertical="15dp"
+                        android:textCursorDrawable="@null"
+                        android:textSize="14sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tv_ask_guide"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/auth_box_gray"
+                    android:padding="15dp"
+                    android:text="@string/setting_ask_guide"
+                    android:textColor="@color/text_secondary_gray"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/til_ask_email" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_cancellation"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="36dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="@string/setting_ask_cancellation"
+                    android:textColor="@color/dark_gray"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/btn_ask"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_ask_guide"
+                    app:strokeColor="@color/auth_box_gray" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_ask"
+                    android:layout_width="0dp"
+                    android:layout_height="55dp"
+                    android:layout_marginStart="8dp"
+                    android:backgroundTint="@color/primary_orange"
+                    android:text="@string/setting_ask_button"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_weight="2"
+                    app:layout_constraintStart_toEndOf="@id/btn_cancellation"
+                    app:layout_constraintTop_toTopOf="@id/btn_cancellation" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

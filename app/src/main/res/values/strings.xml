@@ -25,13 +25,13 @@
     <string name="signup_info_id_title">아이디</string>
     <string name="signup_info_id">영문, 숫자 포함 6 ~ 12자리</string>
     <string name="signup_info_id_detail">중복 확인</string>
-    <string name="signup_info_id_available">사용 가능 한 아이디입니다.</string>
-    <string name="signup_info_id_not_available">이미 사용중인 아이디입니다.</string>
-    <string name="signup_info_id_rule">아이디는 6~12자의 영문,숫자만 사용가능합니다.</string>
+    <string name="signup_info_id_available">사용 가능 한 아이디입니다</string>
+    <string name="signup_info_id_not_available">이미 사용중인 아이디입니다</string>
+    <string name="signup_info_id_rule">아이디는 6~12자의 영문,숫자만 사용가능합니다</string>
 
     <string name="signup_info_pw_title">비밀번호</string>
     <string name="signup_info_pw">영문 대소문자, 숫자, 특수문자 포함 8자리 이상</string>
-    <string name="signup_info_pw_rule">비밀번호는 8자 이상의 영문,숫자,특수문자만 사용가능합니다.</string>
+    <string name="signup_info_pw_rule">비밀번호는 8자 이상의 영문,숫자,특수문자만 사용가능합니다</string>
     <string name="signup_pw_rule_title">비밀번호 요구사항</string>
     <string name="signup_pw_rule1">8자 이상</string>
     <string name="signup_pw_rule2">영문 대문자 포함</string>
@@ -41,8 +41,8 @@
     
     <string name="signup_info_pw_check_title">비밀번호 확인</string>
     <string name="signup_info_pw_check">비밀번호를 다시 입력하세요</string>
-    <string name="signup_info_pw_match">비밀번호가 일치합니다.</string>
-    <string name="signup_info_pw_not_match">비밀번호가 일치하지 않습니다.</string>
+    <string name="signup_info_pw_match">비밀번호가 일치합니다</string>
+    <string name="signup_info_pw_not_match">비밀번호가 일치하지 않습니다</string>
     
     <string name="signup_info_email_title">이메일</string>
     <string name="signup_info_email">hamkkae@example.com</string>
@@ -50,6 +50,7 @@
     <string name="signup_info_email_sending">발송중</string>
     <string name="signup_info_email_resend">재인증</string>
     <string name="signup_info_email_rule">올바른 이메일 형식이 아닙니다</string>
+    <string name="signup_info_email_exist">이미 가입된 이메일입니다</string>
     <string name="signup_info_email_send">인증번호를 발송했습니다</string>
     <string name="signup_info_email_finished">인증 시간이 만료되었습니다.</string>
     
@@ -85,6 +86,8 @@
     <string name="find_pw_id">아이디를 입력해주세요</string>
     <string name="find_pw_email_title">이메일</string>
     <string name="find_pw_email">이메일을 입력해주세요</string>
+    <string name="find_pw_temp_pw_send">임시 비밀번호 발송 완료</string>
+    <string name="find_pw_send_to">%s로 \n임시 비밀번호를 발송했습니다.</string>
 
     <!--state-->
     <string name="state_complete">완료</string>
@@ -388,13 +391,15 @@
     <string name="setting_ask_type1">기능 관련</string>
     <string name="setting_ask_type2">오류 신고</string>
     <string name="setting_ask_type3">계정 문제</string>
-    <string name="setting_ask_type4">기타</string>
+    <string name="setting_ask_type4">결제 문의</string>
+    <string name="setting_ask_type5">기타</string>
     <string-array name="setting_ask_types">
         <item>@string/setting_ask_type_hint</item>
         <item>@string/setting_ask_type1</item>
         <item>@string/setting_ask_type2</item>
         <item>@string/setting_ask_type3</item>
         <item>@string/setting_ask_type4</item>
+        <item>@string/setting_ask_type5</item>
     </string-array>
     <string name="setting_ask_title">제목</string>
     <string name="setting_ask_title_hint">문의 제목을 입력하세요</string>
