@@ -47,6 +47,7 @@ class FindPwFragment : Fragment() {
     private fun setting() {
         checkIdEmail()
         verifyIdEmail()
+        checkCode()
     }
 
     private fun checkIdEmail() {
@@ -236,6 +237,29 @@ class FindPwFragment : Fragment() {
         }
     }
 
+    private fun checkCode() {
+        binding.etCode.addTextChangedListener { text ->
+            val input = text.toString()
+
+            // 6자리 숫자 패턴 검사
+            val isValid = input.matches(Regex("^\\d{6}$"))
+
+            if (isValid) {
+                binding.etCode.error = null
+                binding.btnVerifyCode.isEnabled = true
+                binding.btnVerifyCode.backgroundTintList =
+                    ColorStateList.valueOf(requireContext().getColor(R.color.auth_box_orange))
+            } else {
+                if (input.isNotEmpty()) {
+                    binding.etCode.error = "6자리 숫자를 입력하세요"
+                }
+                binding.btnVerifyCode.isEnabled = false
+                binding.btnVerifyCode.backgroundTintList =
+                    ColorStateList.valueOf(requireContext().getColor(R.color.auth_gray))
+            }
+        }
+    }
+
     private fun verifyCode() {
         lifecycleScope.launch {
             findPwViewModel.codeState.collect { state ->
@@ -243,10 +267,7 @@ class FindPwFragment : Fragment() {
                     CodeState.Loading -> {}
                     is CodeState.Success -> {
                         if (state.success) {
-                            (activity as? FindActivity)?.replaceFragment(
-                                ChangePwFragment(),
-                                ""
-                            )
+                            (activity as? FindActivity)?.showChangeFragment(state.email!!)
                         } else {
                             with(binding) {
                                 tvAvailableCode.apply {

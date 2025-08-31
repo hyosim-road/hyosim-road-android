@@ -10,6 +10,8 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
 import com.hyosim.hamkkae.R
 import com.hyosim.hamkkae.databinding.FragmentChangePwBinding
 import com.hyosim.hamkkae.domain.model.PasswordRule
@@ -25,15 +27,6 @@ class ChangePwFragment : Fragment() {
     private val binding: FragmentChangePwBinding
         get() = requireNotNull(_binding) { "setting fragment is null" }
     private val pwViewModel: ChangePwViewModel by viewModels()
-    private var navigator: ChangePwNavigator? = null
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        // Activity가 ChangePwNavigator 구현했는지 확인
-        if (context is ChangePwNavigator) {
-            navigator = context
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -113,9 +106,8 @@ class ChangePwFragment : Fragment() {
             pwViewModel.changePwState.collect { state ->
                 when (state) {
                     is ChangePwState.Success -> {
-                        navigator?.onPasswordChanged()
                         // 스택의 모든 fragment 삭제
-                        /*findNavController().navigate(
+                        findNavController().navigate(
                             R.id.settingFragment,
                             null,
                             navOptions {
@@ -123,7 +115,7 @@ class ChangePwFragment : Fragment() {
                                     inclusive = true
                                 }
                             }
-                        )*/
+                        )
                     }
                     is ChangePwState.Error->{
                         // 인터넷 오류..
@@ -137,11 +129,6 @@ class ChangePwFragment : Fragment() {
             val newPw = binding.etNewPw.text.toString()
             pwViewModel.changePw(newPw)
         }
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        navigator = null
     }
 
     override fun onDestroy() {

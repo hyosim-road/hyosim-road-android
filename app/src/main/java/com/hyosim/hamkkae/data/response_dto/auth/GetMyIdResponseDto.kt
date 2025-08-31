@@ -12,5 +12,11 @@ data class GetMyIdResponseDto (
     @SerialName("message")
     val message:String,
     @SerialName("data")
-    val data: EmailResponseDto.Data
-)
+    val data: Data
+){
+    @Serializable
+    data class Data(
+        @SerialName("id")
+        val id:String
+    )
+}

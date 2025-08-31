@@ -223,18 +223,16 @@ class FindIdFragment : Fragment() {
             findIdViewModel.getIdState.collect { state ->
                 when (state) {
                     is GetIdState.Success -> {
-                        if (state.success)
                             (activity as? FindActivity)?.replaceFragment(
                                 FindIdResultFragment(),
-                                email
+                                state.id
                             )
-                        else {
-                            binding.etCode.error = getString(R.string.signup_info_code_no_match)
-                        }
                     }
 
                     is GetIdState.Error -> {
                         // 인터넷 에러..
+                        binding.etCode.error = state.message
+                        binding.etCode.visibility=View.VISIBLE
                     }
 
                     is GetIdState.Loading -> {

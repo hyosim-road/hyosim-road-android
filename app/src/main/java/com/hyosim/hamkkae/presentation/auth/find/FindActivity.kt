@@ -9,22 +9,25 @@ import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import android.text.style.UnderlineSpan
 import android.util.TypedValue
+import android.view.View
 import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
+import androidx.viewbinding.ViewBinding
 import com.google.android.material.tabs.TabLayout
 import com.hyosim.hamkkae.R
 import com.hyosim.hamkkae.databinding.ActivityFindBinding
 import com.hyosim.hamkkae.presentation.auth.find.id.FindIdFragment
 import com.hyosim.hamkkae.presentation.auth.find.pw.FindPwFragment
-import com.hyosim.hamkkae.presentation.main.setting.user.ChangePwNavigator
+import com.hyosim.hamkkae.presentation.auth.find.pw.FindPwResultFragment
+import com.hyosim.hamkkae.presentation.main.setting.user.ChangePwFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FindActivity : AppCompatActivity(), ChangePwNavigator {
+class FindActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFindBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,10 +66,10 @@ class FindActivity : AppCompatActivity(), ChangePwNavigator {
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText(getString(R.string.find_pw_button)))
     }
 
-    fun replaceFragment(fragment: Fragment, email: String?) {
+    fun replaceFragment(fragment: Fragment, id: String?) {
         val bundle = Bundle()
-        if (!email.isNullOrEmpty()) {
-            bundle.putString("email", email)
+        if (!id.isNullOrEmpty()) {
+            bundle.putString("id", id)
             fragment.arguments = bundle
         }
 
@@ -108,10 +111,17 @@ class FindActivity : AppCompatActivity(), ChangePwNavigator {
         binding.tabLayout.getTabAt(index)?.select()
     }
 
-    override fun onPasswordChanged() {
-        // supportFragmentManager 기반 이동
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fcv_find, FindPwFragment())
-            .commit()
+    fun showChangeFragment(email:String){
+        val fragment = FindPwResultFragment()
+        val bundle = Bundle()
+        if (!email.isNullOrEmpty()) {
+            bundle.putString("email", email)
+            fragment.arguments = bundle
+        }
+
+        supportFragmentManager.commit {
+            replace(R.id.fcv_find, fragment)
+            setReorderingAllowed(true)
+        }
     }
 }

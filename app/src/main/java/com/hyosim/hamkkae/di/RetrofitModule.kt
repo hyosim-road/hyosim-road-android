@@ -35,7 +35,7 @@ object RetrofitModule {
 
     @Provides
     @Singleton
-    fun provideHeaderIntercepter(
+    fun provideHeaderInterceptor(
         tokenRepository: TokenRepository
     ): HeaderInterceptor =
         HeaderInterceptor(tokenRepository)

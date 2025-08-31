@@ -3,6 +3,7 @@ package com.hyosim.hamkkae.presentation.auth.signup
 import androidx.lifecycle.viewModelScope
 import com.hyosim.hamkkae.core.BaseViewModel
 import com.hyosim.hamkkae.domain.repository.AuthRepository
+import com.hyosim.hamkkae.extension.auth.CheckEmailState
 import com.hyosim.hamkkae.extension.auth.CheckIdState
 import com.hyosim.hamkkae.extension.auth.CodeState
 import com.hyosim.hamkkae.extension.auth.SendEmailState
@@ -10,6 +11,7 @@ import com.hyosim.hamkkae.extension.auth.SignUpState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import okhttp3.ResponseBody
 import retrofit2.HttpException
@@ -22,6 +24,8 @@ class SignupInfoViewModel @Inject constructor(
 ) : BaseViewModel() {
     private val _checkIdState = MutableSharedFlow<CheckIdState>()
     val checkIdState: MutableSharedFlow<CheckIdState> = _checkIdState
+    private val _checkEmailState = MutableStateFlow<CheckEmailState>(CheckEmailState.Loading)
+    val checkEmailState = _checkEmailState.asStateFlow()
     private val _sendEmailState = MutableSharedFlow<SendEmailState>()
     val sendEmailState: MutableSharedFlow<SendEmailState> = _sendEmailState
     private val _codeState = MutableSharedFlow<CodeState>()
@@ -61,6 +65,41 @@ class SignupInfoViewModel @Inject constructor(
         }
     }
 
+    fun checkEmail(email: String) {
+        viewModelScope.launch {
+            authRepository.checkEmail(email).onSuccess { response ->
+                _checkEmailState.value = CheckEmailState.Success(response.data.isExist, email)
+            }.onFailure {
+                if (it is HttpException) {
+                    try {
+                        val errorBody: ResponseBody? = it.response()?.errorBody()
+                        val errorBodyString = errorBody?.string() ?: ""
+                        val apiError = parseStatusCode(errorBodyString)
+
+                        _checkEmailState.value = CheckEmailState.Error(
+                            status = apiError.status,
+                            message = apiError.message,
+                            email = email
+                        )
+                    } catch (e: Exception) {
+                        Timber.e("Error parsing error body: $e")
+                        _checkEmailState.value = CheckEmailState.Error(
+                            status = null,
+                            message = "알 수 없는 에러가 발생했습니다.",
+                            email = email,
+                        )
+                    }
+                } else {
+                    _checkEmailState.value = CheckEmailState.Error(
+                        status = null,
+                        message = it.message,
+                        email = email,
+                    )
+                }
+            }
+        }
+    }
+
     fun sendEmail(email: String) {
         viewModelScope.launch {
             authRepository.send(email).onSuccess {
@@ -70,14 +109,30 @@ class SignupInfoViewModel @Inject constructor(
                     try {
                         val errorBody: ResponseBody? = it.response()?.errorBody()
                         val errorBodyString = errorBody?.string() ?: ""
-                        parseHttpError(errorBodyString)
+                        val apiError = parseStatusCode(errorBodyString)
+
+                        _sendEmailState.emit(
+                            SendEmailState.Error(
+                                status = apiError.status,
+                                message = apiError.message,
+                            )
+                        )
                     } catch (e: Exception) {
-                        // JSON 파싱 실패 시 로깅
-                        Timber.e("Error parsing error body: ${e}")
-                        _sendEmailState.emit(SendEmailState.Error("알 수 없는 에러가 발생했습니다."))
+                        Timber.e("Error parsing error body: $e")
+                        _sendEmailState.emit(
+                            SendEmailState.Error(
+                                status = null,
+                                message = "알 수 없는 에러가 발생했습니다.",
+                            )
+                        )
                     }
                 } else {
-                    _sendEmailState.emit(SendEmailState.Error("${it.message}"))
+                    _sendEmailState.emit(
+                        SendEmailState.Error(
+                            status = null,
+                            message = it.message,
+                        )
+                    )
                 }
             }
         }
@@ -135,7 +190,11 @@ class SignupInfoViewModel @Inject constructor(
         }
     }
 
-    suspend fun sendStateLoading(){
+    fun checkEmailStateLoading() {
+        _checkEmailState.value = CheckEmailState.Loading
+    }
+
+    suspend fun sendStateLoading() {
         sendEmailState.emit(SendEmailState.Loading)
     }
 }

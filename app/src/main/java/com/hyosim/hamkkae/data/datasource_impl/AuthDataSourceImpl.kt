@@ -22,6 +22,7 @@ class AuthDataSourceImpl @Inject constructor(
 
     // sign up
     override suspend fun checkId(id: String): CheckIdResponseDto = authService.checkId(id)
+    override suspend fun checkEmail(email: String): CheckIdResponseDto = authService.checkEmail(email)
 
     override suspend fun send(email: String): SendResponseDto = authService.send(email)
     override suspend fun verify(verifyRequestDto: VerifyRequestDto): EmailResponseDto = authService.verify(verifyRequestDto)
