@@ -300,49 +300,6 @@
     <!--map-->
     <string name="map_navigate">길찾기</string>
 
-    <!--mock-->
-
-
-    <!--home-->
-    <string name="main_question_mock">부모님과 함께 이곳에서 가장 인상 깊었던 순간은 무엇인가요?</string>
-
-    <string name="main_trip_title_mock">경주 역사문화 코스</string>
-    <string name="main_trip_location_mock">불국사</string>
-    <string name="main_trip_time">2시간 전</string>
-
-    <string name="main_recent_mock1">경주 여행을 성공적으로 완료했어요!</string>
-    <string name="main_recent_mock2">동궁과 월지에서 가족사진 업로드</string>
-    <string name="main_recent_mock3">마지막 질문에 답변 완료</string>
-
-    <string name="main_trip_record_mock1">제주 자연 힐링 여행</string>
-    <string name="main_trip_record_mock2">부산 바다 여행</string>
-    <string name="date_mock1">2023.12.20</string>
-    <string name="date_mock2">2023.12.23</string>
-
-    <!--plan-->
-    <!--recommend-->
-    <string name="recommend_during_mock">2박 3일</string>
-    <string name="recommend_description_mock">신라 천년의 역사가 살아 숨쉬는 경주에서 부모님과 함께 우리나라의 찬란한 문화유산을 체험해보세요.</string>
-
-    <!--trip_complete-->
-    <string name="preview_place_mock">불국사</string>
-    <string name="preview_place_description_mock">신라 천년의 불교문화가 살아있는 곳</string>
-    <string name="preview_place_time_mock">09:00 ~ 11:00</string>
-
-
-    <!--family conversation-->
-    <string name="family_conversation_title">가족 대화</string>
-    <string name="family_conversation_subtitle">소중한 순간을 기록해보세요</string>
-    <string name="family_conversation_location">관광지</string>
-    <string name="family_conversation_question">여기에는 질문 내용이 들어갑니다. 어떤 질문일까요?</string>
-    <string name="family_conversation_answer">대화 기록</string>
-    <string name="family_conversation_answer_hint">부모님과 특별한 순간을 자유롭게 적어주세요. 어떤 대화를 나누셨나요? 어떤 감정을 느끼셨나요?</string>
-    <string name="family_conversation_save">대화 저장</string>
-    <string name="family_conversation_saved_answer">사용자가 입력한 대화</string>
-    <string name="family_conversation_to_home">홈 화면으로</string>
-    <string name="family_conversation_before_title">이전 대화</string>
-
-
     <!--setting-->
     <string name="setting_title">설정</string>
     <string name="setting_user">사용자 설정</string>
@@ -393,6 +350,8 @@
     <string name="setting_ask_type3">계정 문제</string>
     <string name="setting_ask_type4">결제 문의</string>
     <string name="setting_ask_type5">기타</string>
+
+    <!-- 라벨: 화면에 보이는 문자열 -->
     <string-array name="setting_ask_types">
         <item>@string/setting_ask_type_hint</item>
         <item>@string/setting_ask_type1</item>
@@ -401,6 +360,17 @@
         <item>@string/setting_ask_type4</item>
         <item>@string/setting_ask_type5</item>
     </string-array>
+
+    <!-- 값: enum 이름 -->
+    <string-array name="setting_ask_types_values">
+        <item>HINT</item>
+        <item>FUNCTION</item>
+        <item>BUG</item>
+        <item>ACCOUNT</item>
+        <item>PAYMENT</item>
+        <item>ETC</item>
+    </string-array>
+
     <string name="setting_ask_title">제목</string>
     <string name="setting_ask_title_hint">문의 제목을 입력하세요</string>
     <string name="setting_ask_context">문의 내용</string>
@@ -410,5 +380,48 @@
     <string name="setting_ask_guide">문의 접수 후 1~2일 내에 답변드리겠습니다.</string>
     <string name="setting_ask_button">문의하기</string>
     <string name="setting_ask_cancellation">취소</string>
+    <string name="setting_ask_complete">문의가 접수되었습니다</string>
+
+    <!--mock-->
+
+
+    <!--home-->
+    <string name="main_question_mock">부모님과 함께 이곳에서 가장 인상 깊었던 순간은 무엇인가요?</string>
+
+    <string name="main_trip_title_mock">경주 역사문화 코스</string>
+    <string name="main_trip_location_mock">불국사</string>
+    <string name="main_trip_time">2시간 전</string>
+
+    <string name="main_recent_mock1">경주 여행을 성공적으로 완료했어요!</string>
+    <string name="main_recent_mock2">동궁과 월지에서 가족사진 업로드</string>
+    <string name="main_recent_mock3">마지막 질문에 답변 완료</string>
+
+    <string name="main_trip_record_mock1">제주 자연 힐링 여행</string>
+    <string name="main_trip_record_mock2">부산 바다 여행</string>
+    <string name="date_mock1">2023.12.20</string>
+    <string name="date_mock2">2023.12.23</string>
+
+    <!--plan-->
+    <!--recommend-->
+    <string name="recommend_during_mock">2박 3일</string>
+    <string name="recommend_description_mock">신라 천년의 역사가 살아 숨쉬는 경주에서 부모님과 함께 우리나라의 찬란한 문화유산을 체험해보세요.</string>
+
+    <!--trip_complete-->
+    <string name="preview_place_mock">불국사</string>
+    <string name="preview_place_description_mock">신라 천년의 불교문화가 살아있는 곳</string>
+    <string name="preview_place_time_mock">09:00 ~ 11:00</string>
+
+
+    <!--family conversation-->
+    <string name="family_conversation_title">가족 대화</string>
+    <string name="family_conversation_subtitle">소중한 순간을 기록해보세요</string>
+    <string name="family_conversation_location">관광지</string>
+    <string name="family_conversation_question">여기에는 질문 내용이 들어갑니다. 어떤 질문일까요?</string>
+    <string name="family_conversation_answer">대화 기록</string>
+    <string name="family_conversation_answer_hint">부모님과 특별한 순간을 자유롭게 적어주세요. 어떤 대화를 나누셨나요? 어떤 감정을 느끼셨나요?</string>
+    <string name="family_conversation_save">대화 저장</string>
+    <string name="family_conversation_saved_answer">사용자가 입력한 대화</string>
+    <string name="family_conversation_to_home">홈 화면으로</string>
+    <string name="family_conversation_before_title">이전 대화</string>
 
 </resources>

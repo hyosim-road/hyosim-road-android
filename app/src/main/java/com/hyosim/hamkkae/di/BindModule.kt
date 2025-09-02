@@ -6,8 +6,10 @@ import com.hyosim.hamkkae.data.datasource_impl.AuthDataSourceImpl
 import com.hyosim.hamkkae.data.datasource_impl.SettingDataSourceImpl
 import com.hyosim.hamkkae.data.repository_impl.AuthRepositoryImpl
 import com.hyosim.hamkkae.data.repository_impl.SettingRepositoryImpl
+import com.hyosim.hamkkae.data.repository_impl.TokenRepositoryImpl
 import com.hyosim.hamkkae.domain.repository.AuthRepository
 import com.hyosim.hamkkae.domain.repository.SettingRepository
+import com.hyosim.hamkkae.domain.repository.TokenRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -17,6 +19,10 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class BindModule {
+    // token\
+    @Binds
+    @Singleton
+    abstract fun bindTokenRepository(tokenRepositoryImpl: TokenRepositoryImpl): TokenRepository
 
     // auth
     @Binds
@@ -25,7 +31,7 @@ abstract class BindModule {
 
     @Binds
     @Singleton
-    abstract fun provideAuthDataSource(authDataSourceImpl: AuthDataSourceImpl): AuthDataSource
+    abstract fun bindAuthDataSource(authDataSourceImpl: AuthDataSourceImpl): AuthDataSource
 
     // setting
     @Binds
@@ -34,5 +40,5 @@ abstract class BindModule {
 
     @Binds
     @Singleton
-    abstract fun provideSettingDataSource(settingDataSourceImpl: SettingDataSourceImpl): SettingDataSource
+    abstract fun bindSettingDataSource(settingDataSourceImpl: SettingDataSourceImpl): SettingDataSource
 }

@@ -43,7 +43,7 @@ class SignupInfoViewModel @Inject constructor(
     fun checkId(id: String) {
         viewModelScope.launch {
             authRepository.checkId(id).onSuccess { response ->
-                _checkIdState.emit(CheckIdState.Success(response.data.isExist))
+                _checkIdState.emit(CheckIdState.Success(response.data!!.isExist))
                 if (!response.data.isExist) verifiedId = id
                 Timber.d("checkId success!")
             }.onFailure {
@@ -68,7 +68,7 @@ class SignupInfoViewModel @Inject constructor(
     fun checkEmail(email: String) {
         viewModelScope.launch {
             authRepository.checkEmail(email).onSuccess { response ->
-                _checkEmailState.value = CheckEmailState.Success(response.data.isExist, email)
+                _checkEmailState.value = CheckEmailState.Success(response.data!!.isExist, email)
             }.onFailure {
                 if (it is HttpException) {
                     try {

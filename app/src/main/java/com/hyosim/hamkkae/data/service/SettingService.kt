@@ -1,7 +1,8 @@
 package com.hyosim.hamkkae.data.service
 
-import com.hyosim.hamkkae.data.response_dto.auth.SendResponseDto
-import com.hyosim.hamkkae.data.response_dto.setting.CheckPasswordResponseDto
+import com.hyosim.hamkkae.data.request_dto.setting.InquiryRequestDto
+import com.hyosim.hamkkae.data.response_dto.ApiResponse
+import com.hyosim.hamkkae.data.response_dto.setting.CheckPasswordResponseData
 import retrofit2.http.Body
 import retrofit2.http.POST
 
@@ -11,11 +12,16 @@ interface SettingService {
     suspend fun checkPw(
         //@Header ("Authorization") accessToken:String,
         @Body password:String
-    ): CheckPasswordResponseDto
+    ): ApiResponse<CheckPasswordResponseData>
 
     @POST("/account/reset-password")
     suspend fun resetPw(
         //@Header ("Authorization") accessToken:String,
         @Body password:String
-    ): SendResponseDto
+    ): ApiResponse<Unit>
+
+    @POST("/inquiry/")
+    suspend fun inquiry(
+        @Body inquiryRequestDto: InquiryRequestDto
+    ): ApiResponse<Int>
 }

@@ -100,7 +100,6 @@ class LoginFragment : Fragment() {
                 when(state){
                     is LoginState.Success ->{
                         val intent = Intent(requireContext(), MainActivity::class.java)
-                        intent.putExtra("token", state.response.data.accessToken)
                         startActivity(intent)
                         requireActivity().finish()
                     }

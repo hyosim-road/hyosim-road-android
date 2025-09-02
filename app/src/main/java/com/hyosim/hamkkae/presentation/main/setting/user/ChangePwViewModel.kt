@@ -29,7 +29,7 @@ class ChangePwViewModel @Inject constructor(
     fun checkPw(password: String) {
         viewModelScope.launch {
             settingRepository.checkPw(password).onSuccess {
-                _checkPwState.emit(CheckPwState.Success(it.data.isCorrect))
+                _checkPwState.emit(CheckPwState.Success(it.data!!.isCorrect))
             }.onFailure {
                 _checkPwState.emit(CheckPwState.Error("Error response failure: ${it.message}"))
                 if (it is HttpException) {
