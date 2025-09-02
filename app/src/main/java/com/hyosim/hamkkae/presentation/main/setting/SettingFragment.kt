@@ -27,20 +27,21 @@ class SettingFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         Timber.d("SettingFragment started!")
 
-        ClickChangePwButton()
-        ClickCustomerCenterButton()
-    }
 
-    private fun ClickChangePwButton() {
         binding.tvChangePw.setOnClickListener {
-            findNavController().navigate(R.id.action_settingFragment_to_checkPwFragment)
+            navigate(R.id.action_settingFragment_to_checkPwFragment)
         }
+        binding.tvCustomerCenter.setOnClickListener {
+            navigate(R.id.action_settingFragment_to_customerCenterFragment)
+        }
+        binding.clResignation.setOnClickListener {
+            navigate(R.id.action_settingFragment_to_resignationFragment)
+        }
+
     }
 
-    private fun ClickCustomerCenterButton() {
-        binding.tvCustomerCenter.setOnClickListener {
-            findNavController().navigate(R.id.action_settingFragment_to_customerCenterFragment)
-        }
+    private fun navigate(resId:Int){
+        findNavController().navigate(resId)
     }
 
     override fun onDestroyView() {
