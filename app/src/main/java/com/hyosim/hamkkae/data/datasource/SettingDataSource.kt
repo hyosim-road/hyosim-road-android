@@ -9,4 +9,5 @@ interface SettingDataSource {
     suspend fun checkPw( password:String): ApiResponse<CheckPasswordResponseData>
     suspend fun resetPw(password:String): ApiResponse<Unit>
     suspend fun inquiry(inquiryRequestDto: InquiryRequestDto): ApiResponse<Int>
+    suspend fun resignation(): ApiResponse<Unit>
 }

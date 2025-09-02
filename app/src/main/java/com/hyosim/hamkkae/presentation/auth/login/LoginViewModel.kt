@@ -3,6 +3,7 @@ package com.hyosim.hamkkae.presentation.auth.login
 import androidx.lifecycle.viewModelScope
 import com.hyosim.hamkkae.core.BaseViewModel
 import com.hyosim.hamkkae.domain.repository.AuthRepository
+import com.hyosim.hamkkae.extension.auth.CheckEmailState
 import com.hyosim.hamkkae.extension.auth.LoginState
 import com.hyosim.hamkkae.util.SessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -29,19 +30,28 @@ class LoginViewModel @Inject constructor(
                 SessionManager.setToken(response.data!!.accessToken)
                 Timber.d("login state success")
             }.onFailure {
-                _loginState.value=LoginState.Error("Error response failure: ${it.message}")
                 if (it is HttpException) {
                     try {
                         val errorBody: ResponseBody? = it.response()?.errorBody()
                         val errorBodyString = errorBody?.string() ?: ""
-                        parseHttpError(errorBodyString)
+                        val apiError = parseStatusCode(errorBodyString)
+
+                        _loginState.value = LoginState.Error(
+                            status = apiError.status,
+                            message = apiError.message,
+                        )
                     } catch (e: Exception) {
-                        // JSON 파싱 실패 시 로깅
-                        Timber.e("Error parsing error body: ${e}")
-                        _loginState.value = LoginState.Error("알 수 없는 에러가 발생했습니다.")
+                        Timber.e("Error parsing error body: $e")
+                        _loginState.value = LoginState.Error(
+                            status = null,
+                            message = "알 수 없는 에러가 발생했습니다.",
+                        )
                     }
-                }else {
-                    _loginState.value = LoginState.Error("네트워크 에러 또는 알 수 없는 오류: ${it.message}")
+                } else {
+                    _loginState.value = LoginState.Error(
+                        status = null,
+                        message = it.message,
+                    )
                 }
             }
         }

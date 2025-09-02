@@ -118,6 +118,17 @@
         </com.google.android.material.textfield.TextInputLayout>
     </com.google.android.material.card.MaterialCardView>
 
+    <TextView
+        android:id="@+id/tv_login_error"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/mcv_pw"
+        app:layout_constraintStart_toStartOf="@id/mcv_pw"
+        app:layout_constraintEnd_toEndOf="@id/mcv_pw"
+        android:layout_marginTop="4dp"/>
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_login"
         android:layout_width="0dp"
