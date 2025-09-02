@@ -92,7 +92,7 @@ class FindIdViewModel @Inject constructor(
     fun getId(email: String) {
         viewModelScope.launch {
             authRepository.getMyId(email).onSuccess {
-                _getIdState.value = GetIdState.Success(it.data.id)
+                _getIdState.value = GetIdState.Success(it.data!!.id)
             }.onFailure {
                 _getIdState.value = GetIdState.Error("Error response failure: ${it.message}")
                 if (it is HttpException) {

@@ -26,7 +26,7 @@ class LoginViewModel @Inject constructor(
         viewModelScope.launch {
             authRepository.login(email, pw).onSuccess { response->
                 _loginState.value=LoginState.Success(response)
-                SessionManager.setToken(response.data.accessToken)
+                SessionManager.setToken(response.data!!.accessToken)
                 Timber.d("login state success")
             }.onFailure {
                 _loginState.value=LoginState.Error("Error response failure: ${it.message}")

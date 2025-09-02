@@ -4,11 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class SendResponseDto (
+data class EmailResponseData (
     @SerialName("success")
     val success:Boolean,
-    @SerialName("status")
-    val status:String,
-    @SerialName("message")
-    val message:String,
 )

@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.hyosim.hamkkae.BuildConfig
 import com.hyosim.hamkkae.data.network.HeaderInterceptor
+import com.hyosim.hamkkae.data.repository_impl.TokenRepositoryImpl
 import com.hyosim.hamkkae.domain.repository.TokenRepository
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module

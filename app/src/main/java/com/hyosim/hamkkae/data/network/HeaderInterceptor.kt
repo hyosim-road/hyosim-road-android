@@ -1,6 +1,7 @@
 package com.hyosim.hamkkae.data.network
 
 
+import com.hyosim.hamkkae.data.repository_impl.TokenRepositoryImpl
 import com.hyosim.hamkkae.domain.repository.TokenRepository
 import okhttp3.Interceptor
 import okhttp3.Response

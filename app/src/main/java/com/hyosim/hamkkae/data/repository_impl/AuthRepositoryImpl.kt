@@ -3,12 +3,12 @@ package com.hyosim.hamkkae.data.repository_impl
 import com.hyosim.hamkkae.data.datasource.AuthDataSource
 import com.hyosim.hamkkae.data.request_dto.auth.LoginRequestDto
 import com.hyosim.hamkkae.data.request_dto.auth.VerifyRequestDto
-import com.hyosim.hamkkae.data.response_dto.auth.CheckIdResponseDto
-import com.hyosim.hamkkae.data.response_dto.auth.EmailResponseDto
-import com.hyosim.hamkkae.data.response_dto.auth.GetMyIdResponseDto
-import com.hyosim.hamkkae.data.response_dto.auth.LoginResponseDto
-import com.hyosim.hamkkae.data.response_dto.auth.SendResponseDto
-import com.hyosim.hamkkae.data.response_dto.auth.VerifyIdEmailResponseDto
+import com.hyosim.hamkkae.data.response_dto.ApiResponse
+import com.hyosim.hamkkae.data.response_dto.auth.CheckIdResponseData
+import com.hyosim.hamkkae.data.response_dto.auth.EmailResponseData
+import com.hyosim.hamkkae.data.response_dto.auth.GetMyIdResponseData
+import com.hyosim.hamkkae.data.response_dto.auth.LoginResponseData
+import com.hyosim.hamkkae.data.response_dto.auth.VerifyIdEmailResponseData
 import com.hyosim.hamkkae.domain.repository.AuthRepository
 import timber.log.Timber
 import javax.inject.Inject
@@ -17,7 +17,7 @@ class AuthRepositoryImpl @Inject constructor(
     private val dataSource: AuthDataSource
 ): AuthRepository {
     // login
-    override suspend fun login(email: String, pw: String): Result<LoginResponseDto> {
+    override suspend fun login(email: String, pw: String): Result<ApiResponse<LoginResponseData>> {
         return runCatching {
             dataSource.login(LoginRequestDto(email, pw))
         }.onFailure {
@@ -26,7 +26,7 @@ class AuthRepositoryImpl @Inject constructor(
     }
 
     // sign up
-    override suspend fun checkId(id: String): Result<CheckIdResponseDto> {
+    override suspend fun checkId(id: String): Result<ApiResponse<CheckIdResponseData>> {
         return runCatching {
             dataSource.checkId(id)
         }.onFailure {
@@ -34,7 +34,7 @@ class AuthRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun checkEmail(email: String): Result<CheckIdResponseDto> {
+    override suspend fun checkEmail(email: String): Result<ApiResponse<CheckIdResponseData>> {
         return runCatching {
             dataSource.checkEmail(email)
         }.onFailure {
@@ -42,7 +42,7 @@ class AuthRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun send(email: String): Result<SendResponseDto> {
+    override suspend fun send(email: String): Result<ApiResponse<Unit>> {
         return runCatching {
             dataSource.send(email)
         }.onFailure {
@@ -53,7 +53,7 @@ class AuthRepositoryImpl @Inject constructor(
     override suspend fun verify(
         email: String,
         code: String
-    ): Result<EmailResponseDto> {
+    ): Result<ApiResponse<EmailResponseData>> {
         return runCatching {
             dataSource.verify(VerifyRequestDto(email, code))
         }.onFailure {
@@ -61,7 +61,7 @@ class AuthRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun signUp(id: String, pw: String, email: String): Result<SendResponseDto> {
+    override suspend fun signUp(id: String, pw: String, email: String): Result<ApiResponse<Unit>> {
         return runCatching {
             dataSource.signUp(com.hyosim.hamkkae.data.request_dto.auth.SignUpRequestDto(id, pw, email))
         }.onFailure {
@@ -70,7 +70,7 @@ class AuthRepositoryImpl @Inject constructor(
     }
 
     // find
-    override suspend fun getMyId(email: String): Result<GetMyIdResponseDto> {
+    override suspend fun getMyId(email: String): Result<ApiResponse<GetMyIdResponseData>> {
         return runCatching {
             dataSource.getMyId(email)
         }.onFailure {
@@ -81,7 +81,7 @@ class AuthRepositoryImpl @Inject constructor(
     override suspend fun verifyIdEmail(
         id: String,
         email: String
-    ): Result<VerifyIdEmailResponseDto> {
+    ): Result<ApiResponse<VerifyIdEmailResponseData>> {
         return runCatching {
             dataSource.verifyIdEmail(com.hyosim.hamkkae.data.request_dto.auth.VerifyIdEmailRequestDto(id, email))
         }.onFailure {
@@ -89,7 +89,7 @@ class AuthRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun sendTempPw(email: String): Result<SendResponseDto> {
+    override suspend fun sendTempPw(email: String): Result<ApiResponse<Unit>> {
         return runCatching {
             dataSource.sendTempPw(email)
         }.onFailure {

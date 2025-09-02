@@ -1,34 +1,34 @@
 package com.hyosim.hamkkae.domain.repository
 
-import com.hyosim.hamkkae.data.response_dto.auth.CheckIdResponseDto
-import com.hyosim.hamkkae.data.response_dto.auth.EmailResponseDto
-import com.hyosim.hamkkae.data.response_dto.auth.GetMyIdResponseDto
-import com.hyosim.hamkkae.data.response_dto.auth.LoginResponseDto
-import com.hyosim.hamkkae.data.response_dto.auth.SendResponseDto
-import com.hyosim.hamkkae.data.response_dto.auth.VerifyIdEmailResponseDto
+import com.hyosim.hamkkae.data.response_dto.ApiResponse
+import com.hyosim.hamkkae.data.response_dto.auth.CheckIdResponseData
+import com.hyosim.hamkkae.data.response_dto.auth.EmailResponseData
+import com.hyosim.hamkkae.data.response_dto.auth.GetMyIdResponseData
+import com.hyosim.hamkkae.data.response_dto.auth.LoginResponseData
+import com.hyosim.hamkkae.data.response_dto.auth.VerifyIdEmailResponseData
 
 interface AuthRepository {
     // login
     suspend fun login(
         email: String,
         pw: String
-    ): Result<LoginResponseDto>
+    ): Result<ApiResponse<LoginResponseData>>
 
     // sign up
-    suspend fun checkId(id:String):Result<CheckIdResponseDto>
-    suspend fun checkEmail(email:String):Result<CheckIdResponseDto>
+    suspend fun checkId(id:String):Result< ApiResponse<CheckIdResponseData>>
+    suspend fun checkEmail(email:String):Result< ApiResponse<CheckIdResponseData>>
     suspend fun send(
         email: String
-    ): Result<SendResponseDto>
-    suspend fun verify(email:String, code:String): Result<EmailResponseDto>
+    ): Result<ApiResponse<Unit>>
+    suspend fun verify(email:String, code:String): Result< ApiResponse<EmailResponseData>>
     suspend fun signUp(
         id: String,
         pw: String,
         email: String
-    ): Result<SendResponseDto>
+    ): Result<ApiResponse<Unit>>
 
     // find
-    suspend fun getMyId(email:String): Result<GetMyIdResponseDto>
-    suspend fun verifyIdEmail(id:String, email:String): Result<VerifyIdEmailResponseDto>
-    suspend fun sendTempPw(email:String): Result<SendResponseDto>
+    suspend fun getMyId(email:String): Result< ApiResponse<GetMyIdResponseData>>
+    suspend fun verifyIdEmail(id:String, email:String): Result<ApiResponse<VerifyIdEmailResponseData>>
+    suspend fun sendTempPw(email:String): Result<ApiResponse<Unit>>
 }
