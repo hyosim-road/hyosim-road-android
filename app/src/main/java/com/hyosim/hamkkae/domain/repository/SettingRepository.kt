@@ -9,5 +9,6 @@ interface SettingRepository {
     suspend fun checkPw(password:String): Result<ApiResponse<CheckPasswordResponseData>>
     suspend fun resetPw(password:String): Result< ApiResponse<Unit>>
     suspend fun inquiry(inquiryRequestDto: InquiryRequestDto): Result<ApiResponse<Int>>
+    suspend fun resignation():Result<ApiResponse<Unit>>
 
 }

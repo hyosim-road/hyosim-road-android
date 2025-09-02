@@ -15,16 +15,23 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.hyosim.hamkkae.R
 import com.hyosim.hamkkae.databinding.DialogResignationBinding
 import com.hyosim.hamkkae.databinding.FragmentResignationBinding
+import com.hyosim.hamkkae.extension.setting.ResignationState
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
+@AndroidEntryPoint
 class ResignationFragment : Fragment() {
     private var _binding: FragmentResignationBinding? = null
     private val binding: FragmentResignationBinding
         get() = requireNotNull(_binding) { "setting fragment is null" }
+    private val resignationViewModel: ResignationViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -40,6 +47,14 @@ class ResignationFragment : Fragment() {
     }
 
     private fun setting() {
+       showReasons()
+
+        binding.btnResignation.setOnClickListener {
+            showDialog()
+        }
+    }
+
+    private fun showReasons(){
         with(binding){
             rgReasons.setOnCheckedChangeListener { _, checkedId ->
                 if(checkedId == R.id.rb_other) {
@@ -83,35 +98,54 @@ class ResignationFragment : Fragment() {
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             })
         }
+    }
 
-        binding.btnResignation.setOnClickListener {
-            // 다이얼로그용 뷰 바인딩
-            val dialogBinding = DialogResignationBinding.inflate(layoutInflater)
+    private fun showDialog() {
+        // 다이얼로그용 뷰 바인딩
+        val dialogBinding = DialogResignationBinding.inflate(layoutInflater)
 
-            val dialog = AlertDialog.Builder(requireContext())
-                .setView(dialogBinding.root)
-                .create()
+        val dialog = AlertDialog.Builder(requireContext())
+            .setView(dialogBinding.root)
+            .create()
 
-            // 기본 흰색 배경 제거
-            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        // 기본 흰색 배경 제거
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-            // 탈퇴하기 버튼 클릭
-            dialogBinding.btnConfirm.setOnClickListener {
-                // 실제 탈퇴 처리 로직 넣기
-                dialog.dismiss()
-
-                val intent = Intent(requireContext(), ResignationCompleteActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(intent)
-            }
-
-            // 취소 버튼 클릭
-            dialogBinding.btnCancel.setOnClickListener {
-                dialog.dismiss()
-            }
-
-            dialog.show()
+        // 탈퇴하기 버튼 클릭
+        dialogBinding.btnConfirm.setOnClickListener {
+           resignation(dialog)
         }
+
+        // 취소 버튼 클릭
+        dialogBinding.btnCancel.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+
+    private fun resignation(dialog: AlertDialog){
+        lifecycleScope.launch {
+            resignationViewModel.resignationState.collect { state ->
+                when (state) {
+                    is ResignationState.Loading -> {
+                        // 로딩 상태 처리
+                    }
+                    is ResignationState.Success -> {
+                        dialog.dismiss()
+
+                        val intent = Intent(requireContext(), ResignationCompleteActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        startActivity(intent)
+                    }
+                    is ResignationState.Error -> {
+                        // 에러 상태 처리
+                    }
+                }
+            }
+        }
+
+        resignationViewModel.resignation()
     }
 
     override fun onDestroyView() {

@@ -38,4 +38,12 @@ class SettingRepositoryImpl @Inject constructor(
             Timber.e("setting repository inquiry fail: $it")
         }
     }
+
+    override suspend fun resignation(): Result<ApiResponse<Unit>> {
+        return runCatching {
+            settingDataSource.resignation()
+        }.onFailure {
+            Timber.e("setting repository resignation fail: $it")
+        }
+    }
 }

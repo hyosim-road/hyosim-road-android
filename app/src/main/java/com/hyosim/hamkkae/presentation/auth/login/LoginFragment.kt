@@ -105,6 +105,17 @@ class LoginFragment : Fragment() {
                     }
                     is LoginState.Error ->{
                         Timber.e("login state error!: ${state.message}")
+                        if(state.status=="MEMBER404"){
+                            binding.tvLoginError.apply{
+                                visibility=View.VISIBLE
+                                text=getString(R.string.login_no_data)
+                            }
+                        }else{
+                            binding.tvLoginError.apply {
+                                visibility=View.VISIBLE
+                                text=state.message
+                            }
+                        }
                     }
                     is LoginState.Loading ->{
                         Timber.d("login state is loading...")

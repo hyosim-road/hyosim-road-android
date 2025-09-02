@@ -13,4 +13,5 @@ class SettingDataSourceImpl @Inject constructor(
     override suspend fun checkPw( password: String): ApiResponse<CheckPasswordResponseData> = settingService.checkPw( password)
     override suspend fun resetPw(password: String):  ApiResponse<Unit> = settingService.resetPw(password)
     override suspend fun inquiry(inquiryRequestDto: InquiryRequestDto): ApiResponse<Int>  = settingService.inquiry(inquiryRequestDto)
+    override suspend fun resignation(): ApiResponse<Unit> = settingService.resignation()
 }
