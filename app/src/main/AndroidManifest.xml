@@ -73,6 +73,8 @@
             android:exported="false"/>
         <activity android:name=".presentation.main.family_conversation.FamilyConversationActivity"
             android:exported="false"/>
+        <activity android:name=".presentation.main.setting.resignation.ResignationCompleteActivity"
+            android:exported="false"/>
     </application>
 
 </manifest>

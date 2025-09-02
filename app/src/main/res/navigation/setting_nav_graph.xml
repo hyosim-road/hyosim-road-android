@@ -18,6 +18,10 @@
         <action
             android:id="@+id/action_settingFragment_to_customerCenterFragment"
             app:destination="@id/customerCenterFragment" />
+
+        <action
+            android:id="@+id/action_settingFragment_to_resignationFragment"
+            app:destination="@id/resignationFragment" />
     </fragment>
 
     <fragment
@@ -47,6 +51,13 @@
         android:name="com.hyosim.hamkkae.presentation.main.setting.support.CustomerCenterFragment"
         android:label="고객센터"
         tools:layout="@layout/fragment_customer_center">
+    </fragment>
+
+    <fragment
+        android:id="@+id/resignationFragment"
+        android:name="com.hyosim.hamkkae.presentation.main.setting.resignation.ResignationFragment"
+        android:label="회원탈퇴"
+        tools:layout="@layout/fragment_resignation">
     </fragment>
 
 </navigation>
