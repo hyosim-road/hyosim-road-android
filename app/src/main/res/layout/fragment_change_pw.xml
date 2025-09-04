@@ -69,17 +69,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <ImageView
+                android:id="@+id/iv_pw"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:padding="1dp"
+                android:layout_marginStart="24dp"
+                android:src="@drawable/ic_pw"
+                app:layout_constraintBottom_toBottomOf="@id/tv_new_pw_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_new_pw_title" />
+
             <TextView
                 android:id="@+id/tv_new_pw_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="70dp"
+                android:layout_marginStart="12dp"
                 android:layout_marginTop="25dp"
                 android:text="@string/setting_change_pw_title"
                 android:textColor="@color/dark_gray"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_pw"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -87,7 +98,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="24dp"
                 android:text="@string/setting_new_pw_title"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@+id/mcv_new_pw"
