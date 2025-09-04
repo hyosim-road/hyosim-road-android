@@ -85,16 +85,28 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <ImageView
+                    android:id="@+id/iv_setting_pw"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:padding="1dp"
+                    android:layout_marginStart="28dp"
+                    android:src="@drawable/ic_setting_pw"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_change_pw"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_change_pw" />
+
+
                 <TextView
                     android:id="@+id/tv_change_pw"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="65dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="25dp"
                     android:text="@string/setting_change_pw"
                     android:textColor="@color/text_secondary_gray"
                     android:textSize="16sp"
-                    app:layout_constraintStart_toStartOf="@+id/tv_setting_user_title"
+                    app:layout_constraintStart_toEndOf="@+id/iv_setting_pw"
                     app:layout_constraintTop_toBottomOf="@id/tv_setting_user_title" />
 
                 <View
@@ -107,8 +119,19 @@
                     android:background="@color/auth_box_gray"
                     app:layout_constraintTop_toBottomOf="@id/tv_change_pw" />
 
+                <ImageView
+                    android:id="@+id/iv_question"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:padding="1dp"
+                    android:layout_marginStart="28dp"
+                    android:src="@drawable/ic_setting_question"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_question"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_question" />
+
                 <TextView
-                    android:id="@+id/tv_dark_mode"
+                    android:id="@+id/tv_question"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
@@ -155,16 +178,27 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <ImageView
+                    android:id="@+id/iv_customer_center"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:padding="1dp"
+                    android:layout_marginStart="28dp"
+                    android:src="@drawable/ic_setting_customer"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_customer_center"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_customer_center" />
+
                 <TextView
                     android:id="@+id/tv_customer_center"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="65dp"
                     android:layout_marginTop="25dp"
+                    android:layout_marginStart="10dp"
                     android:text="@string/setting_customer_center"
                     android:textColor="@color/text_secondary_gray"
                     android:textSize="16sp"
-                    app:layout_constraintStart_toStartOf="@+id/tv_setting_support_title"
+                    app:layout_constraintStart_toEndOf="@+id/iv_customer_center"
                     app:layout_constraintTop_toBottomOf="@id/tv_setting_support_title" />
 
                 <View
@@ -176,6 +210,17 @@
                     android:layout_marginEnd="30dp"
                     android:background="@color/auth_box_gray"
                     app:layout_constraintTop_toBottomOf="@id/tv_customer_center" />
+
+                <ImageView
+                    android:id="@+id/iv_setting_app"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:padding="1dp"
+                    android:layout_marginStart="28dp"
+                    android:src="@drawable/ic_setting_app"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_app_info"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_app_info" />
 
                 <TextView
                     android:id="@+id/tv_app_info"
@@ -198,6 +243,17 @@
                     android:background="@color/auth_box_gray"
                     app:layout_constraintTop_toBottomOf="@id/tv_app_info" />
 
+                <ImageView
+                    android:id="@+id/iv_setting_service"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:padding="1dp"
+                    android:layout_marginStart="28dp"
+                    android:src="@drawable/ic_setting_service"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_service"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_service" />
+
                 <TextView
                     android:id="@+id/tv_service"
                     android:layout_width="0dp"
@@ -219,6 +275,17 @@
                     android:layout_marginEnd="30dp"
                     android:background="@color/auth_box_gray"
                     app:layout_constraintTop_toBottomOf="@id/tv_service" />
+
+                <ImageView
+                    android:id="@+id/iv_setting_personal"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:padding="1dp"
+                    android:layout_marginStart="28dp"
+                    android:src="@drawable/ic_setting_info"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_personal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_personal" />
 
                 <TextView
                     android:id="@+id/tv_personal"
@@ -256,13 +323,15 @@
                 android:paddingVertical="16dp">
 
                 <ImageView
-                    android:id="@+id/iv_logout_icon"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginStart="16dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:id="@+id/iv_logout"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:padding="1dp"
+                    android:layout_marginStart="20dp"
+                    android:src="@drawable/ic_setting_logout"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_logout"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="@id/tv_logout" />
 
                 <TextView
                     android:id="@+id/tv_logout"
@@ -272,9 +341,9 @@
                     android:text="@string/setting_logout"
                     android:textColor="@color/hover_orange"
                     android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="@id/iv_logout_icon"
-                    app:layout_constraintStart_toEndOf="@id/iv_logout_icon"
-                    app:layout_constraintTop_toTopOf="@id/iv_logout_icon" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iv_logout"
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
@@ -307,6 +376,17 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <ImageView
+                    android:id="@+id/iv_out"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:padding="1dp"
+                    android:layout_marginStart="20dp"
+                    android:src="@drawable/ic_setting_out"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_withdrawal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_withdrawal" />
+
                 <TextView
                     android:id="@+id/tv_withdrawal"
                     android:layout_width="wrap_content"
@@ -315,9 +395,9 @@
                     android:text="@string/setting_withdrawal"
                     android:textColor="@color/hover_orange"
                     android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="@id/iv_withdrawal_icon"
-                    app:layout_constraintStart_toEndOf="@id/iv_withdrawal_icon"
-                    app:layout_constraintTop_toTopOf="@id/iv_withdrawal_icon" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iv_out"
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
@@ -329,7 +409,7 @@
             android:text="@string/setting_version"
             android:textSize="14sp"
             android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@id/cv_withdrawal"
+            app:layout_constraintBottom_toTopOf="@id/tv_subtitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -342,7 +422,6 @@
             android:text="@string/setting_subtitle"
             android:textColor="@color/auth_gray"
             android:textSize="14sp"
-            app:layout_constraintTop_toBottomOf="@id/tv_version"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

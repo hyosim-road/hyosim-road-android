@@ -62,17 +62,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cl_header">
 
+        <ImageView
+            android:id="@+id/iv_security"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:padding="1dp"
+            android:layout_marginStart="14dp"
+            android:src="@drawable/ic_pw_safety"
+            app:layout_constraintBottom_toBottomOf="@id/tv_security_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_security_title" />
+
         <TextView
             android:id="@+id/tv_security_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="14dp"
             android:text="@string/setting_security_title"
             android:textColor="@color/security_blue_title"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_security"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -107,17 +118,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <ImageView
+                android:id="@+id/iv_pw"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:padding="1dp"
+                android:layout_marginStart="24dp"
+                android:src="@drawable/ic_pw"
+                app:layout_constraintBottom_toBottomOf="@id/tv_check_pw_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_check_pw_title" />
+
             <TextView
                 android:id="@+id/tv_check_pw_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="70dp"
+                android:layout_marginStart="12dp"
                 android:layout_marginTop="30dp"
                 android:text="@string/setting_check_pw_title"
                 android:textColor="@color/dark_gray"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_pw"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -125,7 +147,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="24dp"
                 android:text="@string/setting_current_pw_subtitle"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@+id/mcv_check_pw"
@@ -223,17 +245,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cv_check_pw">
 
+        <ImageView
+            android:id="@+id/iv_tip"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:padding="1dp"
+            android:layout_marginStart="14dp"
+            android:src="@drawable/ic_pw_tip"
+            app:layout_constraintBottom_toBottomOf="@id/tv_security_tip_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_security_tip_title" />
+
         <TextView
             android:id="@+id/tv_security_tip_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="14dp"
             android:text="@string/setting_security_tip_title"
             android:textColor="@color/tip_yellow_title"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_tip"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
