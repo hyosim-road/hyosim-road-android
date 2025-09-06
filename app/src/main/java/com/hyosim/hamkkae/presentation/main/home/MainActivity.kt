@@ -34,6 +34,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.Locale
 import kotlin.jvm.java
 
@@ -246,13 +247,26 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 nextAttraction != null -> {
-                    tvTripCurrentLocationTitle.text = getString(R.string.main_trip_all_done) // "오늘 일정: 모두 완료 ✅"
-                    tvTripDay.text =
-                        getString(R.string.main_trip_current_day, nextDayIndex ?: 0)
-                    tvTodaySchedule.text = getString(R.string.main_tomorrow_schedule)
+                    val todayStr = dateFormatter.format(Date(now))
+                    val nextDayStr = course.itinerary[(nextDayIndex ?: 1) - 1].day
 
-                    val todayIndex = nextDayIndex ?: 1
-                    getTodaySchedule(todayIndex, course.itinerary[todayIndex - 1].attractions)
+                    if (todayStr == nextDayStr) {
+                        // 오늘 일정인데 아직 시작 전
+                        tvTripCurrentLocationTitle.text = getString(R.string.main_trip_next_location, nextAttraction!!.name)
+                        tvTripDay.text = getString(R.string.main_trip_current_day, nextDayIndex ?: 0)
+                        tvTodaySchedule.text = getString(R.string.main_today_schedule)
+
+                        val todayIndex = nextDayIndex ?: 1
+                        getTodaySchedule(todayIndex, course.itinerary[todayIndex - 1].attractions)
+                    } else {
+                        // 오늘 일정은 다 끝났고, 다음 날 일정
+                        tvTripCurrentLocationTitle.text = getString(R.string.main_trip_all_done) // "오늘 일정: 모두 완료 ✅"
+                        tvTripDay.text = getString(R.string.main_trip_current_day, nextDayIndex ?: 0)
+                        tvTodaySchedule.text = getString(R.string.main_tomorrow_schedule)
+
+                        val tomorrowIndex = nextDayIndex ?: 1
+                        getTodaySchedule(tomorrowIndex, course.itinerary[tomorrowIndex - 1].attractions)
+                    }
                 }
 
                 else -> {
