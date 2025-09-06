@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hyosim.hamkkae.databinding.FragmentRecommendDetailDetailBinding
+import com.hyosim.hamkkae.presentation.main.plan.recommend.detail.RecommendDetailViewModel
 import com.hyosim.hamkkae.presentation.main.plan.recommend.detail.detail.adapter.RecommendDetailDetailAdapter
 import timber.log.Timber
 
@@ -17,6 +18,7 @@ class RecommendDetailDetailFragment: Fragment() {
         get() = requireNotNull(_binding) { "detail detail fragment is null" }
 
     private val recommendDetailDetailViewModel: RecommendDetailDetailViewModel by viewModels()
+    private val detailViewModel: RecommendDetailViewModel by viewModels({requireParentFragment()})
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,7 +48,7 @@ class RecommendDetailDetailFragment: Fragment() {
             isNestedScrollingEnabled = false // 바깥에 ScrollView가 있을 때만 고려
             overScrollMode = View.OVER_SCROLL_NEVER
         }
-        detailAdapter.submitList(recommendDetailDetailViewModel.courseDetailList)
+        detailAdapter.submitList(detailViewModel.allAttractions)
     }
 
     override fun onDestroy() {

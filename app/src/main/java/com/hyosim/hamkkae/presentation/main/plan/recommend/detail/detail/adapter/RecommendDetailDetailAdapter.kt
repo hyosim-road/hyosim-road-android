@@ -8,11 +8,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.hyosim.hamkkae.R
+import com.hyosim.hamkkae.data.response_dto.plan.AiCourseRecommendResponseDto
 import com.hyosim.hamkkae.databinding.ItemRecommendDetailDetailBinding
 import com.hyosim.hamkkae.domain.model.CourseDetail
 
 class RecommendDetailDetailAdapter :
-    ListAdapter<CourseDetail, RecommendDetailDetailAdapter.RecommendDetailDetailViewHolder>(
+    ListAdapter<AiCourseRecommendResponseDto.Itinerary.Attraction, RecommendDetailDetailAdapter.RecommendDetailDetailViewHolder>(
         RecommendDetailDetailDiffCallback
     ) {
 
@@ -55,24 +57,31 @@ class RecommendDetailDetailAdapter :
             }
         }
 
-        fun bind(courseDetail: CourseDetail) {
+        fun bind(courseDetail: AiCourseRecommendResponseDto.Itinerary.Attraction) {
             with(binding) {
                 tvName.text = courseDetail.name
                 tvDescription.text = courseDetail.description
-                ivImage.load(courseDetail.image)
+                ivImage.load(R.drawable.image_trip)
 
-                recommendDetailDetailInfoAdapter.submitList(courseDetail.info)
+                val courseDetail = listOf(
+                    courseDetail.address,
+                    courseDetail.phone,
+                    "${courseDetail.priceKrw}원"
+                )
+                recommendDetailDetailInfoAdapter.submitList(courseDetail)
+
+                //recommendDetailDetailInfoAdapter.submitList(courseDetail)
             }
         }
     }
 }
 
-object RecommendDetailDetailDiffCallback : DiffUtil.ItemCallback<CourseDetail>() {
-    override fun areItemsTheSame(oldItem: CourseDetail, newItem: CourseDetail): Boolean {
-        return oldItem.id == newItem.id // id로 비교 (식별자)
+object RecommendDetailDetailDiffCallback : DiffUtil.ItemCallback<AiCourseRecommendResponseDto.Itinerary.Attraction>() {
+    override fun areItemsTheSame(oldItem: AiCourseRecommendResponseDto.Itinerary.Attraction, newItem: AiCourseRecommendResponseDto.Itinerary.Attraction): Boolean {
+        return oldItem.startTime == newItem.startTime
     }
 
-    override fun areContentsTheSame(oldItem: CourseDetail, newItem: CourseDetail): Boolean {
+    override fun areContentsTheSame(oldItem: AiCourseRecommendResponseDto.Itinerary.Attraction, newItem: AiCourseRecommendResponseDto.Itinerary.Attraction): Boolean {
         return oldItem == newItem // 데이터 클래스라면 자동 equals 비교 가능
     }
 }

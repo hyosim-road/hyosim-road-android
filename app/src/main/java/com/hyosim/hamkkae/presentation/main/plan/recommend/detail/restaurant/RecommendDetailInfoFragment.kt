@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.hyosim.hamkkae.data.response_dto.plan.toInfo
 import com.hyosim.hamkkae.databinding.FragmentRecommendDetailInfoBinding
 import com.hyosim.hamkkae.presentation.main.map.MapActivity
+import com.hyosim.hamkkae.presentation.main.plan.recommend.detail.RecommendDetailViewModel
 import timber.log.Timber
 import kotlin.jvm.java
 
@@ -29,6 +31,7 @@ class RecommendDetailInfoFragment : Fragment() {
     private val binding: FragmentRecommendDetailInfoBinding
         get() = requireNotNull(_binding) { "detail tip fragment is null" }
     private val restaurantViewModel: RecommendDetailInfoViewModel by viewModels()
+    private val detailViewModel: RecommendDetailViewModel by viewModels({requireParentFragment()})
 
 
     override fun onCreateView(
@@ -60,10 +63,13 @@ class RecommendDetailInfoFragment : Fragment() {
                 startActivity(intent)
             })
         binding.rvInfos.adapter = infoAdapter
-        infoAdapter.submitList(
-            if (category == "restaurant") restaurantViewModel.restaurantList
-            else restaurantViewModel.accommodationList
-        )
+        val items = if (category == "restaurant") {
+            detailViewModel.course!!.restaurants.map { it.toInfo() }
+        } else {
+            detailViewModel.course!!.lodgings.map { it.toInfo() }
+        }
+
+        infoAdapter.submitList(items)
     }
 
     override fun onDestroy() {

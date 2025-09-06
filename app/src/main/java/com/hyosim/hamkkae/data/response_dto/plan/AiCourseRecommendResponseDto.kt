@@ -1,6 +1,7 @@
 package com.hyosim.hamkkae.data.response_dto.plan
 
 import android.os.Parcelable
+import com.hyosim.hamkkae.domain.model.Info
 import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -62,3 +63,29 @@ data class AiCourseRecommendResponseDto (
         @SerialName("signatureMenu") val signatureMenu: String? = null
     ): Parcelable
 }
+
+fun AiCourseRecommendResponseDto.Restaurant.toInfo(): Info =
+    Info(
+        id = name,
+        type = "식당",
+        name = name,
+        cost = "인당 ${estimatedCostPerPersonKrw}원",
+        location = address,
+        description = signatureMenu ?: "",
+        additionList = emptyList(), // 필요하면 API에서 파싱
+        optionList = emptyList()
+    )
+
+fun AiCourseRecommendResponseDto.Lodging.toInfo(): Info =
+    Info(
+        id = name,
+        type = "숙소",
+        name = name,
+        cost = "${pricePerNightKrw}원 / 1박",
+        location = address,
+        description = description,
+        additionList = emptyList(),
+        optionList = emptyList(),
+        checkin = checkIn,
+        checkout = checkOut
+    )
