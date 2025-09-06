@@ -23,9 +23,20 @@
         tools:layout="@layout/fragment_select_trip_style">
 
         <action
-            android:id="@+id/action_selectTripStyleFragment_to_recommendCourseFragment"
-            app:destination="@id/recommendCourseFragment" />
+            android:id="@+id/action_selectTripStyleFragment_to_loadingFragment"
+            app:destination="@id/loadingFragment" />
 
+    </fragment>
+
+    <fragment
+        android:id="@+id/loadingFragment"
+        android:name="com.hyosim.hamkkae.presentation.main.plan.recommend.RecommendLoadingFragment"
+        android:label="recommend_loading_fragment"
+        tools:layout="@layout/fragment_recommend_loading">
+
+        <action
+            android:id="@+id/action_recommendLoadingFragment_to_recommendCourseFragment"
+            app:destination="@id/recommendCourseFragment" />
     </fragment>
 
     <fragment
@@ -49,6 +60,10 @@
         android:name="com.hyosim.hamkkae.presentation.main.plan.recommend.detail.RecommendDetailFragment"
         android:label="recommend_detail_fragment"
         tools:layout="@layout/fragment_recommend_detail">
+
+        <argument
+            android:name="course"
+            app:argType="com.hyosim.hamkkae.data.response_dto.plan.AiCourseRecommendResponseDto" />
 
         <action
             android:id="@+id/action_recommendDetailFragment_to_tripStartFragment"

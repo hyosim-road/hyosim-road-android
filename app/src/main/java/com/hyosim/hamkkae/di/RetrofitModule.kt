@@ -20,6 +20,7 @@ import retrofit2.Converter
 import retrofit2.Retrofit
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -68,12 +69,27 @@ object RetrofitModule {
 
     @Provides
     @Singleton
+    @Named("base")
     fun provideBaseRetrofit(
         jsonConverter: Converter.Factory,
         client: OkHttpClient,
     ): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
+            .addConverterFactory(jsonConverter)
+            .client(client)
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    @Named("ai")
+    fun provideAiRetrofit(
+        jsonConverter: Converter.Factory,
+        client: OkHttpClient,
+    ): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(BuildConfig.AI_URL) // 새로 추가한 AI 서버
             .addConverterFactory(jsonConverter)
             .client(client)
             .build()

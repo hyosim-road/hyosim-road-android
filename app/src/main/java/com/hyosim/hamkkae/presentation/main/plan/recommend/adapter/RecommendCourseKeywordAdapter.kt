@@ -7,8 +7,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.hyosim.hamkkae.R
 import com.hyosim.hamkkae.databinding.ItemRecommendCourseKeywordBinding
-import com.hyosim.hamkkae.util.KeywordConstants.KEYWORD_CULTURE
+import com.hyosim.hamkkae.util.KeywordConstants.KEYWORD_FOOD
 import com.hyosim.hamkkae.util.KeywordConstants.KEYWORD_HISTORY
+import com.hyosim.hamkkae.util.KeywordConstants.KEYWORD_NATURE
 import com.hyosim.hamkkae.util.KeywordConstants.KEYWORD_TEMPLE
 
 class RecommendCourseKeywordAdapter :
@@ -37,7 +38,8 @@ class RecommendCourseKeywordAdapter :
                 when(keyword){
                     KEYWORD_HISTORY -> ivIcon.setImageResource(R.drawable.ic_history)
                     KEYWORD_TEMPLE -> ivIcon.setImageResource(R.drawable.ic_temple)
-                    KEYWORD_CULTURE -> ivIcon.setImageResource(R.drawable.ic_culture)
+                    KEYWORD_NATURE -> ivIcon.setImageResource(R.drawable.ic_style_nature)
+                    KEYWORD_FOOD -> ivIcon.setImageResource(R.drawable.ic_style_food)
                 }
             }
         }

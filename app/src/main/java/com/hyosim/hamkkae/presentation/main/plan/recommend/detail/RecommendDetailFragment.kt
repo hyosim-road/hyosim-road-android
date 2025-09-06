@@ -5,12 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.hyosim.hamkkae.R
 import com.hyosim.hamkkae.databinding.FragmentRecommendDetailBinding
+import com.hyosim.hamkkae.presentation.main.plan.PlanViewModel
 import com.hyosim.hamkkae.presentation.main.plan.recommend.adapter.RecommendCourseKeywordAdapter
 import timber.log.Timber
 
@@ -21,6 +24,8 @@ class RecommendDetailFragment : Fragment() {
 
     private var pageChangeCallback: ViewPager2.OnPageChangeCallback? = null
     private var dataObserver: RecyclerView.AdapterDataObserver? = null
+    private val detailViewModel: RecommendDetailViewModel by viewModels()
+    private val args : RecommendDetailFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -7,9 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.hyosim.hamkkae.databinding.FragmentRecommendDetailOverviewBinding
+import com.hyosim.hamkkae.presentation.main.plan.recommend.detail.RecommendDetailViewModel
+import com.hyosim.hamkkae.presentation.main.plan.recommend.detail.overview.adapter.ItineraryAdapter
 import com.hyosim.hamkkae.presentation.main.plan.recommend.detail.overview.adapter.RecommendDetailOverviewHighlightAdapter
 import com.hyosim.hamkkae.presentation.main.plan.recommend.detail.overview.adapter.RecommendDetailOverviewPreviewAdapter
 import timber.log.Timber
+import kotlin.getValue
 
 class RecommendDetailOverviewFragment: Fragment() {
     private var _binding: FragmentRecommendDetailOverviewBinding? = null
@@ -17,6 +20,7 @@ class RecommendDetailOverviewFragment: Fragment() {
         get() = requireNotNull(_binding) { "detail overview fragment is null" }
 
     private val detailOverviewViewModel: RecommendDetailOverviewViewModel by viewModels()
+    private val detailViewModel: RecommendDetailViewModel by viewModels({requireParentFragment()})
 
 
     override fun onCreateView(
@@ -35,20 +39,20 @@ class RecommendDetailOverviewFragment: Fragment() {
     }
 
     private fun setting() {
-        getHighlights()
+        //getHighlights()
         getPreviews()
     }
 
-    private fun getHighlights(){
+    /*private fun getHighlights(){
         val highlightsAdapter = RecommendDetailOverviewHighlightAdapter()
         binding.rvHighlights.adapter = highlightsAdapter
         highlightsAdapter.submitList(detailOverviewViewModel.highlightsList)
-    }
+    }*/
 
     private fun getPreviews(){
-        val previewAdapter = RecommendDetailOverviewPreviewAdapter()
+        val previewAdapter = ItineraryAdapter()
         binding.rvPreview.adapter = previewAdapter
-        previewAdapter.submitList(detailOverviewViewModel.previewList)
+        previewAdapter.submitList(detailViewModel.course!!.itinerary)
     }
 
     override fun onDestroy() {

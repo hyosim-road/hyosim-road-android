@@ -8,10 +8,10 @@ import com.hyosim.hamkkae.domain.model.TripStyle
 
 class SelectTripStyleViewModel: ViewModel() {
     val tripStyleList = listOf(
-        TripStyle(1, "자연",   R.drawable.ic_style_nature),
-        TripStyle(2, "사찰",   R.drawable.ic_style_temple),
-        TripStyle(3, "역사",   R.drawable.ic_style_history),
-        TripStyle(4, "식도락", R.drawable.ic_style_food),
+        TripStyle(1, "자연",   "NATURE", R.drawable.ic_style_nature),
+        TripStyle(2, "사찰",   "TEMPLE", R.drawable.ic_style_temple),
+        TripStyle(3, "역사",   "HISTORY", R.drawable.ic_style_history),
+        TripStyle(4, "식도락", "FOOD", R.drawable.ic_style_food),
 //        TripStyle(5, "문화",   R.drawable.ic_style_culture),
 //        TripStyle(6, "쇼핑",   R.drawable.ic_style_shopping),
 //        TripStyle(7, "힐링",   R.drawable.ic_style_healing),

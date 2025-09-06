@@ -8,14 +8,22 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import com.hyosim.hamkkae.R
+import com.hyosim.hamkkae.data.response_dto.plan.AiCourseRecommendResponseDto
+import com.hyosim.hamkkae.data.response_dto.plan.CourseRecommendResponseData
 import com.hyosim.hamkkae.databinding.ItemRecommendCourseBinding
+import com.hyosim.hamkkae.databinding.ItemRecommendCourseKeywordBinding
 import com.hyosim.hamkkae.domain.model.Course
+import timber.log.Timber
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class RecommendCourseAdapter(
-    private val clickItem: (Course) -> Unit,
-    private val clickDetail:(Course) -> Unit
+    private val clickItem: (AiCourseRecommendResponseDto) -> Unit,
+    private val clickDetail: (AiCourseRecommendResponseDto) -> Unit
 ) :
-    ListAdapter<Course, RecommendCourseAdapter.RecommendCourseViewHolder>(
+    ListAdapter<AiCourseRecommendResponseDto, RecommendCourseAdapter.RecommendCourseViewHolder>(
         RecommendCourseDiffCallback
     ) {
     private val viewPool = RecyclerView.RecycledViewPool()
@@ -35,7 +43,30 @@ class RecommendCourseAdapter(
         position: Int
     ) {
         val course = getItem(position)
-        holder.bind(course, position == selectedPosition)
+        // 현재 position이 선택된 카드인지 여부
+        val isSelected = position == selectedPosition
+        holder.bind(course, isSelected)
+
+        holder.binding.cvCourse.setOnClickListener {
+            val adapterPos = holder.adapterPosition
+            if (adapterPos == RecyclerView.NO_POSITION) return@setOnClickListener
+
+            Timber.d("cvCourse clicked! position=$adapterPos")
+
+            val prevPos = selectedPosition
+            if (selectedPosition == adapterPos) {
+                selectedPosition = null
+                notifyItemChanged(adapterPos)
+            } else {
+                selectedPosition = adapterPos
+                notifyItemChanged(adapterPos)
+                prevPos?.let { notifyItemChanged(it) }
+            }
+
+            clickItem(getItem(adapterPos))
+        }
+
+        /*holder.bind(course, position == selectedPosition)
 
         holder.setClickListener { clickedCourse ->
             val adapterPosition = holder.adapterPosition
@@ -52,9 +83,9 @@ class RecommendCourseAdapter(
                 }
 
                 // 여기에 호출!
-                clickItem(clickedCourse)
+               // clickItem(clickedCourse)
             }
-        }
+        }*/
     }
 
     inner class RecommendCourseViewHolder(
@@ -65,14 +96,14 @@ class RecommendCourseAdapter(
         private val recommendCoursePlaceAdapter = RecommendCoursePlaceAdapter()
 
         init {
-            binding.rvKeyword.apply {
+            /*binding.rvKeyword.apply {
                 layoutManager = LinearLayoutManager(
                     binding.root.context,
                     LinearLayoutManager.HORIZONTAL, false
                 )
                 adapter = recommendCourseKeywordAdapter
                 setRecycledViewPool(viewPool)
-            }
+            }*/
 
             // 내부 RecyclerView 초기 설정
             binding.rvPlaces.apply { // ItemRecommendCourseBinding에 rvInnerPlaces ID가 있다고 가정
@@ -86,15 +117,37 @@ class RecommendCourseAdapter(
             }
         }
 
-        fun bind(course: Course, isSelected: Boolean) {
+        fun bind(course: AiCourseRecommendResponseDto, isSelected: Boolean) {
             with(binding) {
-                tvName.text = course.name
-                tvNumberOfNights.text = course.numberOfNights
+                // 수정해야할 부분
+                tvName.text = "코스"
+                tvNumberOfNights.text = getTripDuration(
+                    course.itinerary[0].day,
+                    course.itinerary[course.itinerary.size - 1].day
+                )
+                val keywordBinding =
+                    ItemRecommendCourseKeywordBinding.bind(binding.llKeyword.getChildAt(0))
+                keywordBinding.ivIcon.load(R.drawable.ic_style_nature)
+                keywordBinding.tvKeyword.text = "자연"
 
-                recommendCourseKeywordAdapter.submitList(course.keyword)
-                recommendCoursePlaceAdapter.submitList(course.places)
+                //recommendCourseKeywordAdapter.submitList("HISTORY" as List<String?>?)
+                recommendCoursePlaceAdapter.submitList(course.itinerary[0].attractions)
 
-                clCourse.isSelected = isSelected
+                // 선택 상태에 따라 버튼 표시 + constraint 갱신
+                clBtns.visibility = if (isSelected) View.VISIBLE else View.GONE
+                val constraintSet = ConstraintSet().apply {
+                    clone(clCourse)
+                    if (isSelected) {
+                        connect(rvPlaces.id, ConstraintSet.BOTTOM, clBtns.id, ConstraintSet.TOP)
+                    } else {
+                        connect(rvPlaces.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM)
+                    }
+                }
+                constraintSet.applyTo(clCourse)
+
+                btnDetail.setOnClickListener { clickDetail(course) }
+
+                /*clCourse.isSelected = isSelected
                 clBtns.visibility = if (isSelected) View.VISIBLE else View.GONE
 
                 val constraintSet = ConstraintSet()
@@ -118,29 +171,61 @@ class RecommendCourseAdapter(
                     )
                 }
 
-                constraintSet.applyTo(clCourse)
+                constraintSet.applyTo(clCourse)*/
 
-                btnDetail.setOnClickListener {
+
+
+               /* btnDetail.setOnClickListener {
                     clickDetail(course)
-                }
+                }*/
             }
+        }
+
+        private fun getTripDuration(departure: String, arrival: String): String {
+            val format = SimpleDateFormat("yyyy-MM-dd", Locale.KOREA) // 서버에서 내려주는 형식 맞추기
+            val depDate = format.parse(departure)
+            val arrDate = format.parse(arrival)
+
+            if (depDate != null && arrDate != null) {
+                val diffInMillis = arrDate.time - depDate.time
+                val days = (diffInMillis / (1000 * 60 * 60 * 24)).toInt() + 1
+                val nights = if (days > 0) days - 1 else 0
+
+                return "${nights}박 ${days}일"
+            }
+            return ""
         }
 
         fun setClickListener(onClick: (Course) -> Unit) {
             binding.clCourse.setOnClickListener {
-                onClick(adapterPosition.takeIf { it != RecyclerView.NO_POSITION }?.let { getItem(it) } ?: return@setOnClickListener)
+                //onClick(adapterPosition.takeIf { it != RecyclerView.NO_POSITION }?.let { getItem(it) } ?: return@setOnClickListener)
             }
         }
 
     }
 }
 
-object RecommendCourseDiffCallback : DiffUtil.ItemCallback<Course>() {
-    override fun areItemsTheSame(oldItem: Course, newItem: Course): Boolean {
-        return oldItem.id == newItem.id // id로 비교 (식별자)
+object RecommendCourseDiffCallback : DiffUtil.ItemCallback<AiCourseRecommendResponseDto>() {
+    /*override fun areItemsTheSame(oldItem: AiCourseRecommendResponseDto, newItem: AiCourseRecommendResponseDto): Boolean {
+        return oldItem.title == newItem.title // id로 비교 (식별자)
     }
 
-    override fun areContentsTheSame(oldItem: Course, newItem: Course): Boolean {
+    override fun areContentsTheSame(oldItem: AiCourseRecommendResponseDto, newItem: AiCourseRecommendResponseDto): Boolean {
         return oldItem == newItem // 데이터 클래스라면 자동 equals 비교 가능
+    }*/
+
+    override fun areItemsTheSame(
+        oldItem: AiCourseRecommendResponseDto,
+        newItem: AiCourseRecommendResponseDto
+    ): Boolean {
+        // 그냥 전체를 equals 비교 (리스트 변경시마다 새로 갱신)
+        return oldItem == newItem
+    }
+
+    override fun areContentsTheSame(
+        oldItem: AiCourseRecommendResponseDto,
+        newItem: AiCourseRecommendResponseDto
+    ): Boolean {
+        return oldItem == newItem
     }
 }

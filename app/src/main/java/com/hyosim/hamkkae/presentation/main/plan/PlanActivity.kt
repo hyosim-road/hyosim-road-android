@@ -3,7 +3,9 @@ package com.hyosim.hamkkae.presentation.main.plan
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.hyosim.hamkkae.databinding.ActivityPlanBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PlanActivity: AppCompatActivity() {
     private lateinit var binding: ActivityPlanBinding
 

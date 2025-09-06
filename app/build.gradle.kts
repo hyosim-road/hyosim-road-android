@@ -34,6 +34,12 @@ android {
             "BASE_URL",
             gradleLocalProperties(rootDir, providers).getProperty("base.url")
         )
+
+        buildConfigField(
+            "String",
+            "AI_URL",
+            gradleLocalProperties(rootDir, providers).getProperty("ai.url")
+        )
     }
 
     buildTypes {
@@ -124,6 +130,9 @@ dependencies {
 
     // 암호화
     implementation("androidx.security:security-crypto:1.1.0-alpha06")
+
+    // lottie
+    implementation("com.airbnb.android:lottie:6.0.0")
 }
 
 kapt {

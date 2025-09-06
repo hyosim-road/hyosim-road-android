@@ -8,10 +8,11 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.hyosim.hamkkae.R
+import com.hyosim.hamkkae.data.response_dto.plan.AiCourseRecommendResponseDto
 import com.hyosim.hamkkae.databinding.ItemTripScheduleBinding
 import com.hyosim.hamkkae.domain.model.TodaySchedule
 
-class RecommendDetailOverviewPreviewAdapter: ListAdapter<TodaySchedule, RecommendDetailOverviewPreviewAdapter.RecommendDetailOverviewPreviewViewHolder>(RecommendDetailOverviewPreviewDiffCallback) {
+class RecommendDetailOverviewPreviewAdapter: ListAdapter<AiCourseRecommendResponseDto.Itinerary, RecommendDetailOverviewPreviewAdapter.RecommendDetailOverviewPreviewViewHolder>(RecommendDetailOverviewPreviewDiffCallback) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -29,24 +30,24 @@ class RecommendDetailOverviewPreviewAdapter: ListAdapter<TodaySchedule, Recommen
 
     inner class RecommendDetailOverviewPreviewViewHolder(private val binding: ItemTripScheduleBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(preview: TodaySchedule) {
+        fun bind(preview: AiCourseRecommendResponseDto.Itinerary) {
             with(binding) {
                 ivBgGray.visibility = View.INVISIBLE
                 ivIcon.load(R.drawable.ic_current_orange)
-                tvPlace.text = preview.place
+               /* tvPlace.text = preview.place
                 tvTime.text = "${preview.startTime} ~ ${preview.endTime}"
-                tvKeyword.text = preview.keyword
+                tvKeyword.text = preview.keyword*/
             }
         }
     }
 }
 
-object RecommendDetailOverviewPreviewDiffCallback : DiffUtil.ItemCallback<TodaySchedule>() {
-    override fun areItemsTheSame(oldItem: TodaySchedule, newItem: TodaySchedule): Boolean {
-        return oldItem.id == newItem.id // id로 비교 (식별자)
+object RecommendDetailOverviewPreviewDiffCallback : DiffUtil.ItemCallback<AiCourseRecommendResponseDto.Itinerary>() {
+    override fun areItemsTheSame(oldItem: AiCourseRecommendResponseDto.Itinerary, newItem: AiCourseRecommendResponseDto.Itinerary): Boolean {
+        return oldItem.day == newItem.day // id로 비교 (식별자)
     }
 
-    override fun areContentsTheSame(oldItem: TodaySchedule, newItem: TodaySchedule): Boolean {
+    override fun areContentsTheSame(oldItem: AiCourseRecommendResponseDto.Itinerary, newItem: AiCourseRecommendResponseDto.Itinerary): Boolean {
         return oldItem == newItem // 데이터 클래스라면 자동 equals 비교 가능
     }
 }

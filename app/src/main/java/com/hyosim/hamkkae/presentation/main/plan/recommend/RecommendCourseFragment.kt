@@ -7,10 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.hyosim.hamkkae.R
 import com.hyosim.hamkkae.databinding.FragmentRecommendCourseBinding
+import com.hyosim.hamkkae.extension.plan.AiCourseRecommendState
+import com.hyosim.hamkkae.extension.plan.CourseRecommendState
+import com.hyosim.hamkkae.presentation.main.plan.PlanViewModel
 import com.hyosim.hamkkae.presentation.main.plan.recommend.adapter.RecommendCourseAdapter
 import timber.log.Timber
 
@@ -20,6 +25,7 @@ class RecommendCourseFragment : Fragment() {
         get() = requireNotNull(_binding) { "home fragment is null" }
 
     private val recommendCourseViewModel: RecommendCourseViewModel by viewModels()
+    private val planViewModel: PlanViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,18 +52,28 @@ class RecommendCourseFragment : Fragment() {
         animator.interpolator = AccelerateDecelerateInterpolator()
         animator.start()
 
-        val recommendCourseAdapter = RecommendCourseAdapter(
-            clickItem = { course ->
-                binding.btnNext.isSelected = true
-            },
-            clickDetail = { course ->
-                findNavController().navigate(R.id.action_recommendCourseFragment_to_recommendDetailFragment)
-            }
-        )
-        binding.rvCourse.adapter = recommendCourseAdapter
-        recommendCourseAdapter.submitList(recommendCourseViewModel.courseList)
+        showCourse()
 
         clickNext()
+    }
+
+    private fun showCourse(){
+        //val currentState = planViewModel.aiCourseRecommendState.value
+        //if(currentState is AiCourseRecommendState.Success){
+            //val courseList = currentState.courseList
+            val recommendCourseAdapter = RecommendCourseAdapter(
+                clickItem = { course ->
+                    binding.btnNext.isSelected = true
+                },
+                clickDetail = { course ->
+                    val action = RecommendCourseFragmentDirections.actionRecommendCourseFragmentToRecommendDetailFragment(course)
+                    findNavController().navigate(action)
+                }
+            )
+            binding.rvCourse.adapter = recommendCourseAdapter
+            recommendCourseAdapter.submitList(recommendCourseViewModel.mockCourses)
+
+       // }
     }
 
     private fun clickNext(){

@@ -176,17 +176,20 @@
     <string name="selected_trip_style">선택된 취향</string>
     <string name="select_trip_style_done_message">여행 스타일이 선택되었어요!</string>
 
+    <!--loading-->
+    <string name="loading">부모님 취향에 맞는 코스를 찾고 있어요%s</string>
+
     <!--recomment_course-->
     <string name="recommend_course_progress_title">3단계: 코스 선택</string>
     <string name="recommend_course_progress">3/4</string>
-    <string name="recommend_course_go_map">지도 보기</string>"
+    <string name="recommend_course_go_map">지도 보기</string>
     <string name="recommend_course_detail">상세보기</string>
     <string name="recommend_course_done">이 코스로 여행 시작하기</string>
     <string name="recommend_course_more">다른 코스 더 보기</string>
 
     <!--detail-->
     <string name="bar_overview">코스 개요</string>
-    <string name="bar_detail">관광지 상세</string>
+    <string name="bar_detail">코스 상세</string>
     <string name="bar_restaurant">맛집 정보</string>
     <string name="bar_accommodation">숙소 정보</string>
     <string name="overview_highlights">코스 하이라이트</string>
