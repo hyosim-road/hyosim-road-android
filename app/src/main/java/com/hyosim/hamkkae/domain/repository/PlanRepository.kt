@@ -8,4 +8,8 @@ interface PlanRepository {
     suspend fun recommendCourse(
         courseRecommendRequestDto: CourseRecommendRequestDto
     ): Result<ApiResponse<CourseRecommendResponseData>>
+
+    suspend fun register(
+        registerRequestDto: CourseRecommendResponseData
+    ):Result<ApiResponse<Int>>
 }

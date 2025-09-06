@@ -18,4 +18,12 @@ class PlanRepositoryImpl @Inject constructor(
             Timber.e("plan repository recommend course fail: $it")
         }
     }
+
+    override suspend fun register(registerRequestDto: CourseRecommendResponseData): Result<ApiResponse<Int>> {
+        return runCatching {
+            planDataSource.register(registerRequestDto)
+        }.onFailure {
+            Timber.e("plan repository register fail: $it")
+        }
+    }
 }

@@ -75,6 +75,10 @@
         android:name="com.hyosim.hamkkae.presentation.main.plan.trip_start.TripStartFragment"
         android:label="trip_start_fragment"
         tools:layout="@layout/fragment_trip_start">
+
+        <argument
+            android:name="course"
+            app:argType="com.hyosim.hamkkae.data.response_dto.plan.AiCourseRecommendResponseDto" />
     </fragment>
 
 

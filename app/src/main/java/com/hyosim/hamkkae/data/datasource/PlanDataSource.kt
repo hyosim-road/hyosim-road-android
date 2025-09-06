@@ -8,4 +8,8 @@ interface PlanDataSource {
     suspend fun recommendCourse(
         courseRecommendRequestDto: CourseRecommendRequestDto
     ): ApiResponse<CourseRecommendResponseData>
+
+    suspend fun register(
+        registerRequestDto: CourseRecommendResponseData
+    ): ApiResponse<Int>
 }

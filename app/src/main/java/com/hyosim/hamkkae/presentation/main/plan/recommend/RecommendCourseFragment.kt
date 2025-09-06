@@ -12,13 +12,16 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.hyosim.hamkkae.R
+import com.hyosim.hamkkae.data.response_dto.plan.AiCourseRecommendResponseDto
 import com.hyosim.hamkkae.databinding.FragmentRecommendCourseBinding
-import com.hyosim.hamkkae.extension.plan.AiCourseRecommendState
-import com.hyosim.hamkkae.extension.plan.CourseRecommendState
+import com.hyosim.hamkkae.extension.plan.RegisterState
 import com.hyosim.hamkkae.presentation.main.plan.PlanViewModel
 import com.hyosim.hamkkae.presentation.main.plan.recommend.adapter.RecommendCourseAdapter
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
+@AndroidEntryPoint
 class RecommendCourseFragment : Fragment() {
     private var _binding: FragmentRecommendCourseBinding? = null
     private val binding: FragmentRecommendCourseBinding
@@ -53,8 +56,6 @@ class RecommendCourseFragment : Fragment() {
         animator.start()
 
         showCourse()
-
-        clickNext()
     }
 
     private fun showCourse(){
@@ -64,6 +65,7 @@ class RecommendCourseFragment : Fragment() {
             val recommendCourseAdapter = RecommendCourseAdapter(
                 clickItem = { course ->
                     binding.btnNext.isSelected = true
+                    clickNext(course)
                 },
                 clickDetail = { course ->
                     val action = RecommendCourseFragmentDirections.actionRecommendCourseFragmentToRecommendDetailFragment(course)
@@ -76,9 +78,34 @@ class RecommendCourseFragment : Fragment() {
        // }
     }
 
-    private fun clickNext(){
+    private fun clickNext(course: AiCourseRecommendResponseDto) {
         binding.btnNext.setOnClickListener {
-            if(binding.btnNext.isSelected) findNavController().navigate(R.id.action_recommendCourseFragment_to_tripStartFragment)
+            if(binding.btnNext.isSelected) {
+                register()
+                recommendCourseViewModel.register(planViewModel.toRequestDto(), course)
+            }
+        }
+    }
+
+    private fun register(){
+        lifecycleScope.launch {
+            recommendCourseViewModel.registerState.collect { state ->
+                when (state) {
+                    is RegisterState.Success -> {
+                        val action = RecommendCourseFragmentDirections
+                            .actionRecommendCourseFragmentToTripStartFragment(state.course)
+
+                        findNavController().navigate(action)
+
+                    }
+
+                    is RegisterState.Error -> {
+                    }
+
+                    is RegisterState.Loading -> {
+                    }
+                }
+            }
         }
     }
 
