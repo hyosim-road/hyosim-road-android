@@ -11,4 +11,9 @@ interface PlanService {
     suspend fun recommendCourse(
         @Body courseRecommendRequestDto: CourseRecommendRequestDto
     ): ApiResponse<CourseRecommendResponseData>
+
+    @POST("/trip/register")
+    suspend fun register(
+        @Body registerRequestDto: CourseRecommendResponseData
+    ):ApiResponse<Int>
 }

@@ -1,32 +1,113 @@
 package com.hyosim.hamkkae.presentation.main.plan.recommend
 
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.hyosim.hamkkae.core.BaseViewModel
+import com.hyosim.hamkkae.data.request_dto.plan.CourseRecommendRequestDto
 import com.hyosim.hamkkae.data.response_dto.plan.AiCourseRecommendResponseDto
-import com.hyosim.hamkkae.domain.model.Course
+import com.hyosim.hamkkae.data.response_dto.plan.CourseRecommendResponseData
+import com.hyosim.hamkkae.domain.repository.PlanRepository
+import com.hyosim.hamkkae.extension.plan.CourseRecommendState
+import com.hyosim.hamkkae.extension.plan.RegisterState
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
+import okhttp3.ResponseBody
+import retrofit2.HttpException
+import timber.log.Timber
+import javax.inject.Inject
 
-class RecommendCourseViewModel : ViewModel() {
-    val courseList = listOf(
-        Course(
-            1, "경주 역사문화 코스", listOf("사찰", "역사", "문화"),
-            listOf(
-                Course.Place(1, "불국사", "09:00 ~ 11:00"),
-                Course.Place(2, "석굴암", "11:00 ~ 13:00"),
-                Course.Place(3, "첨성대", "13:00 ~ 15:00"),
-                Course.Place(4, "동궁과 월지", "15:00 ~ 17:00"),
-            ), "2박 3일"
-        ),
-        Course(
-            2, "부산 바다와 미식 코스", // 코스 이름
-            listOf("해변", "맛집", "야경", "시장"), // 태그
-            listOf( // 장소 목록
-                Course.Place(1, "해운대 해수욕장", "10:00 ~ 12:00"),
-                Course.Place(2, "자갈치 시장 (점심식사)", "12:30 ~ 14:00"),
-                Course.Place(3, "감천문화마을", "14:30 ~ 16:30"),
-                Course.Place(4, "더베이 101 (야경)", "19:00 ~ 21:00")
-            ),
-            "1박 2일" // 여행 기간
+@HiltViewModel
+class RecommendCourseViewModel @Inject constructor(
+    private val planRepository: PlanRepository,
+): BaseViewModel() {
+    private var _registerState =
+        MutableStateFlow<RegisterState>(RegisterState.Loading)
+    val registerState: StateFlow<RegisterState> = _registerState.asStateFlow()
+
+    fun register(planData:CourseRecommendRequestDto, course: AiCourseRecommendResponseDto){
+        val request = toRequestDto(planData, course)
+
+        viewModelScope.launch {
+            planRepository.register(request).onSuccess { response ->
+                _registerState.value = RegisterState.Success(course)
+            }.onFailure {
+                _registerState.value = RegisterState.Error("Error response failure: ${it.message}")
+                if (it is HttpException) {
+                    try {
+                        val errorBody: ResponseBody? = it.response()?.errorBody()
+                        val errorBodyString = errorBody?.string() ?: ""
+                        parseHttpError(errorBodyString)
+                    } catch (e: Exception) {
+                        // JSON 파싱 실패 시 로깅
+                        Timber.e("Error parsing error body: ${e}")
+                        _registerState.emit(RegisterState.Error("알 수 없는 에러가 발생했습니다."))
+                    }
+                } else {
+                    _registerState.emit(RegisterState.Error("네트워크 에러 또는 알 수 없는 오류: ${it.message}"))
+                }
+            }
+        }
+    }
+
+    private fun toRequestDto(planData:CourseRecommendRequestDto, course: AiCourseRecommendResponseDto): CourseRecommendResponseData {
+        return CourseRecommendResponseData(
+            departureDate = planData.departureDate,
+            arrivalDate = planData.arrivalDate,
+            people = planData.numberOfPeople,
+            budgetRange = planData.budgetRange,
+            travelStyle = planData.travelStyle,
+            title = "추천 코스",    // responsedto에서 가져와야함
+            plan = CourseRecommendResponseData.Plan(
+                itinerary = course.itinerary.map { day ->
+                    CourseRecommendResponseData.Plan.ItineraryDay(
+                        day = day.day,
+                        attractions = day.attractions.map { attraction ->
+                            CourseRecommendResponseData.Plan.ItineraryDay.Attraction(
+                                name = attraction.name,
+                                latitude = attraction.latitude,
+                                longitude = attraction.longitude,
+                                startTime = attraction.startTime,
+                                endTime = attraction.endTime,
+                                order = attraction.order,
+                                description = attraction.description,
+                                address = attraction.address,
+                                phone = attraction.phone,
+                                priceKrw = attraction.priceKrw
+                            )
+                        }
+                    )
+                },
+                restaurants = course.restaurants.map { res ->
+                    CourseRecommendResponseData.Plan.Restaurant(
+                        name = res.name,
+                        estimatedCostPerPersonKrw = res.estimatedCostPerPersonKrw,
+                        address = res.address,
+                        latitude = res.latitude,
+                        longitude = res.longitude,
+                        description = res.description,
+                        signatureMenu = res.signatureMenu,
+                        phone = res.phone
+                    )
+                },
+                lodgings = course.lodgings.map { lod ->
+                    CourseRecommendResponseData.Plan.Lodging(
+                        name = lod.name,
+                        pricePerNightKrw = lod.pricePerNightKrw,
+                        address = lod.address,
+                        latitude = lod.latitude,
+                        longitude = lod.longitude,
+                        description = lod.description,
+                        checkIn = lod.checkIn,
+                        checkOut = lod.checkOut,
+                        amenities = lod.amenities,
+                        phone = lod.phone
+                    )
+                }
+            )
         )
-    )
+    }
 
     val mockCourses: List<AiCourseRecommendResponseDto> = listOf(
         // --------------------- 첫 번째 코스 ---------------------

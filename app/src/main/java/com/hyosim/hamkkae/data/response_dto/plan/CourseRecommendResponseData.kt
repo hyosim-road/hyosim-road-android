@@ -51,11 +51,11 @@ data class CourseRecommendResponseData (
                 @SerialName("order")
                 val order: Int,
                 @SerialName("description")
-                val description: String,
+                val description: String?,
                 @SerialName("address")
                 val address: String,
                 @SerialName("phone")
-                val phone: String,
+                val phone: String?,
                 @SerialName("priceKrw")
                 val priceKrw: Int
             )
@@ -73,11 +73,11 @@ data class CourseRecommendResponseData (
             @SerialName("longitude")
             val longitude: Double,
             @SerialName("description")
-            val description: String,
+            val description: String?,
             @SerialName("signatureMenu")
-            val signatureMenu: String,
+            val signatureMenu: String?,
             @SerialName("phone")
-            val phone: String
+            val phone: String?
         )
         @Serializable
         data class Lodging(
@@ -92,7 +92,7 @@ data class CourseRecommendResponseData (
             @SerialName("longitude")
             val longitude: Double,
             @SerialName("description")
-            val description: String,
+            val description: String?,
             @SerialName("checkIn")
             val checkIn: String, // "HH:mm:ss" 형식의 시간 문자열
             @SerialName("checkOut")
@@ -100,7 +100,7 @@ data class CourseRecommendResponseData (
             @SerialName("amenities")
             val amenities: List<String>,
             @SerialName("phone")
-            val phone: String
+            val phone: String?
         )
     }
 }

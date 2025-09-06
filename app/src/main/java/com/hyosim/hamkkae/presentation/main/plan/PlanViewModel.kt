@@ -79,7 +79,7 @@ class PlanViewModel @Inject constructor(
         _travelStyle.value = style
     }
 
-    private fun toRequestDto(): CourseRecommendRequestDto {
+    fun toRequestDto(): CourseRecommendRequestDto {
         return CourseRecommendRequestDto(
             departureDate = _departureDate.value.orEmpty(),
             arrivalDate = _arrivalDate.value.orEmpty(),

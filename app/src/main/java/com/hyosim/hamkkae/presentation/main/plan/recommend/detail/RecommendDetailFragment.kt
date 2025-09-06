@@ -15,8 +15,10 @@ import com.hyosim.hamkkae.R
 import com.hyosim.hamkkae.databinding.FragmentRecommendDetailBinding
 import com.hyosim.hamkkae.presentation.main.plan.PlanViewModel
 import com.hyosim.hamkkae.presentation.main.plan.recommend.adapter.RecommendCourseKeywordAdapter
+import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
+@AndroidEntryPoint
 class RecommendDetailFragment : Fragment() {
     private var _binding: FragmentRecommendDetailBinding? = null
     private val binding: FragmentRecommendDetailBinding

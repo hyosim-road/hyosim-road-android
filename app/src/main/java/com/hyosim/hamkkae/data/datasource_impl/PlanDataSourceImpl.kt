@@ -11,4 +11,5 @@ class PlanDataSourceImpl  @Inject constructor(
     private val planService: PlanService
 ): PlanDataSource{
     override suspend fun recommendCourse(courseRecommendRequestDto: CourseRecommendRequestDto): ApiResponse<CourseRecommendResponseData> = planService.recommendCourse(courseRecommendRequestDto)
+    override suspend fun register(registerRequestDto: CourseRecommendResponseData): ApiResponse<Int> = planService.register(registerRequestDto)
 }
