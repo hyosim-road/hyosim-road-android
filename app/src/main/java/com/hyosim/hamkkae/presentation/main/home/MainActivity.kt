@@ -10,9 +10,13 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.lifecycle.VIEW_MODEL_STORE_OWNER_KEY
 import androidx.lifecycle.lifecycleScope
 import com.hyosim.hamkkae.R
+import com.hyosim.hamkkae.data.response_dto.home.ProgressTripResponseDto
 import com.hyosim.hamkkae.databinding.ActivityMainBinding
+import com.hyosim.hamkkae.domain.model.TodaySchedule
+import com.hyosim.hamkkae.extension.home.ProgressTripState
 import com.hyosim.hamkkae.presentation.main.family_conversation.FamilyConversationActivity
 import com.hyosim.hamkkae.presentation.main.home.adapter.today_schedule.TodayScheduleAdapter
 import com.hyosim.hamkkae.presentation.main.home.adapter.trip_record.TripRecordAdapter
@@ -22,11 +26,18 @@ import com.hyosim.hamkkae.presentation.main.trip_continue.TripDetailActivity
 import com.hyosim.hamkkae.presentation.main.trip_records.TripRecordsActivity
 import com.hyosim.hamkkae.presentation.main.upload_photo.UploadPhotoActivity
 import com.hyosim.hamkkae.presentation.main.setting.SettingActivity
+import com.hyosim.hamkkae.util.StateConstants.TYPE_BEFORE_STARTING
+import com.hyosim.hamkkae.util.StateConstants.TYPE_COMPLETE
+import com.hyosim.hamkkae.util.StateConstants.TYPE_IN_PROCESS
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.text.SimpleDateFormat
+import java.util.Locale
 import kotlin.jvm.java
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val mainViewModel: MainViewModel by viewModels()
@@ -49,25 +60,49 @@ class MainActivity : AppCompatActivity() {
                 if (result.resultCode == RESULT_OK) {
                     // PlanActivity → Trip 완료 후 돌아온 경우
                     Timber.d("main으로 돌아옴!")
-                    setVisibilityPlan(true)
+                    mainViewModel.progressStateLoading()
+                    mainViewModel.progressTrip()
+                    //setVisibilityPlan(true, state.course)
                 }
             }
 
         binding.btnPlan.text = getString(R.string.main_plan_first_btn)
         binding.btnPlan.isSelected = true
 
-        getTodaySchedule()
         //getRecents()
-        getTripRecords()
+        //getTripRecords()
 
-        setVisibilityPlan(false)
+        checkProgressTrip()
+        //setVisibilityPlan(false, state.course)
         showQuestion(false)
         clickPlan()
         clickSetting()
         clickTripRecords()
     }
 
-    private fun setVisibilityPlan(plan: Boolean) {
+    private fun checkProgressTrip() {
+        lifecycleScope.launch {
+            mainViewModel.progressTripState.collect { state ->
+                when (state) {
+                    is ProgressTripState.Success -> {
+                        setVisibilityPlan(true, state.course)
+                    }
+
+                    is ProgressTripState.Error -> {
+                        setVisibilityPlan(false, null)
+                    }
+
+                    is ProgressTripState.Loading -> {
+                        setVisibilityPlan(false, null)
+                    }
+                }
+            }
+        }
+
+        mainViewModel.progressTrip()
+    }
+
+    private fun setVisibilityPlan(plan: Boolean, course: ProgressTripResponseDto?) {
         Timber.d("setVisibilityPlan 호출: plan = $plan")
         val constraintSet = ConstraintSet()
         constraintSet.clone(binding.clMain)
@@ -83,7 +118,7 @@ class MainActivity : AppCompatActivity() {
                 cvPlan.visibility = View.GONE
                 btnTripDetail.isSelected = true
 
-                setTrip()
+                setTrip(course!!)
                 clickTripDetail()
                 clickUpload()
                 clickAnswer()
@@ -132,42 +167,206 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setTrip(){
-        with(binding){
-            tvTripCurrentLocationTitle.text = getString(R.string.main_trip_current_location, "불국사")
-            tvTripDay.text = getString(R.string.main_trip_current_day, 1)
+    private fun setTrip(course: ProgressTripResponseDto) {
+        val now = System.currentTimeMillis()
+        val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.KOREA)
+        val dateTimeFormatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.KOREA)
+
+        val departureDayStr = course.itinerary.first().day
+        val arrivalDayStr = course.itinerary.last().day
+        val departureDay = dateFormatter.parse(departureDayStr)?.time
+
+        var currentLocation: String? = null
+        var currentDayIndex: Int? = null
+        var nextAttraction: ProgressTripResponseDto.Itinerary.Attraction? = null
+        var nextDayIndex: Int? = null
+
+        // 🚩 출발 전이라면 "여행 준비 중" 처리
+        if (departureDay != null && now < departureDay) {
+            with(binding) {
+                tvTripCurrentLocationTitle.text =
+                    getString(R.string.main_trip_preparing) // "여행 준비 중"
+                tvTripDay.text = "" //getString(R.string.main_trip_expected_day1)
+
+                // 날짜는 그대로 보여줌
+                tvTripDate.text = getString(
+                    R.string.main_trip_record_during,
+                    departureDayStr,
+                    arrivalDayStr
+                )
+            }
+            getTodaySchedule(0, course.itinerary[0].attractions)
+            return
         }
+
+        Timber.d("course: $course")
+
+        // 🚩 출발 후 일정 처리
+        course.itinerary.forEachIndexed { index, itinerary ->
+            itinerary.attractions.forEach { attraction ->
+                val start = dateTimeFormatter.parse(attraction.startTime)?.time
+                val end = dateTimeFormatter.parse(attraction.endTime)?.time
+
+                if (start != null && end != null) {
+                    when {
+                        now in start..end -> {
+                            currentLocation = attraction.name
+                            currentDayIndex = index + 1
+                            return@forEachIndexed
+                        }
+
+                        start > now -> {
+                            if (nextAttraction == null || start < dateTimeFormatter.parse(
+                                    nextAttraction!!.startTime
+                                )?.time!!
+                            ) {
+                                nextAttraction = attraction
+                                nextDayIndex = index + 1
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
+        with(binding) {
+            when {
+                currentLocation != null -> {
+                    tvTripCurrentLocationTitle.text =
+                        getString(R.string.main_trip_current_location, currentLocation)
+                    tvTripDay.text =
+                        getString(R.string.main_trip_current_day, currentDayIndex ?: 0)
+                    tvTodaySchedule.text = getString(R.string.main_today_schedule)
+
+                    // 오늘 일정 전달
+                    currentDayIndex?.let { dayIdx ->
+                        getTodaySchedule(dayIdx, course.itinerary[currentDayIndex - 1].attractions)
+                    }
+                }
+
+                nextAttraction != null -> {
+                    tvTripCurrentLocationTitle.text = getString(R.string.main_trip_all_done) // "오늘 일정: 모두 완료 ✅"
+                    tvTripDay.text =
+                        getString(R.string.main_trip_current_day, nextDayIndex ?: 0)
+                    tvTodaySchedule.text = getString(R.string.main_tomorrow_schedule)
+
+                    val todayIndex = nextDayIndex ?: 1
+                    getTodaySchedule(todayIndex, course.itinerary[todayIndex - 1].attractions)
+                }
+
+                else -> {
+                    tvTripCurrentLocationTitle.text =
+                        getString(R.string.main_trip_current_location, "일정 없음")
+                    tvTripDay.text =
+                        getString(R.string.main_trip_current_day, 0)
+                }
+            }
+
+            tvTripDate.text = getString(
+                R.string.main_trip_record_during,
+                departureDayStr,
+                arrivalDayStr
+            )
+        }
+
+        setProgress(course)
     }
 
 
-    private fun getTodaySchedule() {
+    private fun setProgress(course: ProgressTripResponseDto) {
+        val now = System.currentTimeMillis()
+        val dateTimeFormatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.KOREA)
+
+        // 전체 attraction 수
+        val allAttractions = course.itinerary.flatMap { it.attractions }
+        val totalCount = allAttractions.size
+
+        // 끝난 일정 수
+        val completedCount = allAttractions.count { attraction ->
+            val end = dateTimeFormatter.parse(attraction.endTime)?.time
+            end != null && now > end
+        }
+
+        // 진행률 계산
+        val progressPercent =
+            if (totalCount > 0) (completedCount * 100 / totalCount) else 0
+
+        with(binding) {
+            tvTripProgress.text = "$progressPercent%"
+            pbTrip.progress = progressPercent
+        }
+    }
+
+    private fun getTodaySchedule(
+        day: Int,
+        planList: List<ProgressTripResponseDto.Itinerary.Attraction>
+    ) {
+        // 진행 중이면 '오늘의 일정', 시작 전이면 '예정된 Day 1 일정'을 보여줌
+        with(binding) {
+            if (day > 0) {
+                //tvTodaySchedule.text = getString(R.string.main_today_schedule)
+                tvScheduleDay.visibility = View.VISIBLE
+                tvScheduleDay.text = "Day $day"
+            } else {
+                tvTodaySchedule.text = getString(R.string.main_trip_expected_day1)
+                tvScheduleDay.visibility = View.GONE
+            }
+        }
+
+        Timber.d("planList size = ${planList.size}")
+
+        val now = System.currentTimeMillis()
+        val dateTimeFormatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.KOREA)
+
+        // Attraction -> TodaySchedule 변환
+        val todaySchedules = planList.mapIndexed { index, attraction ->
+            val start = dateTimeFormatter.parse(attraction.startTime)?.time ?: 0L
+            val end = dateTimeFormatter.parse(attraction.endTime)?.time ?: 0L
+
+            val status = when {
+                now in start..end -> TYPE_IN_PROCESS
+                now > end -> TYPE_COMPLETE
+                else -> TYPE_BEFORE_STARTING
+            }
+
+            TodaySchedule(
+                id = index + 1,                  // 일정 순서
+                place = attraction.name,         // 장소명
+                keyword = attraction.address,    // 키워드 대신 address 임시 사용
+                startTime = attraction.startTime.substring(11, 16), // HH:mm
+                endTime = attraction.endTime.substring(11, 16),
+                status = status
+            )
+        }
+
         val todayScheduleAdapter = TodayScheduleAdapter(false)
         binding.rvMainSchedule.adapter = todayScheduleAdapter
-        todayScheduleAdapter.submitList(mainViewModel.todayScheduleList)
+        todayScheduleAdapter.submitList(todaySchedules)
     }
 
-   /* private fun getRecents() {
-        val recentAdapter = RecentAdapter()
-        binding.rvMainRecent.adapter = recentAdapter
-        val list = mainViewModel.recentActivityList
-        Timber.d("recentActivityList: $list")
-        recentAdapter.submitList(list)
+    /* private fun getRecents() {
+         val recentAdapter = RecentAdapter()
+         binding.rvMainRecent.adapter = recentAdapter
+         val list = mainViewModel.recentActivityList
+         Timber.d("recentActivityList: $list")
+         recentAdapter.submitList(list)
 
-        with(binding) {
-            rvMainRecent.visibility = View.GONE
-            tvRecentNoContent.visibility = View.VISIBLE
-        }
-    }*/
+         with(binding) {
+             rvMainRecent.visibility = View.GONE
+             tvRecentNoContent.visibility = View.VISIBLE
+         }
+     }*/
 
-    private fun getTripRecords() {
-        val tripRecordAdapter = TripRecordAdapter()
-        binding.rvMainTripRecord.adapter = tripRecordAdapter
-        tripRecordAdapter.submitList(mainViewModel.tripRecordList)
-        with(binding) {
-            rvMainTripRecord.visibility = View.GONE
-            tvTripRecordNoContent.visibility = View.VISIBLE
-        }
-    }
+    /* private fun getTripRecords() {
+         val tripRecordAdapter = TripRecordAdapter()
+         binding.rvMainTripRecord.adapter = tripRecordAdapter
+         tripRecordAdapter.submitList(mainViewModel.tripRecordList)
+         with(binding) {
+             rvMainTripRecord.visibility = View.GONE
+             tvTripRecordNoContent.visibility = View.VISIBLE
+         }
+     }*/
 
     private fun showQuestion(isShow: Boolean) {
         val constraintSet = ConstraintSet()
@@ -230,16 +429,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun clickUpload() {
-        binding.btnUpload.setOnClickListener {
-            // 새로 만든 메서드 호출
-            navigateTo(UploadPhotoActivity::class.java)
-        }
+        /* binding.btnUpload.setOnClickListener {
+             // 새로 만든 메서드 호출
+             navigateTo(UploadPhotoActivity::class.java)
+         }*/
     }
 
-    private fun clickPhotoAlbum(){
-        binding.clAlbum.setOnClickListener {
-            navigateTo(PhotoAlbumActivity::class.java)
-        }
+    private fun clickPhotoAlbum() {
+        /* binding.clAlbum.setOnClickListener {
+             navigateTo(PhotoAlbumActivity::class.java)
+         }*/
     }
 
     private fun clickSetting() {
@@ -251,14 +450,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun clickTripRecords(){
-        binding.btnTripRecordAll.setOnClickListener {
-            Timber.d("click trip detail!")
-            navigateTo(TripRecordsActivity::class.java)
-        }
+    private fun clickTripRecords() {
+        /* binding.btnTripRecordAll.setOnClickListener {
+             Timber.d("click trip detail!")
+             navigateTo(TripRecordsActivity::class.java)
+         }*/
     }
 
-    private fun navigateTo(destination: Class<*>){
+    private fun navigateTo(destination: Class<*>) {
         val intent = Intent(this, destination)
         startActivity(intent)
     }

@@ -108,7 +108,11 @@
     <string name="main_question_answer">답변하기</string>
     <string name="main_question_later">나중에</string>
 
+    <string name="main_trip_preparing">여행 준비 중</string>
+    <string name="main_trip_expected_day1">예정된 Day 1 일정</string>
     <string name="main_trip_current_location">현재위치: %s</string>
+    <string name="main_trip_next_location">다음위치: %s</string>
+    <string name="main_trip_all_done">오늘 일정: 모두 완료 ✅</string>
     <string name="main_trip_current_day">• Day %d</string>
     <string name="main_trip_photo">사진</string>
     <string name="main_trip_answers">대화</string>
@@ -119,6 +123,7 @@
     <string name="main_trip_upload">사진 업로드</string>
 
     <string name="main_today_schedule">오늘의 일정</string>
+    <string name="main_tomorrow_schedule">내일의 일정</string>
     <string name="main_time">%s ~ %s</string>
     <string name="main_current">현재</string>
 

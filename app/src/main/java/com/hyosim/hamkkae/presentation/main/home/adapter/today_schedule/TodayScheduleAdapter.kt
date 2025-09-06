@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import coil.size.ViewSizeResolver
 import com.hyosim.hamkkae.R
 import com.hyosim.hamkkae.databinding.ItemTripScheduleBinding
 import com.hyosim.hamkkae.domain.model.TodaySchedule
@@ -49,10 +50,11 @@ class TodayScheduleAdapter(
                     }
                 }
                 tvPlace.text = schedule.place
-                tvKeyword.text = schedule.keyword
+                //tvKeyword.text = schedule.keyword
                 tvTime.text = binding.root.context.getString(R.string.main_time, schedule.startTime, schedule.endTime)
 
                 if(!bgVisibility) ivBgGray.visibility = View.INVISIBLE
+                tvKeyword.visibility= View.GONE
             }
         }
     }

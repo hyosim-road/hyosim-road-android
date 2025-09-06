@@ -114,60 +114,60 @@ class RecommendCourseViewModel @Inject constructor(
         AiCourseRecommendResponseDto(
             itinerary = listOf(
                 AiCourseRecommendResponseDto.Itinerary(
-                    day = "2025-09-10",
+                    day = "2025-09-06",
                     attractions = listOf(
                         AiCourseRecommendResponseDto.Itinerary.Attraction(
                             address = "강원특별자치도 강릉시 성산면 삼포암길 133",
                             description = null,
-                            endTime = "2025-09-10T12:00:00",
+                            endTime = "2025-09-06T12:00:00",
                             latitude = 37.7149097631,
                             longitude = 128.7905413133,
                             name = "국립대관령자연휴양림",
                             order = 1,
                             phone = "",
                             priceKrw = 0,
-                            startTime = "2025-09-10T10:00:00"
+                            startTime = "2025-09-06T10:00:00"
                         ),
                         AiCourseRecommendResponseDto.Itinerary.Attraction(
                             address = "강원특별자치도 평창군 대관령면 대관령마루길 483-32",
                             description = null,
-                            endTime = "2025-09-10T14:30:00",
+                            endTime = "2025-09-06T18:30:00",
                             latitude = 37.6876427505,
                             longitude = 128.7533288363,
                             name = "대관령양떼목장",
                             order = 2,
                             phone = "",
                             priceKrw = 0,
-                            startTime = "2025-09-10T13:30:00"
+                            startTime = "2025-09-06T16:10:00"
                         )
                     )
                 ),
                 AiCourseRecommendResponseDto.Itinerary(
-                    day = "2025-09-11",
+                    day = "2025-09-07",
                     attractions = listOf(
                         AiCourseRecommendResponseDto.Itinerary.Attraction(
                             address = "강원특별자치도 강릉시 성산면 어흘리",
                             description = null,
-                            endTime = "2025-09-11T12:00:00",
+                            endTime = "2025-09-07T12:00:00",
                             latitude = 37.7099545878,
                             longitude = 128.7806256921,
                             name = "제왕산/능경봉",
                             order = 1,
                             phone = "",
                             priceKrw = 0,
-                            startTime = "2025-09-11T10:00:00"
+                            startTime = "2025-09-07T10:00:00"
                         ),
                         AiCourseRecommendResponseDto.Itinerary.Attraction(
                             address = "강원특별자치도 평창군 대관령로 94 대관령 원예농협",
                             description = null,
-                            endTime = "2025-09-11T14:30:00",
+                            endTime = "2025-09-07T14:30:00",
                             latitude = 37.6726296948,
                             longitude = 128.7066362804,
                             name = "바우파머스몰(대관령마켓)",
                             order = 2,
                             phone = "010-7742-7808",
                             priceKrw = 0,
-                            startTime = "2025-09-11T13:30:00"
+                            startTime = "2025-09-07T13:30:00"
                         )
                     )
                 )
