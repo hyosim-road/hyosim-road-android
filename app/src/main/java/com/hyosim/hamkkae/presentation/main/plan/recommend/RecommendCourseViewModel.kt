@@ -128,11 +128,56 @@ class RecommendCourseViewModel : ViewModel() {
                     "",
                     null
                 ),
-                AiCourseRecommendResponseDto.Restaurant("강원특별자치도 평창군 대관령면 대관령마루길 347", null, 20000, 37.685315007, 128.7412077776, "남경식당", "033-335-5891", null),
-                AiCourseRecommendResponseDto.Restaurant("강원특별자치도 강릉시 범일로579번길 59", null, 20000, 37.735625703, 128.8764607133, "청송식당", "010-9057-9252", null),
-                AiCourseRecommendResponseDto.Restaurant("강원특별자치도 평창군 대관령면 송천3길 10", null, 20000, 37.6714188107, 128.7111331341, "넘버나인정육식당", "", null),
-                AiCourseRecommendResponseDto.Restaurant("강원특별자치도 평창군 대관령면 횡계2길 11-1", null, 20000, 37.673293553, 128.7090166011, "남원식당", "", null),
-                AiCourseRecommendResponseDto.Restaurant("강원특별자치도 평창군 대관령면 횡계길 24", null, 20000, 37.6732963253, 128.7087471805, "수미카페", "", null)
+                AiCourseRecommendResponseDto.Restaurant(
+                    "강원특별자치도 평창군 대관령면 대관령마루길 347",
+                    null,
+                    20000,
+                    37.685315007,
+                    128.7412077776,
+                    "남경식당",
+                    "033-335-5891",
+                    null
+                ),
+                AiCourseRecommendResponseDto.Restaurant(
+                    "강원특별자치도 강릉시 범일로579번길 59",
+                    null,
+                    20000,
+                    37.735625703,
+                    128.8764607133,
+                    "청송식당",
+                    "010-9057-9252",
+                    null
+                ),
+                AiCourseRecommendResponseDto.Restaurant(
+                    "강원특별자치도 평창군 대관령면 송천3길 10",
+                    null,
+                    20000,
+                    37.6714188107,
+                    128.7111331341,
+                    "넘버나인정육식당",
+                    "",
+                    null
+                ),
+                AiCourseRecommendResponseDto.Restaurant(
+                    "강원특별자치도 평창군 대관령면 횡계2길 11-1",
+                    null,
+                    20000,
+                    37.673293553,
+                    128.7090166011,
+                    "남원식당",
+                    "",
+                    null
+                ),
+                AiCourseRecommendResponseDto.Restaurant(
+                    "강원특별자치도 평창군 대관령면 횡계길 24",
+                    null,
+                    20000,
+                    37.6732963253,
+                    128.7087471805,
+                    "수미카페",
+                    "",
+                    null
+                )
             )
         ),
 
@@ -211,7 +256,18 @@ class RecommendCourseViewModel : ViewModel() {
                     "033-635-4001",
                     160000
                 ),
-                AiCourseRecommendResponseDto.Lodging("11:00:00", "강원특별자치도 속초시 설악산로836번길 6", emptyList(), "15:00:00", null, 38.1684962792, 128.5171325821, "뉴스타트설악리조트[한국관광 품질인증/Korea Quality]", "033-637-2239", 160000)
+                AiCourseRecommendResponseDto.Lodging(
+                    "11:00:00",
+                    "강원특별자치도 속초시 설악산로836번길 6",
+                    emptyList(),
+                    "15:00:00",
+                    null,
+                    38.1684962792,
+                    128.5171325821,
+                    "뉴스타트설악리조트[한국관광 품질인증/Korea Quality]",
+                    "033-637-2239",
+                    160000
+                )
             ),
             restaurants = listOf(
                 AiCourseRecommendResponseDto.Restaurant(
@@ -224,11 +280,56 @@ class RecommendCourseViewModel : ViewModel() {
                     "",
                     null
                 ),
-                AiCourseRecommendResponseDto.Restaurant("강원특별자치도 양양군 서면 설악로 1417-7", null, 20000, 38.076131755, 128.5032672614, "물레방아식당", "", null),
-                AiCourseRecommendResponseDto.Restaurant("강원특별자치도 양양군 낙산사로 37-2", null, 20000, 38.120976219, 128.6299238227, "전라도식당", "", null),
-                AiCourseRecommendResponseDto.Restaurant("강원특별자치도 속초시 먹거리4길 21", null, 20000, 38.1957108631, 128.5730322116, "완도회식당", "", null),
-                AiCourseRecommendResponseDto.Restaurant("강원특별자치도 속초시 엑스포로 10-3", null, 20000, 38.1915116955, 128.5907196256, "프리미엄 이가한우 정육참숯식당", "", null),
-                AiCourseRecommendResponseDto.Restaurant("강원특별자치도 속초시 중앙로108번길 22-1", null, 20000, 38.201027209, 128.5883667641, "후포식당", "", null)
+                AiCourseRecommendResponseDto.Restaurant(
+                    "강원특별자치도 양양군 서면 설악로 1417-7",
+                    null,
+                    20000,
+                    38.076131755,
+                    128.5032672614,
+                    "물레방아식당",
+                    "",
+                    null
+                ),
+                AiCourseRecommendResponseDto.Restaurant(
+                    "강원특별자치도 양양군 낙산사로 37-2",
+                    null,
+                    20000,
+                    38.120976219,
+                    128.6299238227,
+                    "전라도식당",
+                    "",
+                    null
+                ),
+                AiCourseRecommendResponseDto.Restaurant(
+                    "강원특별자치도 속초시 먹거리4길 21",
+                    null,
+                    20000,
+                    38.1957108631,
+                    128.5730322116,
+                    "완도회식당",
+                    "",
+                    null
+                ),
+                AiCourseRecommendResponseDto.Restaurant(
+                    "강원특별자치도 속초시 엑스포로 10-3",
+                    null,
+                    20000,
+                    38.1915116955,
+                    128.5907196256,
+                    "프리미엄 이가한우 정육참숯식당",
+                    "",
+                    null
+                ),
+                AiCourseRecommendResponseDto.Restaurant(
+                    "강원특별자치도 속초시 중앙로108번길 22-1",
+                    null,
+                    20000,
+                    38.201027209,
+                    128.5883667641,
+                    "후포식당",
+                    "",
+                    null
+                )
             )
         ),
 

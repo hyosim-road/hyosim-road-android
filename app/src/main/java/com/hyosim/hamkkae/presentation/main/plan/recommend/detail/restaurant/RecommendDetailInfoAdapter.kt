@@ -18,6 +18,8 @@ import com.hyosim.hamkkae.R
 import com.hyosim.hamkkae.databinding.ItemRecommendDetailInfoBinding
 import com.hyosim.hamkkae.databinding.ItemTextBinding
 import com.hyosim.hamkkae.domain.model.Info
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class RecommendDetailInfoAdapter(
     private val category: String,
@@ -49,9 +51,9 @@ class RecommendDetailInfoAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(info: Info) {
             with(binding) {
-                ivImage.load(info.image)
+                ivImage.load(R.drawable.image_trip)
 
-                tvType.text = info.type
+                //tvType.text = info.type
                 tvName.text = info.name
                 tvCost.text = info.cost
                 tvLocation.text = info.location
@@ -62,9 +64,7 @@ class RecommendDetailInfoAdapter(
 
                 rvAddition.layoutManager = createFlexboxLayoutManager(binding.root.context)
 
-
                 rvOption.layoutManager = createFlexboxLayoutManager(binding.root.context)
-
 
                 rvAddition.adapter = additionAdapter
                 rvOption.adapter = optionAdapter
@@ -73,18 +73,30 @@ class RecommendDetailInfoAdapter(
                     clCheckin.visibility = View.VISIBLE
                     clCheckout.visibility = View.VISIBLE
 
-                    tvCheckin.text = info.checkin
-                    tvCheckout.text = info.checkout
-
+                    tvCheckin.text = formatTime(info.checkin)
+                    tvCheckout.text = formatTime(info.checkout)
 
                     val params = tvAddition.layoutParams as ConstraintLayout.LayoutParams
                     params.topToBottom = R.id.cl_checkin
                     tvAddition.layoutParams = params
+                    binding.tvAddition.visibility = View.GONE
                 }
 
                 btnMap.setOnClickListener {
                     clickMap()
                 }
+            }
+        }
+
+        private fun formatTime(time: String?): String {
+            return try {
+                if (time.isNullOrBlank()) return ""
+                val inputFormat = SimpleDateFormat("HH:mm:ss", Locale.KOREA)
+                val outputFormat = SimpleDateFormat("HH:mm", Locale.KOREA)
+                val date = inputFormat.parse(time)
+                date?.let { outputFormat.format(it) } ?: ""
+            } catch (e: Exception) {
+                ""
             }
         }
 

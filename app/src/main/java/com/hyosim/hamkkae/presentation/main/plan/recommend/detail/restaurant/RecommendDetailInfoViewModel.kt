@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.hyosim.hamkkae.domain.model.Info
 
 class RecommendDetailInfoViewModel : ViewModel() {
-    val restaurantList = listOf(
+    /*val restaurantList = listOf(
         Info(
             1,
             "https://lh3.googleusercontent.com/gps-cs-s/AC9h4nqPfRslmQlYGxmAygDLRQVkrvl2Fd9mAD36cAmAyXuhshc_H06EW3Jvb63N30EQDzQEWDnXbU5j2dR69kwd5vpFO3CbECOfrigp-V5sM7__WiwRla29VKjErtjWJ1r-jPU1a2YZ=s1360-w1360-h1020-rw",
@@ -177,5 +177,5 @@ class RecommendDetailInfoViewModel : ViewModel() {
             listOf("개별 노천탕", "한정식 레스토랑", "전통 건축미", "프라이빗 정원"),
             listOf("특별한 경험", "럭셔리 휴양", "조용함", "신라밀레니엄파크 연계")
         ),
-    )
+    )*/
 }
