@@ -1,5 +1,6 @@
 package com.hyosim.hamkkae.presentation.main.setting
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.hyosim.hamkkae.R
 import com.hyosim.hamkkae.databinding.FragmentSettingBinding
+import com.hyosim.hamkkae.presentation.auth.AuthActivity
+import com.hyosim.hamkkae.util.SessionManager
 import timber.log.Timber
 
 class SettingFragment: Fragment() {
@@ -36,6 +39,18 @@ class SettingFragment: Fragment() {
         }
         binding.clResignation.setOnClickListener {
             navigate(R.id.action_settingFragment_to_resignationFragment)
+        }
+
+        binding.cvLogout.setOnClickListener {
+            val sessionManager = SessionManager
+            sessionManager.clearToken()
+
+            val intent = Intent(requireContext(), AuthActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            }
+            startActivity(intent)
+
+            requireActivity().finishAffinity()
         }
 
     }

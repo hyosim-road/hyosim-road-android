@@ -2,19 +2,23 @@ package com.hyosim.hamkkae.di
 
 import com.hyosim.hamkkae.data.datasource.AiPlanDataSource
 import com.hyosim.hamkkae.data.datasource.AuthDataSource
+import com.hyosim.hamkkae.data.datasource.HomeDataSource
 import com.hyosim.hamkkae.data.datasource.PlanDataSource
 import com.hyosim.hamkkae.data.datasource.SettingDataSource
 import com.hyosim.hamkkae.data.datasource_impl.AiPlanDataSourceImpl
 import com.hyosim.hamkkae.data.datasource_impl.AuthDataSourceImpl
+import com.hyosim.hamkkae.data.datasource_impl.HomeDataSourceImpl
 import com.hyosim.hamkkae.data.datasource_impl.PlanDataSourceImpl
 import com.hyosim.hamkkae.data.datasource_impl.SettingDataSourceImpl
 import com.hyosim.hamkkae.data.repository_impl.AiPlanRepositoryImpl
 import com.hyosim.hamkkae.data.repository_impl.AuthRepositoryImpl
+import com.hyosim.hamkkae.data.repository_impl.HomeRepositoryImpl
 import com.hyosim.hamkkae.data.repository_impl.PlanRepositoryImpl
 import com.hyosim.hamkkae.data.repository_impl.SettingRepositoryImpl
 import com.hyosim.hamkkae.data.repository_impl.TokenRepositoryImpl
 import com.hyosim.hamkkae.domain.repository.AiPlanRepository
 import com.hyosim.hamkkae.domain.repository.AuthRepository
+import com.hyosim.hamkkae.domain.repository.HomeRepository
 import com.hyosim.hamkkae.domain.repository.PlanRepository
 import com.hyosim.hamkkae.domain.repository.SettingRepository
 import com.hyosim.hamkkae.domain.repository.TokenRepository
@@ -59,6 +63,15 @@ abstract class BindModule {
     @Binds
     @Singleton
     abstract fun bindPlanDataSource(planDataSourceImpl: PlanDataSourceImpl): PlanDataSource
+
+    // home
+    @Binds
+    @Singleton
+    abstract fun bindHomeRepository(homeRepositoryImpl: HomeRepositoryImpl): HomeRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindHomeDataSource(homeDataSourceImpl: HomeDataSourceImpl): HomeDataSource
 
 
     // temp
