@@ -1,6 +1,7 @@
 package com.hyosim.hamkkae.di.service
 
-import com.hyosim.hamkkae.data.service.SettingService
+import com.hyosim.hamkkae.data.service.AiPlanService
+import com.hyosim.hamkkae.data.service.PlanService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,10 +12,10 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object ServiceModule {
+object AiPlanModule {
     @Provides
     @Singleton
-    fun provideService(
-        @Named("base") retrofit: Retrofit
-    ): SettingService = retrofit.create(SettingService::class.java)
+    fun provideAiPlanService(
+        @Named("ai") retrofit: Retrofit
+    ): AiPlanService = retrofit.create(AiPlanService::class.java)
 }

@@ -10,12 +10,30 @@ class HeaderInterceptor(
     private val tokenRepository: TokenRepository
 ): Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
-        // 토큰 가져오기
+        /*// 토큰 가져오기
         val token = tokenRepository.getToken()
         val originalRequest = chain.request()
 
         // 토큰이 없으면 그냥 원래 요청 진행
         // 있으면 Bearer 붙여서 저장
+        val newRequest = if (!token.isNullOrEmpty()) {
+            originalRequest.newBuilder()
+                .addHeader("Authorization", "Bearer $token")
+                .build()
+        } else {
+            originalRequest
+        }
+
+        return chain.proceed(newRequest)*/
+
+        val originalRequest = chain.request()
+
+        // AI 서버면 토큰 제외
+        if (originalRequest.url.host == "49.50.132.184") {
+            return chain.proceed(originalRequest)
+        }
+
+        val token = tokenRepository.getToken()
         val newRequest = if (!token.isNullOrEmpty()) {
             originalRequest.newBuilder()
                 .addHeader("Authorization", "Bearer $token")

@@ -7,20 +7,25 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.hyosim.hamkkae.R
 import com.hyosim.hamkkae.databinding.FragmentSelectTripStyleBinding
+import com.hyosim.hamkkae.presentation.main.plan.PlanViewModel
 import com.hyosim.hamkkae.presentation.main.plan.select.adapter.SelectTripStyleAdapter
+import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
+@AndroidEntryPoint
 class SelectTripStyleFragment : Fragment() {
     private var _binding: FragmentSelectTripStyleBinding? = null
     private val binding: FragmentSelectTripStyleBinding
         get() = requireNotNull(_binding) { "home fragment is null" }
 
     private val selectTripStyleViewModel: SelectTripStyleViewModel by viewModels()
+    private val planViewModel: PlanViewModel by activityViewModels()
     private lateinit var tripStyleAdapter: SelectTripStyleAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -73,9 +78,12 @@ class SelectTripStyleFragment : Fragment() {
 
     private fun clickNextButton() {
         binding.btnNext.setOnClickListener {
-            if (binding.btnNext.isEnabled) {
-                findNavController().navigate(R.id.action_selectTripStyleFragment_to_recommendCourseFragment)
-            }
+            val selected = selectTripStyleViewModel.selectedStyles.value.orEmpty()
+            // 여러 개 중 첫 번째만 API에 넣는다고 가정
+            val styleCode = selected.firstOrNull()?.code ?: ""
+            planViewModel.setTravelStyle(styleCode)
+
+            findNavController().navigate(R.id.action_selectTripStyleFragment_to_loadingFragment)
         }
     }
 
