@@ -114,7 +114,7 @@ class MapFragment : Fragment() {
                     val centerLatLng = getCenterLatLng(attractions, currentLatLng ?: LatLng.from(37.5665, 126.9780))
 
                     // 카메라 이동 + 줌 레벨 10 적용
-                    val cameraUpdate = CameraUpdateFactory.newCenterPosition(centerLatLng, 10)
+                    val cameraUpdate = CameraUpdateFactory.newCenterPosition(centerLatLng, 11)
                     kakaoMap?.moveCamera(cameraUpdate)
 
                     makeLabel()
@@ -147,27 +147,46 @@ class MapFragment : Fragment() {
         val labelManager = kakaoMap?.labelManager ?: return
         val layer = labelManager.getLayer() ?: return
 
-        val attractions = mapViewModel.locationList.value
-            ?.filter { it.type == "여행지" }
-            ?: emptyList()
-
-        for ((index, location) in attractions.withIndex()) {
-            // 1~6 아이콘 선택
-            val iconRes = when (index + 1) {
+        // 🟠 Attraction (숫자 마커) — 1~6까지 drawable 준비
+        fun getAttractionStyle(order: Int): Int {
+            return when (order) {
                 1 -> R.drawable.ic_attraction_1
                 2 -> R.drawable.ic_attraction_2
                 3 -> R.drawable.ic_attraction_3
                 4 -> R.drawable.ic_attraction_4
                 5 -> R.drawable.ic_attraction_5
                 6 -> R.drawable.ic_attraction_6
-                else -> R.drawable.ic_location // fallback
+                else -> R.drawable.ic_attraction_1
+            }
+        }
+
+        // 🔵 Lodging (숙소)
+        val lodgingStyle = labelManager.addLabelStyles(
+            LabelStyles.from(LabelStyle.from(R.drawable.ic_lodging))
+        )
+
+        // 🟢 Restaurant (식당)
+        val restaurantStyle = labelManager.addLabelStyles(
+            LabelStyles.from(LabelStyle.from(R.drawable.ic_restaurant))
+        )
+
+        val locations = mapViewModel.locationList.value ?: emptyList()
+
+        for (location in locations) {
+            val latLng = LatLng.from(location.latitude, location.longitude)
+
+            val style = when (location.type) {
+                "여행지" -> {
+                    val iconRes = getAttractionStyle(location.id) // id 또는 order 사용
+                    labelManager.addLabelStyles(LabelStyles.from(LabelStyle.from(iconRes)))
+                }
+                "숙소" -> lodgingStyle
+                "식당" -> restaurantStyle
+                else -> labelManager.addLabelStyles(
+                    LabelStyles.from(LabelStyle.from(R.drawable.ic_location)) // fallback
+                )
             }
 
-            val style = labelManager.addLabelStyles(
-                LabelStyles.from(LabelStyle.from(iconRes))
-            )
-
-            val latLng = LatLng.from(location.latitude, location.longitude)
             val option = LabelOptions.from(latLng)
                 .setStyles(style)
                 .setTag(location.id)
@@ -175,22 +194,9 @@ class MapFragment : Fragment() {
             layer.addLabel(option)
         }
 
-       /* val labelData = listOf(
-            Triple(1, 37.299171, 127.045373),
-            Triple(2, 37.298938, 127.043893),
-            Triple(3, 37.299099, 127.042824)
-        )
-
-        for((id, lat, lng)in labelData){
-            val latLng = LatLng.from(lat, lng)
-            val labelOption = LabelOptions.from(latLng).setStyles(style).setTag(id)
-            layer.addLabel(labelOption)
-        }*/
-
+        // 라벨 클릭 리스너 등록
         clickLabel()
     }
-
-
 
     private fun clickLabel(){
         kakaoMap?.setOnLabelClickListener {kakaoMap, labelLayer, label->
