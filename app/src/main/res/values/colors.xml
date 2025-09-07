@@ -64,4 +64,13 @@
     <color name="safety_green_title">#1C4E2A</color>
     <color name="safety_green_text">#376641</color>
 
+    <!--map-->
+    <color name="text_filter_restaurant">#4CAF50</color>
+    <color name="bg_attraction_selected_orange">#FED7AA</color>
+    <color name="bg_attraction_text_selected_orange">#F97316</color>
+    <color name="bg_lodging_selected_blue">#BFDBFE</color>
+    <color name="bg_lodging_text_selected_blue">#2563EB</color>
+    <color name="bg_restaurant_selected_green">#BBF7D0</color>
+    <color name="bg_restaurant_text_selected_green">#388E3C</color>
+
 </resources>

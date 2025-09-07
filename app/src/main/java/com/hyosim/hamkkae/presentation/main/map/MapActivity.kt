@@ -14,8 +14,8 @@ import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.hyosim.hamkkae.data.response_dto.home.ProgressTripResponseDto
-import com.hyosim.hamkkae.data.response_dto.home.toLocationList
 import com.hyosim.hamkkae.databinding.ActivityMapBinding
+import com.hyosim.hamkkae.domain.model.Location
 import com.kakao.vectormap.LatLng
 
 class MapActivity: AppCompatActivity(), MapLabelClickListener {
@@ -47,12 +47,12 @@ class MapActivity: AppCompatActivity(), MapLabelClickListener {
         mapViewModel.setCourse(course)
     }
 
-    override fun onLabelClicked(id: Int, currentLatLng: LatLng) {
+    override fun onLabelClicked(location: Location, currentLatLng: LatLng) {
         val bottomSheet = binding.bottomSheet
         val behavior = BottomSheetBehavior.from(bottomSheet)
         behavior.state = BottomSheetBehavior.STATE_EXPANDED
 
-        val location = mapViewModel.locationList.value!!.find { it.id == id }!!
+        val location = mapViewModel.locationList.value!!.find { it.id == location.id }!!
         with(binding) {
             tvName.text = location.name
             tvDistance.text = location.distance
