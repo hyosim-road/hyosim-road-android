@@ -13,11 +13,14 @@ import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.hyosim.hamkkae.data.response_dto.home.ProgressTripResponseDto
+import com.hyosim.hamkkae.data.response_dto.home.toLocationList
 import com.hyosim.hamkkae.databinding.ActivityMapBinding
 import com.kakao.vectormap.LatLng
 
 class MapActivity: AppCompatActivity(), MapLabelClickListener {
     private lateinit var binding: ActivityMapBinding
+    private lateinit var course: ProgressTripResponseDto
     private val mapViewModel: MapViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +40,11 @@ class MapActivity: AppCompatActivity(), MapLabelClickListener {
 
         behavior.isHideable = true           // 숨김 허용
         behavior.state = BottomSheetBehavior.STATE_HIDDEN // 처음에 숨김 상태
+
+        course = intent.getParcelableExtra("course")
+            ?: throw IllegalArgumentException("Course is missing")
+
+        mapViewModel.setCourse(course)
     }
 
     override fun onLabelClicked(id: Int, currentLatLng: LatLng) {
@@ -44,7 +52,7 @@ class MapActivity: AppCompatActivity(), MapLabelClickListener {
         val behavior = BottomSheetBehavior.from(bottomSheet)
         behavior.state = BottomSheetBehavior.STATE_EXPANDED
 
-        val location = mapViewModel.locationList.find { it.id == id }!!
+        val location = mapViewModel.locationList.value!!.find { it.id == id }!!
         with(binding) {
             tvName.text = location.name
             tvDistance.text = location.distance

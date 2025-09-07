@@ -157,6 +157,7 @@ class TripDetailActivity : AppCompatActivity() {
     private fun clickMap() {
         binding.btnMap.setOnClickListener {
             val intent = Intent(this, MapActivity::class.java)
+            intent.putExtra("course", course)
             startActivity(intent)
         }
     }
