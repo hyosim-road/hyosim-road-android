@@ -16,6 +16,7 @@ import androidx.fragment.app.activityViewModels
 import com.google.android.gms.location.LocationServices
 import com.hyosim.hamkkae.R
 import com.hyosim.hamkkae.databinding.FragmentMapBinding
+import com.hyosim.hamkkae.domain.model.Location
 import com.kakao.vectormap.KakaoMap
 import com.kakao.vectormap.KakaoMapReadyCallback
 import com.kakao.vectormap.LatLng
@@ -49,6 +50,25 @@ class MapFragment : Fragment() {
 
     private fun setting() {
         checkAndGetCurrentLocation()
+
+        binding.btnAttraction.isSelected = true
+        binding.btnLodging.isSelected = false
+        binding.btnRestaurant.isSelected = false
+
+        binding.btnAttraction.setOnClickListener {
+            it.isSelected = !it.isSelected
+            updateLabels()
+        }
+
+        binding.btnLodging.setOnClickListener {
+            it.isSelected = !it.isSelected
+            updateLabels()
+        }
+
+        binding.btnRestaurant.setOnClickListener {
+            it.isSelected = !it.isSelected
+            updateLabels()
+        }
     }
 
     private fun checkAndGetCurrentLocation() {
@@ -113,8 +133,7 @@ class MapFragment : Fragment() {
 
                     val centerLatLng = getCenterLatLng(attractions, currentLatLng ?: LatLng.from(37.5665, 126.9780))
 
-                    // 카메라 이동 + 줌 레벨 10 적용
-                    val cameraUpdate = CameraUpdateFactory.newCenterPosition(centerLatLng, 11)
+                    val cameraUpdate = CameraUpdateFactory.newCenterPosition(centerLatLng, 12)
                     kakaoMap?.moveCamera(cameraUpdate)
 
                     makeLabel()
@@ -189,24 +208,48 @@ class MapFragment : Fragment() {
 
             val option = LabelOptions.from(latLng)
                 .setStyles(style)
-                .setTag(location.id)
+                .setTag(location)
 
             layer.addLabel(option)
         }
 
         // 라벨 클릭 리스너 등록
         clickLabel()
+
+        updateLabels()
     }
 
     private fun clickLabel(){
         kakaoMap?.setOnLabelClickListener {kakaoMap, labelLayer, label->
-            val tag = label.tag
+            val loc = label.tag as? Location ?: return@setOnLabelClickListener false
             Timber.d("label clicked!: ${tag}")
 
-            (activity as? MapLabelClickListener)?.onLabelClicked(tag as Int, currentLatLng!!)
+            (activity as? MapLabelClickListener)?.onLabelClicked(loc, currentLatLng!!)
             true
         }
     }
+
+    private fun updateLabels() {
+        val labelManager = kakaoMap?.labelManager ?: return
+        val layer = labelManager.getLayer() ?: return
+
+        val showAttractions = binding.btnAttraction.isSelected
+        val showLodging = binding.btnLodging.isSelected
+        val showRestaurant = binding.btnRestaurant.isSelected
+
+        Timber.d("attraction: ${binding.btnAttraction.isSelected}")
+
+        for (label in layer.allLabels) {
+            val loc = label.tag as? Location ?: continue
+            when (loc.type) {
+                "여행지" -> if (showAttractions) label.show() else label.hide()
+                "숙소"   -> if (showLodging) label.show() else label.hide()
+                "식당"   -> if (showRestaurant) label.show() else label.hide()
+                else     -> label.show() // fallback: 항상 표시
+            }
+        }
+    }
+
 
     @RequiresPermission(allOf = [Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION])
     override fun onRequestPermissionsResult(
