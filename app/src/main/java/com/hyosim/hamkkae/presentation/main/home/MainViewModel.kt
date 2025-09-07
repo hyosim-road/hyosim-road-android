@@ -46,14 +46,22 @@ class MainViewModel @Inject constructor(
                     val newDay = if (index == 0) today else tomorrow
                     day.copy(
                         day = newDay,
-                        attractions = day.attractions.map { attr ->
-                            // startTime, endTime도 날짜 교체
-                            val startTime = attr.startTime.substring(11) // "HH:mm:ss..."
-                            val endTime = attr.endTime.substring(11)
-                            attr.copy(
-                                startTime = "${newDay}T$startTime",
-                                endTime = "${newDay}T$endTime"
-                            )
+                        attractions = day.attractions.mapIndexed { attrIndex, attr ->
+                            if (attrIndex == 1) {
+                                // 두 번째 attraction만 시간 교체
+                                attr.copy(
+                                    startTime = "${newDay}T13:00:00",
+                                    endTime = "${newDay}T13:30:00"
+                                )
+                            } else {
+                                // 나머지는 기존 시간 유지 (날짜만 교체)
+                                val startTime = attr.startTime.substring(11) // "HH:mm:ss"
+                                val endTime = attr.endTime.substring(11)
+                                attr.copy(
+                                    startTime = "${newDay}T$startTime",
+                                    endTime = "${newDay}T$endTime"
+                                )
+                            }
                         }
                     )
                 }

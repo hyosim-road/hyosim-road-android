@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hyosim.hamkkae.R
 import com.hyosim.hamkkae.databinding.ItemTripDetailScheduleBinding
 import com.hyosim.hamkkae.domain.model.TotalCourse
-import com.hyosim.hamkkae.presentation.main.home.adapter.today_schedule.TodayScheduleAdapter
+import com.hyosim.hamkkae.presentation.main.home.adapter.TodayScheduleAdapter
 
 class VisitedAdapter :
     ListAdapter<TotalCourse, VisitedAdapter.VisitedViewHolder>(

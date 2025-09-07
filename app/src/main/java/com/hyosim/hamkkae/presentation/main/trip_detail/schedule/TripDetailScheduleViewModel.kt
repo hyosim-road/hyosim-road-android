@@ -1,4 +1,4 @@
-package com.hyosim.hamkkae.presentation.main.trip_continue.schedule
+package com.hyosim.hamkkae.presentation.main.trip_detail.schedule
 
 import androidx.lifecycle.ViewModel
 import com.hyosim.hamkkae.domain.model.TodaySchedule

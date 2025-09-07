@@ -10,12 +10,10 @@ import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.hyosim.hamkkae.R
 import com.hyosim.hamkkae.databinding.FragmentTripStartBinding
 import com.hyosim.hamkkae.domain.model.TodaySchedule
-import com.hyosim.hamkkae.presentation.main.home.adapter.today_schedule.TodayScheduleAdapter
 import com.hyosim.hamkkae.presentation.main.plan.PlanViewModel
 import timber.log.Timber
 import java.text.SimpleDateFormat

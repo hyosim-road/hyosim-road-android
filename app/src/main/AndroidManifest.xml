@@ -52,7 +52,7 @@
         <activity android:name=".presentation.main.plan.PlanActivity"
             android:exported="false"/>
 
-        <activity android:name=".presentation.main.trip_continue.TripDetailActivity"
+        <activity android:name=".presentation.main.trip_detail.TripDetailActivity"
             android:exported="false"/>
 
         <activity android:name=".presentation.main.upload_photo.UploadPhotoActivity"

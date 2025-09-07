@@ -2,9 +2,14 @@ package com.hyosim.hamkkae.data.response_dto.home
 
 import android.os.Parcelable
 import com.hyosim.hamkkae.domain.model.Info
+import com.hyosim.hamkkae.extension.home.AttractionResult
 import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 @Parcelize
 @Serializable
@@ -62,4 +67,60 @@ data class ProgressTripResponseDto (
         @SerialName("phone") val phone: String? = null,
         @SerialName("signatureMenu") val signatureMenu: String? = null
     ): Parcelable
+}
+
+fun ProgressTripResponseDto.findAttraction(now: Long = System.currentTimeMillis()): AttractionResult {
+    val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.KOREA)
+    val dateTimeFormatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.KOREA)
+    val timeOnlyFormatter = SimpleDateFormat("HH:mm", Locale.KOREA)
+
+    val todayStr = dateFormatter.format(Date(now))
+
+    val todayItinerary = itinerary.find { it.day == todayStr }
+
+    if (todayItinerary != null) {
+        todayItinerary.attractions.forEach { attr ->
+            val startDate = dateTimeFormatter.parse(attr.startTime)
+            val endDate = dateTimeFormatter.parse(attr.endTime)
+
+            if (startDate != null && endDate != null) {
+                if (now in startDate.time..endDate.time) {
+                    return AttractionResult.Current(
+                        attr,
+                        timeOnlyFormatter.format(startDate),
+                        timeOnlyFormatter.format(endDate)
+                    )
+                }
+            }
+        }
+        val next = todayItinerary.attractions
+            .firstOrNull { dateTimeFormatter.parse(it.startTime)?.time ?: Long.MAX_VALUE > now }
+
+        if (next != null) {
+            val startDate = dateTimeFormatter.parse(next.startTime)
+            val endDate = dateTimeFormatter.parse(next.endTime)
+            return AttractionResult.Next(
+                next,
+                timeOnlyFormatter.format(startDate!!),
+                timeOnlyFormatter.format(endDate!!)
+            )
+        }
+    }
+
+    val tomorrowItinerary = itinerary
+        .sortedBy { it.day }
+        .firstOrNull { it.day > todayStr }
+
+    if (tomorrowItinerary != null && tomorrowItinerary.attractions.isNotEmpty()) {
+        val first = tomorrowItinerary.attractions.first()
+        val startDate = dateTimeFormatter.parse(first.startTime)
+        val endDate = dateTimeFormatter.parse(first.endTime)
+        return AttractionResult.Next(
+            first,
+            timeOnlyFormatter.format(startDate!!),
+            timeOnlyFormatter.format(endDate!!)
+        )
+    }
+
+    return AttractionResult.None
 }
