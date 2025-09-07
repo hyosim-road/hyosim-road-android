@@ -9,6 +9,8 @@
         android:id="@+id/rv_schedule"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:overScrollMode="never"
+        android:nestedScrollingEnabled="false"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"

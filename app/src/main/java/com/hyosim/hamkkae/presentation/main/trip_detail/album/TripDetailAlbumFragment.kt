@@ -1,4 +1,4 @@
-package com.hyosim.hamkkae.presentation.main.trip_continue.album
+package com.hyosim.hamkkae.presentation.main.trip_detail.album
 
 import android.graphics.Rect
 import android.os.Bundle

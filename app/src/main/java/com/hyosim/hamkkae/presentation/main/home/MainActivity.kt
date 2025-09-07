@@ -10,7 +10,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintSet
-import androidx.lifecycle.VIEW_MODEL_STORE_OWNER_KEY
 import androidx.lifecycle.lifecycleScope
 import com.hyosim.hamkkae.R
 import com.hyosim.hamkkae.data.response_dto.home.ProgressTripResponseDto
@@ -18,13 +17,9 @@ import com.hyosim.hamkkae.databinding.ActivityMainBinding
 import com.hyosim.hamkkae.domain.model.TodaySchedule
 import com.hyosim.hamkkae.extension.home.ProgressTripState
 import com.hyosim.hamkkae.presentation.main.family_conversation.FamilyConversationActivity
-import com.hyosim.hamkkae.presentation.main.home.adapter.today_schedule.TodayScheduleAdapter
-import com.hyosim.hamkkae.presentation.main.home.adapter.trip_record.TripRecordAdapter
-import com.hyosim.hamkkae.presentation.main.photo_album.PhotoAlbumActivity
+import com.hyosim.hamkkae.presentation.main.home.adapter.TodayScheduleAdapter
 import com.hyosim.hamkkae.presentation.main.plan.PlanActivity
-import com.hyosim.hamkkae.presentation.main.trip_continue.TripDetailActivity
-import com.hyosim.hamkkae.presentation.main.trip_records.TripRecordsActivity
-import com.hyosim.hamkkae.presentation.main.upload_photo.UploadPhotoActivity
+import com.hyosim.hamkkae.presentation.main.trip_detail.TripDetailActivity
 import com.hyosim.hamkkae.presentation.main.setting.SettingActivity
 import com.hyosim.hamkkae.util.StateConstants.TYPE_BEFORE_STARTING
 import com.hyosim.hamkkae.util.StateConstants.TYPE_COMPLETE
@@ -78,7 +73,6 @@ class MainActivity : AppCompatActivity() {
         showQuestion(false)
         clickPlan()
         clickSetting()
-        clickTripRecords()
     }
 
     private fun checkProgressTrip() {
@@ -87,6 +81,7 @@ class MainActivity : AppCompatActivity() {
                 when (state) {
                     is ProgressTripState.Success -> {
                         setVisibilityPlan(true, state.course)
+                        clickTripDetail(state.course)
                     }
 
                     is ProgressTripState.Error -> {
@@ -120,7 +115,6 @@ class MainActivity : AppCompatActivity() {
                 btnTripDetail.isSelected = true
 
                 setTrip(course!!)
-                clickTripDetail()
                 clickUpload()
                 clickAnswer()
 
@@ -435,10 +429,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun clickTripDetail() {
+    private fun clickTripDetail(course: ProgressTripResponseDto) {
         binding.btnTripDetail.setOnClickListener {
-            // 새로 만든 메서드 호출
-            navigateTo(TripDetailActivity::class.java)
+            val intent  = Intent(this, TripDetailActivity::class.java)
+            intent.putExtra("course", course)
+            startActivity(intent)
         }
     }
 
@@ -464,7 +459,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun clickTripRecords() {
+    private fun clickTripRecords(course: ProgressTripResponseDto) {
         /* binding.btnTripRecordAll.setOnClickListener {
              Timber.d("click trip detail!")
              navigateTo(TripRecordsActivity::class.java)

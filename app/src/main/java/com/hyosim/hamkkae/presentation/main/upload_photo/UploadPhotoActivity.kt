@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.hyosim.hamkkae.R
 import com.hyosim.hamkkae.databinding.ActivityUploadPhotoBinding
-import com.hyosim.hamkkae.presentation.main.trip_continue.album.TextAdapter
+import com.hyosim.hamkkae.presentation.main.trip_detail.album.TextAdapter
 import timber.log.Timber
 
 class UploadPhotoActivity : AppCompatActivity() {

@@ -245,7 +245,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
-        <com.google.android.material.tabs.TabLayout
+        <!--<com.google.android.material.tabs.TabLayout
             android:id="@+id/tl_detail"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -274,7 +274,17 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tl_detail" />
+            app:layout_constraintTop_toBottomOf="@id/tl_detail" />-->
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fcv_course_detail"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="15dp"
+            app:layout_constraintTop_toBottomOf="@id/cv_current"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

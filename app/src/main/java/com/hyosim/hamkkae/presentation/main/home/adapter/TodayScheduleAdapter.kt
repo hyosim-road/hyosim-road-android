@@ -1,18 +1,19 @@
-package com.hyosim.hamkkae.presentation.main.home.adapter.today_schedule
+package com.hyosim.hamkkae.presentation.main.home.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import coil.size.ViewSizeResolver
 import com.hyosim.hamkkae.R
 import com.hyosim.hamkkae.databinding.ItemTripScheduleBinding
 import com.hyosim.hamkkae.domain.model.TodaySchedule
 import com.hyosim.hamkkae.util.StateConstants.TYPE_BEFORE_STARTING
 import com.hyosim.hamkkae.util.StateConstants.TYPE_COMPLETE
 import com.hyosim.hamkkae.util.StateConstants.TYPE_IN_PROCESS
+import timber.log.Timber
 
 class TodayScheduleAdapter(
     private val bgVisibility:Boolean
@@ -34,21 +35,26 @@ class TodayScheduleAdapter(
 
     inner class TodayScheduleViewHolder(private val binding: ItemTripScheduleBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(schedule: TodaySchedule) {
+            Timber.d("schedule: $schedule")
             with(binding){
-                when(schedule.status){
+                tvCurrent.visibility = View.GONE
+                tvNumber.visibility = View.GONE
+
+                when (schedule.status) {
                     TYPE_COMPLETE -> {
                         ivIcon.load(R.drawable.ic_complete_blue)
                     }
                     TYPE_IN_PROCESS -> {
                         ivIcon.load(R.drawable.ic_current_orange)
-                        tvCurrent.visibility=View.VISIBLE
+                        tvCurrent.visibility = View.VISIBLE
                     }
                     TYPE_BEFORE_STARTING -> {
-                        ivIcon.load(R.drawable.bg_schedule_gray)
-                        tvNumber.visibility= View.VISIBLE
+                        ivIcon.setImageResource(R.drawable.bg_schedule_gray)
+                        tvNumber.visibility = View.VISIBLE
                         tvNumber.text = schedule.id.toString()
                     }
                 }
+
                 tvPlace.text = schedule.place
                 //tvKeyword.text = schedule.keyword
                 tvTime.text = binding.root.context.getString(R.string.main_time, schedule.startTime, schedule.endTime)
@@ -57,5 +63,15 @@ class TodayScheduleAdapter(
                 tvKeyword.visibility= View.GONE
             }
         }
+    }
+}
+
+object TodayScheduleDiffCallback : DiffUtil.ItemCallback<TodaySchedule>() {
+    override fun areItemsTheSame(oldItem: TodaySchedule, newItem: TodaySchedule): Boolean {
+        return oldItem.id == newItem.id // id로 비교 (식별자)
+    }
+
+    override fun areContentsTheSame(oldItem: TodaySchedule, newItem: TodaySchedule): Boolean {
+        return oldItem == newItem // 데이터 클래스라면 자동 equals 비교 가능
     }
 }

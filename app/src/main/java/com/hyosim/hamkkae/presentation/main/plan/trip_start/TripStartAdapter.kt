@@ -9,10 +9,7 @@ import coil.load
 import com.hyosim.hamkkae.R
 import com.hyosim.hamkkae.databinding.ItemTripScheduleBinding
 import com.hyosim.hamkkae.domain.model.TodaySchedule
-import com.hyosim.hamkkae.presentation.main.home.adapter.today_schedule.TodayScheduleDiffCallback
-import com.hyosim.hamkkae.util.StateConstants.TYPE_BEFORE_STARTING
-import com.hyosim.hamkkae.util.StateConstants.TYPE_COMPLETE
-import com.hyosim.hamkkae.util.StateConstants.TYPE_IN_PROCESS
+import com.hyosim.hamkkae.presentation.main.home.adapter.TodayScheduleDiffCallback
 
 class TripStartAdapter(
     private val bgVisibility:Boolean
