@@ -2,6 +2,7 @@ package com.hyosim.hamkkae.data.response_dto.home
 
 import android.os.Parcelable
 import com.hyosim.hamkkae.domain.model.Info
+import com.hyosim.hamkkae.domain.model.Location
 import com.hyosim.hamkkae.extension.home.AttractionResult
 import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.SerialName
@@ -123,4 +124,77 @@ fun ProgressTripResponseDto.findAttraction(now: Long = System.currentTimeMillis(
     }
 
     return AttractionResult.None
+}
+
+fun ProgressTripResponseDto.toLocationList(currentLat: Double, currentLng: Double): List<Location> {
+    val locations = mutableListOf<Location>()
+
+    var globalId = 1
+
+    // Attraction
+    itinerary.forEach { day ->
+        day.attractions.forEach { attr ->
+            locations.add(
+                Location(
+                    id = globalId++, // ✅ 전역 고유 ID
+                    name = attr.name,
+                    distance = calculateDistanceKm(currentLat, currentLng, attr.latitude, attr.longitude),
+                    latitude = attr.latitude,
+                    longitude = attr.longitude,
+                    type = "여행지",
+                    time = "${attr.startTime.substring(11,16)} ~ ${attr.endTime.substring(11,16)}",
+                    amenityList = listOf(),
+                    image = ""
+                )
+            )
+        }
+    }
+
+    // Lodging
+    lodgings.forEachIndexed { index, lodge ->
+        locations.add(
+            Location(
+                id = 1000 + index,
+                name = lodge.name,
+                distance = calculateDistanceKm(currentLat, currentLng, lodge.latitude, lodge.longitude),
+                latitude = lodge.latitude,
+                longitude = lodge.longitude,
+                type = "숙소",
+                time = "${lodge.checkIn} ~ ${lodge.checkOut}",
+                amenityList = lodge.amenities,
+                image = ""
+            )
+        )
+    }
+
+    // Restaurant
+    restaurants.forEachIndexed { index, restaurant ->
+        locations.add(
+            Location(
+                id = 2000 + index,
+                name = restaurant.name,
+                distance = calculateDistanceKm(currentLat, currentLng, restaurant.latitude, restaurant.longitude),
+                latitude = restaurant.latitude,
+                longitude = restaurant.longitude,
+                type = "식당",
+                time = "예상비용 ${restaurant.estimatedCostPerPersonKrw}원/인",
+                amenityList = listOf("대표메뉴: ${restaurant.signatureMenu ?: "정보 없음"}"),
+                image = ""
+            )
+        )
+    }
+
+    return locations
+}
+
+
+fun calculateDistanceKm(lat1: Double, lon1: Double, lat2: Double, lon2: Double): String {
+    val results = FloatArray(1)
+    android.location.Location.distanceBetween(lat1, lon1, lat2, lon2, results)
+    val meters = results[0]
+    return if (meters >= 1000) {
+        String.format("%.1f km", meters / 1000f)
+    } else {
+        String.format("%d m", meters.toInt())
+    }
 }

@@ -1,10 +1,30 @@
 package com.hyosim.hamkkae.presentation.main.map
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.hyosim.hamkkae.data.response_dto.home.ProgressTripResponseDto
+import com.hyosim.hamkkae.data.response_dto.home.toLocationList
 import com.hyosim.hamkkae.domain.model.Location
 
 class MapViewModel: ViewModel() {
-    val locationList = listOf(
+
+    private var course: ProgressTripResponseDto? = null
+
+    private val _locationList = MutableLiveData<List<Location>>()
+    val locationList: LiveData<List<Location>> = _locationList
+
+    fun setCourse(course: ProgressTripResponseDto) {
+        this.course = course
+    }
+
+    fun updateLocationList(currentLat: Double, currentLng: Double) {
+        course?.let {
+            _locationList.value = it.toLocationList(currentLat, currentLng)
+        }
+    }
+
+   /* val locationList = listOf(
         Location(
             id = 1,
             name = "불국사",
@@ -38,5 +58,5 @@ class MapViewModel: ViewModel() {
             amenityList = listOf("주차장", "화장실", "매표소", "유모차/휠체어 접근로", "야경 명소"),
             image = "https://www.gyeongju.go.kr/upload/content/thumb/20200317/5F92275758614941B3EB69A32A12CA4E.jpg" // 예시 이미지 URL
         )
-    )
+    )*/
 }
