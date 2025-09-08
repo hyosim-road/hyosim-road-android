@@ -22,7 +22,7 @@ import com.hyosim.hamkkae.R
 import com.hyosim.hamkkae.databinding.FragmentSignupAgreeBinding
 import timber.log.Timber
 
-class SignupAgreeFragment: Fragment() {
+class SignupAgreeFragment : Fragment() {
     private var _binding: FragmentSignupAgreeBinding? = null
     private val binding get() = _binding!!
 
@@ -44,8 +44,13 @@ class SignupAgreeFragment: Fragment() {
             targetText = "로그인"
         )
 
-        clickNextButton()
+        handleRequiredCheckBoxes()
+        handleAllAgreeCheckBox()
+        updateNextButtonState()
+
+        clickArrowButton()
         clickLoginButton()
+        clickNextButton()
     }
 
     private fun applySpannableStyle(
@@ -67,18 +72,75 @@ class SignupAgreeFragment: Fragment() {
                 resources.displayMetrics
             ).toInt()
 
-            spannableString.setSpan(StyleSpan(Typeface.BOLD_ITALIC), startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-            spannableString.setSpan(UnderlineSpan(), startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-            spannableString.setSpan(ForegroundColorSpan(color), startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-            spannableString.setSpan(AbsoluteSizeSpan(sizeInPx), startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            spannableString.setSpan(
+                StyleSpan(Typeface.BOLD_ITALIC),
+                startIndex,
+                endIndex,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+            spannableString.setSpan(
+                UnderlineSpan(),
+                startIndex,
+                endIndex,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+            spannableString.setSpan(
+                ForegroundColorSpan(color),
+                startIndex,
+                endIndex,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+            spannableString.setSpan(
+                AbsoluteSizeSpan(sizeInPx),
+                startIndex,
+                endIndex,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
         }
 
         textView.text = spannableString
     }
 
+    private fun handleAllAgreeCheckBox() {
+        binding.cbAgreeAll.setOnCheckedChangeListener { _, isChecked ->
+            binding.cbAgreeService.isChecked = isChecked
+            binding.cbAgreePersonal.isChecked = isChecked
+            binding.cbAgreeMarketing.isChecked = isChecked
+        }
+    }
+
+    private fun updateNextButtonState() {
+        val isServiceChecked = binding.cbAgreeService.isChecked
+        val isPersonalChecked = binding.cbAgreePersonal.isChecked
+        binding.btnNext.isEnabled = isServiceChecked && isPersonalChecked
+        binding.btnNext.isSelected = isServiceChecked && isPersonalChecked
+    }
+
+    private fun handleRequiredCheckBoxes() {
+        binding.cbAgreeService.setOnCheckedChangeListener { _, _ ->
+            updateNextButtonState()
+        }
+
+        binding.cbAgreePersonal.setOnCheckedChangeListener { _, _ ->
+            updateNextButtonState()
+        }
+    }
+
+    private fun clickArrowButton() {
+        binding.ivAgreeServiceArrow.setOnClickListener {
+            findNavController().navigate(R.id.action_signupAgreeFragment_to_signupServiceFragment)
+        }
+
+        binding.ivAgreePersonalArrow.setOnClickListener {
+            findNavController().navigate(R.id.action_signupAgreeFragment_to_signupPersonalFragment)
+        }
+    }
+
     private fun clickNextButton() {
         binding.btnNext.setOnClickListener {
-            findNavController().navigate(R.id.action_signupAgreeFragment_to_signupInfoFragment)
+            if (binding.btnNext.isEnabled) {
+                findNavController().navigate(R.id.action_signupAgreeFragment_to_signupInfoFragment)
+            }
         }
     }
 
