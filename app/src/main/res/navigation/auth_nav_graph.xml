@@ -10,7 +10,6 @@
         android:name="com.hyosim.hamkkae.presentation.auth.login.LoginFragment"
         android:label="로그인"
         tools:layout="@layout/fragment_login">
-
         <action
             android:id="@+id/action_loginFragment_to_signupAgreeFragment"
             app:destination="@id/signupAgreeFragment" />
@@ -20,22 +19,39 @@
         android:id="@+id/signupAgreeFragment"
         android:name="com.hyosim.hamkkae.presentation.auth.signup.SignupAgreeFragment"
         android:label="회원가입 약관 동의"
-        tools:layout="@layout/fragment_signup_agree" />
+        tools:layout="@layout/fragment_signup_agree">
+        <!-- 이 부분에 약관 상세 프래그먼트로 이동하는 액션 추가 -->
+        <action
+            android:id="@+id/action_signupAgreeFragment_to_signupServiceFragment"
+            app:destination="@id/signupServiceFragment" />
+        <action
+            android:id="@+id/action_signupAgreeFragment_to_signupPersonalFragment"
+            app:destination="@id/signupPersonalFragment" />
+        <action
+            android:id="@+id/action_signupAgreeFragment_to_signupInfoFragment"
+            app:destination="@id/signupInfoFragment" />
+        <action
+            android:id="@+id/action_signupAgreeFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
 
-    <action
-        android:id="@+id/action_signupAgreeFragment_to_signupInfoFragment"
-        app:destination="@id/signupInfoFragment" />
+    <fragment
+        android:id="@+id/signupServiceFragment"
+        android:name="com.hyosim.hamkkae.presentation.auth.signup.SignupServiceFragment"
+        android:label="서비스 이용약관"
+        tools:layout="@layout/fragment_signup_service" />
 
-    <action
-        android:id="@+id/action_signupAgreeFragment_to_loginFragment"
-        app:destination="@id/loginFragment" />
+    <fragment
+        android:id="@+id/signupPersonalFragment"
+        android:name="com.hyosim.hamkkae.presentation.auth.signup.SignupPersonalFragment"
+        android:label="개인정보 처리방침"
+        tools:layout="@layout/fragment_signup_personal" />
 
     <fragment
         android:id="@+id/signupInfoFragment"
         android:name="com.hyosim.hamkkae.presentation.auth.signup.SignupInfoFragment"
         android:label="회원가입 정보 입력"
         tools:layout="@layout/fragment_signup_info">
-
         <action
             android:id="@+id/action_signupInfoFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
