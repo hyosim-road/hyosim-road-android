@@ -22,6 +22,15 @@
         <action
             android:id="@+id/action_settingFragment_to_resignationFragment"
             app:destination="@id/resignationFragment" />
+
+        <action
+            android:id="@+id/action_settingFragment_to_signup_service"
+            app:destination="@id/signup_service" />
+
+        <action
+            android:id="@+id/action_settingFragment_to_signup_personal"
+            app:destination="@id/signup_personal" />
+
     </fragment>
 
     <fragment
@@ -58,6 +67,20 @@
         android:name="com.hyosim.hamkkae.presentation.main.setting.resignation.ResignationFragment"
         android:label="회원탈퇴"
         tools:layout="@layout/fragment_resignation">
+    </fragment>
+
+    <fragment
+        android:id="@+id/signup_service"
+        android:name="com.hyosim.hamkkae.presentation.auth.signup.SignupServiceFragment"
+        android:label="약관 동의"
+        tools:layout="@layout/fragment_signup_service">
+    </fragment>
+
+    <fragment
+        android:id="@+id/signup_personal"
+        android:name="com.hyosim.hamkkae.presentation.auth.signup.SignupPersonalFragment"
+        android:label="개인정보 입력"
+        tools:layout="@layout/fragment_signup_personal">
     </fragment>
 
 </navigation>
