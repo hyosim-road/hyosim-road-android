@@ -71,24 +71,25 @@ class SelectTripInfoFragment : Fragment() {
         binding.tvStartDate.setOnClickListener {
             val today = Calendar.getInstance()
             showDatePicker(minDate = today.timeInMillis) { uiDate, apiDate ->
-                binding.tvStartDate.text = uiDate        // 화면 표시용
-                planViewModel.setDepartureDate(apiDate)  // API 전송용
-                planViewModel.setArrivalDate("")         // 초기화
-                Timber.d("api: $apiDate")
+                binding.tvStartDate.text = uiDate
+                planViewModel.setDepartureDate(apiDate)
+                planViewModel.setArrivalDate("")
             }
         }
 
         binding.tvEndDate.setOnClickListener {
-            val minDateMillis = binding.tvStartDate.text.toString().toMillis()
-            showDatePicker(minDate = minDateMillis) { uiDate, apiDate ->
-                binding.tvEndDate.text = uiDate         // 화면 표시용
-                planViewModel.setArrivalDate(apiDate)   // API 전송용
+            val startDateMillis = binding.tvStartDate.text.toString().toMillis()
+            val maxDateMillis = startDateMillis + 3L * 24 * 60 * 60 * 1000
+            showDatePicker(minDate = startDateMillis, maxDate = maxDateMillis) { uiDate, apiDate ->
+                binding.tvEndDate.text = uiDate
+                planViewModel.setArrivalDate(apiDate)
             }
         }
     }
 
     private fun showDatePicker(
         minDate: Long? = null,
+        maxDate: Long? = null,
         onDateSelected: (uiDate: String, apiDate: String) -> Unit
     ) {
         val uiFormat = SimpleDateFormat("yyyy.MM.dd (E)", Locale.KOREA)
@@ -110,6 +111,7 @@ class SelectTripInfoFragment : Fragment() {
         )
 
         minDate?.let { dialog.datePicker.minDate = it }
+        maxDate?.let { dialog.datePicker.maxDate = it }
         dialog.show()
     }
 
