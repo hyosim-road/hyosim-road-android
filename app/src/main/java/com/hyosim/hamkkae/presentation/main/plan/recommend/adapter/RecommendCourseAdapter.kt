@@ -16,18 +16,21 @@ import com.hyosim.hamkkae.databinding.ItemRecommendCourseBinding
 import com.hyosim.hamkkae.databinding.ItemRecommendCourseKeywordBinding
 import com.hyosim.hamkkae.domain.model.Course
 import timber.log.Timber
+import java.security.PrivateKey
 import java.text.SimpleDateFormat
 import java.util.Locale
 
 class RecommendCourseAdapter(
     private val clickItem: (AiCourseRecommendResponseDto) -> Unit,
-    private val clickDetail: (AiCourseRecommendResponseDto) -> Unit
+    private val clickDetail: (AiCourseRecommendResponseDto) -> Unit,
+    private val clickMap: (AiCourseRecommendResponseDto)->Unit,
 ) :
     ListAdapter<AiCourseRecommendResponseDto, RecommendCourseAdapter.RecommendCourseViewHolder>(
         RecommendCourseDiffCallback
     ) {
     private val viewPool = RecyclerView.RecycledViewPool()
     private var selectedPosition: Int? = null // 선택된 아이템 position 저장
+    private var travelStyle: String? = null
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -88,6 +91,10 @@ class RecommendCourseAdapter(
         }*/
     }
 
+    fun saveStyle(style: String) {
+        travelStyle = style
+    }
+
     inner class RecommendCourseViewHolder(
         val binding: ItemRecommendCourseBinding,
         private val viewPool: RecyclerView.RecycledViewPool
@@ -120,15 +127,35 @@ class RecommendCourseAdapter(
         fun bind(course: AiCourseRecommendResponseDto, isSelected: Boolean) {
             with(binding) {
                 // 수정해야할 부분
-                tvName.text = "코스"
+                //tvName.text = course.caption
                 tvNumberOfNights.text = getTripDuration(
                     course.itinerary[0].day,
                     course.itinerary[course.itinerary.size - 1].day
                 )
                 val keywordBinding =
                     ItemRecommendCourseKeywordBinding.bind(binding.llKeyword.getChildAt(0))
-                keywordBinding.ivIcon.load(R.drawable.ic_style_nature)
-                keywordBinding.tvKeyword.text = "자연"
+                /*keywordBinding.ivIcon.load(R.drawable.ic_style_nature)
+                keywordBinding.tvKeyword.text = "자연"*/
+
+                when(travelStyle){
+                    "NATURE"->{
+                        keywordBinding.ivIcon.load(R.drawable.ic_style_nature)
+                        keywordBinding.tvKeyword.text = "자연"
+                    }
+                    "HISTORY"->{
+                        keywordBinding.ivIcon.load(R.drawable.ic_style_history)
+                        keywordBinding.tvKeyword.text = "역사"
+                    }
+                    "TEMPLE"->{
+                        keywordBinding.ivIcon.load(R.drawable.ic_style_temple)
+                        keywordBinding.tvKeyword.text = "사찰"
+                    }
+                    "FOOD"->{
+                        keywordBinding.ivIcon.load(R.drawable.ic_style_food)
+                        keywordBinding.tvKeyword.text = "음식"
+                    }
+                    else->{}
+                }
 
                 //recommendCourseKeywordAdapter.submitList("HISTORY" as List<String?>?)
                 recommendCoursePlaceAdapter.submitList(course.itinerary[0].attractions)
@@ -146,38 +173,7 @@ class RecommendCourseAdapter(
                 constraintSet.applyTo(clCourse)
 
                 btnDetail.setOnClickListener { clickDetail(course) }
-
-                /*clCourse.isSelected = isSelected
-                clBtns.visibility = if (isSelected) View.VISIBLE else View.GONE
-
-                val constraintSet = ConstraintSet()
-                constraintSet.clone(clCourse)
-
-                if (isSelected) {
-                    // rv_places의 bottom을 cl_btns의 top에 붙이기
-                    constraintSet.connect(
-                        rvPlaces.id,
-                        ConstraintSet.BOTTOM,
-                        clBtns.id,
-                        ConstraintSet.TOP
-                    )
-                } else {
-                    // rv_places의 bottom을 parent에 붙이기
-                    constraintSet.connect(
-                        rvPlaces.id,
-                        ConstraintSet.BOTTOM,
-                        ConstraintSet.PARENT_ID,
-                        ConstraintSet.BOTTOM
-                    )
-                }
-
-                constraintSet.applyTo(clCourse)*/
-
-
-
-               /* btnDetail.setOnClickListener {
-                    clickDetail(course)
-                }*/
+                btnMap.setOnClickListener { clickMap(course) }
             }
         }
 

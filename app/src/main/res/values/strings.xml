@@ -129,7 +129,7 @@
 
     <string name="main_plan_title">부모님과 특별한 여행을 계획해보세요</string>
     <string name="main_plan_subtitle">취향에 맞는 관광지 추천부터 추억만들기까지 \n모든 것을 도와드려요 😊</string>
-    <string name="main_plan_first_btn">+\t\t첫 여행 계획하기</string>
+    <string name="main_plan_first_btn">+\t\t여행 계획하기</string>
     <string name="main_plan_btn">+\t\t\t여행 계획하기</string>
 
     <string name="main_recent_title">최근 활동</string>
@@ -183,6 +183,7 @@
 
     <!--loading-->
     <string name="loading">부모님 취향에 맞는 코스를 찾고 있어요%s</string>
+    <string name="loading_max_time">최대 2분정도 소요될 수 있습니다</string>
 
     <!--recomment_course-->
     <string name="recommend_course_progress_title">3단계: 코스 선택</string>

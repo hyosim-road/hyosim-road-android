@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.hyosim.hamkkae.R
 import com.hyosim.hamkkae.databinding.FragmentRecommendLoadingBinding
@@ -54,7 +55,13 @@ class RecommendLoadingFragment : Fragment() {
             // 3초 대기
             delay(3000)
 
-            findNavController().navigate(R.id.action_recommendLoadingFragment_to_recommendCourseFragment)
+            findNavController().navigate(
+                R.id.action_recommendLoadingFragment_to_recommendCourseFragment,
+                null,
+                NavOptions.Builder()
+                    .setPopUpTo(R.id.loadingFragment, true) // ✅ LoadingFragment 스택에서 제거
+                    .build()
+            )
             // API 호출
             //recommendCourse()
         }
@@ -63,12 +70,22 @@ class RecommendLoadingFragment : Fragment() {
     private fun startDotAnimation() {
         lifecycleScope.launch {
             var dotCount = 0
+            var messageToggle = false // 번갈아 메시지 선택
+
             while (isActive) {
                 dotCount = (dotCount % 3) + 1
                 val dots = ".".repeat(dotCount)
 
-                binding.tvLoading.text = getString(R.string.loading, dots)
-                delay(500)
+                val message = if (messageToggle) {
+                    getString(R.string.loading, dots) // "로딩중..."
+                } else {
+                    getString(R.string.loading_max_time) // "최대 2분정도 소요될 수 있습니다"
+                }
+
+                binding.tvLoading.text = message
+
+                messageToggle = !messageToggle // true <-> false 토글
+                delay(2000) // 1초마다 바꾸기 (원하는 속도에 맞게 조절)
             }
         }
     }
@@ -78,7 +95,14 @@ class RecommendLoadingFragment : Fragment() {
             planViewModel.aiCourseRecommendState.collect { state->
                 when(state){
                     is AiCourseRecommendState.Success -> {
-                        findNavController().navigate(R.id.action_recommendLoadingFragment_to_recommendCourseFragment)
+                        findNavController().navigate(
+                            R.id.action_recommendLoadingFragment_to_recommendCourseFragment,
+                            null,
+                            NavOptions.Builder()
+                                .setPopUpTo(R.id.loadingFragment, true) // ✅ LoadingFragment 스택에서 제거
+                                .build()
+                        )
+
                     }
                     is AiCourseRecommendState.Error -> {
 

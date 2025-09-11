@@ -11,8 +11,8 @@ class RecommendDetailAdapter(fragment: Fragment) : FragmentStateAdapter(fragment
     override fun createFragment(position: Int): Fragment = when (position) {
         0 -> RecommendDetailOverviewFragment()
         1 -> RecommendDetailDetailFragment()
-        2 -> RecommendDetailInfoFragment.newInstance("restaurant")
-        3 -> RecommendDetailInfoFragment.newInstance("accommodation")
+        2 -> RecommendDetailInfoFragment.newInstance("restaurants")
+        3 -> RecommendDetailInfoFragment.newInstance("lodgings")
         else -> throw IllegalStateException("Invalid tab index")
     }
 }

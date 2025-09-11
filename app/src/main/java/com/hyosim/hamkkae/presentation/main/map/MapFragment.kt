@@ -127,13 +127,13 @@ class MapFragment : Fragment() {
                     Timber.d("KakaoMap 준비 완료!")
 
                     val attractions = mapViewModel.locationList.value
-                        ?.filter { it.type == "여행지" }
+                        ?.filter { it.type == "attraction" }
                         ?.map { LatLng.from(it.latitude, it.longitude) }
                         ?: emptyList()
 
                     val centerLatLng = getCenterLatLng(attractions, currentLatLng ?: LatLng.from(37.5665, 126.9780))
 
-                    val cameraUpdate = CameraUpdateFactory.newCenterPosition(centerLatLng, 12)
+                    val cameraUpdate = CameraUpdateFactory.newCenterPosition(centerLatLng, 11)
                     kakaoMap?.moveCamera(cameraUpdate)
 
                     makeLabel()
@@ -141,7 +141,7 @@ class MapFragment : Fragment() {
 
                 override fun getPosition(): com.kakao.vectormap.LatLng {
                     val attractions = mapViewModel.locationList.value
-                        ?.filter { it.type == "여행지" }
+                        ?.filter { it.type == "attraction" }
                         ?.map { LatLng.from(it.latitude, it.longitude) }
                         ?: emptyList()
 
@@ -195,12 +195,12 @@ class MapFragment : Fragment() {
             val latLng = LatLng.from(location.latitude, location.longitude)
 
             val style = when (location.type) {
-                "여행지" -> {
+                "attraction" -> {
                     val iconRes = getAttractionStyle(location.id) // id 또는 order 사용
                     labelManager.addLabelStyles(LabelStyles.from(LabelStyle.from(iconRes)))
                 }
-                "숙소" -> lodgingStyle
-                "식당" -> restaurantStyle
+                "lodgings" -> lodgingStyle
+                "restaurants" -> restaurantStyle
                 else -> labelManager.addLabelStyles(
                     LabelStyles.from(LabelStyle.from(R.drawable.ic_location)) // fallback
                 )
@@ -217,6 +217,8 @@ class MapFragment : Fragment() {
         clickLabel()
 
         updateLabels()
+
+        autoClickLabelIfNeeded()
     }
 
     private fun clickLabel(){
@@ -242,10 +244,40 @@ class MapFragment : Fragment() {
         for (label in layer.allLabels) {
             val loc = label.tag as? Location ?: continue
             when (loc.type) {
-                "여행지" -> if (showAttractions) label.show() else label.hide()
-                "숙소"   -> if (showLodging) label.show() else label.hide()
-                "식당"   -> if (showRestaurant) label.show() else label.hide()
+                "attraction" -> if (showAttractions) label.show() else label.hide()
+                "lodgings"   -> if (showLodging) label.show() else label.hide()
+                "restaurants"   -> if (showRestaurant) label.show() else label.hide()
                 else     -> label.show() // fallback: 항상 표시
+            }
+        }
+    }
+
+    private fun autoClickLabelIfNeeded() {
+        val labelManager = kakaoMap?.labelManager ?: return
+        val layer = labelManager.getLayer() ?: return
+
+        val category = mapViewModel.category ?: return
+        val name = mapViewModel.name ?: return
+
+        for (label in layer.allLabels) {
+            val loc = label.tag as? Location ?: continue
+            if (loc.type.equals(category, ignoreCase = true) && loc.name == name) {
+                Timber.d("자동 클릭 처리: ${loc.name} (${loc.type})")
+
+                val position = LatLng.from(loc.latitude, loc.longitude)
+                kakaoMap?.moveCamera(CameraUpdateFactory.newCenterPosition(position, 15
+                ))
+
+                if(category=="lodgings"){
+                    binding.btnLodging.isSelected=true
+                    updateLabels()
+                }else if(category=="restaurants"){
+                    binding.btnRestaurant.isSelected=true
+                    updateLabels()
+                }
+
+                (activity as? MapLabelClickListener)?.onLabelClicked(loc, currentLatLng!!)
+                break
             }
         }
     }

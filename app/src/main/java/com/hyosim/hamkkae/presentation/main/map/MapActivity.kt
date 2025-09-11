@@ -17,6 +17,7 @@ import com.hyosim.hamkkae.data.response_dto.home.ProgressTripResponseDto
 import com.hyosim.hamkkae.databinding.ActivityMapBinding
 import com.hyosim.hamkkae.domain.model.Location
 import com.kakao.vectormap.LatLng
+import timber.log.Timber
 
 class MapActivity: AppCompatActivity(), MapLabelClickListener {
     private lateinit var binding: ActivityMapBinding
@@ -44,6 +45,17 @@ class MapActivity: AppCompatActivity(), MapLabelClickListener {
         course = intent.getParcelableExtra("course")
             ?: throw IllegalArgumentException("Course is missing")
 
+        val category = intent?.getStringExtra("category")
+        val name = intent?.getStringExtra("name")
+
+        Timber.d("category: $category, name: $name")
+        category?.let{
+            mapViewModel.setCategory(it)
+        }
+        name?.let{
+            mapViewModel.setName(it)
+        }
+
         mapViewModel.setCourse(course)
     }
 
@@ -56,10 +68,16 @@ class MapActivity: AppCompatActivity(), MapLabelClickListener {
         with(binding) {
             tvName.text = location.name
             tvDistance.text = location.distance
-            tvType.text = location.type
             tvTime.text = location.time
             ivImage.load(location.image) {
                 transformations(RoundedCornersTransformation(10f))
+            }
+
+
+            when(location.type){
+                "attraction"->tvType.text = "여행지"
+                "lodgings"->tvType.text = "숙박"
+                "restaurants"->tvType.text = "음식점"
             }
 
             val flexboxLayoutManager = FlexboxLayoutManager(this@MapActivity).apply {

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.hyosim.hamkkae.data.response_dto.plan.toInfo
+import com.hyosim.hamkkae.data.response_dto.plan.toProgressTripResponseDto
 import com.hyosim.hamkkae.databinding.FragmentRecommendDetailInfoBinding
 import com.hyosim.hamkkae.presentation.main.map.MapActivity
 import com.hyosim.hamkkae.presentation.main.plan.recommend.detail.RecommendDetailViewModel
@@ -58,12 +59,17 @@ class RecommendDetailInfoFragment : Fragment() {
         Timber.d("category: $category")
         val infoAdapter = RecommendDetailInfoAdapter(
             category,
-            clickMap = {
+            clickMap = {name->
+                val progressCourse = detailViewModel.course!!.toProgressTripResponseDto()
+
                 val intent = Intent(requireActivity(), MapActivity::class.java)
+                intent.putExtra("course", progressCourse)
+                intent.putExtra("category", category)
+                intent.putExtra("name", name)
                 startActivity(intent)
             })
         binding.rvInfos.adapter = infoAdapter
-        val items = if (category == "restaurant") {
+        val items = if (category == "restaurants") {
             detailViewModel.course!!.restaurants.map { it.toInfo() }
         } else {
             detailViewModel.course!!.lodgings.map { it.toInfo() }
