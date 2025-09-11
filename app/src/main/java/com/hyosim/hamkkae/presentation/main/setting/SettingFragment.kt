@@ -63,7 +63,7 @@ class SettingFragment: Fragment() {
             requireActivity().finishAffinity()
         }
 
-        setSwitchState(binding.switchQuestion.isChecked)
+        binding.switchQuestion.isChecked = true
         binding.switchQuestion.setOnCheckedChangeListener { _, isChecked ->
             setSwitchState(isChecked)
         }

@@ -69,19 +69,70 @@
                 app:layout_constraintBottom_toBottomOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_complete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="18dp"
+            android:background="@drawable/bg_security_blue"
+            android:elevation="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cl_header">
+
+            <ImageView
+                android:id="@+id/iv_complete"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:padding="1dp"
+                android:layout_marginStart="14dp"
+                android:src="@drawable/ic_complete_blue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_complete_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="14dp"
+                android:text="@string/family_conversation_complete_title"
+                android:textColor="@color/security_blue_title"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/iv_complete"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_complete_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="@string/family_conversation_complete_text"
+                android:textColor="@color/security_blue_text"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tv_complete_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_complete_title" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cv_question"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="18dp"
             app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="8dp"
+            app:cardCornerRadius="6dp"
             app:cardElevation="2dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cl_header"
+            app:layout_constraintTop_toBottomOf="@id/cl_complete"
             app:strokeColor="@color/primary_red"
             app:strokeWidth="1dp">
 
@@ -138,7 +189,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:text="@string/family_conversation_answer"
             android:textColor="@color/dark_gray"
             android:textSize="16sp"
@@ -172,8 +223,21 @@
                 android:inputType="textMultiLine"
                 android:padding="16dp"
                 android:textCursorDrawable="@null"
-                android:textSize="15sp" />
+                android:textSize="16sp" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tv_answer_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginStart="4dp"
+            android:textColor="@color/auth_gray"
+            android:textSize="15sp"
+            android:text="@string/family_conversation_answer_size"
+            app:layout_constraintTop_toBottomOf="@id/til_answer_context"
+            app:layout_constraintStart_toStartOf="@id/til_answer_context" />
+
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_save"
@@ -189,15 +253,15 @@
             app:layout_constraintDimensionRatio="1:0.13"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/til_answer_context" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_answer_size" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cv_my_answer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="22dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="22dp"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="5dp"
             app:cardElevation="2dp"
@@ -225,18 +289,71 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
 
-<!--                <ImageButton-->
-<!--                    android:id="@+id/btn_edit_answer"-->
-<!--                    android:layout_width="24dp"-->
-<!--                    android:layout_height="24dp"-->
-<!--                    android:background="@null"-->
-<!--                    android:src="@drawable/ic_edit"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent"-->
-<!--                    android:contentDescription="수정 버튼" />-->
-
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_keyword"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="22dp"
+            android:background="@drawable/bg_selected_style_box"
+            android:elevation="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cv_my_answer">
+
+            <ImageView
+                android:id="@+id/iv_keyword"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:padding="1dp"
+                android:layout_marginStart="14dp"
+                android:src="@drawable/ic_answer_keyword"
+                app:layout_constraintBottom_toBottomOf="@id/tv_keyword_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_keyword_title" />
+
+            <TextView
+                android:id="@+id/tv_keyword_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="14dp"
+                android:text="@string/family_conversation_keyword_title"
+                android:textColor="@color/hover_orange"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/iv_keyword"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_keyword_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="@string/family_conversation_keyword_text"
+                android:textColor="@color/primary_orange"
+                app:layout_constraintStart_toStartOf="@+id/tv_keyword_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_keyword_title" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_keyword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:layout_marginTop="10dp"
+                android:nestedScrollingEnabled="false"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="@id/tv_keyword_text"
+                app:layout_constraintTop_toBottomOf="@id/tv_keyword_text"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:listitem="@layout/item_recommend_course_keyword" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_home"
@@ -252,13 +369,13 @@
             app:layout_constraintDimensionRatio="1:0.13"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cv_my_answer" />
+            app:layout_constraintTop_toBottomOf="@+id/cl_keyword" />
 
         <TextView
             android:id="@+id/tv_before_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="30dp"
             android:text="@string/family_conversation_before_title"
             android:textColor="@color/dark_gray"
             android:textSize="16sp"

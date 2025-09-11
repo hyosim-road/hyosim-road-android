@@ -21,27 +21,27 @@ import com.hyosim.hamkkae.databinding.ItemAnswerBinding
 import com.hyosim.hamkkae.databinding.ItemTextBinding
 import com.hyosim.hamkkae.domain.model.Answer
 
-class FamilyConversationAdapter :
-    ListAdapter<Answer, FamilyConversationAdapter.FamilyConversationViewHolder>(
+class ConversationAdapter :
+    ListAdapter<Answer, ConversationAdapter.ConversationViewHolder>(
         FamilyConversationDiffCallback
     ) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): FamilyConversationViewHolder {
+    ): ConversationViewHolder {
         val binding =
             ItemAnswerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return FamilyConversationViewHolder(binding)
+        return ConversationViewHolder(binding)
     }
 
     override fun onBindViewHolder(
-        holder: FamilyConversationViewHolder,
+        holder: ConversationViewHolder,
         position: Int
     ) {
         holder.bind(getItem(position))
     }
 
-    inner class FamilyConversationViewHolder(private val binding: ItemAnswerBinding) :
+    inner class ConversationViewHolder(private val binding: ItemAnswerBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(answer: Answer) {
             with(binding) {

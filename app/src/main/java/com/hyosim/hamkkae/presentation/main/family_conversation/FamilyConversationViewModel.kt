@@ -42,4 +42,6 @@ class FamilyConversationViewModel: ViewModel() {
             "\"실제로 마주한 에밀레종의 거대한 크기와 그 안에 담긴 슬픈 전설을 떠올리며 깊은 여운을 느꼈을 때.\""
         )
     )
+
+    val keywordList = listOf("#감동", "#추억", "#힐링")
 }
