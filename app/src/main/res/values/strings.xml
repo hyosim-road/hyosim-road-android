@@ -459,8 +459,13 @@
     <string name="family_conversation_question">여기에는 질문 내용이 들어갑니다. 어떤 질문일까요?</string>
     <string name="family_conversation_answer">대화 기록</string>
     <string name="family_conversation_answer_hint">부모님과 특별한 순간을 자유롭게 적어주세요. 어떤 대화를 나누셨나요? 어떤 감정을 느끼셨나요?</string>
+    <string name="family_conversation_answer_size">20자 이상으로 자세하게 작성해주세요!</string>
     <string name="family_conversation_save">대화 저장</string>
+    <string name="family_conversation_complete_title">답변이 성공적으로 저장되었어요!</string>
+    <string name="family_conversation_complete_text">AI가 답변을 분석해서 키워드를 생성했어요</string>
     <string name="family_conversation_saved_answer">사용자가 입력한 대화</string>
+    <string name="family_conversation_keyword_title">생성된 여행 키워드</string>
+    <string name="family_conversation_keyword_text">답변을 분석해서 이번 여행의 키워드를 찾았어요!</string>
     <string name="family_conversation_to_home">홈 화면으로</string>
     <string name="family_conversation_before_title">이전 대화</string>
 
