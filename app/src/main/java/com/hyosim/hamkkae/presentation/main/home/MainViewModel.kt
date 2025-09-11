@@ -35,7 +35,7 @@ class MainViewModel @Inject constructor(
     fun progressTrip(){
         viewModelScope.launch {
             homeRepository.progressTrip().onSuccess { response->
-                val original = response.data!!
+                /*val original = response.data!!
 
                 // 오늘 날짜 (yyyy-MM-dd)
                 val today = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.KOREA).format(System.currentTimeMillis())
@@ -68,8 +68,8 @@ class MainViewModel @Inject constructor(
 
                 val updatedCourse = original.copy(itinerary = updatedItinerary)
 
-                _progressTripState.value = ProgressTripState.Success(updatedCourse)
-                //_progressTripState.value= ProgressTripState.Success(response.data!!)
+                _progressTripState.value = ProgressTripState.Success(updatedCourse)*/
+                _progressTripState.value= ProgressTripState.Success(response.data!!)
             }.onFailure {
                 if (it is HttpException) {
                     try {

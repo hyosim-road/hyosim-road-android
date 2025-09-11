@@ -208,7 +208,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"/>
 
-                <TextView
+                <!--<TextView
                     android:id="@+id/tv_trip_title"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -221,23 +221,22 @@
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/iv_trip_image"
-                    app:layout_constraintStart_toStartOf="parent"/>
+                    app:layout_constraintStart_toStartOf="parent"/>-->
 
                 <ImageView
                     android:id="@+id/iv_location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/ic_location_gray_24"
-                    android:layout_marginStart="-4dp"
-                    android:layout_marginTop="3dp"
-                    app:layout_constraintTop_toBottomOf="@id/tv_trip_title"
-                    app:layout_constraintStart_toStartOf="@id/tv_trip_title"/>
+                    android:layout_marginStart="11dp"
+                    android:layout_marginTop="15dp"
+                    app:layout_constraintTop_toBottomOf="@id/iv_trip_image"
+                    app:layout_constraintStart_toStartOf="@id/iv_trip_image"/>
 
                 <TextView
                     android:id="@+id/tv_trip_current_location_title"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/main_trip_current_location"
                     android:textColor="@color/text_secondary_gray"
                     android:textSize="15sp"
                     app:layout_constraintStart_toEndOf="@id/iv_location"
@@ -249,18 +248,17 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
-                    android:text="@string/date_mock1"
+                    android:layout_marginStart="15dp"
                     android:textSize="15sp"
                     android:textColor="@color/text_secondary_gray"
                     app:layout_constraintTop_toBottomOf="@id/iv_location"
-                    app:layout_constraintStart_toStartOf="@id/tv_trip_title"/>
+                    app:layout_constraintStart_toStartOf="parent"/>
 
                 <TextView
                     android:id="@+id/tv_trip_day"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:text="@string/main_trip_current_day"
                     android:textSize="15sp"
                     android:textColor="@color/text_secondary_gray"
                     app:layout_constraintBottom_toBottomOf="@id/tv_trip_date"
@@ -347,7 +345,7 @@
                     android:text="@string/main_trip_progress"
                     android:textSize="17sp"
                     app:layout_constraintTop_toBottomOf="@id/tv_trip_date"
-                    app:layout_constraintStart_toStartOf="@id/tv_trip_title"/>
+                    app:layout_constraintStart_toStartOf="@id/iv_location"/>
 
                 <TextView
                     android:id="@+id/tv_trip_progress"
@@ -356,7 +354,8 @@
                     android:text="0%"
                     android:textSize="15sp"
                     android:textColor="@color/text_secondary_gray"
-                    app:layout_constraintEnd_toEndOf="@id/tv_trip_title"
+                    android:layout_marginEnd="15dp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/tv_trip_progress_title"
                     app:layout_constraintBottom_toBottomOf="@id/tv_trip_progress_title"/>
 
@@ -386,7 +385,7 @@
                     android:textColor="@color/white"
                     app:layout_constraintHeight_percent="0.08"
                     app:layout_constraintTop_toBottomOf="@id/pb_trip"
-                    app:layout_constraintStart_toStartOf="@id/tv_trip_title"
+                    app:layout_constraintStart_toStartOf="@id/tv_trip_date"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"/>
 

@@ -5,18 +5,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import coil.load
 import com.google.android.material.tabs.TabLayoutMediator
 import com.hyosim.hamkkae.R
+import com.hyosim.hamkkae.data.response_dto.plan.AiCourseRecommendResponseDto
 import com.hyosim.hamkkae.databinding.FragmentRecommendDetailBinding
+import com.hyosim.hamkkae.databinding.ItemRecommendCourseKeywordBinding
+import com.hyosim.hamkkae.extension.plan.RegisterState
 import com.hyosim.hamkkae.presentation.main.plan.PlanViewModel
+import com.hyosim.hamkkae.presentation.main.plan.recommend.RecommendCourseFragmentDirections
+import com.hyosim.hamkkae.presentation.main.plan.recommend.RecommendCourseViewModel
 import com.hyosim.hamkkae.presentation.main.plan.recommend.adapter.RecommendCourseKeywordAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 @AndroidEntryPoint
 class RecommendDetailFragment : Fragment() {
@@ -27,6 +38,8 @@ class RecommendDetailFragment : Fragment() {
     private var pageChangeCallback: ViewPager2.OnPageChangeCallback? = null
     private var dataObserver: RecyclerView.AdapterDataObserver? = null
     private val detailViewModel: RecommendDetailViewModel by viewModels()
+    private val recommendCourseViewModel: RecommendCourseViewModel by viewModels()
+    private val planViewModel: PlanViewModel by activityViewModels()
     private val args : RecommendDetailFragmentArgs by navArgs()
 
     override fun onCreateView(
@@ -45,13 +58,43 @@ class RecommendDetailFragment : Fragment() {
     }
 
     private fun setting() {
+        showInfo()
         showTab()
         showKeywords()
 
         binding.btnStart.isSelected=true
         binding.btnStart.setOnClickListener {
-            findNavController().navigate(R.id.action_recommendDetailFragment_to_tripStartFragment)
+            register()
+            recommendCourseViewModel.register(planViewModel.toRequestDto(), args.course)
         }
+    }
+
+    private fun showInfo(){
+        with(binding){
+            val course = args.course
+            // tvName.text = course.caption
+
+            val durationText = getTripDuration(course)
+            tvDuring.text = durationText
+        }
+    }
+
+    private fun getTripDuration(course: AiCourseRecommendResponseDto): String {
+        if (course.itinerary.isEmpty()) return ""
+
+        val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.KOREA)
+
+        val firstDay = course.itinerary.first().day
+        val lastDay = course.itinerary.last().day
+
+        // 날짜 파싱해서 유효성 체크
+        val startDate = dateFormatter.parse(firstDay)
+        val endDate = dateFormatter.parse(lastDay)
+
+        if (startDate == null || endDate == null) return ""
+
+        // 그냥 문자열로 연결해서 반환
+        return "$firstDay ~ $lastDay"
     }
 
     private fun showTab() {
@@ -94,9 +137,34 @@ class RecommendDetailFragment : Fragment() {
     }
 
     private fun showKeywords(){
-        val keywordAdapter = RecommendCourseKeywordAdapter()
+        /*val keywordAdapter = RecommendCourseKeywordAdapter()
         binding.rvKeyword.adapter= keywordAdapter
-        keywordAdapter.submitList(listOf("역사","문화","유적"))
+        keywordAdapter.submitList(listOf("역사","문화","유적"))*/
+
+        val keywordBinding =
+            ItemRecommendCourseKeywordBinding.bind(binding.llKeyword.getChildAt(0))
+        /*keywordBinding.ivIcon.load(R.drawable.ic_style_nature)
+        keywordBinding.tvKeyword.text = "자연"*/
+
+        when(detailViewModel.travelStyle){
+            "NATURE"->{
+                keywordBinding.ivIcon.load(R.drawable.ic_style_nature)
+                keywordBinding.tvKeyword.text = "자연"
+            }
+            "HISTORY"->{
+                keywordBinding.ivIcon.load(R.drawable.ic_style_history)
+                keywordBinding.tvKeyword.text = "역사"
+            }
+            "TEMPLE"->{
+                keywordBinding.ivIcon.load(R.drawable.ic_style_temple)
+                keywordBinding.tvKeyword.text = "사찰"
+            }
+            "FOOD"->{
+                keywordBinding.ivIcon.load(R.drawable.ic_style_food)
+                keywordBinding.tvKeyword.text = "음식"
+            }
+            else->{}
+        }
     }
 
     private fun updateVpHeightForCurrentPage() {
@@ -117,6 +185,28 @@ class RecommendDetailFragment : Fragment() {
             lp.height = page.measuredHeight
             vp.layoutParams = lp
             vp.invalidate()
+        }
+    }
+
+    private fun register(){
+        lifecycleScope.launch {
+            recommendCourseViewModel.registerState.collect { state ->
+                when (state) {
+                    is RegisterState.Success -> {
+                        val action = RecommendDetailFragmentDirections
+                            .actionRecommendDetailFragmentToTripStartFragment(state.course)
+
+                        findNavController().navigate(action)
+
+                    }
+
+                    is RegisterState.Error -> {
+                    }
+
+                    is RegisterState.Loading -> {
+                    }
+                }
+            }
         }
     }
 

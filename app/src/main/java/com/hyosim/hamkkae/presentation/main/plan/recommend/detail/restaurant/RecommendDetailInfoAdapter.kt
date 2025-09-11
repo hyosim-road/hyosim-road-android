@@ -23,7 +23,7 @@ import java.util.Locale
 
 class RecommendDetailInfoAdapter(
     private val category: String,
-    private val clickMap: () -> Unit
+    private val clickMap: (String) -> Unit
 ) : ListAdapter<Info, RecommendDetailInfoAdapter.RecommendDetailInfoViewHolder>(
         RecommendDetailInfoDiffCallback
     ) {
@@ -69,7 +69,7 @@ class RecommendDetailInfoAdapter(
                 rvAddition.adapter = additionAdapter
                 rvOption.adapter = optionAdapter
 
-                if (category == "accommodation") {
+                if (category == "lodgings") {
                     clCheckin.visibility = View.VISIBLE
                     clCheckout.visibility = View.VISIBLE
 
@@ -83,7 +83,7 @@ class RecommendDetailInfoAdapter(
                 }
 
                 btnMap.setOnClickListener {
-                    clickMap()
+                    clickMap(info.name)
                 }
             }
         }

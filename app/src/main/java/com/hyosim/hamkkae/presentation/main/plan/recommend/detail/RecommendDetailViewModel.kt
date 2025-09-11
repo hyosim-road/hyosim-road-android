@@ -11,6 +11,7 @@ class RecommendDetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ): ViewModel() {
     val course = savedStateHandle.get<AiCourseRecommendResponseDto>("course")
+    val travelStyle = savedStateHandle.get<String>("travelStyle")
 
     val allAttractions: List<AiCourseRecommendResponseDto.Itinerary.Attraction> =
         course?.itinerary?.flatMap { it.attractions } ?: emptyList()

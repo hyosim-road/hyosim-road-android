@@ -1,6 +1,7 @@
 package com.hyosim.hamkkae.data.response_dto.plan
 
 import android.os.Parcelable
+import com.hyosim.hamkkae.data.response_dto.home.ProgressTripResponseDto
 import com.hyosim.hamkkae.domain.model.Info
 import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.SerialName
@@ -26,6 +27,7 @@ data class AiCourseRecommendResponseDto (
             @SerialName("address") val address: String,
             @SerialName("description") val description: String? = null,
             @SerialName("endTime") val endTime: String,
+            @SerialName("image") val image:String,
             @SerialName("latitude") val latitude: Double,
             @SerialName("longitude") val longitude: Double,
             @SerialName("name") val name: String,
@@ -89,3 +91,62 @@ fun AiCourseRecommendResponseDto.Lodging.toInfo(): Info =
         checkin = checkIn,
         checkout = checkOut
     )
+
+
+fun AiCourseRecommendResponseDto.toProgressTripResponseDto(): ProgressTripResponseDto {
+    return ProgressTripResponseDto(
+        itinerary = this.itinerary.map { it.toProgressItinerary() },
+        lodgings = this.lodgings.map { it.toProgressLodging() },
+        restaurants = this.restaurants.map { it.toProgressRestaurant() }
+    )
+}
+
+private fun AiCourseRecommendResponseDto.Itinerary.toProgressItinerary(): ProgressTripResponseDto.Itinerary {
+    return ProgressTripResponseDto.Itinerary(
+        day = this.day,
+        attractions = this.attractions.map { it.toProgressAttraction() }
+    )
+}
+
+private fun AiCourseRecommendResponseDto.Itinerary.Attraction.toProgressAttraction(): ProgressTripResponseDto.Itinerary.Attraction {
+    return ProgressTripResponseDto.Itinerary.Attraction(
+        address = this.address,
+        description = this.description,
+        endTime = this.endTime,
+        latitude = this.latitude,
+        longitude = this.longitude,
+        name = this.name,
+        order = this.order,
+        phone = this.phone,
+        priceKrw = this.priceKrw,
+        startTime = this.startTime
+    )
+}
+
+private fun AiCourseRecommendResponseDto.Lodging.toProgressLodging(): ProgressTripResponseDto.Lodging {
+    return ProgressTripResponseDto.Lodging(
+        checkOut = this.checkOut,
+        address = this.address,
+        amenities = this.amenities,
+        checkIn = this.checkIn,
+        description = this.description,
+        latitude = this.latitude,
+        longitude = this.longitude,
+        name = this.name,
+        phone = this.phone,
+        pricePerNightKrw = this.pricePerNightKrw
+    )
+}
+
+private fun AiCourseRecommendResponseDto.Restaurant.toProgressRestaurant(): ProgressTripResponseDto.Restaurant {
+    return ProgressTripResponseDto.Restaurant(
+        address = this.address,
+        description = this.description,
+        estimatedCostPerPersonKrw = this.estimatedCostPerPersonKrw,
+        latitude = this.latitude,
+        longitude = this.longitude,
+        name = this.name,
+        phone = this.phone,
+        signatureMenu = this.signatureMenu
+    )
+}

@@ -39,7 +39,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"/>
 
-            <TextView
+           <!-- <TextView
                 android:id="@+id/tv_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintTop_toBottomOf="@id/iv_image"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"/>-->
 
             <ImageView
                 android:id="@+id/iv_clock"
@@ -60,8 +60,8 @@
                 android:background="@drawable/ic_time_gray_24"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintWidth_percent="0.05"
-                app:layout_constraintTop_toTopOf="@id/tv_name"
-                app:layout_constraintBottom_toBottomOf="@id/tv_name"
+                app:layout_constraintTop_toTopOf="@id/ll_keyword"
+                app:layout_constraintBottom_toBottomOf="@id/ll_keyword"
                 app:layout_constraintEnd_toStartOf="@id/tv_number_of_nights"/>
             
             <TextView
@@ -80,10 +80,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="5dp"
-                app:layout_constraintTop_toBottomOf="@id/tv_name"
-                app:layout_constraintStart_toStartOf="@id/tv_name"
-                app:layout_constraintEnd_toEndOf="@id/tv_number_of_nights">
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="15dp"
+                app:layout_constraintTop_toBottomOf="@id/iv_image"
+                app:layout_constraintStart_toStartOf="@id/iv_image"
+                app:layout_constraintEnd_toStartOf="@id/iv_clock">
 
                 <include layout="@layout/item_recommend_course_keyword" />
             </LinearLayout>

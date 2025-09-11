@@ -53,6 +53,10 @@
             android:id="@+id/action_recommendCourseFragment_to_recommendDetailFragment"
             app:destination="@id/recommendDetailFragment"/>
 
+        <action
+            android:id="@+id/action_recommendCourseFramgent_to_loadingFramgent"
+            app:destination="@id/loadingFragment" />
+
     </fragment>
 
     <fragment
@@ -64,6 +68,10 @@
         <argument
             android:name="course"
             app:argType="com.hyosim.hamkkae.data.response_dto.plan.AiCourseRecommendResponseDto" />
+
+        <argument
+            android:name="travelStyle"
+            app:argType="string" />
 
         <action
             android:id="@+id/action_recommendDetailFragment_to_tripStartFragment"

@@ -134,10 +134,10 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            lifecycleScope.launch {
+           /* lifecycleScope.launch {
                 delay(3000) // 3초 대기
                 showQuestion(true)
-            }
+            }*/
 
         } else {
             //binding.cvQuestion.visibility = View.GONE
