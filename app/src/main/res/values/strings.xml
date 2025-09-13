@@ -184,6 +184,7 @@
     <!--loading-->
     <string name="loading">부모님 취향에 맞는 코스를 찾고 있어요%s</string>
     <string name="loading_max_time">최대 2분정도 소요될 수 있습니다</string>
+    <string name="loading_error">오류가 발생했습니다.\n나중에 다시 시도해주십시오.</string>
 
     <!--recomment_course-->
     <string name="recommend_course_progress_title">3단계: 코스 선택</string>

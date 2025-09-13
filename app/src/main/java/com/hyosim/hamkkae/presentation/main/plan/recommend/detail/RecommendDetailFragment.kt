@@ -76,6 +76,13 @@ class RecommendDetailFragment : Fragment() {
 
             val durationText = getTripDuration(course)
             tvDuring.text = durationText
+
+            val image: String? = course.itinerary
+                .flatMap { it.attractions }           // itinerary 안의 attractions 모두 펼치기
+                .firstOrNull { it.image.isNotEmpty() } // image가 비어있지 않은 첫 번째 찾기
+                ?.image                               // 찾으면 image 값, 없으면 null
+
+            ivImage.load(image ?: R.drawable.ic_default)
         }
     }
 

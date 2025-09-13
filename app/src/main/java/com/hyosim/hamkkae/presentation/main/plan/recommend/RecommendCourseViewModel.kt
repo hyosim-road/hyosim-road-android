@@ -112,9 +112,12 @@ class RecommendCourseViewModel @Inject constructor(
         )
     }
 
+
+
     val mockCourses: List<AiCourseRecommendResponseDto> = listOf(
         // --------------------- 첫 번째 코스 ---------------------
         AiCourseRecommendResponseDto(
+            caption="강원도.",
             itinerary = listOf(
                 AiCourseRecommendResponseDto.Itinerary(
                     day = "2025-09-12",
@@ -271,6 +274,7 @@ class RecommendCourseViewModel @Inject constructor(
 
         // --------------------- 두 번째 코스 ---------------------
         AiCourseRecommendResponseDto(
+            caption="강원도.",
             itinerary = listOf(
                 AiCourseRecommendResponseDto.Itinerary(
                     day = "2025-09-12",

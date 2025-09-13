@@ -45,7 +45,8 @@ class SelectTripStyleFragment : Fragment() {
 
     private fun setupRecyclerView() {
         tripStyleAdapter = SelectTripStyleAdapter { style ->
-            selectTripStyleViewModel.toggleTripStyleSelection(style)
+            // 클릭할 때마다 ViewModel에 단일 선택 반영
+            selectTripStyleViewModel.selectStyle(style)
         }
 
         binding.rvTripStyle.apply {
@@ -57,6 +58,30 @@ class SelectTripStyleFragment : Fragment() {
     }
 
     private fun observeViewModel() {
+        selectTripStyleViewModel.selectedStyle.observe(viewLifecycleOwner) { selected ->
+            tripStyleAdapter.selectItem(selected)
+
+            val isSelectionNotEmpty = selected != null
+            binding.btnNext.isEnabled = isSelectionNotEmpty
+            binding.btnNext.isSelected = isSelectionNotEmpty
+            binding.tvDone.visibility = if (isSelectionNotEmpty) View.VISIBLE else View.GONE
+        }
+    }
+
+    /*private fun setupRecyclerView() {
+        tripStyleAdapter = SelectTripStyleAdapter { style ->
+            selectTripStyleViewModel.toggleTripStyleSelection(style)
+        }
+
+        binding.rvTripStyle.apply {
+            layoutManager = GridLayoutManager(requireContext(), 2)
+            adapter = tripStyleAdapter
+            setHasFixedSize(true)
+        }
+        tripStyleAdapter.submitList(selectTripStyleViewModel.tripStyleList)
+    }*/
+
+   /* private fun observeViewModel() {
         selectTripStyleViewModel.selectedStyles.observe(viewLifecycleOwner) { selectedList ->
             tripStyleAdapter.submitSelection(selectedList)
 
@@ -66,6 +91,17 @@ class SelectTripStyleFragment : Fragment() {
             binding.tvDone.visibility = if (isSelectionNotEmpty) View.VISIBLE else View.GONE
         }
     }
+*/
+  /* private fun observeViewModel() {
+       selectTripStyleViewModel.selectedStyle.observe(viewLifecycleOwner) { selected ->
+           tripStyleAdapter.selectItem(selected)
+
+           val isSelectionNotEmpty = selected != null
+           binding.btnNext.isEnabled = isSelectionNotEmpty
+           binding.btnNext.isSelected = isSelectionNotEmpty
+           binding.tvDone.visibility = if (isSelectionNotEmpty) View.VISIBLE else View.GONE
+       }
+   }*/
 
     private fun setting() {
         binding.pbTrip.progress = 50
@@ -76,13 +112,23 @@ class SelectTripStyleFragment : Fragment() {
         clickNextButton()
     }
 
-    private fun clickNextButton() {
+   /* private fun clickNextButton() {
         binding.btnNext.setOnClickListener {
             val selected = selectTripStyleViewModel.selectedStyles.value.orEmpty()
             // 여러 개 중 첫 번째만 API에 넣는다고 가정
             val styleCode = selected.firstOrNull()?.code ?: ""
             planViewModel.setTravelStyle(styleCode)
 
+            findNavController().navigate(R.id.action_selectTripStyleFragment_to_loadingFragment)
+        }
+    }*/
+
+    private fun clickNextButton() {
+        binding.btnNext.setOnClickListener {
+            val selected = selectTripStyleViewModel.selectedStyle.value
+            val styleCode = selected?.code ?: ""
+
+            planViewModel.setTravelStyle(styleCode)
             findNavController().navigate(R.id.action_selectTripStyleFragment_to_loadingFragment)
         }
     }

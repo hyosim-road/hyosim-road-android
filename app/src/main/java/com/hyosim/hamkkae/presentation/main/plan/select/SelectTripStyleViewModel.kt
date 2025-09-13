@@ -18,10 +18,17 @@ class SelectTripStyleViewModel: ViewModel() {
 //        TripStyle(8, "체험",   R.drawable.ic_style_experience)
     )
 
-    private val _selectedStyles = MutableLiveData<List<TripStyle>>(emptyList())
-    val selectedStyles: LiveData<List<TripStyle>> = _selectedStyles
+    /*private val _selectedStyles = MutableLiveData<List<TripStyle>>(emptyList())
+    val selectedStyles: LiveData<List<TripStyle>> = _selectedStyles*/
+    private val _selectedStyle = MutableLiveData<TripStyle?>()
+    val selectedStyle: LiveData<TripStyle?> = _selectedStyle
 
-    fun toggleTripStyleSelection(tripStyle: TripStyle) {
+    fun selectStyle(style: TripStyle) {
+        _selectedStyle.value = style
+    }
+
+
+   /* fun toggleTripStyleSelection(tripStyle: TripStyle) {
         val currentList = _selectedStyles.value.orEmpty().toMutableList()
 
         if (currentList.contains(tripStyle)) {
@@ -30,5 +37,5 @@ class SelectTripStyleViewModel: ViewModel() {
             currentList.add(tripStyle)
         }
         _selectedStyles.value = currentList
-    }
+    }*/
 }

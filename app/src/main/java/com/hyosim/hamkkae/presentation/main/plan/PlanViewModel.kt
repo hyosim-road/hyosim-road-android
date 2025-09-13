@@ -9,6 +9,7 @@ import com.hyosim.hamkkae.domain.repository.AiPlanRepository
 import com.hyosim.hamkkae.domain.repository.PlanRepository
 import com.hyosim.hamkkae.extension.plan.AiCourseRecommendState
 import com.hyosim.hamkkae.extension.plan.CourseRecommendState
+import com.hyosim.hamkkae.extension.plan.RegisterState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -134,5 +135,9 @@ class PlanViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    fun resetState(){
+        _aiCourseRecommendState.value= AiCourseRecommendState.Loading
     }
 }

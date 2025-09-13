@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
+import androidx.compose.ui.unit.Velocity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -53,17 +54,17 @@ class RecommendLoadingFragment : Fragment() {
             startDotAnimation()
 
             // 3초 대기
-            delay(3000)
+            //delay(3000)
 
-            findNavController().navigate(
+            /*findNavController().navigate(
                 R.id.action_recommendLoadingFragment_to_recommendCourseFragment,
                 null,
                 NavOptions.Builder()
                     .setPopUpTo(R.id.loadingFragment, true) // ✅ LoadingFragment 스택에서 제거
                     .build()
-            )
+            )*/
             // API 호출
-            //recommendCourse()
+            recommendCourse()
         }
     }
 
@@ -77,9 +78,9 @@ class RecommendLoadingFragment : Fragment() {
                 val dots = ".".repeat(dotCount)
 
                 val message = if (messageToggle) {
-                    getString(R.string.loading, dots) // "로딩중..."
+                    getString(R.string.loading, dots)
                 } else {
-                    getString(R.string.loading_max_time) // "최대 2분정도 소요될 수 있습니다"
+                    getString(R.string.loading_max_time)
                 }
 
                 binding.tvLoading.text = message
@@ -95,17 +96,38 @@ class RecommendLoadingFragment : Fragment() {
             planViewModel.aiCourseRecommendState.collect { state->
                 when(state){
                     is AiCourseRecommendState.Success -> {
-                        findNavController().navigate(
-                            R.id.action_recommendLoadingFragment_to_recommendCourseFragment,
-                            null,
-                            NavOptions.Builder()
-                                .setPopUpTo(R.id.loadingFragment, true) // ✅ LoadingFragment 스택에서 제거
-                                .build()
-                        )
+                        val course = state.courseList
+                        val hasAttractions = course.get(0).itinerary.any { it.attractions.isNotEmpty() }
 
+                        if (hasAttractions) {
+                            findNavController().navigate(
+                                R.id.action_recommendLoadingFragment_to_recommendCourseFragment,
+                                null,
+                                NavOptions.Builder()
+                                    .setPopUpTo(R.id.loadingFragment, true)
+                                    .build()
+                            )
+                        } else {
+                            // 오류 화면 표시
+                            with(binding) {
+                                lottieLoading.visibility = View.GONE
+                                tvLoading.visibility = View.GONE
+
+                                ivError.visibility = View.VISIBLE
+                                tvError.visibility = View.VISIBLE
+                            }
+                        }
+
+                        planViewModel.resetState()
                     }
                     is AiCourseRecommendState.Error -> {
+                        with(binding){
+                            lottieLoading.visibility = View.GONE
+                            tvLoading.visibility= View.GONE
 
+                            ivError.visibility= View.VISIBLE
+                            tvError.visibility= View.VISIBLE
+                        }
                     }
                     is AiCourseRecommendState.Loading -> {
 

@@ -13,7 +13,7 @@ class SelectTripStyleAdapter(
     private val onItemClick: (TripStyle) -> Unit
 ) : ListAdapter<TripStyle, SelectTripStyleAdapter.SelectTripStyleViewHolder>(TripStyleDiffCallback) {
 
-    private var selectedItems: List<TripStyle> = emptyList()
+    private var selectedItem: TripStyle? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SelectTripStyleViewHolder {
         val binding = ItemTripStyleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -22,12 +22,22 @@ class SelectTripStyleAdapter(
 
     override fun onBindViewHolder(holder: SelectTripStyleViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item, selectedItems.contains(item))
+        holder.bind(item, item == selectedItem)
     }
 
-    fun submitSelection(items: List<TripStyle>) {
-        selectedItems = items
-        notifyDataSetChanged()
+    fun selectItem(item: TripStyle?) {
+        val previousSelected = selectedItem
+        selectedItem = item
+
+        // 이전 선택된 아이템 위치만 갱신
+        previousSelected?.let {
+            val prevIndex = currentList.indexOf(it)
+            if (prevIndex != -1) notifyItemChanged(prevIndex)
+        }
+
+        // 새로 선택된 아이템 위치 갱신
+        val newIndex = currentList.indexOf(item)
+        if (newIndex != -1) notifyItemChanged(newIndex)
     }
 
     inner class SelectTripStyleViewHolder(
@@ -37,7 +47,9 @@ class SelectTripStyleAdapter(
         init {
             binding.clTripStyle.setOnClickListener {
                 if (adapterPosition != RecyclerView.NO_POSITION) {
-                    onItemClick(getItem(adapterPosition))
+                    val clickedItem = getItem(adapterPosition)
+                    selectItem(clickedItem)   // ✅ 선택 갱신
+                    onItemClick(clickedItem)  // ✅ 외부로 선택 이벤트 전달
                 }
             }
         }
@@ -46,11 +58,10 @@ class SelectTripStyleAdapter(
             binding.ivIcon.setImageResource(item.icon)
             binding.tvLabel.text = item.name
 
-            if (isSelected) {
-                binding.clTripStyle.setBackgroundResource(R.drawable.bg_selected_style_box)
-            } else {
-                binding.clTripStyle.setBackgroundResource(R.drawable.bg_select_style_box)
-            }
+            binding.clTripStyle.setBackgroundResource(
+                if (isSelected) R.drawable.bg_selected_style_box
+                else R.drawable.bg_select_style_box
+            )
         }
     }
 }
