@@ -11,6 +11,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.lifecycle.lifecycleScope
+import coil.load
 import com.hyosim.hamkkae.R
 import com.hyosim.hamkkae.data.response_dto.home.ProgressTripResponseDto
 import com.hyosim.hamkkae.databinding.ActivityMainBinding
@@ -132,6 +133,8 @@ class MainActivity : AppCompatActivity() {
                     )
                     constraintSet.applyTo(binding.clMain)
                 }
+
+                ivTripImage.load(R.drawable.ic_default)
             }
 
            /* lifecycleScope.launch {

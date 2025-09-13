@@ -64,7 +64,7 @@ class RecommendCourseFragment : Fragment() {
     }
 
     private fun showCourse(){
-        /*val currentState = planViewModel.aiCourseRecommendState.value
+        val currentState = planViewModel.aiCourseRecommendState.value
         if(currentState is AiCourseRecommendState.Success) {
             val courseList = currentState.courseList
             val recommendCourseAdapter = RecommendCourseAdapter(
@@ -78,15 +78,23 @@ class RecommendCourseFragment : Fragment() {
                             course, planViewModel.travelStyle.value!!
                         )
                     findNavController().navigate(action)
+                },
+                clickMap = {course->
+                    val progressCourse = course.toProgressTripResponseDto()
+
+                    val intent = Intent(requireActivity(), MapActivity::class.java)
+                    intent.putExtra("course", progressCourse)
+                    startActivity(intent)
                 }
             )
             binding.rvCourse.adapter = recommendCourseAdapter
             recommendCourseAdapter.submitList(courseList)
             recommendCourseAdapter.saveStyle(planViewModel.travelStyle.value.orEmpty())
 
-        }*/
+            clickAgain()
+        }
 
-        val courseList = recommendCourseViewModel.mockCourses
+       /* val courseList = recommendCourseViewModel.mockCourses
         val recommendCourseAdapter = RecommendCourseAdapter(
             clickItem = { course ->
                 binding.btnNext.isSelected = true
@@ -111,7 +119,7 @@ class RecommendCourseFragment : Fragment() {
         recommendCourseAdapter.submitList(courseList)
         recommendCourseAdapter.saveStyle(planViewModel.travelStyle.value.orEmpty())
 
-        clickAgain()
+        clickAgain()*/
     }
 
     private fun clickNext(course: AiCourseRecommendResponseDto) {

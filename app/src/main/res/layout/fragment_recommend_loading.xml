@@ -33,4 +33,28 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/lottieLoading"/>
 
+    <ImageView
+        android:id="@+id/iv_error"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/ic_error_black_24"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tv_error"
+        app:tint="@color/auth_no_red" />
+
+    <TextView
+        android:id="@+id/tv_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/loading_error"
+        android:gravity="center"
+        android:textColor="@color/auth_no_red"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/iv_error"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

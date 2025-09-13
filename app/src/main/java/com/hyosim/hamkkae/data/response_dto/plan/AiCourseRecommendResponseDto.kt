@@ -10,6 +10,7 @@ import kotlinx.serialization.Serializable
 @Parcelize
 @Serializable
 data class AiCourseRecommendResponseDto (
+    @SerialName("caption") val caption:String,
     @SerialName("itinerary") val itinerary: List<Itinerary>,
     @SerialName("lodgings") val lodgings: List<Lodging>,
     @SerialName("restaurants") val restaurants: List<Restaurant>
