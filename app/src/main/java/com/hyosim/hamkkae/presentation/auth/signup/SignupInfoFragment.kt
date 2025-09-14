@@ -389,6 +389,7 @@ class SignupInfoFragment : Fragment() {
             signupInfoViewModel.sendEmailState.collect { state ->
                 when (state) {
                     is SendEmailState.Success -> {
+                        Timber.d("send email state success")
                         setEmailButtonLoading(false)
                         with(binding) {
                             tvAvailableEmail.apply {
@@ -423,9 +424,11 @@ class SignupInfoFragment : Fragment() {
                     }
 
                     is SendEmailState.Error -> {
+                        Timber.e("send email state error")
                         setEmailButtonLoading(false)
                         Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
                         signupInfoViewModel.sendStateLoading()
+                        binding.btnRequestEmailCode.text = getString(R.string.signup_info_email_resend)
                     }
 
                     is SendEmailState.Loading -> {

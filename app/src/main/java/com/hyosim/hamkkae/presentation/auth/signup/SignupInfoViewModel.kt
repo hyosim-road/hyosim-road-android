@@ -11,6 +11,7 @@ import com.hyosim.hamkkae.extension.auth.SignUpState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import okhttp3.ResponseBody
@@ -26,8 +27,8 @@ class SignupInfoViewModel @Inject constructor(
     val checkIdState: MutableSharedFlow<CheckIdState> = _checkIdState
     private val _checkEmailState = MutableStateFlow<CheckEmailState>(CheckEmailState.Loading)
     val checkEmailState = _checkEmailState.asStateFlow()
-    private val _sendEmailState = MutableSharedFlow<SendEmailState>()
-    val sendEmailState: MutableSharedFlow<SendEmailState> = _sendEmailState
+    private val _sendEmailState = MutableStateFlow<SendEmailState>(SendEmailState.Loading)
+    val sendEmailState: StateFlow<SendEmailState> = _sendEmailState.asStateFlow()
     private val _codeState = MutableSharedFlow<CodeState>()
     val codeState: MutableSharedFlow<CodeState> = _codeState
     var verifiedId: String? = null
@@ -103,7 +104,7 @@ class SignupInfoViewModel @Inject constructor(
     fun sendEmail(email: String) {
         viewModelScope.launch {
             authRepository.send(email).onSuccess {
-                _sendEmailState.emit(SendEmailState.Success(it.message))
+                _sendEmailState.value = SendEmailState.Success(it.message)
             }.onFailure {
                 if (it is HttpException) {
                     try {
@@ -111,27 +112,27 @@ class SignupInfoViewModel @Inject constructor(
                         val errorBodyString = errorBody?.string() ?: ""
                         val apiError = parseStatusCode(errorBodyString)
 
-                        _sendEmailState.emit(
+                        _sendEmailState.value =
                             SendEmailState.Error(
                                 status = apiError.status,
                                 message = apiError.message,
                             )
-                        )
+
                     } catch (e: Exception) {
                         Timber.e("Error parsing error body: $e")
-                        _sendEmailState.emit(
+                        _sendEmailState.value =
                             SendEmailState.Error(
                                 status = null,
                                 message = "알 수 없는 에러가 발생했습니다.",
-                            )
+
                         )
                     }
                 } else {
-                    _sendEmailState.emit(
+                    _sendEmailState.value =
                         SendEmailState.Error(
                             status = null,
                             message = it.message,
-                        )
+
                     )
                 }
             }
@@ -195,6 +196,6 @@ class SignupInfoViewModel @Inject constructor(
     }
 
     suspend fun sendStateLoading() {
-        _sendEmailState.emit(SendEmailState.Loading)
+        _sendEmailState.value = SendEmailState.Loading
     }
 }
