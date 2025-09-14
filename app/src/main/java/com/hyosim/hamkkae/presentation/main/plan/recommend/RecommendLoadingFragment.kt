@@ -54,17 +54,17 @@ class RecommendLoadingFragment : Fragment() {
             startDotAnimation()
 
             // 3초 대기
-            //delay(3000)
+            delay(3000)
 
-            /*findNavController().navigate(
+            findNavController().navigate(
                 R.id.action_recommendLoadingFragment_to_recommendCourseFragment,
                 null,
                 NavOptions.Builder()
                     .setPopUpTo(R.id.loadingFragment, true) // ✅ LoadingFragment 스택에서 제거
                     .build()
-            )*/
+            )
             // API 호출
-            recommendCourse()
+            //recommendCourse()
         }
     }
 
@@ -117,8 +117,6 @@ class RecommendLoadingFragment : Fragment() {
                                 tvError.visibility = View.VISIBLE
                             }
                         }
-
-                        planViewModel.resetState()
                     }
                     is AiCourseRecommendState.Error -> {
                         with(binding){
