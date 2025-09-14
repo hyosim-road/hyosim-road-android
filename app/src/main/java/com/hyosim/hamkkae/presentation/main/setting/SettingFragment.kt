@@ -63,17 +63,17 @@ class SettingFragment: Fragment() {
             requireActivity().finishAffinity()
         }
 
-        binding.switchQuestion.isChecked = true
+       /* binding.switchQuestion.isChecked = true
         binding.switchQuestion.setOnCheckedChangeListener { _, isChecked ->
             setSwitchState(isChecked)
-        }
+        }*/
     }
 
     private fun navigate(resId:Int){
         findNavController().navigate(resId)
     }
 
-    private fun setSwitchState(isChecked: Boolean) {
+   /* private fun setSwitchState(isChecked: Boolean) {
         if (isChecked) {
             binding.switchQuestion.trackTintList = ColorStateList.valueOf(
                 ContextCompat.getColor(requireContext(), R.color.hover_orange)
@@ -83,7 +83,7 @@ class SettingFragment: Fragment() {
                 ContextCompat.getColor(requireContext(), R.color.auth_gray)
             )
         }
-    }
+    }*/
 
     override fun onDestroyView() {
         super.onDestroyView()

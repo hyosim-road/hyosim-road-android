@@ -109,7 +109,7 @@
                 android:overScrollMode="never"
                 android:scrollbars="none"
                 app:layout_constraintTop_toBottomOf="@id/ll_keyword"
-                app:layout_constraintStart_toStartOf="@id/tv_name"
+                app:layout_constraintStart_toStartOf="@id/ll_keyword"
                 app:layout_constraintEnd_toEndOf="@id/tv_number_of_nights"
                 app:layout_constraintBottom_toBottomOf="parent"
                 tools:listitem="@layout/item_recommend_course_place"/>
@@ -123,7 +123,7 @@
                 android:layout_marginEnd="20dp"
                 android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@id/rv_places"
-                app:layout_constraintStart_toStartOf="@id/tv_name"
+                app:layout_constraintStart_toStartOf="@id/ll_keyword"
                 app:layout_constraintEnd_toEndOf="@id/tv_number_of_nights">
 
                 <View

@@ -36,6 +36,7 @@ import com.hyosim.hamkkae.extension.auth.SignUpState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import kotlin.math.sign
 
 @AndroidEntryPoint
 class SignupInfoFragment : Fragment() {
@@ -424,6 +425,7 @@ class SignupInfoFragment : Fragment() {
                     is SendEmailState.Error -> {
                         setEmailButtonLoading(false)
                         Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
+                        signupInfoViewModel.sendStateLoading()
                     }
 
                     is SendEmailState.Loading -> {
