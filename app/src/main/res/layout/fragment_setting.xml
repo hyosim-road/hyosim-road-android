@@ -120,7 +120,7 @@
                     android:background="@color/auth_box_gray"
                     app:layout_constraintTop_toBottomOf="@id/tv_change_pw" />
 
-                <ImageView
+                <!--<ImageView
                     android:id="@+id/iv_question"
                     android:layout_width="28dp"
                     android:layout_height="28dp"
@@ -153,7 +153,7 @@
                     app:trackTint="@color/hover_orange"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/tv_question"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_question" />
+                    app:layout_constraintBottom_toBottomOf="@id/tv_question"--> />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
