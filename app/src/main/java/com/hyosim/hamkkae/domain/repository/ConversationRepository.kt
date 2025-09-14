@@ -1,0 +1,11 @@
+package com.hyosim.hamkkae.domain.repository
+
+import com.hyosim.hamkkae.data.request_dto.PostAnswerRequestDto
+import com.hyosim.hamkkae.data.response_dto.ApiResponse
+import com.hyosim.hamkkae.data.response_dto.conversation.GetQuestionResponseData
+
+interface ConversationRepository {
+    suspend fun getQuestion(tripId:Int):Result<ApiResponse<GetQuestionResponseData>>
+    suspend fun postAnswer(postAnswerRequestDto: PostAnswerRequestDto): Result<ApiResponse<Unit>>
+    suspend fun getConversations(tripId: Int):Result<ApiResponse<Unit>>
+}

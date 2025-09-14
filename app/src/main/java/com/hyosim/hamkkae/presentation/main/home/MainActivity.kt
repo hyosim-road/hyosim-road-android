@@ -16,6 +16,7 @@ import com.hyosim.hamkkae.R
 import com.hyosim.hamkkae.data.response_dto.home.ProgressTripResponseDto
 import com.hyosim.hamkkae.databinding.ActivityMainBinding
 import com.hyosim.hamkkae.domain.model.TodaySchedule
+import com.hyosim.hamkkae.extension.conversation.GetQuestionState
 import com.hyosim.hamkkae.extension.home.ProgressTripState
 import com.hyosim.hamkkae.presentation.main.family_conversation.FamilyConversationActivity
 import com.hyosim.hamkkae.presentation.main.home.adapter.TodayScheduleAdapter
@@ -117,7 +118,7 @@ class MainActivity : AppCompatActivity() {
 
                 setTrip(course!!)
                 clickUpload()
-                clickAnswer()
+                clickAnswer(course.id)
 
                 // cvAlbum의 top을 cvSchedule의 bottom에 연결
                 cvSchedule.post {
@@ -137,10 +138,7 @@ class MainActivity : AppCompatActivity() {
                 ivTripImage.load(R.drawable.ic_default)
             }
 
-           /* lifecycleScope.launch {
-                delay(3000) // 3초 대기
-                showQuestion(true)
-            }*/
+            getQuestion()
 
         } else {
             //binding.cvQuestion.visibility = View.GONE
@@ -162,6 +160,8 @@ class MainActivity : AppCompatActivity() {
                 )
                 set.applyTo(binding.clMain)
             }
+
+            showQuestion(false)
         }
     }
 
@@ -379,6 +379,27 @@ class MainActivity : AppCompatActivity() {
          }
      }*/
 
+    private fun getQuestion(){
+        lifecycleScope.launch {
+            mainViewModel.getQuestionState.collect { state->
+                when(state){
+                    is GetQuestionState.Success -> {
+                        binding.tvQuestionContent.text = state.question.content
+                        showQuestion(true)
+                    }
+                    is GetQuestionState.Loading -> {
+
+                    }
+                    is GetQuestionState.Error -> {
+
+                    }
+                }
+            }
+        }
+
+        mainViewModel.getQuestion()
+    }
+
     private fun showQuestion(isShow: Boolean) {
         val constraintSet = ConstraintSet()
         constraintSet.clone(binding.clMain)
@@ -426,9 +447,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun clickAnswer() {
+    private fun clickAnswer(tripId:Int) {
         binding.btnAnswer.setOnClickListener {
-            navigateTo(FamilyConversationActivity::class.java)
+            val intent = Intent(this, FamilyConversationActivity::class.java)
+            intent.putExtra("tripId", tripId)
+            startActivity(intent)
+            //navigateTo(FamilyConversationActivity::class.java)
         }
     }
 
@@ -456,9 +480,7 @@ class MainActivity : AppCompatActivity() {
     private fun clickSetting() {
         binding.btnSetting.setOnClickListener {
             Timber.d("setting click!")
-
-            val intent = Intent(it.context, SettingActivity::class.java)
-            startActivity(intent)
+            navigateTo(SettingActivity::class.java)
         }
     }
 

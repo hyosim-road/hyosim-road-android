@@ -26,9 +26,11 @@ data class AiCourseRecommendResponseDto (
         @Serializable
         data class Attraction(
             @SerialName("address") val address: String,
+            @SerialName("contentId") val contentId:String,
+            @SerialName("contentid") val contentid:String,
             @SerialName("description") val description: String? = null,
             @SerialName("endTime") val endTime: String,
-            @SerialName("image") val image:String,
+            @SerialName("image") val image:String?,
             @SerialName("latitude") val latitude: Double,
             @SerialName("longitude") val longitude: Double,
             @SerialName("name") val name: String,
@@ -45,7 +47,10 @@ data class AiCourseRecommendResponseDto (
         @SerialName("address") val address: String,
         @SerialName("amenities") val amenities: List<String>,
         @SerialName("checkIn") val checkIn: String,
+        @SerialName("contentId") val contentId:String,
+        @SerialName("contentid") val contentid:String,
         @SerialName("description") val description: String? = null,
+        @SerialName("image") val image:String?,
         @SerialName("latitude") val latitude: Double,
         @SerialName("longitude") val longitude: Double,
         @SerialName("name") val name: String,
@@ -59,6 +64,9 @@ data class AiCourseRecommendResponseDto (
         @SerialName("address") val address: String,
         @SerialName("description") val description: String? = null,
         @SerialName("estimatedCostPerPersonKrw") val estimatedCostPerPersonKrw: Int,
+        @SerialName("image") val image:String?,
+        @SerialName("contentId") val contentId:String,
+        @SerialName("contentid") val contentid:String,
         @SerialName("latitude") val latitude: Double,
         @SerialName("longitude") val longitude: Double,
         @SerialName("name") val name: String,
@@ -96,6 +104,7 @@ fun AiCourseRecommendResponseDto.Lodging.toInfo(): Info =
 
 fun AiCourseRecommendResponseDto.toProgressTripResponseDto(): ProgressTripResponseDto {
     return ProgressTripResponseDto(
+        id = 1,
         itinerary = this.itinerary.map { it.toProgressItinerary() },
         lodgings = this.lodgings.map { it.toProgressLodging() },
         restaurants = this.restaurants.map { it.toProgressRestaurant() }
@@ -120,7 +129,8 @@ private fun AiCourseRecommendResponseDto.Itinerary.Attraction.toProgressAttracti
         order = this.order,
         phone = this.phone,
         priceKrw = this.priceKrw,
-        startTime = this.startTime
+        startTime = this.startTime,
+        imageUrl = this.image
     )
 }
 
@@ -135,7 +145,8 @@ private fun AiCourseRecommendResponseDto.Lodging.toProgressLodging(): ProgressTr
         longitude = this.longitude,
         name = this.name,
         phone = this.phone,
-        pricePerNightKrw = this.pricePerNightKrw
+        pricePerNightKrw = this.pricePerNightKrw,
+        imageUrl = this.image
     )
 }
 
@@ -144,6 +155,7 @@ private fun AiCourseRecommendResponseDto.Restaurant.toProgressRestaurant(): Prog
         address = this.address,
         description = this.description,
         estimatedCostPerPersonKrw = this.estimatedCostPerPersonKrw,
+        imageUrl=this.image,
         latitude = this.latitude,
         longitude = this.longitude,
         name = this.name,

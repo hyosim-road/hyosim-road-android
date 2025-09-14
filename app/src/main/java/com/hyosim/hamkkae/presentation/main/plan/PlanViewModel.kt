@@ -18,6 +18,7 @@ import kotlinx.coroutines.launch
 import okhttp3.ResponseBody
 import retrofit2.HttpException
 import timber.log.Timber
+import java.io.IOException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -118,20 +119,25 @@ class PlanViewModel @Inject constructor(
         viewModelScope.launch {
             aiPlanRepository.recommendCourse(toRequestDto()).onSuccess { response->
                 _aiCourseRecommendState.value= AiCourseRecommendState.Success(response)
-            }.onFailure {
-                _aiCourseRecommendState.value= AiCourseRecommendState.Error("Error response failure: ${it.message}")
-                if (it is HttpException) {
-                    try {
-                        val errorBody: ResponseBody? = it.response()?.errorBody()
-                        val errorBodyString = errorBody?.string() ?: ""
-                        parseHttpError(errorBodyString)
-                    } catch (e: Exception) {
-                        // JSON 파싱 실패 시 로깅
-                        Timber.e("Error parsing error body: ${e}")
-                        _aiCourseRecommendState.emit(AiCourseRecommendState.Error("알 수 없는 에러가 발생했습니다."))
+            }.onFailure {throwable ->
+                when (throwable) {
+                    is HttpException -> {
+                        try {
+                            val errorBody = throwable.response()?.errorBody()?.string().orEmpty()
+                            parseHttpError(errorBody)
+                        } catch (e: Exception) {
+                            Timber.e(e, "Error parsing error body")
+                            _aiCourseRecommendState.value = AiCourseRecommendState.Error("에러 응답 파싱 실패")
+                        }
                     }
-                } else {
-                    _aiCourseRecommendState.emit(AiCourseRecommendState.Error("네트워크 에러 또는 알 수 없는 오류: ${it.message}"))
+                    is IOException -> {
+                        Timber.e(throwable, "네트워크 I/O 오류")
+                        _aiCourseRecommendState.value = AiCourseRecommendState.Error("네트워크 오류: ${throwable.message}")
+                    }
+                    else -> {
+                        Timber.e(throwable, "알 수 없는 오류")
+                        _aiCourseRecommendState.value = AiCourseRecommendState.Error("알 수 없는 오류: ${throwable.message}")
+                    }
                 }
             }
         }

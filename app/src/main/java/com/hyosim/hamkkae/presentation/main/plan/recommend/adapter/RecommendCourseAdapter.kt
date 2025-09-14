@@ -128,17 +128,28 @@ class RecommendCourseAdapter(
             with(binding) {
                 // 수정해야할 부분
                 //tvName.text = course.caption
+                Timber.d("recommend course adapter")
                 tvNumberOfNights.text = getTripDuration(
                     course.itinerary[0].day,
                     course.itinerary[course.itinerary.size - 1].day
                 )
 
                 val image: String? = course.itinerary
-                    .flatMap { it.attractions }           // itinerary 안의 attractions 모두 펼치기
-                    .firstOrNull { it.image.isNotEmpty() } // image가 비어있지 않은 첫 번째 찾기
-                    ?.image                               // 찾으면 image 값, 없으면 null
+                    .flatMap { it.attractions }
+                    .firstOrNull { !it.image.isNullOrEmpty() } // image가 null이 아니고 비어있지 않은 경우
+                    ?.image                                     // 찾으면 image 값, 없으면 null
 
-                ivImage.load(image ?: R.drawable.ic_default)
+                ivImage.load(image) {
+                    listener(
+                        onError = { _, throwable ->
+                            Timber.e("이미지 로드 실패: $image")
+                        },
+                        onSuccess = { _, _ ->
+                            Timber.d("이미지 로드 성공: $image")
+                        }
+                    )
+                }
+
 
                 val keywordBinding =
                     ItemRecommendCourseKeywordBinding.bind(binding.llKeyword.getChildAt(0))

@@ -15,6 +15,7 @@ import java.util.Locale
 @Parcelize
 @Serializable
 data class ProgressTripResponseDto (
+    @SerialName("id") val id:Int,
     @SerialName("itinerary") val itinerary: List<Itinerary>,
     @SerialName("lodgings") val lodgings: List<Lodging>,
     @SerialName("restaurants") val restaurants: List<Restaurant>
@@ -38,7 +39,8 @@ data class ProgressTripResponseDto (
             @SerialName("order") val order: Int,
             @SerialName("phone") val phone: String? = null,
             @SerialName("priceKrw") val priceKrw: Int,
-            @SerialName("startTime") val startTime: String
+            @SerialName("startTime") val startTime: String,
+            @SerialName("imageUrl") val imageUrl:String?,
         ): Parcelable
     }
     @Parcelize
@@ -53,7 +55,8 @@ data class ProgressTripResponseDto (
         @SerialName("longitude") val longitude: Double,
         @SerialName("name") val name: String,
         @SerialName("phone") val phone: String? = null,
-        @SerialName("pricePerNightKrw") val pricePerNightKrw: Int
+        @SerialName("pricePerNightKrw") val pricePerNightKrw: Int,
+        @SerialName("imageUrl") val imageUrl:String?
     ): Parcelable
 
     @Parcelize
@@ -66,7 +69,8 @@ data class ProgressTripResponseDto (
         @SerialName("longitude") val longitude: Double,
         @SerialName("name") val name: String,
         @SerialName("phone") val phone: String? = null,
-        @SerialName("signatureMenu") val signatureMenu: String? = null
+        @SerialName("signatureMenu") val signatureMenu: String? = null,
+        @SerialName("imageUrl") val imageUrl:String?
     ): Parcelable
 }
 
