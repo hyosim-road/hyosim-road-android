@@ -47,6 +47,7 @@
             android:textColor="@color/dark_gray"
             android:textSize="14sp"
             android:textStyle="bold"
+            android:breakStrategy="simple"
             app:layout_constraintBottom_toTopOf="@id/tv_description"
             app:layout_constraintStart_toEndOf="@id/iv_icon"
             app:layout_constraintTop_toTopOf="parent" />
@@ -72,6 +73,7 @@
             android:gravity="start"
             android:textColor="@color/dark_gray"
             android:textSize="14sp"
+            android:breakStrategy="simple"
             app:layout_constraintBottom_toTopOf="@id/tv_place"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/tv_place"

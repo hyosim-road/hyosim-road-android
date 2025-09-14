@@ -17,12 +17,15 @@ import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
 import com.hyosim.hamkkae.R
+import com.hyosim.hamkkae.data.response_dto.conversation.GetAnswersResponseData
 import com.hyosim.hamkkae.databinding.ItemAnswerBinding
+import com.hyosim.hamkkae.databinding.ItemConversationAnswerBinding
 import com.hyosim.hamkkae.databinding.ItemTextBinding
 import com.hyosim.hamkkae.domain.model.Answer
+import com.hyosim.hamkkae.presentation.main.home.noWordBreak
 
 class ConversationAdapter :
-    ListAdapter<Answer, ConversationAdapter.ConversationViewHolder>(
+    ListAdapter<GetAnswersResponseData, ConversationAdapter.ConversationViewHolder>(
         FamilyConversationDiffCallback
     ) {
     override fun onCreateViewHolder(
@@ -30,7 +33,7 @@ class ConversationAdapter :
         viewType: Int
     ): ConversationViewHolder {
         val binding =
-            ItemAnswerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemConversationAnswerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ConversationViewHolder(binding)
     }
 
@@ -41,23 +44,19 @@ class ConversationAdapter :
         holder.bind(getItem(position))
     }
 
-    inner class ConversationViewHolder(private val binding: ItemAnswerBinding) :
+    inner class ConversationViewHolder(private val binding: ItemConversationAnswerBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(answer: Answer) {
+        fun bind(answer: GetAnswersResponseData) {
             with(binding) {
-                ivIcon.visibility = View.GONE
-                tvNumber.visibility = View.GONE
 
-                tvPlace.text = answer.place
+                tvQuestion.text = answer.questionContent
                 tvDescription.apply {
-                    text = answer.content
+                    text = answer.answerContent!!.noWordBreak()
                     visibility = View.VISIBLE
 
                     val params = layoutParams as? ViewGroup.MarginLayoutParams
                     params?.topMargin = 8.dpToPx(context)
                     layoutParams = params
-
-                    setTextSize(TypedValue.COMPLEX_UNIT_SP, 17f)
                 }
 
                 val textAdapter = TextAdapter()
@@ -71,52 +70,8 @@ class ConversationAdapter :
                 binding.rvKeywords.layoutManager = flexboxLayoutManager
                 rvKeywords.adapter = textAdapter
 
-                val modifyList = answer.keywords.map{binding.root.context.getString(R.string.photo_album_tag, it)}
+                val modifyList = answer.tags.map{binding.root.context.getString(R.string.photo_album_tag, it)}
                 textAdapter.submitList(modifyList)
-
-                val cardView =
-                    binding.root as CardView // binding.root가 CardView인 경우, 또는 binding.cvTripSchedule
-
-                cardView.cardElevation = 2.dpToPx(cardView.context).toFloat()
-                cardView.radius =
-                    10.dpToPx(cardView.context).toFloat() // cardCornerRadius는 radius 프로퍼티로 접근
-
-                val layoutParams = cardView.layoutParams as? ViewGroup.MarginLayoutParams
-                layoutParams?.let {
-                    it.topMargin = 5.dpToPx(cardView.context)
-                    it.bottomMargin = 5.dpToPx(cardView.context)
-                    it.marginStart = 3.dpToPx(cardView.context)
-                    it.marginEnd = 3.dpToPx(cardView.context)
-                    cardView.layoutParams = it
-                }
-
-                val parentLayout = root as? ConstraintLayout // root가 해당 ConstraintLayout이라고 가정
-                parentLayout?.let { layout ->
-                    val constraintSet = ConstraintSet()
-                    constraintSet.clone(layout) // 현재 레이아웃의 제약 조건 복제
-
-                    // tvPlace의 하단을 tvDescription의 상단에 연결
-                    constraintSet.connect(
-                        tvPlace.id,
-                        ConstraintSet.BOTTOM,
-                        tvDescription.id,
-                        ConstraintSet.TOP,
-                    )
-
-                    // tvDescription의 하단을 rvKeywords의 하단에 연결
-                    constraintSet.connect(
-                        tvDescription.id, // tvDescription의 ID
-                        ConstraintSet.BOTTOM, // tvDescription의 하단 앵커
-                        rvKeywords.id, // rvKeywords의 ID
-                        ConstraintSet.BOTTOM, // 부모의 하단 앵커
-                    )
-                    // (필요하다면 다른 제약 조건도 여기서 설정/수정)
-                    constraintSet.clear(binding.ivIcon.id, ConstraintSet.TOP)
-
-                    constraintSet.applyTo(layout) // 변경된 제약 조건 적용
-                }
-
-                rvKeywords.visibility = View.VISIBLE
             }
         }
     }
@@ -238,7 +193,7 @@ class ConversationAdapter :
     }
 }
 
-private object FamilyConversationDiffCallback : DiffUtil.ItemCallback<Answer>() {
-    override fun areItemsTheSame(a: Answer, b: Answer) = a.id == b.id
-    override fun areContentsTheSame(a: Answer, b: Answer) = a == b
+private object FamilyConversationDiffCallback : DiffUtil.ItemCallback<GetAnswersResponseData>() {
+    override fun areItemsTheSame(a: GetAnswersResponseData, b: GetAnswersResponseData) = a.questionId == b.questionId
+    override fun areContentsTheSame(a: GetAnswersResponseData, b: GetAnswersResponseData) = a == b
 }

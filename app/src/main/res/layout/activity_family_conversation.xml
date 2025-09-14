@@ -174,9 +174,10 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="5dp"
                     android:layout_marginEnd="20dp"
-                    android:text="@string/family_conversation_question"
                     android:textColor="@color/dark_gray"
                     android:textSize="16sp"
+                    android:lineSpacingExtra="0dp"
+                    android:breakStrategy="simple"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -212,7 +213,9 @@
             app:layout_constraintEnd_toEndOf="@id/cv_question"
             app:layout_constraintStart_toStartOf="@id/cv_question"
             app:layout_constraintTop_toBottomOf="@id/tv_answer_title"
-            app:shapeAppearanceOverlay="@style/ShapeAppearance.TextInputLayout.Rounded">
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.TextInputLayout.Rounded"
+            app:counterEnabled="true"
+            app:counterMaxLength="300">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_answer_context"
@@ -223,7 +226,8 @@
                 android:inputType="textMultiLine"
                 android:padding="16dp"
                 android:textCursorDrawable="@null"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:breakStrategy="simple"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -342,16 +346,18 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_keyword"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginEnd="3dp"
                 android:nestedScrollingEnabled="false"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintStart_toStartOf="@id/tv_keyword_text"
                 app:layout_constraintTop_toBottomOf="@id/tv_keyword_text"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 tools:listitem="@layout/item_recommend_course_keyword" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

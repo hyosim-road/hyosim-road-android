@@ -36,7 +36,8 @@
                     android:layout_height="wrap_content"
                     android:lineSpacingExtra="2dp"
                     android:text="@string/service_policy"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:breakStrategy="simple"/>
 
             </ScrollView>
 

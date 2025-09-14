@@ -2,6 +2,8 @@ package com.hyosim.hamkkae.presentation.main.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
@@ -27,7 +29,6 @@ import com.hyosim.hamkkae.util.StateConstants.TYPE_BEFORE_STARTING
 import com.hyosim.hamkkae.util.StateConstants.TYPE_COMPLETE
 import com.hyosim.hamkkae.util.StateConstants.TYPE_IN_PROCESS
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.text.SimpleDateFormat
@@ -118,7 +119,6 @@ class MainActivity : AppCompatActivity() {
 
                 setTrip(course!!)
                 clickUpload()
-                clickAnswer(course.id)
 
                 // cvAlbum의 top을 cvSchedule의 bottom에 연결
                 cvSchedule.post {
@@ -137,9 +137,6 @@ class MainActivity : AppCompatActivity() {
 
                 ivTripImage.load(R.drawable.ic_default)
             }
-
-            getQuestion()
-
         } else {
             //binding.cvQuestion.visibility = View.GONE
             binding.cvTrip.visibility = View.GONE
@@ -241,6 +238,10 @@ class MainActivity : AppCompatActivity() {
                     currentDayIndex?.let { dayIdx ->
                         getTodaySchedule(dayIdx, course.itinerary[currentDayIndex - 1].attractions)
                     }
+
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        getQuestion(course.id, currentLocation)
+                    }, 2000)
                 }
 
                 nextAttraction != null -> {
@@ -379,13 +380,14 @@ class MainActivity : AppCompatActivity() {
          }
      }*/
 
-    private fun getQuestion(){
+    private fun getQuestion(tripId: Int, currentLocation: String){
         lifecycleScope.launch {
             mainViewModel.getQuestionState.collect { state->
                 when(state){
                     is GetQuestionState.Success -> {
                         binding.tvQuestionContent.text = state.question.content
                         showQuestion(true)
+                        clickAnswer(tripId, currentLocation,state.question.id, state.question.content)
                     }
                     is GetQuestionState.Loading -> {
 
@@ -447,10 +449,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun clickAnswer(tripId:Int) {
+    private fun clickAnswer(tripId: Int, currentLocation: String, questionId: Int, content: String) {
         binding.btnAnswer.setOnClickListener {
             val intent = Intent(this, FamilyConversationActivity::class.java)
             intent.putExtra("tripId", tripId)
+            intent.putExtra("currentLocation", currentLocation)
+            intent.putExtra("questionId", questionId)
+            intent.putExtra("content", content)
             startActivity(intent)
             //navigateTo(FamilyConversationActivity::class.java)
         }
