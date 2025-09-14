@@ -36,7 +36,6 @@
             android:id="@+id/tv_trip_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/main_trip_title_mock"
             android:textSize="17sp"
             android:textStyle="bold"
             android:textColor="@color/black"

@@ -14,6 +14,7 @@ import com.hyosim.hamkkae.data.response_dto.home.ProgressTripResponseDto
 import com.hyosim.hamkkae.data.response_dto.home.findAttraction
 import com.hyosim.hamkkae.databinding.ActivityTripDetailBinding
 import com.hyosim.hamkkae.extension.home.AttractionResult
+import com.hyosim.hamkkae.presentation.main.home.noWordBreak
 import com.hyosim.hamkkae.presentation.main.map.MapActivity
 import com.hyosim.hamkkae.presentation.main.trip_detail.album.TripDetailAlbumFragment
 import com.hyosim.hamkkae.presentation.main.trip_detail.schedule.TripDetailScheduleFragment
@@ -100,7 +101,7 @@ class TripDetailActivity : AppCompatActivity() {
                     visibility = View.VISIBLE
                 }
                 binding.tvCurrent.text =
-                    getString(R.string.main_trip_current_location, result.attraction.name)
+                    getString(R.string.main_trip_current_location, result.attraction.name).noWordBreak()
                 binding.tvTime.text = getString(
                     R.string.main_time,
                     result.startTime,
@@ -116,7 +117,7 @@ class TripDetailActivity : AppCompatActivity() {
                     visibility = View.VISIBLE
                 }
                 binding.tvCurrent.text =
-                    getString(R.string.main_trip_next_location, result.attraction.name)
+                    getString(R.string.main_trip_next_location, result.attraction.name).noWordBreak()
                 binding.tvTime.text = getString(
                     R.string.main_time,
                     result.startTime,

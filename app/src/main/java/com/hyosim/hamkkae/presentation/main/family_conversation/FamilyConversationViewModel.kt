@@ -1,9 +1,107 @@
 package com.hyosim.hamkkae.presentation.main.family_conversation
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.hyosim.hamkkae.core.BaseViewModel
+import com.hyosim.hamkkae.data.request_dto.PostAnswerRequestDto
 import com.hyosim.hamkkae.domain.model.Answer
+import com.hyosim.hamkkae.domain.repository.ConversationRepository
+import com.hyosim.hamkkae.extension.conversation.GetAnswersState
+import com.hyosim.hamkkae.extension.conversation.GetQuestionState
+import com.hyosim.hamkkae.extension.conversation.PostAnswerState
+import com.hyosim.hamkkae.extension.home.ProgressTripState
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
+import okhttp3.ResponseBody
+import retrofit2.HttpException
+import timber.log.Timber
+import javax.inject.Inject
 
-class FamilyConversationViewModel: ViewModel() {
+
+@HiltViewModel
+class FamilyConversationViewModel @Inject constructor(
+    private val conversationRepository: ConversationRepository
+): BaseViewModel() {
+    private var _postAnswerState =
+        MutableStateFlow<PostAnswerState>(PostAnswerState.Loading)
+    val postAnswerState: StateFlow<PostAnswerState> = _postAnswerState.asStateFlow()
+
+    private var _getAnswersState =
+        MutableStateFlow<GetAnswersState>(GetAnswersState.Loading)
+    val getAnswersState: StateFlow<GetAnswersState> = _getAnswersState.asStateFlow()
+
+
+    fun postAnswer(questionId:Int, content:String){
+        viewModelScope.launch {
+            conversationRepository.postAnswer(PostAnswerRequestDto(questionId, content)).onSuccess { response->
+                _postAnswerState.value= PostAnswerState.Success(response.data!!)
+            }.onFailure {
+                if (it is HttpException) {
+                    try {
+                        val errorBody: ResponseBody? = it.response()?.errorBody()
+                        val errorBodyString = errorBody?.string() ?: ""
+                        val apiError = parseStatusCode(errorBodyString)
+
+                        _postAnswerState.value = PostAnswerState.Error(
+                            status = apiError.status,
+                            message = apiError.message,
+                        )
+                    } catch (e: Exception) {
+                        Timber.e("Error parsing error body: $e")
+                        _postAnswerState.value = PostAnswerState.Error(
+                            status = null,
+                            message = "알 수 없는 에러가 발생했습니다.",
+                        )
+                    }
+                } else {
+                    _postAnswerState.value = PostAnswerState .Error(
+                        status = null,
+                        message = it.message,
+                    )
+                }
+            }
+        }
+    }
+
+    fun getAnswers(tripId:Int){
+        viewModelScope.launch {
+            conversationRepository.getConversations(tripId).onSuccess { response ->
+                _getAnswersState.value = GetAnswersState.Success(response.data!!)
+            }.onFailure {
+                if (it is HttpException) {
+                    try {
+                        val errorBody: ResponseBody? = it.response()?.errorBody()
+                        val errorBodyString = errorBody?.string() ?: ""
+                        val apiError = parseStatusCode(errorBodyString)
+
+                        _getAnswersState.value = GetAnswersState.Error(
+                            status = apiError.status,
+                            message = apiError.message,
+                        )
+                    } catch (e: Exception) {
+                        Timber.e("Error parsing error body: $e")
+                        _getAnswersState.value = GetAnswersState.Error(
+                            status = null,
+                            message = "알 수 없는 에러가 발생했습니다.",
+                        )
+                    }
+                } else {
+                    _getAnswersState.value = GetAnswersState .Error(
+                        status = null,
+                        message = it.message,
+                    )
+                }
+            }
+        }
+    }
+
+    fun postAnswerReset(){
+        _postAnswerState.value= PostAnswerState.Loading
+    }
+
     val answerList = listOf(
         Answer(
             1,

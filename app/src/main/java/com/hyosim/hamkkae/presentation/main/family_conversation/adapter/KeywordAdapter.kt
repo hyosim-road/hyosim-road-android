@@ -1,6 +1,7 @@
 package com.hyosim.hamkkae.presentation.main.family_conversation.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -13,6 +14,7 @@ class KeywordAdapter : ListAdapter<String, KeywordAdapter.KeywordViewHolder>(Key
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(keyword: String) {
+            binding.ivIcon.visibility= View.GONE
             binding.tvKeyword.text = keyword
         }
     }

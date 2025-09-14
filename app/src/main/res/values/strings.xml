@@ -240,6 +240,9 @@
     <string name="trip_detail_pre_question">이전 질문 답변 보기</string>
     <string name="trip_detail_tip">사진 업로드 팁</string>
 
+    <!-- conversation-->
+    <string name="conversation_loading">키워드 생성중...</string>
+
     <!--upload-->
     <string name="upload_photo_title">가족 사진 업로드</string>
     <string name="upload_photo_subtitle">소중한 순간을 기록해주세요</string>
