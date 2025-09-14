@@ -25,4 +25,9 @@ interface ConversationService {
     suspend fun getConversations(
         @Query("tripId") tripId:Int,
     ): ApiResponse<List<GetAnswersResponseData>>
+
+    @GET("/conversation/count")
+    suspend fun getCount(
+        @Query("tripId") tripId:Int,
+    ):ApiResponse<Int>
 }

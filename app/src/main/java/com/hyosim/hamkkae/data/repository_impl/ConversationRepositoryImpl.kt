@@ -36,4 +36,12 @@ class ConversationRepositoryImpl @Inject constructor(
             Timber.e("conversation repository get conversations fail: $it")
         }
     }
+
+    override suspend fun getCount(tripId: Int): Result<ApiResponse<Int>> {
+        return runCatching {
+            conversationDataSource.getCount(tripId)
+        }.onFailure {
+            Timber.e("conversation repository get count fail: $it")
+        }
+    }
 }

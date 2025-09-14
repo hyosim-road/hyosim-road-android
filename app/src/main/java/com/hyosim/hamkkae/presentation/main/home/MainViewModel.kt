@@ -8,6 +8,7 @@ import com.hyosim.hamkkae.domain.model.TodaySchedule
 import com.hyosim.hamkkae.domain.model.TripRecord
 import com.hyosim.hamkkae.domain.repository.ConversationRepository
 import com.hyosim.hamkkae.domain.repository.HomeRepository
+import com.hyosim.hamkkae.extension.conversation.CountState
 import com.hyosim.hamkkae.extension.conversation.GetQuestionState
 import com.hyosim.hamkkae.extension.home.ProgressTripState
 import com.hyosim.hamkkae.util.KeywordConstants.KEYWORD_HISTORY
@@ -40,6 +41,10 @@ class MainViewModel @Inject constructor(
     private var _getQuestionState =
         MutableStateFlow<GetQuestionState>(GetQuestionState.Loading)
     val getQuestionState: StateFlow<GetQuestionState> = _getQuestionState.asStateFlow()
+
+    private var _countState =
+        MutableStateFlow<CountState>(CountState.Loading)
+    val countState: StateFlow<CountState> = _countState.asStateFlow()
 
     fun progressTrip(){
         viewModelScope.launch {
@@ -136,6 +141,38 @@ class MainViewModel @Inject constructor(
                     }
                 } else {
                     _getQuestionState.value = GetQuestionState.Error(
+                        status = null,
+                        message = it.message,
+                    )
+                }
+            }
+        }
+    }
+
+    fun count(){
+        viewModelScope.launch {
+            conversationRepository.getCount(tripId!!).onSuccess { response ->
+                _countState.value= CountState.Success(response.data!!)
+            }.onFailure {
+                if (it is HttpException) {
+                    try {
+                        val errorBody: ResponseBody? = it.response()?.errorBody()
+                        val errorBodyString = errorBody?.string() ?: ""
+                        val apiError = parseStatusCode(errorBodyString)
+
+                        _countState.value = CountState.Error(
+                            status = apiError.status,
+                            message = apiError.message,
+                        )
+                    } catch (e: Exception) {
+                        Timber.e("Error parsing error body: $e")
+                        _countState.value = CountState.Error(
+                            status = null,
+                            message = "알 수 없는 에러가 발생했습니다.",
+                        )
+                    }
+                } else {
+                    _countState.value = CountState.Error(
                         status = null,
                         message = it.message,
                     )
