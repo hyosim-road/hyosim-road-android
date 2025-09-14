@@ -10,4 +10,5 @@ interface ConversationRepository {
     suspend fun getQuestion(tripId:Int):Result<ApiResponse<GetQuestionResponseData>>
     suspend fun postAnswer(postAnswerRequestDto: PostAnswerRequestDto): Result<ApiResponse<PostAnswerResponseData>>
     suspend fun getConversations(tripId: Int):Result<ApiResponse<List<GetAnswersResponseData>>>
+    suspend fun getCount(tripId: Int):Result<ApiResponse<Int>>
 }

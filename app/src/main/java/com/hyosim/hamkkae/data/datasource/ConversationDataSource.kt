@@ -10,4 +10,5 @@ interface ConversationDataSource {
     suspend fun getQuestion(tripId:Int): ApiResponse<GetQuestionResponseData>
     suspend fun postAnswer(postAnswerRequestDto: PostAnswerRequestDto): ApiResponse<PostAnswerResponseData>
     suspend fun getConversations(tripId:Int): ApiResponse<List<GetAnswersResponseData>>
+    suspend fun getCount(tripId: Int): ApiResponse<Int>
 }

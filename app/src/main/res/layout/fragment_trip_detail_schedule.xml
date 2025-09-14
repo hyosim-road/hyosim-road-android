@@ -17,21 +17,29 @@
         app:layout_constraintEnd_toEndOf="parent"
         tools:listitem="@layout/item_trip_detail_schedule"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_pre_question"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+    <TextView
+        android:id="@+id/tv_before_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="15dp"
-        android:background="@drawable/bg_white_stroke"
-        android:text="@string/trip_detail_pre_question"
-        android:textColor="@color/text_secondary_gray"
-        app:layout_constraintDimensionRatio="1:0.13"
-        app:layout_constraintWidth_percent="0.9"
-        app:layout_constraintTop_toBottomOf="@id/rv_schedule"
+        android:text="@string/family_conversation_before_title"
+        android:textColor="@color/dark_gray"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rv_schedule" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_answers"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:nestedScrollingEnabled="false"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintStart_toStartOf="@id/tv_before_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_before_title"
+        tools:listitem="@layout/item_answer" />
 </androidx.constraintlayout.widget.ConstraintLayout>

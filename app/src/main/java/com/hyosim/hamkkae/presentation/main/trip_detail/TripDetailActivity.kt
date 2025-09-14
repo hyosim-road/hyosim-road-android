@@ -18,6 +18,7 @@ import com.hyosim.hamkkae.presentation.main.home.noWordBreak
 import com.hyosim.hamkkae.presentation.main.map.MapActivity
 import com.hyosim.hamkkae.presentation.main.trip_detail.album.TripDetailAlbumFragment
 import com.hyosim.hamkkae.presentation.main.trip_detail.schedule.TripDetailScheduleFragment
+import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -25,6 +26,7 @@ import java.time.temporal.ChronoUnit
 import java.util.Date
 import java.util.Locale
 
+@AndroidEntryPoint
 class TripDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTripDetailBinding
     private lateinit var course: ProgressTripResponseDto

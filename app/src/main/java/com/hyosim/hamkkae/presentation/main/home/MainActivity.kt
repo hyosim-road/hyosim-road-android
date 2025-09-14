@@ -18,6 +18,7 @@ import com.hyosim.hamkkae.R
 import com.hyosim.hamkkae.data.response_dto.home.ProgressTripResponseDto
 import com.hyosim.hamkkae.databinding.ActivityMainBinding
 import com.hyosim.hamkkae.domain.model.TodaySchedule
+import com.hyosim.hamkkae.extension.conversation.CountState
 import com.hyosim.hamkkae.extension.conversation.GetQuestionState
 import com.hyosim.hamkkae.extension.home.ProgressTripState
 import com.hyosim.hamkkae.presentation.main.family_conversation.FamilyConversationActivity
@@ -84,6 +85,7 @@ class MainActivity : AppCompatActivity() {
                 when (state) {
                     is ProgressTripState.Success -> {
                         setVisibilityPlan(true, state.course)
+
                         clickTripDetail(state.course)
                     }
 
@@ -207,6 +209,10 @@ class MainActivity : AppCompatActivity() {
                         now in start..end -> {
                             currentLocation = attraction.name
                             currentDayIndex = index + 1
+
+                            checkAnswers(currentDayIndex, course.id, currentLocation)
+                            mainViewModel.count()
+
                             return@forEachIndexed
                         }
 
@@ -238,10 +244,6 @@ class MainActivity : AppCompatActivity() {
                     currentDayIndex?.let { dayIdx ->
                         getTodaySchedule(dayIdx, course.itinerary[currentDayIndex - 1].attractions)
                     }
-
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        getQuestion(course.id, currentLocation)
-                    }, 2000)
                 }
 
                 nextAttraction != null -> {
@@ -283,6 +285,26 @@ class MainActivity : AppCompatActivity() {
         }
 
         setProgress(course)
+    }
+
+    private fun checkAnswers(currentDayIndex: Int?, tripId:Int, location:String) {
+        lifecycleScope.launch {
+            mainViewModel.countState.collect { state ->
+                when (state) {
+                    is CountState.Success -> {
+                        if(state.count < currentDayIndex!!+1){
+                            Handler(Looper.getMainLooper()).postDelayed({
+                                getQuestion(tripId, location)
+                            }, 2000)
+                        }
+                    }
+                    is CountState.Error -> {
+                    }
+                    is CountState.Loading -> {
+                    }
+                }
+            }
+        }
     }
 
 

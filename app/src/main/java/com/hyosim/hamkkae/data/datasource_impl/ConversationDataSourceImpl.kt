@@ -15,4 +15,5 @@ class ConversationDataSourceImpl @Inject constructor(
     override suspend fun getQuestion(tripId: Int): ApiResponse<GetQuestionResponseData> = conversationService.getQuestion(tripId)
     override suspend fun postAnswer(postAnswerRequestDto: PostAnswerRequestDto): ApiResponse<PostAnswerResponseData> = conversationService.postAnswer(postAnswerRequestDto)
     override suspend fun getConversations(tripId: Int): ApiResponse<List<GetAnswersResponseData>> = conversationService.getConversations(tripId)
+    override suspend fun getCount(tripId: Int): ApiResponse<Int> = conversationService.getCount(tripId)
 }
