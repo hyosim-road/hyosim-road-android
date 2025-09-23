@@ -64,7 +64,7 @@ class RecommendCourseFragment : Fragment() {
     }
 
     private fun showCourse(){
-      /*  val currentState = planViewModel.aiCourseRecommendState.value
+        val currentState = planViewModel.aiCourseRecommendState.value
         if(currentState is AiCourseRecommendState.Success) {
             val courseList = currentState.courseList
             Timber.d("recommend course fragment! courseList: $courseList")
@@ -94,9 +94,9 @@ class RecommendCourseFragment : Fragment() {
 
             planViewModel.resetState()
             clickAgain()
-        }*/
+        }
 
-        val courseList = recommendCourseViewModel.mockData
+        /*val courseList = recommendCourseViewModel.mockData
         val recommendCourseAdapter = RecommendCourseAdapter(
             clickItem = { course ->
                 binding.btnNext.isSelected = true
@@ -121,7 +121,7 @@ class RecommendCourseFragment : Fragment() {
         recommendCourseAdapter.submitList(courseList)
         recommendCourseAdapter.saveStyle(planViewModel.travelStyle.value.orEmpty())
 
-        clickAgain()
+        clickAgain()*/
     }
 
     private fun clickNext(course: AiCourseRecommendResponseDto) {

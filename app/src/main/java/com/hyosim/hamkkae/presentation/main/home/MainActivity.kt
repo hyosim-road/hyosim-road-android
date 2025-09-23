@@ -1,9 +1,14 @@
 package com.hyosim.hamkkae.presentation.main.home
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.AbsoluteSizeSpan
+import android.text.style.StyleSpan
 import android.view.View
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
@@ -329,6 +334,23 @@ class MainActivity : AppCompatActivity() {
         with(binding) {
             tvTripProgress.text = "$progressPercent%"
             pbTrip.progress = progressPercent
+        }
+
+        if(progressPercent==100){
+            with(binding){
+                tvTripDay.visibility= View.GONE
+                val text = "여행 완료!"
+                val spannable = SpannableString(text).apply {
+                    setSpan(StyleSpan(Typeface.BOLD), 0, length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                    setSpan(AbsoluteSizeSpan(17, true), 0, length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                    // 20sp 크기
+                }
+
+                tvTripDate.text = spannable
+                ivLocation.visibility=View.GONE
+                tvTripCurrentLocationTitle.visibility=View.GONE
+                cvSchedule.visibility = View.GONE
+            }
         }
     }
 

@@ -145,10 +145,12 @@ fun ProgressTripResponseDto.toLocationList(currentLat: Double, currentLng: Doubl
                     distance = calculateDistanceKm(currentLat, currentLng, attr.latitude, attr.longitude),
                     latitude = attr.latitude,
                     longitude = attr.longitude,
+                    checkIn = null,
+                    checkOut = null,
                     type = "attraction",
                     time = "${attr.startTime.substring(11,16)} ~ ${attr.endTime.substring(11,16)}",
                     amenityList = listOf(),
-                    image = ""
+                    image = attr.imageUrl ?: ""
                 )
             )
         }
@@ -163,6 +165,8 @@ fun ProgressTripResponseDto.toLocationList(currentLat: Double, currentLng: Doubl
                 distance = calculateDistanceKm(currentLat, currentLng, lodge.latitude, lodge.longitude),
                 latitude = lodge.latitude,
                 longitude = lodge.longitude,
+                checkIn=lodge.checkIn,
+                checkOut=lodge.checkOut,
                 type = "lodgings",
                 time = "${lodge.checkIn} ~ ${lodge.checkOut}",
                 amenityList = lodge.amenities,
@@ -180,6 +184,8 @@ fun ProgressTripResponseDto.toLocationList(currentLat: Double, currentLng: Doubl
                 distance = calculateDistanceKm(currentLat, currentLng, restaurant.latitude, restaurant.longitude),
                 latitude = restaurant.latitude,
                 longitude = restaurant.longitude,
+                checkIn=null,
+                checkOut=null,
                 type = "restaurants",
                 time = "예상비용 ${restaurant.estimatedCostPerPersonKrw}원/인",
                 amenityList = listOf("대표메뉴: ${restaurant.signatureMenu ?: "정보 없음"}"),
