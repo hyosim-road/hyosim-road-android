@@ -54,7 +54,7 @@ class RecommendLoadingFragment : Fragment() {
             startDotAnimation()
 
             // 3초 대기
-            delay(3000)
+            /*delay(3000)
 
             findNavController().navigate(
                 R.id.action_recommendLoadingFragment_to_recommendCourseFragment,
@@ -62,9 +62,9 @@ class RecommendLoadingFragment : Fragment() {
                 NavOptions.Builder()
                     .setPopUpTo(R.id.loadingFragment, true) // ✅ LoadingFragment 스택에서 제거
                     .build()
-            )
+            )*/
             // API 호출
-            //recommendCourse()
+            recommendCourse()
         }
     }
 

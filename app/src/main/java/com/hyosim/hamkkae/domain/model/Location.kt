@@ -6,6 +6,8 @@ data class Location (
     val distance:String,
     val latitude:Double,
     val longitude:Double,
+    val checkIn:String?,
+    val checkOut:String?,
     val type:String,
     val time:String,
     val amenityList:List<String>,
