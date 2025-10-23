@@ -55,15 +55,15 @@ object RetrofitModule {
     @Provides
     @Singleton
     fun provideOkHttpClient(
-        headerInterceptor: HeaderInterceptor, // ✅ 토큰 붙이는 인터셉터
+        headerInterceptor: HeaderInterceptor, // 토큰 붙이는 인터셉터
         loggingInterceptor: HttpLoggingInterceptor
     ): OkHttpClient {
         return OkHttpClient.Builder()
-            .addInterceptor(headerInterceptor) // ✅ 먼저 토큰 붙이기
-            .addInterceptor(loggingInterceptor) // ✅ 그다음 로깅
-            .connectTimeout(100, TimeUnit.SECONDS)
-            .readTimeout(100, TimeUnit.SECONDS)
-            .writeTimeout(100, TimeUnit.SECONDS)
+            .addInterceptor(headerInterceptor) // 먼저 토큰 붙이기
+            .addInterceptor(loggingInterceptor) // 그다음 로깅
+            .connectTimeout(180, TimeUnit.SECONDS)
+            .readTimeout(180, TimeUnit.SECONDS)
+            .writeTimeout(180, TimeUnit.SECONDS)
             .build()
     }
 
